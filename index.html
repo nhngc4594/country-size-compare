@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Country Square Compare</title>
+    <style>
+        body { font-family: system-ui, sans-serif; padding: 20px; background: #f4f4f9; }
+        #stage { display: flex; align-items: flex-end; gap: 20px; padding: 40px; overflow-x: auto; border-bottom: 2px solid #ccc; min-height: 400px; background: white; }
+        .square { background: #3498db; border: 2px solid #2980b9; position: relative; transition: transform 0.2s; }
+        .label { position: absolute; bottom: -30px; width: 100%; text-align: center; font-size: 12px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Country Square Compare</h1>
+    <p>Type a country name to see its area as a proportional square.</p>
+    
+    <input list="countries" id="countryInput" placeholder="Start typing a country...">
+    <datalist id="countries"></datalist>
+    <button onclick="addCountry()">Add Square</button>
+
+    <div id="stage"></div>
+
+    <script>
+        // Use a free API to get country data
+        let countryData = [];
+        fetch('https://restcountries.com/v3.1/all?fields=name,area')
+            .then(res => res.json())
+            .then(data => {
+                countryData = data;
+                const list = document.getElementById('countries');
+                data.forEach(c => {
+                    let opt = document.createElement('option');
+                    opt.value = c.name.common;
+                    list.appendChild(opt);
+                });
+            });
+
+        function addCountry() {
+            const input = document.getElementById('countryInput');
+            const country = countryData.find(c => c.name.common.toLowerCase() === input.value.toLowerCase());
+            
+            if (country) {
+                const side = Math.sqrt(country.area) * 0.5; // Scale: 1px = 2km
+                const square = document.createElement('div');
+                square.className = 'square';
+                square.style.width = side + 'px';
+                square.style.height = side + 'px';
+                square.innerHTML = `<div class="label">${country.name.common}</div>`;
+                document.getElementById('stage').appendChild(square);
+                input.value = "";
+            } else {
+                alert("Country not found!");
+            }
+        }
+    </script>
+</body>
+</html>
