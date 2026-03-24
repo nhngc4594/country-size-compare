@@ -7,72 +7,41 @@
     <style>
         :root { --primary: #2c3e50; --accent: #3498db; --danger: #e74c3c; --success: #27ae60; --bg: #f8f9fa; }
         body { font-family: -apple-system, system-ui, sans-serif; margin: 0; display: flex; flex-direction: column; height: 100vh; background: var(--bg); overflow: hidden; }
-        
-        .header-nav { background: var(--primary); color: white; z-index: 1000; flex-shrink: 0; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
-        header { padding: 10px; font-weight: bold; text-align: center; font-size: 1.1rem; }
-        
+        .header-nav { background: var(--primary); color: white; z-index: 1000; flex-shrink: 0; }
+        header { padding: 8px; font-weight: bold; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .controls-container { background: white; padding: 12px; border-bottom: 1px solid #ddd; color: #333; }
         .input-wrapper { max-width: 500px; margin: 0 auto; position: relative; }
-        input { width: 100%; padding: 14px; border: 2px solid #dfe6e9; border-radius: 8px; font-size: 16px; box-sizing: border-box; outline: none; }
-
-        #results-box { position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ddd; z-index: 2000; display: none; border-radius: 0 0 8px 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
-        .result-item { padding: 15px; border-bottom: 1px solid #eee; cursor: pointer; font-size: 15px; }
-
+        input { width: 100%; padding: 12px; border: 2px solid #dfe6e9; border-radius: 8px; font-size: 16px; box-sizing: border-box; outline: none; }
+        #results-box { position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ddd; z-index: 2000; display: none; border-radius: 0 8px 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .result-item { padding: 12px; border-bottom: 1px solid #eee; cursor: pointer; }
         .btn-row { display: flex; gap: 6px; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
-        button { padding: 10px 12px; cursor: pointer; border-radius: 6px; border: none; background: var(--accent); color: white; font-weight: bold; font-size: 12px; transition: opacity 0.2s; }
-
-        #main-layout { display: flex; flex-grow: 1; overflow: hidden; position: relative; }
-        #legend { width: 220px; background: white; border-right: 1px solid #ddd; overflow-y: auto; padding: 15px; display: none; z-index: 50; }
+        button { padding: 10px 12px; cursor: pointer; border-radius: 6px; border: none; background: var(--accent); color: white; font-weight: bold; font-size: 11px; }
+        #main-layout { display: flex; flex-grow: 1; overflow: hidden; }
+        #legend { width: 220px; background: white; border-right: 1px solid #ddd; overflow-y: auto; padding: 15px; display: none; }
         #legend.active { display: block; }
-        .legend-item { margin-bottom: 8px; padding: 8px; border-radius: 4px; border-left: 4px solid var(--accent); background: #f0f2f5; font-size: 12px; }
-
+        .legend-item { margin-bottom: 8px; padding: 8px; border-radius: 4px; border-left: 4px solid var(--accent); background: #f0f2f5; font-size: 11px; }
         #stage { flex-grow: 1; position: relative; overflow: hidden; background-image: radial-gradient(#d1d1d1 0.8px, transparent 0.8px); background-size: 40px 40px; }
-
-        .square { 
-            position: absolute; 
-            border: 2px solid rgba(0,0,0,0.25); 
-            display: flex; align-items: center; justify-content: center; 
-            cursor: grab; touch-action: none; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .square.overlapping { border: 3px solid var(--success); box-shadow: 0 0 15px var(--success); z-index: 600 !important; }
-        
-        .square-delete { 
-            position: absolute; top: -12px; right: -12px; 
-            background: var(--danger); color: white; border-radius: 50%; 
-            width: 24px; height: 24px; display: flex; align-items: center; 
-            justify-content: center; font-size: 14px; font-weight: bold; 
-            cursor: pointer; border: 2px solid white; z-index: 10;
-        }
-
-        .label { font-size: 11px; font-weight: bold; text-align: center; pointer-events: none; color: rgba(0,0,0,0.8); padding: 5px; line-height: 1.1; }
+        .square { position: absolute; border: 2px solid rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; cursor: grab; touch-action: none; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .square.selected { border: 3px solid var(--accent); box-shadow: 0 0 15px var(--accent); z-index: 900 !important; }
+        .square.overlapping { border: 2px solid var(--success); }
+        .square-delete { position: absolute; top: -10px; right: -10px; background: var(--danger); color: white; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; cursor: pointer; border: 2px solid white; }
+        .label { font-size: 10px; font-weight: bold; text-align: center; pointer-events: none; color: rgba(0,0,0,0.8); padding: 4px; line-height: 1.1; overflow: hidden; }
     </style>
 </head>
 <body>
-
-<div class="header-nav">
-    <header>Square Scale Pro</header>
-    <div class="controls-container">
-        <div class="input-wrapper">
-            <input type="text" id="entitySearch" placeholder="Search (e.g. Japan > Hokkaido)..." autocomplete="off">
-            <div id="results-box"></div>
-        </div>
-        <div class="btn-row">
-            <button onclick="toggleLegend()">Legend</button>
-            <button id="combineBtn" style="background:var(--success)" onclick="combineTouching()">Combine Touching</button>
-            <button style="background:var(--danger)" onclick="clearAll()">Clear All</button>
-        </div>
+<div class="header-nav"><header>Square Scale Pro</header>
+<div class="controls-container">
+    <div class="input-wrapper"><input type="text" id="entitySearch" placeholder="Search..." autocomplete="off"><div id="results-box"></div></div>
+    <div class="btn-row">
+        <button onclick="toggleLegend()">Legend</button>
+        <button style="background:var(--success)" onclick="combineTouching()">Combine Touching</button>
+        <button id="uncombineBtn" style="background:var(--primary); display:none;" onclick="uncombineSelected()">Un-combine Selected</button>
+        <button style="background:var(--danger)" onclick="clearAll()">Clear All</button>
     </div>
-</div>
-
-<div id="main-layout">
-    <div id="legend"></div>
-    <div id="stage"></div>
-</div>
-
+</div></div>
+<div id="main-layout"><div id="legend"></div><div id="stage"></div></div>
 <script>
-    let masterData = [];
-    let addedItems = [];
+    let masterData = [], addedItems = [], selectedIndex = null;
     const stage = document.getElementById('stage');
     const legend = document.getElementById('legend');
 
@@ -80,161 +49,117 @@
         try {
             const res = await fetch('https://restcountries.com/v3.1/all?fields=name,area');
             const countries = await res.json();
-            const countryList = countries.map(c => ({ name: c.name.common, area: c.area }));
+            const countryList = countries.map(c => ({ name: c.name.common, area: c.area, parts: null }));
             const resData = await fetch('data.json');
             const customData = await resData.json();
-            masterData = [...countryList, ...customData].sort((a,b) => a.name.localeCompare(b.name));
-        } catch(e) { console.log("Data load error"); }
+            masterData = [...countryList, ...customData.map(i => ({...i, parts: null}))].sort((a,b) => a.name.localeCompare(b.name));
+        } catch(e) {}
         setupSearch();
     }
 
     function setupSearch() {
-        const input = document.getElementById('entitySearch');
-        const resultsBox = document.getElementById('results-box');
+        const input = document.getElementById('entitySearch'), box = document.getElementById('results-box');
         input.oninput = (e) => {
-            const val = e.target.value.toLowerCase();
-            resultsBox.innerHTML = "";
-            if (val.length < 2) { resultsBox.style.display = "none"; return; }
+            const val = e.target.value.toLowerCase(); box.innerHTML = "";
+            if (val.length < 2) { box.style.display = "none"; return; }
             const matches = masterData.filter(i => i.name.toLowerCase().includes(val)).slice(0, 8);
-            if (matches.length > 0) {
-                resultsBox.style.display = "block";
-                matches.forEach(m => {
-                    const div = document.createElement('div');
-                    div.className = "result-item";
-                    div.innerText = m.name;
-                    div.onclick = () => { addSquare(m); resultsBox.style.display = "none"; input.value = ""; };
-                    resultsBox.appendChild(div);
-                });
-            }
+            if (matches.length > 0) { box.style.display = "block"; matches.forEach(m => {
+                const div = document.createElement('div'); div.className = "result-item"; div.innerText = m.name;
+                div.onclick = () => { addSquare(m); box.style.display = "none"; input.value = ""; }; box.appendChild(div);
+            });}
         };
-        document.addEventListener('click', (e) => { if(e.target !== input) resultsBox.style.display = "none"; });
+        document.addEventListener('click', (e) => { if(e.target !== input) box.style.display = "none"; });
     }
 
-    function isOverlapping(item1, item2, scale) {
-        const s1 = Math.sqrt(item1.area) * scale;
-        const s2 = Math.sqrt(item2.area) * scale;
-        return !(item1.x + s1 < item2.x || item1.x > item2.x + s2 || 
-                 item1.y + s1 < item2.y || item1.y > item2.y + s2);
+    function isOverlapping(i1, i2, scale) {
+        const s1 = Math.sqrt(i1.area) * scale, s2 = Math.sqrt(i2.area) * scale;
+        return !(i1.x + s1 < i2.x || i1.x > i2.x + s2 || i1.y + s1 < i2.y || i1.y > i2.y + s2);
     }
 
     function render() {
-        stage.innerHTML = "";
-        legend.innerHTML = "<strong>Active List</strong><hr>";
-        if (addedItems.length === 0) return;
-
-        const maxArea = Math.max(...addedItems.map(i => i.area));
-        const maxSide = Math.sqrt(maxArea);
-        const stageDim = Math.min(stage.offsetWidth, stage.offsetHeight) * 0.7;
-        const scale = stageDim / maxSide;
-
+        stage.innerHTML = ""; legend.innerHTML = "<strong>Active List</strong><hr>";
+        if (addedItems.length === 0) { selectedIndex = null; updateButtons(); return; }
+        const maxArea = Math.max(...addedItems.map(i => i.area)), stageDim = Math.min(stage.offsetWidth, stage.offsetHeight) * 0.7, scale = stageDim / Math.sqrt(maxArea);
+        
         addedItems.forEach((item, index) => {
-            const side = Math.sqrt(item.area) * scale;
-            const sq = document.createElement('div');
-            sq.className = 'square';
-            sq.style.width = side + 'px';
-            sq.style.height = side + 'px';
+            const side = Math.sqrt(item.area) * scale, sq = document.createElement('div');
+            sq.className = 'square' + (selectedIndex === index ? ' selected' : '');
+            sq.style.width = sq.style.height = side + 'px';
             sq.style.backgroundColor = item.color;
-            
-            if(!item.x) {
-                item.x = (stage.offsetWidth/2) - (side/2);
-                item.y = (stage.offsetHeight/2) - (side/2);
-            }
-            sq.style.left = item.x + 'px';
-            sq.style.top = item.y + 'px';
-            sq.innerHTML = `<div class="square-delete" onclick="removeItem(${index})">×</div>
-                            <div class="label">${item.name}<br>${Math.round(item.area).toLocaleString()} km²</div>`;
-            
-            stage.appendChild(sq);
-            makeDraggable(sq, index, scale);
-
-            const miles = Math.round(item.area * 0.3861).toLocaleString();
-            legend.innerHTML += `<div class="legend-item" style="border-color:${item.color}">
-                <b>${item.name}</b><br>${Math.round(item.area).toLocaleString()} km²</div>`;
+            if(!item.x) { item.x = (stage.offsetWidth/2 - side/2); item.y = (stage.offsetHeight/2 - side/2); }
+            sq.style.left = item.x + 'px'; sq.style.top = item.y + 'px';
+            sq.innerHTML = `<div class="square-delete" onclick="removeItem(${index})">×</div><div class="label">${item.name}<br>${Math.round(item.area).toLocaleString()} km²</div>`;
+            sq.onclick = (e) => { if(e.target.className !== 'square-delete') { selectedIndex = index; render(); } };
+            stage.appendChild(sq); makeDraggable(sq, index, scale);
+            legend.innerHTML += `<div class="legend-item" style="border-color:${item.color}"><b>${item.name}</b><br>${Math.round(item.area).toLocaleString()} km²</div>`;
         });
+        updateButtons();
     }
 
     function makeDraggable(el, index, scale) {
-        let initialX, initialY;
-        const dragStart = (e) => {
-            if (e.target.className === 'square-delete') return;
-            const touch = e.type === "touchstart" ? e.touches[0] : e;
-            initialX = touch.clientX - addedItems[index].x;
-            initialY = touch.clientY - addedItems[index].y;
-            el.style.zIndex = 1000;
-        };
-        const drag = (e) => {
-            if (initialX === undefined) return;
-            const touch = e.type === "touchmove" ? e.touches[0] : e;
-            addedItems[index].x = touch.clientX - initialX;
-            addedItems[index].y = touch.clientY - initialY;
-            el.style.left = addedItems[index].x + 'px';
-            el.style.top = addedItems[index].y + 'px';
-            
-            // Visual feedback for overlap
-            addedItems.forEach((other, i) => {
-                if(i !== index && isOverlapping(addedItems[index], other, scale)) {
-                    el.classList.add('overlapping');
-                } else if (i !== index) {
-                    el.classList.remove('overlapping');
-                }
-            });
-        };
-        const dragEnd = () => { initialX = undefined; el.style.zIndex = Math.floor(addedItems[index].area/1000); };
-        el.addEventListener("touchstart", dragStart, {passive: false});
-        el.addEventListener("touchend", dragEnd);
-        el.addEventListener("touchmove", drag, {passive: false});
-        el.addEventListener("mousedown", dragStart);
-        document.addEventListener("mousemove", drag);
-        document.addEventListener("mouseup", dragEnd);
+        let ix, iy;
+        const start = (e) => { if(e.target.className==='square-delete') return; const t = e.type==="touchstart"?e.touches[0]:e; ix=t.clientX-addedItems[index].x; iy=t.clientY-addedItems[index].y; el.style.zIndex=1000; };
+        const move = (e) => { if(ix===undefined) return; e.preventDefault(); const t = e.type==="touchmove"?e.touches[0]:e; addedItems[index].x=t.clientX-ix; addedItems[index].y=t.clientY-iy; el.style.left=addedItems[index].x+'px'; el.style.top=addedItems[index].y+'px'; };
+        const stop = () => { ix=undefined; render(); };
+        el.addEventListener("touchstart", start, {passive:false}); el.addEventListener("touchmove", move, {passive:false}); el.addEventListener("touchend", stop);
+        el.addEventListener("mousedown", start); document.addEventListener("mousemove", move); document.addEventListener("mouseup", stop);
     }
 
     function combineTouching() {
         if (addedItems.length < 2) return;
-        
-        // Find groups that are touching
-        let maxArea = Math.max(...addedItems.map(i => i.area));
-        let scale = (Math.min(stage.offsetWidth, stage.offsetHeight) * 0.7) / Math.sqrt(maxArea);
-        
-        let toCombine = [];
-        let remaining = [];
-        
-        // This checks if the FIRST square is touching ANY others
-        let first = addedItems[0];
-        let group = [first];
-        let others = addedItems.slice(1);
-        
-        let foundAny = false;
-        others.forEach(other => {
-            if(isOverlapping(first, other, scale)) {
-                group.push(other);
-                foundAny = true;
-            } else {
-                remaining.push(other);
-            }
-        });
+        const maxArea = Math.max(...addedItems.map(i => i.area)), scale = (Math.min(stage.offsetWidth, stage.offsetHeight) * 0.7) / Math.sqrt(maxArea);
+        let groups = []; let visited = new Set();
 
-        if(!foundAny) {
-            alert("No touching squares found! Drag them over each other first.");
-            return;
+        for(let i=0; i<addedItems.length; i++) {
+            if(visited.has(i)) continue;
+            let group = [i], queue = [i]; visited.add(i);
+            while(queue.length > 0) {
+                let curr = queue.shift();
+                for(let j=0; j<addedItems.length; j++) {
+                    if(!visited.has(j) && isOverlapping(addedItems[curr], addedItems[j], scale)) {
+                        visited.add(j); group.push(j); queue.push(j);
+                    }
+                }
+            }
+            if(group.length > 1) groups.push(group);
         }
 
-        const totalArea = group.reduce((sum, i) => sum + i.area, 0);
-        const newName = "Combined Area";
+        if(groups.length === 0) return alert("No touching squares!");
         
-        addedItems = [...remaining];
-        addSquare({ name: newName, area: totalArea });
+        let newItems = addedItems.filter((_, i) => !visited.has(i));
+        groups.forEach(g => {
+            const items = g.map(idx => addedItems[idx]);
+            const totalArea = items.reduce((s, i) => s + i.area, 0);
+            const combinedName = items.map(i => i.name.split('>').pop().trim()).join(' + ');
+            const avgX = items.reduce((s, i) => s + i.x, 0) / items.length;
+            const avgY = items.reduce((s, i) => s + i.y, 0) / items.length;
+            newItems.push({ name: combinedName, area: totalArea, color: items[0].color, x: avgX, y: avgY, parts: items });
+        });
+        addedItems = newItems; selectedIndex = null; render();
+    }
+
+    function uncombineSelected() {
+        if(selectedIndex === null || !addedItems[selectedIndex].parts) return;
+        const parts = addedItems[selectedIndex].parts;
+        addedItems.splice(selectedIndex, 1);
+        addedItems.push(...parts);
+        selectedIndex = null; render();
+    }
+
+    function updateButtons() {
+        const btn = document.getElementById('uncombineBtn');
+        btn.style.display = (selectedIndex !== null && addedItems[selectedIndex].parts) ? 'inline-block' : 'none';
     }
 
     function addSquare(item) {
         const hue = Math.floor(Math.random() * 360);
         addedItems.push({ ...item, color: `hsla(${hue}, 75%, 65%, 0.7)`, x: null, y: null });
-        render();
+        selectedIndex = addedItems.length - 1; render();
     }
-    function removeItem(index) { addedItems.splice(index, 1); render(); }
+    function removeItem(index) { addedItems.splice(index, 1); selectedIndex = null; render(); }
     function toggleLegend() { legend.classList.toggle('active'); }
     function clearAll() { addedItems = []; render(); }
-    window.onresize = render;
-    init();
+    window.onresize = render; init();
 </script>
 </body>
 </html>
