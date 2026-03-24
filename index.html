@@ -5,46 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Square Scale Pro</title>
     <style>
-        :root { --primary: #2c3e50; --accent: #3498db; --danger: #e74c3c; --bg: #f8f9fa; }
+        :root { --primary: #2c3e50; --accent: #3498db; --danger: #e74c3c; --success: #27ae60; --bg: #f8f9fa; }
         body { font-family: -apple-system, system-ui, sans-serif; margin: 0; display: flex; flex-direction: column; height: 100vh; background: var(--bg); overflow: hidden; }
         
-        /* Fixed Header Section */
-        .header-nav { background: var(--primary); color: white; z-index: 1000; flex-shrink: 0; }
-        header { padding: 10px; font-weight: bold; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .header-nav { background: var(--primary); color: white; z-index: 1000; flex-shrink: 0; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        header { padding: 10px; font-weight: bold; text-align: center; font-size: 1.1rem; }
         
-        .controls-container { background: white; padding: 15px; border-bottom: 1px solid #ddd; position: relative; color: #333; }
+        .controls-container { background: white; padding: 12px; border-bottom: 1px solid #ddd; color: #333; }
         .input-wrapper { max-width: 500px; margin: 0 auto; position: relative; }
-        input { width: 100%; padding: 12px; border: 2px solid #dfe6e9; border-radius: 8px; font-size: 16px; box-sizing: border-box; }
+        input { width: 100%; padding: 14px; border: 2px solid #dfe6e9; border-radius: 8px; font-size: 16px; box-sizing: border-box; outline: none; }
 
-        #results-box { position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ddd; z-index: 2000; display: none; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        .result-item { padding: 12px; border-bottom: 1px solid #eee; cursor: pointer; }
+        #results-box { position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ddd; z-index: 2000; display: none; border-radius: 0 0 8px 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
+        .result-item { padding: 15px; border-bottom: 1px solid #eee; cursor: pointer; font-size: 15px; }
 
-        .btn-row { display: flex; gap: 8px; justify-content: center; margin-top: 10px; }
-        button { padding: 10px; cursor: pointer; border-radius: 6px; border: none; background: var(--accent); color: white; font-weight: bold; font-size: 12px; }
+        .btn-row { display: flex; gap: 6px; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
+        button { padding: 10px 12px; cursor: pointer; border-radius: 6px; border: none; background: var(--accent); color: white; font-weight: bold; font-size: 12px; transition: opacity 0.2s; }
+        button:active { opacity: 0.7; }
 
-        /* Legend Sidebar */
-        #main-layout { display: flex; flex-grow: 1; overflow: hidden; }
-        #legend { width: 250px; background: white; border-right: 1px solid #ddd; overflow-y: auto; padding: 15px; font-size: 13px; display: none; }
+        #main-layout { display: flex; flex-grow: 1; overflow: hidden; position: relative; }
+        #legend { width: 220px; background: white; border-right: 1px solid #ddd; overflow-y: auto; padding: 15px; display: none; z-index: 50; }
         #legend.active { display: block; }
-        .legend-item { margin-bottom: 10px; padding: 8px; border-radius: 4px; border-left: 4px solid var(--accent); background: #f0f2f5; }
+        .legend-item { margin-bottom: 8px; padding: 8px; border-radius: 4px; border-left: 4px solid var(--accent); background: #f0f2f5; font-size: 12px; }
 
-        /* The Stage */
-        #stage { flex-grow: 1; position: relative; overflow: hidden; background-image: radial-gradient(#d1d1d1 0.5px, transparent 0.5px); background-size: 30px 30px; }
+        #stage { flex-grow: 1; position: relative; overflow: hidden; background-image: radial-gradient(#d1d1d1 0.8px, transparent 0.8px); background-size: 40px 40px; }
 
         .square { 
             position: absolute; 
-            background: rgba(52, 152, 219, 0.5); 
-            border: 2px solid rgba(0,0,0,0.2); 
+            border: 2px solid rgba(0,0,0,0.25); 
             display: flex; align-items: center; justify-content: center; 
-            cursor: grab; touch-action: none; /* Critical for dragging */
-            transition: border-color 0.2s;
+            cursor: grab; touch-action: none; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        .square:active { cursor: grabbing; border-color: white; }
+        .square:active { cursor: grabbing; z-index: 500 !important; border-color: white; }
         
-        .square-delete { position: absolute; top: -10px; right: -10px; background: var(--danger); color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; cursor: pointer; opacity: 0; transition: 0.2s; }
-        .square:hover .square-delete { opacity: 1; }
+        .square-delete { 
+            position: absolute; top: -12px; right: -12px; 
+            background: var(--danger); color: white; border-radius: 50%; 
+            width: 24px; height: 24px; display: flex; align-items: center; 
+            justify-content: center; font-size: 14px; font-weight: bold; 
+            cursor: pointer; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
 
-        .label { font-size: 10px; font-weight: bold; text-align: center; pointer-events: none; }
+        .label { font-size: 11px; font-weight: bold; text-align: center; pointer-events: none; color: rgba(0,0,0,0.8); padding: 5px; line-height: 1.1; }
     </style>
 </head>
 <body>
@@ -53,51 +55,51 @@
     <header>Square Scale Pro</header>
     <div class="controls-container">
         <div class="input-wrapper">
-            <input type="text" id="entitySearch" placeholder="Search (e.g. Japan > Hokkaido)..." autocomplete="off">
+            <input type="text" id="entitySearch" placeholder="Type to search (e.g. USA > Florida)..." autocomplete="off">
             <div id="results-box"></div>
         </div>
         <div class="btn-row">
-            <button onclick="toggleOverlap()">Overlap Mode</button>
             <button onclick="toggleLegend()">Legend</button>
-            <button class="clear" style="background:var(--danger)" onclick="clearAll()">Clear All</button>
+            <button id="combineBtn" style="background:var(--success)" onclick="combineAll()">Combine Squares</button>
+            <button style="background:var(--danger)" onclick="clearAll()">Clear All</button>
         </div>
     </div>
 </div>
 
 <div id="main-layout">
-    <div id="legend"><strong>Active Comparisons</strong><hr></div>
+    <div id="legend"></div>
     <div id="stage"></div>
 </div>
 
 <script>
     let masterData = [];
     let addedItems = [];
-    let overlapMode = false;
+    const stage = document.getElementById('stage');
+    const legend = document.getElementById('legend');
 
     async function init() {
-        // Fetch world countries
-        const res = await fetch('https://restcountries.com/v3.1/all?fields=name,area');
-        const countries = await res.json();
-        const countryList = countries.map(c => ({ name: c.name.common, area: c.area }));
-        
-        // Fetch your custom data.json file
         try {
+            const res = await fetch('https://restcountries.com/v3.1/all?fields=name,area');
+            const countries = await res.json();
+            const countryList = countries.map(c => ({ name: c.name.common, area: c.area }));
+            
             const resData = await fetch('data.json');
             const customData = await resData.json();
             masterData = [...countryList, ...customData].sort((a,b) => a.name.localeCompare(b.name));
-        } catch(e) { masterData = countryList; }
-        
+        } catch(e) { console.log("Some data failed to load, using defaults."); }
         setupSearch();
     }
 
     function setupSearch() {
         const input = document.getElementById('entitySearch');
         const resultsBox = document.getElementById('results-box');
+        
         input.oninput = (e) => {
             const val = e.target.value.toLowerCase();
             resultsBox.innerHTML = "";
             if (val.length < 2) { resultsBox.style.display = "none"; return; }
-            const matches = masterData.filter(i => i.name.toLowerCase().includes(val)).slice(0, 6);
+            
+            const matches = masterData.filter(i => i.name.toLowerCase().includes(val)).slice(0, 8);
             if (matches.length > 0) {
                 resultsBox.style.display = "block";
                 matches.forEach(m => {
@@ -109,85 +111,103 @@
                 });
             }
         };
+        // Close search if clicking elsewhere
+        document.addEventListener('click', (e) => { if(e.target !== input) resultsBox.style.display = "none"; });
     }
 
     function render() {
-        const stage = document.getElementById('stage');
-        const legend = document.getElementById('legend');
         stage.innerHTML = "";
-        legend.innerHTML = "<strong>Active Comparisons</strong><hr>";
+        legend.innerHTML = "<strong>Active List</strong><hr>";
         if (addedItems.length === 0) return;
 
         const maxArea = Math.max(...addedItems.map(i => i.area));
         const maxSide = Math.sqrt(maxArea);
-        const stageDim = Math.min(stage.offsetWidth, stage.offsetHeight) * 0.8;
+        const stageDim = Math.min(stage.offsetWidth, stage.offsetHeight) * 0.7;
         const scale = stageDim / maxSide;
 
         addedItems.forEach((item, index) => {
             const side = Math.sqrt(item.area) * scale;
             const sq = document.createElement('div');
             sq.className = 'square';
+            sq.id = 'sq-' + index;
             sq.style.width = side + 'px';
             sq.style.height = side + 'px';
             sq.style.backgroundColor = item.color;
-            sq.style.left = item.x ? item.x + 'px' : (stage.offsetWidth/2 - side/2) + 'px';
-            sq.style.top = item.y ? item.y + 'px' : (stage.offsetHeight/2 - side/2) + 'px';
-            
-            sq.innerHTML = `<div class="square-delete" onclick="removeItem(${index})">X</div>
-                            <div class="label">${item.name}</div>`;
-            
-            // Drag Logic
-            makeDraggable(sq, index);
-            stage.appendChild(sq);
+            sq.style.zIndex = Math.floor(item.area / 1000); // Larger areas go behind
 
-            // Update Legend
-            const miles = (item.area * 0.3861).toLocaleString();
+            // Initial Position logic
+            if(!item.x) {
+                item.x = (stage.offsetWidth/2) - (side/2) + (index * 10);
+                item.y = (stage.offsetHeight/2) - (side/2) + (index * 10);
+            }
+            sq.style.left = item.x + 'px';
+            sq.style.top = item.y + 'px';
+            
+            sq.innerHTML = `<div class="square-delete" onclick="removeItem(${index})">×</div>
+                            <div class="label">${item.name}<br>${Math.round(item.area).toLocaleString()} km²</div>`;
+            
+            stage.appendChild(sq);
+            makeDraggable(sq, index);
+
+            // Legend Update
+            const miles = Math.round(item.area * 0.3861).toLocaleString();
             legend.innerHTML += `<div class="legend-item" style="border-color:${item.color}">
-                <b>${item.name}</b><br>${item.area.toLocaleString()} km²<br>${miles} sq miles
-            </div>`;
+                <b>${item.name}</b><br>${Math.round(item.area).toLocaleString()} km²<br>${miles} sq. mi</div>`;
         });
     }
 
     function makeDraggable(el, index) {
-        let isDragging = false;
-        let startX, startY;
+        let currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
 
-        const start = (e) => {
-            isDragging = true;
-            const touch = e.type === 'touchstart' ? e.touches[0] : e;
-            startX = touch.clientX - el.offsetLeft;
-            startY = touch.clientY - el.offsetTop;
+        const dragStart = (e) => {
+            const touch = e.type === "touchstart" ? e.touches[0] : e;
+            initialX = touch.clientX - addedItems[index].x;
+            initialY = touch.clientY - addedItems[index].y;
+            if (e.target.className !== 'square-delete') el.style.cursor = 'grabbing';
         };
 
-        const move = (e) => {
-            if (!isDragging) return;
-            const touch = e.type === 'touchmove' ? e.touches[0] : e;
-            let newX = touch.clientX - startX;
-            let newY = touch.clientY - startY;
-            el.style.left = newX + 'px';
-            el.style.top = newY + 'px';
-            addedItems[index].x = newX; // Save position
-            addedItems[index].y = newY;
+        const drag = (e) => {
+            if (initialX === undefined) return;
+            e.preventDefault();
+            const touch = e.type === "touchmove" ? e.touches[0] : e;
+            currentX = touch.clientX - initialX;
+            currentY = touch.clientY - initialY;
+            addedItems[index].x = currentX;
+            addedItems[index].y = currentY;
+            el.style.left = currentX + 'px';
+            el.style.top = currentY + 'px';
         };
 
-        const stop = () => isDragging = false;
+        const dragEnd = () => {
+            initialX = undefined;
+            el.style.cursor = 'grab';
+        };
 
-        el.onmousedown = start;
-        window.onmousemove = move;
-        window.onmouseup = stop;
-        el.ontouchstart = start;
-        window.ontouchmove = move;
-        window.ontouchend = stop;
+        el.addEventListener("touchstart", dragStart, {passive: false});
+        el.addEventListener("touchend", dragEnd, {passive: false});
+        el.addEventListener("touchmove", drag, {passive: false});
+        el.addEventListener("mousedown", dragStart);
+        document.addEventListener("mousemove", drag);
+        document.addEventListener("mouseup", dragEnd);
+    }
+
+    function combineAll() {
+        if (addedItems.length < 2) return;
+        const totalArea = addedItems.reduce((sum, item) => sum + item.area, 0);
+        const names = addedItems.map(i => i.name.split('>').pop().trim()).join(' + ');
+        
+        clearAll();
+        addSquare({ name: `Combined: ${names}`, area: totalArea });
     }
 
     function addSquare(item) {
         const hue = Math.floor(Math.random() * 360);
-        addedItems.push({ ...item, color: `hsla(${hue}, 70%, 60%, 0.6)` });
+        addedItems.push({ ...item, color: `hsla(${hue}, 75%, 65%, 0.7)`, x: null, y: null });
         render();
     }
+
     function removeItem(index) { addedItems.splice(index, 1); render(); }
-    function toggleLegend() { document.getElementById('legend').classList.toggle('active'); }
-    function toggleOverlap() { /* In this version, overlap is natural because you can drag! */ }
+    function toggleLegend() { legend.classList.toggle('active'); }
     function clearAll() { addedItems = []; render(); }
 
     window.onresize = render;
