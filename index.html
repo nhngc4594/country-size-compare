@@ -12,20 +12,19 @@
         .controls-container { background: white; padding: 12px; border-bottom: 1px solid #ddd; color: #333; }
         .input-wrapper { max-width: 500px; margin: 0 auto; position: relative; }
         input { width: 100%; padding: 12px; border: 2px solid #dfe6e9; border-radius: 8px; font-size: 16px; box-sizing: border-box; outline: none; }
-        #results-box { position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ddd; z-index: 2000; display: none; border-radius: 0 8px 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        #results-box { position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ddd; z-index: 2000; display: none; border-radius: 0 0 8px 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         .result-item { padding: 12px; border-bottom: 1px solid #eee; cursor: pointer; }
         .btn-row { display: flex; gap: 6px; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
         button { padding: 10px 12px; cursor: pointer; border-radius: 6px; border: none; background: var(--accent); color: white; font-weight: bold; font-size: 11px; }
         #main-layout { display: flex; flex-grow: 1; overflow: hidden; }
-        #legend { width: 220px; background: white; border-right: 1px solid #ddd; overflow-y: auto; padding: 15px; display: none; }
-        #legend.active { display: block; }
-        .legend-item { margin-bottom: 8px; padding: 8px; border-radius: 4px; border-left: 4px solid var(--accent); background: #f0f2f5; font-size: 11px; }
+        #legend { width: 240px; background: white; border-right: 1px solid #ddd; overflow-y: auto; padding: 15px; display: block; }
+        @media (max-width: 600px) { #legend { display: none; position: absolute; left:0; top:0; bottom:0; z-index: 900; width: 80%; } #legend.active { display: block; } }
+        .legend-item { margin-bottom: 8px; padding: 10px; border-radius: 4px; border-left: 4px solid var(--accent); background: #f0f2f5; font-size: 12px; position: relative; }
+        .legend-del { color: var(--danger); font-weight: bold; float: right; cursor: pointer; }
         #stage { flex-grow: 1; position: relative; overflow: hidden; background-image: radial-gradient(#d1d1d1 0.8px, transparent 0.8px); background-size: 40px 40px; }
-        .square { position: absolute; border: 2px solid rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; cursor: grab; touch-action: none; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .square.selected { border: 3px solid var(--accent); box-shadow: 0 0 15px var(--accent); z-index: 900 !important; }
-        .square.overlapping { border: 2px solid var(--success); }
-        .square-delete { position: absolute; top: -10px; right: -10px; background: var(--danger); color: white; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; cursor: pointer; border: 2px solid white; }
-        .label { font-size: 10px; font-weight: bold; text-align: center; pointer-events: none; color: rgba(0,0,0,0.8); padding: 4px; line-height: 1.1; overflow: hidden; }
+        .square { position: absolute; border: 1.5px solid rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; cursor: grab; touch-action: none; transition: transform 0.2s; }
+        .square.selected { border: 3px solid #000; z-index: 900 !important; }
+        .label { font-size: 10px; font-weight: bold; text-align: center; pointer-events: none; color: rgba(0,0,0,0.9); padding: 4px; line-height: 1.1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
     </style>
 </head>
 <body>
@@ -33,17 +32,16 @@
 <div class="controls-container">
     <div class="input-wrapper"><input type="text" id="entitySearch" placeholder="Search..." autocomplete="off"><div id="results-box"></div></div>
     <div class="btn-row">
-        <button onclick="toggleLegend()">Legend</button>
-        <button style="background:var(--success)" onclick="combineTouching()">Combine Touching</button>
-        <button id="uncombineBtn" style="background:var(--primary); display:none;" onclick="uncombineSelected()">Un-combine Selected</button>
+        <button onclick="toggleLegend()">List/Legend</button>
+        <button style="background:var(--success)" onclick="combineAll()">Combine All</button>
+        <button id="decombineBtn" style="background:var(--primary); display:none;" onclick="decombineSelected()">De-combine Selected</button>
         <button style="background:var(--danger)" onclick="clearAll()">Clear All</button>
     </div>
 </div></div>
 <div id="main-layout"><div id="legend"></div><div id="stage"></div></div>
 <script>
     let masterData = [], addedItems = [], selectedIndex = null;
-    const stage = document.getElementById('stage');
-    const legend = document.getElementById('legend');
+    const stage = document.getElementById('stage'), legend = document.getElementById('legend');
 
     async function init() {
         try {
@@ -68,77 +66,53 @@
                 div.onclick = () => { addSquare(m); box.style.display = "none"; input.value = ""; }; box.appendChild(div);
             });}
         };
-        document.addEventListener('click', (e) => { if(e.target !== input) box.style.display = "none"; });
-    }
-
-    function isOverlapping(i1, i2, scale) {
-        const s1 = Math.sqrt(i1.area) * scale, s2 = Math.sqrt(i2.area) * scale;
-        return !(i1.x + s1 < i2.x || i1.x > i2.x + s2 || i1.y + s1 < i2.y || i1.y > i2.y + s2);
     }
 
     function render() {
-        stage.innerHTML = ""; legend.innerHTML = "<strong>Active List</strong><hr>";
-        if (addedItems.length === 0) { selectedIndex = null; updateButtons(); return; }
-        const maxArea = Math.max(...addedItems.map(i => i.area)), stageDim = Math.min(stage.offsetWidth, stage.offsetHeight) * 0.7, scale = stageDim / Math.sqrt(maxArea);
+        stage.innerHTML = ""; legend.innerHTML = "<strong>Comparison List</strong><hr>";
+        if (addedItems.length === 0) { selectedIndex = null; updateUI(); return; }
+        
+        const maxArea = Math.max(...addedItems.map(i => i.area));
+        const scale = (Math.min(stage.offsetWidth, stage.offsetHeight) * 0.75) / Math.sqrt(maxArea);
         
         addedItems.forEach((item, index) => {
-            const side = Math.sqrt(item.area) * scale, sq = document.createElement('div');
+            const side = Math.max(15, Math.sqrt(item.area) * scale); // Ensure min-size for Aruba
+            const sq = document.createElement('div');
             sq.className = 'square' + (selectedIndex === index ? ' selected' : '');
             sq.style.width = sq.style.height = side + 'px';
             sq.style.backgroundColor = item.color;
             if(!item.x) { item.x = (stage.offsetWidth/2 - side/2); item.y = (stage.offsetHeight/2 - side/2); }
             sq.style.left = item.x + 'px'; sq.style.top = item.y + 'px';
-            sq.innerHTML = `<div class="square-delete" onclick="removeItem(${index})">×</div><div class="label">${item.name}<br>${Math.round(item.area).toLocaleString()} km²</div>`;
-            sq.onclick = (e) => { if(e.target.className !== 'square-delete') { selectedIndex = index; render(); } };
-            stage.appendChild(sq); makeDraggable(sq, index, scale);
-            legend.innerHTML += `<div class="legend-item" style="border-color:${item.color}"><b>${item.name}</b><br>${Math.round(item.area).toLocaleString()} km²</div>`;
+            sq.innerHTML = `<div class="label">${item.name}</div>`;
+            sq.onclick = () => { selectedIndex = index; render(); };
+            stage.appendChild(sq);
+            makeDraggable(sq, index);
+            
+            const km = Math.round(item.area).toLocaleString();
+            legend.innerHTML += `<div class="legend-item" style="border-color:${item.color}"><span class="legend-del" onclick="removeItem(${index})">DEL</span><b>${item.name}</b><br>${km} km²</div>`;
         });
-        updateButtons();
+        updateUI();
     }
 
-    function makeDraggable(el, index, scale) {
+    function makeDraggable(el, index) {
         let ix, iy;
-        const start = (e) => { if(e.target.className==='square-delete') return; const t = e.type==="touchstart"?e.touches[0]:e; ix=t.clientX-addedItems[index].x; iy=t.clientY-addedItems[index].y; el.style.zIndex=1000; };
-        const move = (e) => { if(ix===undefined) return; e.preventDefault(); const t = e.type==="touchmove"?e.touches[0]:e; addedItems[index].x=t.clientX-ix; addedItems[index].y=t.clientY-iy; el.style.left=addedItems[index].x+'px'; el.style.top=addedItems[index].y+'px'; };
-        const stop = () => { ix=undefined; render(); };
+        const start = (e) => { const t = e.type.startsWith("touch")?e.touches[0]:e; ix=t.clientX-addedItems[index].x; iy=t.clientY-addedItems[index].y; el.style.zIndex=1000; };
+        const move = (e) => { if(ix===undefined) return; e.preventDefault(); const t = e.type.startsWith("touch")?e.touches[0]:e; addedItems[index].x=t.clientX-ix; addedItems[index].y=t.clientY-iy; el.style.left=addedItems[index].x+'px'; el.style.top=addedItems[index].y+'px'; };
+        const stop = () => { if(ix!==undefined) { ix=undefined; } };
         el.addEventListener("touchstart", start, {passive:false}); el.addEventListener("touchmove", move, {passive:false}); el.addEventListener("touchend", stop);
         el.addEventListener("mousedown", start); document.addEventListener("mousemove", move); document.addEventListener("mouseup", stop);
     }
 
-    function combineTouching() {
+    function combineAll() {
         if (addedItems.length < 2) return;
-        const maxArea = Math.max(...addedItems.map(i => i.area)), scale = (Math.min(stage.offsetWidth, stage.offsetHeight) * 0.7) / Math.sqrt(maxArea);
-        let groups = []; let visited = new Set();
-
-        for(let i=0; i<addedItems.length; i++) {
-            if(visited.has(i)) continue;
-            let group = [i], queue = [i]; visited.add(i);
-            while(queue.length > 0) {
-                let curr = queue.shift();
-                for(let j=0; j<addedItems.length; j++) {
-                    if(!visited.has(j) && isOverlapping(addedItems[curr], addedItems[j], scale)) {
-                        visited.add(j); group.push(j); queue.push(j);
-                    }
-                }
-            }
-            if(group.length > 1) groups.push(group);
-        }
-
-        if(groups.length === 0) return alert("No touching squares!");
-        
-        let newItems = addedItems.filter((_, i) => !visited.has(i));
-        groups.forEach(g => {
-            const items = g.map(idx => addedItems[idx]);
-            const totalArea = items.reduce((s, i) => s + i.area, 0);
-            const combinedName = items.map(i => i.name.split('>').pop().trim()).join(' + ');
-            const avgX = items.reduce((s, i) => s + i.x, 0) / items.length;
-            const avgY = items.reduce((s, i) => s + i.y, 0) / items.length;
-            newItems.push({ name: combinedName, area: totalArea, color: items[0].color, x: avgX, y: avgY, parts: items });
-        });
-        addedItems = newItems; selectedIndex = null; render();
+        const totalArea = addedItems.reduce((s, i) => s + i.area, 0);
+        const combinedName = addedItems.map(i => i.name.split('>').pop().trim()).join(' + ');
+        const savedParts = [...addedItems];
+        addedItems = [{ name: combinedName, area: totalArea, color: addedItems[0].color, x: null, y: null, parts: savedParts }];
+        selectedIndex = 0; render();
     }
 
-    function uncombineSelected() {
+    function decombineSelected() {
         if(selectedIndex === null || !addedItems[selectedIndex].parts) return;
         const parts = addedItems[selectedIndex].parts;
         addedItems.splice(selectedIndex, 1);
@@ -146,8 +120,8 @@
         selectedIndex = null; render();
     }
 
-    function updateButtons() {
-        const btn = document.getElementById('uncombineBtn');
+    function updateUI() {
+        const btn = document.getElementById('decombineBtn');
         btn.style.display = (selectedIndex !== null && addedItems[selectedIndex].parts) ? 'inline-block' : 'none';
     }
 
@@ -156,7 +130,7 @@
         addedItems.push({ ...item, color: `hsla(${hue}, 75%, 65%, 0.7)`, x: null, y: null });
         selectedIndex = addedItems.length - 1; render();
     }
-    function removeItem(index) { addedItems.splice(index, 1); selectedIndex = null; render(); }
+    function removeItem(idx) { addedItems.splice(idx, 1); selectedIndex = null; render(); }
     function toggleLegend() { legend.classList.toggle('active'); }
     function clearAll() { addedItems = []; render(); }
     window.onresize = render; init();
