@@ -25,7 +25,7 @@
         .btn-row { display: flex; gap: 6px; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
         button { padding: 10px 14px; cursor: pointer; border-radius: 6px; border: none; background: var(--accent); color: white; font-weight: bold; font-size: 11px; min-width: 90px; }
         #stage { flex-grow: 1; position: relative; overflow: hidden; background-image: radial-gradient(#d1d1d1 0.8px, transparent 0.8px); background-size: 40px 40px; }
-        .square { position: absolute; border: 1.5px solid rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; cursor: grab; touch-action: none; box-shadow: 0 2px 5px rgba(0,0,0,0.1); will-change: transform, left, top; }
+        .square { position: absolute; border: 1.5px solid rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; cursor: grab; touch-action: none; box-shadow: 0 2px 5px rgba(0,0,0,0.1); will-change: left, top; }
         .square.selected { border: 3px solid #000 !important; z-index: 800 !important; }
         .square.highlight { border: 3px dashed var(--success) !important; }
         .square.is-tiny { border: 2px solid #e67e22; box-shadow: 0 0 8px #e67e22; }
@@ -49,7 +49,6 @@
         </div>
     </div>
 </div>
-
 <div id="stage"></div>
 
 <script>
@@ -60,14 +59,10 @@
         try {
             const res = await fetch('https://restcountries.com/v3.1/all?fields=name,area');
             const countries = await res.json();
-            const countryList = countries.map(c => ({ name: c.name.common, area: c.area, parts: null }));
-            const resData = await fetch('data.json');
-            const customData = await resData.json();
-            masterData = [...countryList, ...customData.map(i => ({...i, parts: null}))].sort((a,b) => a.name.localeCompare(b.name));
+            masterData = countries.map(c => ({ name: c.name.common, area: c.area, parts: null })).sort((a,b) => a.name.localeCompare(b.name));
         } catch(e) {}
         setupSearch();
 
-        // Load Shared Maps
         const urlParams = new URLSearchParams(window.location.search);
         const mapData = urlParams.get('map');
         if (mapData) {
@@ -96,9 +91,8 @@
     }
 
     function updateURL() {
-        if (addedItems.length === 0) { window.history.replaceState({}, '', window.location.pathname); return; }
         const state = addedItems.map(i => `${encodeURIComponent(i.name)}:${i.area}`).join('|');
-        window.history.replaceState({}, '', `?map=${state}`);
+        window.history.replaceState({}, '', state ? `?map=${state}` : window.location.pathname);
     }
 
     function render() {
@@ -117,21 +111,31 @@
             if(!item.x) { item.x = (stage.offsetWidth/2 - side/2); item.y = (stage.offsetHeight/2 - side/2); }
             sq.style.left = item.x + 'px'; sq.style.top = item.y + 'px';
             sq.innerHTML = `<div class="label"><b>${item.name}</b><br>${Math.round(item.area).toLocaleString()} km²</div>`;
-            sq.onmousedown = sq.ontouchstart = () => { selectedIndex = index; render(); };
+            sq.onmousedown = sq.ontouchstart = () => { selectedIndex = index; updateUI(); };
             stage.appendChild(sq);
             makeDraggable(sq, index, scale);
         });
         updateUI();
-        updateURL();
     }
 
     function makeDraggable(el, index, scale) {
         let ix, iy, dragging = false;
-        const start = (e) => { dragging = true; const t = e.type.startsWith("touch") ? e.touches[0] : e; ix = t.clientX - addedItems[index].x; iy = t.clientY - addedItems[index].y; el.style.zIndex = 1000; };
+        const start = (e) => { 
+            dragging = true; 
+            const t = e.type.startsWith("touch") ? e.touches[0] : e; 
+            ix = t.clientX - addedItems[index].x; 
+            iy = t.clientY - addedItems[index].y; 
+            el.style.zIndex = 1000;
+            selectedIndex = index;
+            document.querySelectorAll('.square').forEach(s => s.classList.remove('selected'));
+            el.classList.add('selected');
+        };
         const move = (e) => { 
-            if (!dragging) return; e.preventDefault();
+            if (!dragging) return; 
+            e.preventDefault();
             const t = e.type.startsWith("touch") ? e.touches[0] : e;
-            addedItems[index].x = t.clientX - ix; addedItems[index].y = t.clientY - iy;
+            addedItems[index].x = t.clientX - ix; 
+            addedItems[index].y = t.clientY - iy;
             requestAnimationFrame(() => {
                 el.style.left = addedItems[index].x + 'px'; el.style.top = addedItems[index].y + 'px';
                 const squares = document.querySelectorAll('.square');
@@ -145,7 +149,7 @@
                 });
             });
         };
-        const stop = () => { dragging = false; ix = undefined; };
+        const stop = () => { if(dragging) { dragging = false; updateURL(); updateUI(); } };
         el.addEventListener("touchstart", start, {passive:false}); window.addEventListener("touchmove", move, {passive:false}); window.addEventListener("touchend", stop);
         el.addEventListener("mousedown", start); window.addEventListener("mousemove", move); window.addEventListener("mouseup", stop);
     }
@@ -168,7 +172,7 @@
             }
         });
         if (toMerge.length < 2) return;
-        if (typeof gtag === 'function') gtag('event', 'combine_regions', { 'count': toMerge.length, 'primary_region': target.name });
+        if (typeof gtag === 'function') gtag('event', 'combine_regions', { 'count': toMerge.length });
         const mergedParts = [];
         toMerge.forEach(idx => {
             if (addedItems[idx].parts) mergedParts.push(...addedItems[idx].parts); else mergedParts.push(addedItems[idx]);
@@ -190,25 +194,21 @@
 
     function updateUI() {
         const actionBtn = document.getElementById('actionBtn'), deleteBtn = document.getElementById('deleteBtn');
-        if (selectedIndex !== null) {
+        if (selectedIndex !== null && addedItems[selectedIndex]) {
             deleteBtn.style.display = 'inline-block';
-            const item = addedItems[selectedIndex];
-            if (item.parts) { actionBtn.innerText = "De-combine"; actionBtn.style.background = "var(--primary)"; }
-            else { actionBtn.innerText = "Combine Touching"; actionBtn.style.background = "var(--success)"; }
+            actionBtn.innerText = addedItems[selectedIndex].parts ? "De-combine" : "Combine Touching";
+            actionBtn.style.background = addedItems[selectedIndex].parts ? "var(--primary)" : "var(--success)";
         } else { deleteBtn.style.display = 'none'; }
     }
 
     function addSquare(item, isNew = true) {
-        if (isNew && typeof gtag === 'function') gtag('event', 'select_country', { 'country_name': item.name, 'area_size': item.area });
+        if (isNew && typeof gtag === 'function') gtag('event', 'select_country', { 'country_name': item.name });
         const hue = Math.floor(Math.random() * 360);
         addedItems.push({ ...item, color: `hsla(${hue}, 75%, 65%, 0.7)`, x: null, y: null });
         selectedIndex = addedItems.length - 1; render();
     }
 
-    function shareScale() {
-        navigator.clipboard.writeText(window.location.href).then(() => { alert("Comparison Link copied! Send it to a friend."); });
-    }
-
+    function shareScale() { navigator.clipboard.writeText(window.location.href).then(() => { alert("Comparison Link copied!"); }); }
     function clearAll() { addedItems = []; render(); }
     window.onresize = render; init();
 </script>
