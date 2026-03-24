@@ -1,53 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-4QWG8TF8P3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-4QWG8TF8P3');
-</script>
-
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4QWG8TF8P3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4QWG8TF8P3');
+    </script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Square Scale Pro</title>
     <style>
         :root { --primary: #2c3e50; --accent: #3498db; --danger: #e74c3c; --success: #27ae60; --bg: #f8f9fa; }
         body { font-family: -apple-system, system-ui, sans-serif; margin: 0; display: flex; flex-direction: column; height: 100vh; background: var(--bg); overflow: hidden; }
-        
         .header-nav { background: var(--primary); color: white; z-index: 1000; flex-shrink: 0; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
         header { padding: 8px; font-weight: bold; text-align: center; font-size: 1.1rem; }
-        
         .controls-container { background: white; padding: 12px; border-bottom: 1px solid #ddd; color: #333; }
         .input-wrapper { max-width: 500px; margin: 0 auto; position: relative; }
         input { width: 100%; padding: 12px; border: 2px solid #dfe6e9; border-radius: 8px; font-size: 16px; box-sizing: border-box; outline: none; }
-
         #results-box { position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ddd; z-index: 2000; display: none; border-radius: 0 0 8px 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
         .result-item { padding: 15px; border-bottom: 1px solid #eee; cursor: pointer; }
-
         .btn-row { display: flex; gap: 6px; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
-        button { padding: 10px 14px; cursor: pointer; border-radius: 6px; border: none; background: var(--accent); color: white; font-weight: bold; font-size: 12px; min-width: 100px; }
-
+        button { padding: 10px 14px; cursor: pointer; border-radius: 6px; border: none; background: var(--accent); color: white; font-weight: bold; font-size: 11px; min-width: 90px; }
         #stage { flex-grow: 1; position: relative; overflow: hidden; background-image: radial-gradient(#d1d1d1 0.8px, transparent 0.8px); background-size: 40px 40px; }
-
-        .square { 
-            position: absolute; 
-            border: 1.5px solid rgba(0,0,0,0.3); 
-            display: flex; align-items: center; justify-content: center; 
-            cursor: grab; touch-action: none; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            will-change: transform, left, top; /* Performance boost */
-        }
+        .square { position: absolute; border: 1.5px solid rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; cursor: grab; touch-action: none; box-shadow: 0 2px 5px rgba(0,0,0,0.1); will-change: transform, left, top; }
         .square.selected { border: 3px solid #000 !important; z-index: 800 !important; }
         .square.highlight { border: 3px dashed var(--success) !important; }
-        
-        /* The "Aruba" Indicator */
         .square.is-tiny { border: 2px solid #e67e22; box-shadow: 0 0 8px #e67e22; }
-        .square.is-tiny::after { content: 'TINY'; position: absolute; top: -15px; font-size: 8px; color: #e67e22; font-weight: bold; }
-
         .label { font-size: 10px; font-weight: bold; text-align: center; pointer-events: none; color: rgba(0,0,0,0.9); padding: 5px; line-height: 1.2; overflow: hidden; }
     </style>
 </head>
@@ -63,6 +44,7 @@
         <div class="btn-row">
             <button id="actionBtn" style="background:var(--success)" onclick="handleAction()">Combine Touching</button>
             <button id="deleteBtn" style="background:var(--danger); display:none;" onclick="deleteSelected()">Delete Selected</button>
+            <button style="background:var(--accent)" onclick="shareScale()">Share Layout</button>
             <button style="background:#7f8c8d" onclick="clearAll()">Clear All</button>
         </div>
     </div>
@@ -84,6 +66,16 @@
             masterData = [...countryList, ...customData.map(i => ({...i, parts: null}))].sort((a,b) => a.name.localeCompare(b.name));
         } catch(e) {}
         setupSearch();
+
+        // Load Shared Maps
+        const urlParams = new URLSearchParams(window.location.search);
+        const mapData = urlParams.get('map');
+        if (mapData) {
+            mapData.split('|').forEach(str => {
+                const [name, area] = str.split(':');
+                if(name && area) addSquare({ name: decodeURIComponent(name), area: parseFloat(area) }, false);
+            });
+        }
     }
 
     function setupSearch() {
@@ -103,101 +95,64 @@
         };
     }
 
+    function updateURL() {
+        if (addedItems.length === 0) { window.history.replaceState({}, '', window.location.pathname); return; }
+        const state = addedItems.map(i => `${encodeURIComponent(i.name)}:${i.area}`).join('|');
+        window.history.replaceState({}, '', `?map=${state}`);
+    }
+
     function render() {
         stage.innerHTML = "";
         if (addedItems.length === 0) { selectedIndex = null; updateUI(); return; }
-        
         const maxArea = Math.max(...addedItems.map(i => i.area));
-        const stageMinDim = Math.min(stage.offsetWidth, stage.offsetHeight);
-        const scale = (stageMinDim * 0.75) / Math.sqrt(maxArea);
+        const scale = (Math.min(stage.offsetWidth, stage.offsetHeight) * 0.75) / Math.sqrt(maxArea);
         
         addedItems.forEach((item, index) => {
             const trueSide = Math.sqrt(item.area) * scale;
-            const isTiny = trueSide < 25;
-            const side = Math.max(25, trueSide); // 25px min for usability
-            
+            const side = Math.max(25, trueSide);
             const sq = document.createElement('div');
-            sq.className = 'square' + (selectedIndex === index ? ' selected' : '') + (isTiny ? ' is-tiny' : '');
+            sq.className = 'square' + (selectedIndex === index ? ' selected' : '') + (trueSide < 25 ? ' is-tiny' : '');
             sq.style.width = sq.style.height = side + 'px';
             sq.style.backgroundColor = item.color;
-            
-            if(!item.x) { 
-                item.x = (stage.offsetWidth/2 - side/2); 
-                item.y = (stage.offsetHeight/2 - side/2); 
-            }
+            if(!item.x) { item.x = (stage.offsetWidth/2 - side/2); item.y = (stage.offsetHeight/2 - side/2); }
             sq.style.left = item.x + 'px'; sq.style.top = item.y + 'px';
-            
-            const km2 = Math.round(item.area).toLocaleString();
-            sq.innerHTML = `<div class="label"><b>${item.name}</b><br>${km2} km²</div>`;
-            
-            sq.onmousedown = sq.ontouchstart = (e) => { 
-                selectedIndex = index; 
-                // Don't trigger full render on every single tap to keep it fast
-                document.querySelectorAll('.square').forEach(s => s.classList.remove('selected'));
-                sq.classList.add('selected');
-                updateUI();
-            };
-            
+            sq.innerHTML = `<div class="label"><b>${item.name}</b><br>${Math.round(item.area).toLocaleString()} km²</div>`;
+            sq.onmousedown = sq.ontouchstart = () => { selectedIndex = index; render(); };
             stage.appendChild(sq);
             makeDraggable(sq, index, scale);
         });
         updateUI();
+        updateURL();
     }
 
     function makeDraggable(el, index, scale) {
         let ix, iy, dragging = false;
-
-        const start = (e) => {
-            dragging = true;
+        const start = (e) => { dragging = true; const t = e.type.startsWith("touch") ? e.touches[0] : e; ix = t.clientX - addedItems[index].x; iy = t.clientY - addedItems[index].y; el.style.zIndex = 1000; };
+        const move = (e) => { 
+            if (!dragging) return; e.preventDefault();
             const t = e.type.startsWith("touch") ? e.touches[0] : e;
-            ix = t.clientX - addedItems[index].x;
-            iy = t.clientY - addedItems[index].y;
-            el.style.zIndex = 1000;
-        };
-
-        const move = (e) => {
-            if (!dragging) return;
-            e.preventDefault();
-            const t = e.type.startsWith("touch") ? e.touches[0] : e;
-            
-            addedItems[index].x = t.clientX - ix;
-            addedItems[index].y = t.clientY - iy;
-            
-            // Use requestAnimationFrame for buttery smooth movement
+            addedItems[index].x = t.clientX - ix; addedItems[index].y = t.clientY - iy;
             requestAnimationFrame(() => {
-                el.style.left = addedItems[index].x + 'px';
-                el.style.top = addedItems[index].y + 'px';
-                
-                // Highlight logic (only check every few frames)
+                el.style.left = addedItems[index].x + 'px'; el.style.top = addedItems[index].y + 'px';
                 const squares = document.querySelectorAll('.square');
                 addedItems.forEach((other, i) => {
                     if(i !== index) {
                         const s1 = Math.max(25, Math.sqrt(addedItems[index].area) * scale);
                         const s2 = Math.max(25, Math.sqrt(other.area) * scale);
-                        const overlap = !(addedItems[index].x + s1 < other.x || addedItems[index].x > other.x + s2 || 
-                                          addedItems[index].y + s1 < other.y || addedItems[index].y > other.y + s2);
-                        if(overlap) squares[i].classList.add('highlight');
-                        else squares[i].classList.remove('highlight');
+                        const overlap = !(addedItems[index].x + s1 < other.x || addedItems[index].x > other.x + s2 || addedItems[index].y + s1 < other.y || addedItems[index].y > other.y + s2);
+                        if(overlap) squares[i].classList.add('highlight'); else squares[i].classList.remove('highlight');
                     }
                 });
             });
         };
-
         const stop = () => { dragging = false; ix = undefined; };
-
-        el.addEventListener("touchstart", start, {passive:false});
-        window.addEventListener("touchmove", move, {passive:false});
-        window.addEventListener("touchend", stop);
-        
-        el.addEventListener("mousedown", start);
-        window.addEventListener("mousemove", move);
-        window.addEventListener("mouseup", stop);
+        el.addEventListener("touchstart", start, {passive:false}); window.addEventListener("touchmove", move, {passive:false}); window.addEventListener("touchend", stop);
+        el.addEventListener("mousedown", start); window.addEventListener("mousemove", move); window.addEventListener("mouseup", stop);
     }
 
     function handleAction() {
         if (selectedIndex === null) return;
-        if (addedItems[selectedIndex].parts) decombineSelected();
-        else mergeTouching();
+        if (addedItems[selectedIndex].parts) decombineSelected(); else mergeTouching();
     }
 
     function mergeTouching() {
@@ -205,28 +160,21 @@
         const scale = (Math.min(stage.offsetWidth, stage.offsetHeight) * 0.75) / Math.sqrt(maxArea);
         const target = addedItems[selectedIndex];
         let toMerge = [selectedIndex], others = [];
-        
         addedItems.forEach((item, i) => {
             if (i !== selectedIndex) {
-                const s1 = Math.max(25, Math.sqrt(target.area) * scale);
-                const s2 = Math.max(25, Math.sqrt(item.area) * scale);
-                const overlap = !(target.x + s1 < item.x || target.x > item.x + s2 || target.y + s1 < item.y || target.y > item.y + s2);
-                if (overlap) toMerge.push(i);
+                const s1 = Math.max(25, Math.sqrt(target.area) * scale), s2 = Math.max(25, Math.sqrt(item.area) * scale);
+                if (!(target.x + s1 < item.x || target.x > item.x + s2 || target.y + s1 < item.y || target.y > item.y + s2)) toMerge.push(i);
                 else others.push(item);
             }
         });
-
         if (toMerge.length < 2) return;
-
+        if (typeof gtag === 'function') gtag('event', 'combine_regions', { 'count': toMerge.length, 'primary_region': target.name });
         const mergedParts = [];
         toMerge.forEach(idx => {
-            if (addedItems[idx].parts) mergedParts.push(...addedItems[idx].parts);
-            else mergedParts.push(addedItems[idx]);
+            if (addedItems[idx].parts) mergedParts.push(...addedItems[idx].parts); else mergedParts.push(addedItems[idx]);
         });
-
         const totalArea = mergedParts.reduce((s, i) => s + i.area, 0);
         const newName = Array.from(new Set(mergedParts.map(p => p.name.split('>').pop().trim()))).join(' + ');
-        
         addedItems = [...others, { name: newName, area: totalArea, color: mergedParts[0].color, x: target.x, y: target.y, parts: mergedParts }];
         selectedIndex = addedItems.length - 1; render();
     }
@@ -238,9 +186,7 @@
         selectedIndex = null; render();
     }
 
-    function deleteSelected() {
-        if (selectedIndex !== null) { addedItems.splice(selectedIndex, 1); selectedIndex = null; render(); }
-    }
+    function deleteSelected() { if (selectedIndex !== null) { addedItems.splice(selectedIndex, 1); selectedIndex = null; render(); } }
 
     function updateUI() {
         const actionBtn = document.getElementById('actionBtn'), deleteBtn = document.getElementById('deleteBtn');
@@ -249,25 +195,20 @@
             const item = addedItems[selectedIndex];
             if (item.parts) { actionBtn.innerText = "De-combine"; actionBtn.style.background = "var(--primary)"; }
             else { actionBtn.innerText = "Combine Touching"; actionBtn.style.background = "var(--success)"; }
-        } else {
-            deleteBtn.style.display = 'none';
-        }
+        } else { deleteBtn.style.display = 'none'; }
     }
 
-   function addSquare(item) {
-        // This sends the country name to your Google Dashboard!
-        if (typeof gtag === 'function') {
-            gtag('event', 'select_country', {
-                'country_name': item.name,
-                'area_size': item.area
-            });
-        }
-
+    function addSquare(item, isNew = true) {
+        if (isNew && typeof gtag === 'function') gtag('event', 'select_country', { 'country_name': item.name, 'area_size': item.area });
         const hue = Math.floor(Math.random() * 360);
         addedItems.push({ ...item, color: `hsla(${hue}, 75%, 65%, 0.7)`, x: null, y: null });
-        selectedIndex = addedItems.length - 1; 
-        render();
+        selectedIndex = addedItems.length - 1; render();
     }
+
+    function shareScale() {
+        navigator.clipboard.writeText(window.location.href).then(() => { alert("Comparison Link copied! Send it to a friend."); });
+    }
+
     function clearAll() { addedItems = []; render(); }
     window.onresize = render; init();
 </script>
