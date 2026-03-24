@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4QWG8TF8P3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-4QWG8TF8P3');
+</script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Square Scale Pro</title>
@@ -244,10 +254,19 @@
         }
     }
 
-    function addSquare(item) {
+   function addSquare(item) {
+        // This sends the country name to your Google Dashboard!
+        if (typeof gtag === 'function') {
+            gtag('event', 'select_country', {
+                'country_name': item.name,
+                'area_size': item.area
+            });
+        }
+
         const hue = Math.floor(Math.random() * 360);
         addedItems.push({ ...item, color: `hsla(${hue}, 75%, 65%, 0.7)`, x: null, y: null });
-        selectedIndex = addedItems.length - 1; render();
+        selectedIndex = addedItems.length - 1; 
+        render();
     }
     function clearAll() { addedItems = []; render(); }
     window.onresize = render; init();
