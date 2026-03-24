@@ -7,42 +7,57 @@
     <style>
         :root { --primary: #2c3e50; --accent: #3498db; --danger: #e74c3c; --success: #27ae60; --bg: #f8f9fa; }
         body { font-family: -apple-system, system-ui, sans-serif; margin: 0; display: flex; flex-direction: column; height: 100vh; background: var(--bg); overflow: hidden; }
-        .header-nav { background: var(--primary); color: white; z-index: 1000; flex-shrink: 0; }
-        header { padding: 8px; font-weight: bold; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        
+        .header-nav { background: var(--primary); color: white; z-index: 1000; flex-shrink: 0; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        header { padding: 8px; font-weight: bold; text-align: center; font-size: 1.1rem; }
+        
         .controls-container { background: white; padding: 12px; border-bottom: 1px solid #ddd; color: #333; }
         .input-wrapper { max-width: 500px; margin: 0 auto; position: relative; }
         input { width: 100%; padding: 12px; border: 2px solid #dfe6e9; border-radius: 8px; font-size: 16px; box-sizing: border-box; outline: none; }
-        #results-box { position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ddd; z-index: 2000; display: none; border-radius: 0 0 8px 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .result-item { padding: 12px; border-bottom: 1px solid #eee; cursor: pointer; }
+
+        #results-box { position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ddd; z-index: 2000; display: none; border-radius: 0 0 8px 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
+        .result-item { padding: 15px; border-bottom: 1px solid #eee; cursor: pointer; }
+
         .btn-row { display: flex; gap: 6px; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
-        button { padding: 10px 12px; cursor: pointer; border-radius: 6px; border: none; background: var(--accent); color: white; font-weight: bold; font-size: 11px; }
-        #main-layout { display: flex; flex-grow: 1; overflow: hidden; }
-        #legend { width: 240px; background: white; border-right: 1px solid #ddd; overflow-y: auto; padding: 15px; display: block; }
-        @media (max-width: 600px) { #legend { display: none; position: absolute; left:0; top:0; bottom:0; z-index: 900; width: 80%; } #legend.active { display: block; } }
-        .legend-item { margin-bottom: 8px; padding: 10px; border-radius: 4px; border-left: 4px solid var(--accent); background: #f0f2f5; font-size: 12px; position: relative; }
-        .legend-del { color: var(--danger); font-weight: bold; float: right; cursor: pointer; }
+        button { padding: 10px 14px; cursor: pointer; border-radius: 6px; border: none; background: var(--accent); color: white; font-weight: bold; font-size: 12px; min-width: 100px; }
+
         #stage { flex-grow: 1; position: relative; overflow: hidden; background-image: radial-gradient(#d1d1d1 0.8px, transparent 0.8px); background-size: 40px 40px; }
-        .square { position: absolute; border: 1.5px solid rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; cursor: grab; touch-action: none; }
-        .square.selected { border: 3px solid #000; z-index: 800 !important; }
-        .square.highlight { border: 3px dashed var(--success); box-shadow: 0 0 10px var(--success); }
-        .label { font-size: 10px; font-weight: bold; text-align: center; pointer-events: none; color: rgba(0,0,0,0.9); padding: 4px; line-height: 1.1; overflow: hidden; }
+
+        .square { 
+            position: absolute; 
+            border: 1.5px solid rgba(0,0,0,0.3); 
+            display: flex; align-items: center; justify-content: center; 
+            cursor: grab; touch-action: none; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .square.selected { border: 3px solid #000 !important; z-index: 800 !important; box-shadow: 0 0 15px rgba(0,0,0,0.3); }
+        .square.highlight { border: 3px dashed var(--success); }
+
+        .label { font-size: 10px; font-weight: bold; text-align: center; pointer-events: none; color: rgba(0,0,0,0.9); padding: 5px; line-height: 1.2; overflow: hidden; }
     </style>
 </head>
 <body>
-<div class="header-nav"><header>Square Scale Pro</header>
-<div class="controls-container">
-    <div class="input-wrapper"><input type="text" id="entitySearch" placeholder="Search..." autocomplete="off"><div id="results-box"></div></div>
-    <div class="btn-row">
-        <button onclick="toggleLegend()">List/Legend</button>
-        <button id="mergeBtn" style="background:var(--success)" onclick="mergeTouching()">Combine Touching</button>
-        <button id="decombineBtn" style="background:var(--primary); display:none;" onclick="decombineSelected()">De-combine Selected</button>
-        <button style="background:var(--danger)" onclick="clearAll()">Clear All</button>
+
+<div class="header-nav">
+    <header>Square Scale</header>
+    <div class="controls-container">
+        <div class="input-wrapper">
+            <input type="text" id="entitySearch" placeholder="Search Country/Region..." autocomplete="off">
+            <div id="results-box"></div>
+        </div>
+        <div class="btn-row">
+            <button id="actionBtn" style="background:var(--success)" onclick="handleAction()">Combine Touching</button>
+            <button id="deleteBtn" style="background:var(--danger); display:none;" onclick="deleteSelected()">Delete Selected</button>
+            <button style="background:#7f8c8d" onclick="clearAll()">Clear All</button>
+        </div>
     </div>
-</div></div>
-<div id="main-layout"><div id="legend"></div><div id="stage"></div></div>
+</div>
+
+<div id="stage"></div>
+
 <script>
     let masterData = [], addedItems = [], selectedIndex = null;
-    const stage = document.getElementById('stage'), legend = document.getElementById('legend');
+    const stage = document.getElementById('stage');
 
     async function init() {
         try {
@@ -52,7 +67,7 @@
             const resData = await fetch('data.json');
             const customData = await resData.json();
             masterData = [...countryList, ...customData.map(i => ({...i, parts: null}))].sort((a,b) => a.name.localeCompare(b.name));
-        } catch(e) {}
+        } catch(e) { console.warn("Custom data.json not found, using API only."); }
         setupSearch();
     }
 
@@ -62,55 +77,67 @@
             const val = e.target.value.toLowerCase(); box.innerHTML = "";
             if (val.length < 2) { box.style.display = "none"; return; }
             const matches = masterData.filter(i => i.name.toLowerCase().includes(val)).slice(0, 8);
-            if (matches.length > 0) { box.style.display = "block"; matches.forEach(m => {
-                const div = document.createElement('div'); div.className = "result-item"; div.innerText = m.name;
-                div.onclick = () => { addSquare(m); box.style.display = "none"; input.value = ""; }; box.appendChild(div);
-            });}
+            if (matches.length > 0) {
+                box.style.display = "block";
+                matches.forEach(m => {
+                    const div = document.createElement('div'); div.className = "result-item"; div.innerText = m.name;
+                    div.onclick = () => { addSquare(m); box.style.display = "none"; input.value = ""; };
+                    box.appendChild(div);
+                });
+            }
         };
+        document.addEventListener('click', (e) => { if(e.target !== input) box.style.display = "none"; });
     }
 
     function isOverlapping(i1, i2, scale) {
-        const s1 = Math.max(15, Math.sqrt(i1.area) * scale);
-        const s2 = Math.max(15, Math.sqrt(i2.area) * scale);
+        const s1 = Math.max(20, Math.sqrt(i1.area) * scale);
+        const s2 = Math.max(20, Math.sqrt(i2.area) * scale);
         return !(i1.x + s1 < i2.x || i1.x > i2.x + s2 || i1.y + s1 < i2.y || i1.y > i2.y + s2);
     }
 
     function render() {
-        stage.innerHTML = ""; legend.innerHTML = "<strong>Comparison List</strong><hr>";
+        stage.innerHTML = "";
         if (addedItems.length === 0) { selectedIndex = null; updateUI(); return; }
         const maxArea = Math.max(...addedItems.map(i => i.area));
         const scale = (Math.min(stage.offsetWidth, stage.offsetHeight) * 0.75) / Math.sqrt(maxArea);
         
         addedItems.forEach((item, index) => {
-            const side = Math.max(15, Math.sqrt(item.area) * scale);
+            const side = Math.max(20, Math.sqrt(item.area) * scale);
             const sq = document.createElement('div');
             sq.className = 'square' + (selectedIndex === index ? ' selected' : '');
             sq.style.width = sq.style.height = side + 'px';
             sq.style.backgroundColor = item.color;
             if(!item.x) { item.x = (stage.offsetWidth/2 - side/2); item.y = (stage.offsetHeight/2 - side/2); }
             sq.style.left = item.x + 'px'; sq.style.top = item.y + 'px';
-            sq.innerHTML = `<div class="label">${item.name}</div>`;
-            sq.onclick = (e) => { selectedIndex = index; render(); };
+            
+            const mi2 = Math.round(item.area * 0.3861).toLocaleString();
+            const km2 = Math.round(item.area).toLocaleString();
+            sq.innerHTML = `<div class="label"><b>${item.name}</b><br>${km2} km²<br>${mi2} mi²</div>`;
+            
+            sq.onmousedown = sq.ontouchstart = () => { selectedIndex = index; render(); };
             stage.appendChild(sq);
             makeDraggable(sq, index, scale);
-            const km = Math.round(item.area).toLocaleString();
-            legend.innerHTML += `<div class="legend-item" style="border-color:${item.color}"><span class="legend-del" onclick="removeItem(${index})">DEL</span><b>${item.name}</b><br>${km} km²</div>`;
         });
         updateUI();
     }
 
     function makeDraggable(el, index, scale) {
         let ix, iy;
-        const start = (e) => { const t = e.type.startsWith("touch")?e.touches[0]:e; ix=t.clientX-addedItems[index].x; iy=t.clientY-addedItems[index].y; el.style.zIndex=1000; selectedIndex=index; };
+        const start = (e) => { 
+            const t = e.type.startsWith("touch") ? e.touches[0] : e;
+            ix = t.clientX - addedItems[index].x;
+            iy = t.clientY - addedItems[index].y;
+            el.style.zIndex = 1000;
+        };
         const move = (e) => { 
-            if(ix===undefined) return; e.preventDefault(); 
-            const t = e.type.startsWith("touch")?e.touches[0]:e; 
+            if(ix === undefined) return;
+            e.preventDefault(); 
+            const t = e.type.startsWith("touch") ? e.touches[0] : e; 
             addedItems[index].x = t.clientX - ix; 
             addedItems[index].y = t.clientY - iy; 
             el.style.left = addedItems[index].x + 'px'; 
             el.style.top = addedItems[index].y + 'px';
             
-            // Check for overlaps with the CURRENTLY dragged item
             const squares = document.querySelectorAll('.square');
             addedItems.forEach((other, i) => {
                 if(i !== index) {
@@ -119,19 +146,23 @@
                 }
             });
         };
-        const stop = () => { if(ix!==undefined) { ix=undefined; render(); } };
+        const stop = () => { if(ix !== undefined) { ix = undefined; render(); } };
         el.addEventListener("touchstart", start, {passive:false}); el.addEventListener("touchmove", move, {passive:false}); el.addEventListener("touchend", stop);
         el.addEventListener("mousedown", start); document.addEventListener("mousemove", move); document.addEventListener("mouseup", stop);
     }
 
+    function handleAction() {
+        if (selectedIndex === null) return;
+        const item = addedItems[selectedIndex];
+        if (item.parts) decombineSelected();
+        else mergeTouching();
+    }
+
     function mergeTouching() {
-        if (selectedIndex === null || addedItems.length < 2) return;
         const maxArea = Math.max(...addedItems.map(i => i.area));
         const scale = (Math.min(stage.offsetWidth, stage.offsetHeight) * 0.75) / Math.sqrt(maxArea);
         const target = addedItems[selectedIndex];
-        
-        let toMerge = [selectedIndex];
-        let others = [];
+        let toMerge = [selectedIndex], others = [];
         
         addedItems.forEach((item, i) => {
             if (i !== selectedIndex) {
@@ -140,27 +171,52 @@
             }
         });
 
-        if (toMerge.length < 2) return alert("Select a square and drag others on top of it to combine!");
+        if (toMerge.length < 2) return;
 
-        const mergedParts = toMerge.map(idx => addedItems[idx]);
+        const mergedParts = [];
+        toMerge.forEach(idx => {
+            const itm = addedItems[idx];
+            if (itm.parts) mergedParts.push(...itm.parts);
+            else mergedParts.push(itm);
+        });
+
         const totalArea = mergedParts.reduce((s, i) => s + i.area, 0);
-        const newName = mergedParts.map(p => p.name.split('>').pop().trim()).join(' + ');
+        const newName = Array.from(new Set(mergedParts.map(p => p.name.split('>').pop().trim()))).join(' + ');
         
         addedItems = [...others, { name: newName, area: totalArea, color: mergedParts[0].color, x: target.x, y: target.y, parts: mergedParts }];
         selectedIndex = addedItems.length - 1; render();
     }
 
     function decombineSelected() {
-        if(selectedIndex === null || !addedItems[selectedIndex].parts) return;
         const parts = addedItems[selectedIndex].parts;
         addedItems.splice(selectedIndex, 1);
         addedItems.push(...parts);
         selectedIndex = null; render();
     }
 
+    function deleteSelected() {
+        if (selectedIndex !== null) { addedItems.splice(selectedIndex, 1); selectedIndex = null; render(); }
+    }
+
     function updateUI() {
-        const decombineBtn = document.getElementById('decombineBtn');
-        decombineBtn.style.display = (selectedIndex !== null && addedItems[selectedIndex].parts) ? 'inline-block' : 'none';
+        const actionBtn = document.getElementById('actionBtn');
+        const deleteBtn = document.getElementById('deleteBtn');
+        
+        if (selectedIndex !== null) {
+            deleteBtn.style.display = 'inline-block';
+            const item = addedItems[selectedIndex];
+            if (item.parts) {
+                actionBtn.innerText = "De-combine";
+                actionBtn.style.background = "var(--primary)";
+            } else {
+                actionBtn.innerText = "Combine Touching";
+                actionBtn.style.background = "var(--success)";
+            }
+        } else {
+            deleteBtn.style.display = 'none';
+            actionBtn.innerText = "Combine Touching";
+            actionBtn.style.background = "var(--success)";
+        }
     }
 
     function addSquare(item) {
@@ -168,8 +224,6 @@
         addedItems.push({ ...item, color: `hsla(${hue}, 75%, 65%, 0.7)`, x: null, y: null });
         selectedIndex = addedItems.length - 1; render();
     }
-    function removeItem(idx) { addedItems.splice(idx, 1); selectedIndex = null; render(); }
-    function toggleLegend() { legend.classList.toggle('active'); }
     function clearAll() { addedItems = []; render(); }
     window.onresize = render; init();
 </script>
