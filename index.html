@@ -29,9 +29,14 @@
             display: flex; align-items: center; justify-content: center; 
             cursor: grab; touch-action: none; 
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            will-change: transform, left, top; /* Performance boost */
         }
-        .square.selected { border: 3px solid #000 !important; z-index: 800 !important; box-shadow: 0 0 15px rgba(0,0,0,0.3); }
-        .square.highlight { border: 3px dashed var(--success); }
+        .square.selected { border: 3px solid #000 !important; z-index: 800 !important; }
+        .square.highlight { border: 3px dashed var(--success) !important; }
+        
+        /* The "Aruba" Indicator */
+        .square.is-tiny { border: 2px solid #e67e22; box-shadow: 0 0 8px #e67e22; }
+        .square.is-tiny::after { content: 'TINY'; position: absolute; top: -15px; font-size: 8px; color: #e67e22; font-weight: bold; }
 
         .label { font-size: 10px; font-weight: bold; text-align: center; pointer-events: none; color: rgba(0,0,0,0.9); padding: 5px; line-height: 1.2; overflow: hidden; }
     </style>
@@ -67,7 +72,7 @@
             const resData = await fetch('data.json');
             const customData = await resData.json();
             masterData = [...countryList, ...customData.map(i => ({...i, parts: null}))].sort((a,b) => a.name.localeCompare(b.name));
-        } catch(e) { console.warn("Custom data.json not found, using API only."); }
+        } catch(e) {}
         setupSearch();
     }
 
@@ -86,35 +91,43 @@
                 });
             }
         };
-        document.addEventListener('click', (e) => { if(e.target !== input) box.style.display = "none"; });
-    }
-
-    function isOverlapping(i1, i2, scale) {
-        const s1 = Math.max(20, Math.sqrt(i1.area) * scale);
-        const s2 = Math.max(20, Math.sqrt(i2.area) * scale);
-        return !(i1.x + s1 < i2.x || i1.x > i2.x + s2 || i1.y + s1 < i2.y || i1.y > i2.y + s2);
     }
 
     function render() {
         stage.innerHTML = "";
         if (addedItems.length === 0) { selectedIndex = null; updateUI(); return; }
+        
         const maxArea = Math.max(...addedItems.map(i => i.area));
-        const scale = (Math.min(stage.offsetWidth, stage.offsetHeight) * 0.75) / Math.sqrt(maxArea);
+        const stageMinDim = Math.min(stage.offsetWidth, stage.offsetHeight);
+        const scale = (stageMinDim * 0.75) / Math.sqrt(maxArea);
         
         addedItems.forEach((item, index) => {
-            const side = Math.max(20, Math.sqrt(item.area) * scale);
+            const trueSide = Math.sqrt(item.area) * scale;
+            const isTiny = trueSide < 25;
+            const side = Math.max(25, trueSide); // 25px min for usability
+            
             const sq = document.createElement('div');
-            sq.className = 'square' + (selectedIndex === index ? ' selected' : '');
+            sq.className = 'square' + (selectedIndex === index ? ' selected' : '') + (isTiny ? ' is-tiny' : '');
             sq.style.width = sq.style.height = side + 'px';
             sq.style.backgroundColor = item.color;
-            if(!item.x) { item.x = (stage.offsetWidth/2 - side/2); item.y = (stage.offsetHeight/2 - side/2); }
+            
+            if(!item.x) { 
+                item.x = (stage.offsetWidth/2 - side/2); 
+                item.y = (stage.offsetHeight/2 - side/2); 
+            }
             sq.style.left = item.x + 'px'; sq.style.top = item.y + 'px';
             
-            const mi2 = Math.round(item.area * 0.3861).toLocaleString();
             const km2 = Math.round(item.area).toLocaleString();
-            sq.innerHTML = `<div class="label"><b>${item.name}</b><br>${km2} km²<br>${mi2} mi²</div>`;
+            sq.innerHTML = `<div class="label"><b>${item.name}</b><br>${km2} km²</div>`;
             
-            sq.onmousedown = sq.ontouchstart = () => { selectedIndex = index; render(); };
+            sq.onmousedown = sq.ontouchstart = (e) => { 
+                selectedIndex = index; 
+                // Don't trigger full render on every single tap to keep it fast
+                document.querySelectorAll('.square').forEach(s => s.classList.remove('selected'));
+                sq.classList.add('selected');
+                updateUI();
+            };
+            
             stage.appendChild(sq);
             makeDraggable(sq, index, scale);
         });
@@ -122,39 +135,58 @@
     }
 
     function makeDraggable(el, index, scale) {
-        let ix, iy;
-        const start = (e) => { 
+        let ix, iy, dragging = false;
+
+        const start = (e) => {
+            dragging = true;
             const t = e.type.startsWith("touch") ? e.touches[0] : e;
             ix = t.clientX - addedItems[index].x;
             iy = t.clientY - addedItems[index].y;
             el.style.zIndex = 1000;
         };
-        const move = (e) => { 
-            if(ix === undefined) return;
-            e.preventDefault(); 
-            const t = e.type.startsWith("touch") ? e.touches[0] : e; 
-            addedItems[index].x = t.clientX - ix; 
-            addedItems[index].y = t.clientY - iy; 
-            el.style.left = addedItems[index].x + 'px'; 
-            el.style.top = addedItems[index].y + 'px';
+
+        const move = (e) => {
+            if (!dragging) return;
+            e.preventDefault();
+            const t = e.type.startsWith("touch") ? e.touches[0] : e;
             
-            const squares = document.querySelectorAll('.square');
-            addedItems.forEach((other, i) => {
-                if(i !== index) {
-                    if(isOverlapping(addedItems[index], other, scale)) squares[i].classList.add('highlight');
-                    else squares[i].classList.remove('highlight');
-                }
+            addedItems[index].x = t.clientX - ix;
+            addedItems[index].y = t.clientY - iy;
+            
+            // Use requestAnimationFrame for buttery smooth movement
+            requestAnimationFrame(() => {
+                el.style.left = addedItems[index].x + 'px';
+                el.style.top = addedItems[index].y + 'px';
+                
+                // Highlight logic (only check every few frames)
+                const squares = document.querySelectorAll('.square');
+                addedItems.forEach((other, i) => {
+                    if(i !== index) {
+                        const s1 = Math.max(25, Math.sqrt(addedItems[index].area) * scale);
+                        const s2 = Math.max(25, Math.sqrt(other.area) * scale);
+                        const overlap = !(addedItems[index].x + s1 < other.x || addedItems[index].x > other.x + s2 || 
+                                          addedItems[index].y + s1 < other.y || addedItems[index].y > other.y + s2);
+                        if(overlap) squares[i].classList.add('highlight');
+                        else squares[i].classList.remove('highlight');
+                    }
+                });
             });
         };
-        const stop = () => { if(ix !== undefined) { ix = undefined; render(); } };
-        el.addEventListener("touchstart", start, {passive:false}); el.addEventListener("touchmove", move, {passive:false}); el.addEventListener("touchend", stop);
-        el.addEventListener("mousedown", start); document.addEventListener("mousemove", move); document.addEventListener("mouseup", stop);
+
+        const stop = () => { dragging = false; ix = undefined; };
+
+        el.addEventListener("touchstart", start, {passive:false});
+        window.addEventListener("touchmove", move, {passive:false});
+        window.addEventListener("touchend", stop);
+        
+        el.addEventListener("mousedown", start);
+        window.addEventListener("mousemove", move);
+        window.addEventListener("mouseup", stop);
     }
 
     function handleAction() {
         if (selectedIndex === null) return;
-        const item = addedItems[selectedIndex];
-        if (item.parts) decombineSelected();
+        if (addedItems[selectedIndex].parts) decombineSelected();
         else mergeTouching();
     }
 
@@ -166,7 +198,10 @@
         
         addedItems.forEach((item, i) => {
             if (i !== selectedIndex) {
-                if (isOverlapping(target, item, scale)) toMerge.push(i);
+                const s1 = Math.max(25, Math.sqrt(target.area) * scale);
+                const s2 = Math.max(25, Math.sqrt(item.area) * scale);
+                const overlap = !(target.x + s1 < item.x || target.x > item.x + s2 || target.y + s1 < item.y || target.y > item.y + s2);
+                if (overlap) toMerge.push(i);
                 else others.push(item);
             }
         });
@@ -175,9 +210,8 @@
 
         const mergedParts = [];
         toMerge.forEach(idx => {
-            const itm = addedItems[idx];
-            if (itm.parts) mergedParts.push(...itm.parts);
-            else mergedParts.push(itm);
+            if (addedItems[idx].parts) mergedParts.push(...addedItems[idx].parts);
+            else mergedParts.push(addedItems[idx]);
         });
 
         const totalArea = mergedParts.reduce((s, i) => s + i.area, 0);
@@ -199,23 +233,14 @@
     }
 
     function updateUI() {
-        const actionBtn = document.getElementById('actionBtn');
-        const deleteBtn = document.getElementById('deleteBtn');
-        
+        const actionBtn = document.getElementById('actionBtn'), deleteBtn = document.getElementById('deleteBtn');
         if (selectedIndex !== null) {
             deleteBtn.style.display = 'inline-block';
             const item = addedItems[selectedIndex];
-            if (item.parts) {
-                actionBtn.innerText = "De-combine";
-                actionBtn.style.background = "var(--primary)";
-            } else {
-                actionBtn.innerText = "Combine Touching";
-                actionBtn.style.background = "var(--success)";
-            }
+            if (item.parts) { actionBtn.innerText = "De-combine"; actionBtn.style.background = "var(--primary)"; }
+            else { actionBtn.innerText = "Combine Touching"; actionBtn.style.background = "var(--success)"; }
         } else {
             deleteBtn.style.display = 'none';
-            actionBtn.innerText = "Combine Touching";
-            actionBtn.style.background = "var(--success)";
         }
     }
 
