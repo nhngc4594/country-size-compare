@@ -5,55 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Square Scale Pro</title>
     <style>
-        :root { --primary: #2c3e50; --accent: #3498db; --danger: #e74c3c; }
-        body { font-family: system-ui, -apple-system, sans-serif; margin: 0; display: flex; flex-direction: column; height: 100vh; background: #f0f2f5; overflow: hidden; }
+        :root { --primary: #2c3e50; --accent: #3498db; --danger: #e74c3c; --bg: #f8f9fa; }
+        body { font-family: -apple-system, system-ui, sans-serif; margin: 0; display: flex; flex-direction: column; height: 100vh; background: var(--bg); overflow: hidden; }
         
-        header { background: var(--primary); color: white; padding: 10px; font-weight: bold; text-align: center; }
+        header { background: var(--primary); color: white; padding: 12px; font-weight: bold; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         
-        .controls { display: flex; gap: 8px; padding: 12px; background: white; border-bottom: 1px solid #ddd; flex-wrap: wrap; justify-content: center; z-index: 10; }
-        
-        input { padding: 10px; border: 2px solid #ddd; border-radius: 8px; width: 100%; max-width: 250px; font-size: 16px; }
-        
-        button { padding: 10px 14px; cursor: pointer; border-radius: 8px; border: none; background: var(--accent); color: white; font-weight: bold; font-size: 14px; }
+        .controls-container { background: white; padding: 15px; border-bottom: 1px solid #ddd; z-index: 100; position: relative; }
+        .input-wrapper { max-width: 500px; margin: 0 auto; position: relative; }
+        input { width: 100%; padding: 12px; border: 2px solid #dfe6e9; border-radius: 8px; font-size: 16px; box-sizing: border-box; outline: none; }
+        input:focus { border-color: var(--accent); }
+
+        /* Custom Search Results Box */
+        #results-box { position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ddd; border-top: none; border-radius: 0 0 8px 8px; max-height: 250px; overflow-y: auto; display: none; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .result-item { padding: 12px; border-bottom: 1px solid #eee; cursor: pointer; font-size: 14px; }
+        .result-item:hover { background: #f0f7ff; }
+
+        .btn-row { display: flex; gap: 8px; justify-content: center; margin-top: 10px; }
+        button { flex: 1; max-width: 120px; padding: 10px; cursor: pointer; border-radius: 6px; border: none; background: var(--accent); color: white; font-weight: bold; font-size: 13px; }
         button.clear { background: var(--danger); }
-        button.secondary { background: #95a5a6; }
+        button#overlap-btn.active { background: #27ae60; }
 
-        #stage { 
-            flex-grow: 1; 
-            position: relative; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            padding: 20px; 
-            background-image: radial-gradient(#d1d1d1 0.5px, transparent 0.5px); 
-            background-size: 30px 30px; 
-            overflow: hidden; 
-        }
-
-        .square { 
-            position: absolute;
-            background: rgba(52, 152, 219, 0.5); 
-            border: 1px solid rgba(0,0,0,0.3); 
-            display: flex; align-items: center; justify-content: center; 
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
-            cursor: pointer;
-        }
-
-        .label { position: absolute; bottom: 2px; width: 100%; text-align: center; font-size: min(12px, 2vw); font-weight: 700; color: #333; pointer-events: none; overflow: hidden; text-overflow: ellipsis; }
+        #stage { flex-grow: 1; padding: 20px; overflow-y: auto; display: flex; flex-wrap: wrap; align-content: center; justify-content: center; gap: 15px; background-image: radial-gradient(#d1d1d1 0.5px, transparent 0.5px); background-size: 30px 30px; transition: all 0.5s ease; }
         
-        #overlap-btn.active { background: #27ae60; }
+        #stage.overlap-mode { display: block; overflow: hidden; }
+        #stage.overlap-mode .square { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+
+        .square { background: rgba(52, 152, 219, 0.5); border: 1px solid rgba(0,0,0,0.2); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; }
+        .label { position: absolute; bottom: 4px; width: 90%; text-align: center; font-size: 10px; font-weight: bold; color: #222; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none; }
+        
+        .tip { text-align: center; font-size: 11px; color: #95a5a6; margin-top: 8px; }
     </style>
 </head>
 <body>
 
 <header>Square Scale</header>
 
-<div class="controls">
-    <input list="entities" id="entityInput" placeholder="Search Country/State...">
-    <datalist id="entities"></datalist>
-    <button onclick="addSquare()">Add</button>
-    <button id="overlap-btn" class="secondary" onclick="toggleOverlap()">Overlap Mode</button>
-    <button class="clear" onclick="clearAll()">Clear</button>
+<div class="controls-container">
+    <div class="input-wrapper">
+        <input type="text" id="entitySearch" placeholder="Search (e.g. Japan > Hokkaido)..." autocomplete="off">
+        <div id="results-box"></div>
+    </div>
+    <div class="btn-row">
+        <button id="overlap-btn" onclick="toggleOverlap()">Overlap Mode</button>
+        <button class="clear" onclick="clearAll()">Clear All</button>
+    </div>
+    <div class="tip">Double-tap a square to remove it</div>
 </div>
 
 <div id="stage"></div>
@@ -62,41 +58,65 @@
     let masterData = [];
     let addedItems = [];
     let overlapMode = false;
-    const stage = document.getElementById('stage');
 
-    async function loadData() {
-        try {
-            const countriesRes = await fetch('https://restcountries.com/v3.1/all?fields=name,area');
-            const countries = await countriesRes.json();
-            const countryList = countries.map(c => ({ name: c.name.common, area: c.area }));
+    // 1. DATA LOADING
+    async function init() {
+        const countriesRes = await fetch('https://restcountries.com/v3.1/all?fields=name,area');
+        const countries = await countriesRes.json();
+        
+        const worldCountries = countries.map(c => ({ name: c.name.common, area: c.area }));
+        
+        // Master List of Prefectures & States (Option C Format)
+        const subRegions = [
+            { name: "USA > Nebraska", area: 200330 }, { name: "USA > Florida", area: 170312 },
+            { name: "USA > California", area: 423970 }, { name: "USA > Texas", area: 695662 },
+            { name: "Japan > Hokkaido", area: 83424 }, { name: "Japan > Honshu", area: 227960 },
+            { name: "Japan > Kyushu", area: 36782 }, { name: "Canada > Ontario", area: 1076000 },
+            { name: "Canada > Prince Edward Island", area: 5660 }, { name: "Earth > Asia", area: 44579000 },
+            { name: "Earth > Africa", area: 30370000 }, { name: "Earth > Moon", area: 37930000 }
+        ];
 
-            const states = [
-                { name: "Nebraska (USA)", area: 200330 }, { name: "Florida (USA)", area: 170312 },
-                { name: "California (USA)", area: 423970 }, { name: "Texas (USA)", area: 695662 },
-                { name: "Hokkaido (Japan)", area: 83424 }, { name: "Ontario (Canada)", area: 1076000 }
-            ];
-
-            masterData = [...countryList, ...states].sort((a,b) => a.name.localeCompare(b.name));
-            const list = document.getElementById('entities');
-            masterData.forEach(item => {
-                let opt = document.createElement('option');
-                opt.value = item.name;
-                list.appendChild(opt);
-            });
-        } catch(e) { console.error(e); }
+        masterData = [...worldCountries, ...subRegions].sort((a,b) => a.name.localeCompare(b.name));
+        setupSearch();
     }
 
+    // 2. CUSTOM SEARCH LOGIC
+    function setupSearch() {
+        const input = document.getElementById('entitySearch');
+        const resultsBox = document.getElementById('results-box');
+
+        input.addEventListener('input', (e) => {
+            const val = e.target.value.toLowerCase();
+            resultsBox.innerHTML = "";
+            if (val.length < 2) { resultsBox.style.display = "none"; return; }
+
+            const matches = masterData.filter(i => i.name.toLowerCase().includes(val)).slice(0, 6);
+            
+            if (matches.length > 0) {
+                resultsBox.style.display = "block";
+                matches.forEach(m => {
+                    const div = document.createElement('div');
+                    div.className = "result-item";
+                    div.innerText = m.name;
+                    div.onclick = () => { addSquare(m); resultsBox.style.display = "none"; input.value = ""; };
+                    resultsBox.appendChild(div);
+                });
+            } else {
+                resultsBox.style.display = "none";
+            }
+        });
+    }
+
+    // 3. RENDER ENGINE
     function render() {
+        const stage = document.getElementById('stage');
         stage.innerHTML = "";
         if (addedItems.length === 0) return;
 
-        // AUTO-SCALING LOGIC
-        // 1. Find the biggest area currently added
+        // Auto-scaling logic to fit big stuff like Canada or Asia
         const maxArea = Math.max(...addedItems.map(i => i.area));
         const maxSide = Math.sqrt(maxArea);
-        
-        // 2. Determine scale (use 80% of the smallest screen dimension)
-        const stageDim = Math.min(stage.offsetWidth, stage.offsetHeight) * 0.8;
+        const stageDim = Math.min(window.innerWidth, window.innerHeight) * 0.7;
         const scale = stageDim / maxSide;
 
         addedItems.forEach((item, index) => {
@@ -106,59 +126,40 @@
             square.style.width = side + 'px';
             square.style.height = side + 'px';
             square.style.backgroundColor = item.color;
-            
-            // Positioning Logic
-            if (overlapMode) {
-                square.style.left = `calc(50% - ${side/2}px)`;
-                square.style.top = `calc(50% - ${side/2}px)`;
-            } else {
-                // Simple horizontal line for side-by-side
-                const totalWidth = addedItems.reduce((acc, curr) => acc + (Math.sqrt(curr.area) * scale) + 10, 0);
-                let offset = (stage.offsetWidth - totalWidth) / 2;
-                for(let i=0; i<index; i++) {
-                    offset += (Math.sqrt(addedItems[i].area) * scale) + 10;
-                }
-                square.style.left = offset + 'px';
-                square.style.top = `calc(50% - ${side/2}px)`;
-            }
-
-            // Remove on Double Click / Tap
-            square.ondblclick = () => removeItem(index);
-            
             square.innerHTML = `<div class="label">${item.name}</div>`;
+            
+            // Delete Logic
+            square.ondblclick = () => { addedItems.splice(index, 1); render(); };
+            
+            // Mobile Double Tap
+            let lastTap = 0;
+            square.addEventListener('touchend', (e) => {
+                let now = Date.now();
+                if (now - lastTap < 300) { addedItems.splice(index, 1); render(); }
+                lastTap = now;
+            });
+
             stage.appendChild(square);
         });
     }
 
-    function addSquare() {
-        const val = document.getElementById('entityInput').value;
-        const item = masterData.find(i => i.name === val);
-        if (item) {
-            const hue = Math.floor(Math.random() * 360);
-            addedItems.push({ ...item, color: `hsla(${hue}, 70%, 60%, 0.6)` });
-            document.getElementById('entityInput').value = "";
-            render();
-        }
-    }
-
-    function removeItem(index) {
-        addedItems.splice(index, 1);
+    function addSquare(item) {
+        const hue = Math.floor(Math.random() * 360);
+        addedItems.push({ ...item, color: `hsla(${hue}, 70%, 60%, 0.6)` });
         render();
     }
 
     function toggleOverlap() {
         overlapMode = !overlapMode;
+        document.getElementById('stage').classList.toggle('overlap-mode');
         document.getElementById('overlap-btn').classList.toggle('active');
         render();
     }
 
-    function clearAll() {
-        addedItems = [];
-        render();
-    }
+    function clearAll() { addedItems = []; render(); }
 
     window.onresize = render;
-    loadData();
+    init();
 </script>
 
 </body>
