@@ -1,8 +1,5790 @@
 [
-  {"name": "Earth > Asia", "area": 44579000},
-  {"name": "Earth > Africa", "area": 30370000},
-  {"name": "USA > Nebraska", "area": 200330},
-  {"name": "USA > Florida", "area": 170312},
-  {"name": "Japan > Hokkaido", "area": 83424},
-  {"name": "Canada > Ontario", "area": 1076000}
+  {
+    "name": "Earth > Africa",
+    "area": 30370000,
+    "type": "continent"
+  },
+  {
+    "name": "Earth > Antarctica",
+    "area": 14000000,
+    "type": "continent"
+  },
+  {
+    "name": "Earth > Asia",
+    "area": 44579000,
+    "type": "continent"
+  },
+  {
+    "name": "Earth > Europe",
+    "area": 10530000,
+    "type": "continent"
+  },
+  {
+    "name": "Earth > North America",
+    "area": 24709000,
+    "type": "continent"
+  },
+  {
+    "name": "Earth > Oceania",
+    "area": 8526000,
+    "type": "continent"
+  },
+  {
+    "name": "Earth > South America",
+    "area": 17840000,
+    "type": "continent"
+  },
+  {
+    "name": "Earth > World",
+    "area": 510072000,
+    "type": "continent"
+  },
+  {
+    "name": "Region > European Union",
+    "area": 4233262,
+    "type": "region"
+  },
+  {
+    "name": "Region > Western Europe",
+    "area": 3452000,
+    "type": "region"
+  },
+  {
+    "name": "Region > Middle East",
+    "area": 6000000,
+    "type": "region"
+  },
+  {
+    "name": "Region > Southeast Asia",
+    "area": 4522518,
+    "type": "region"
+  },
+  {
+    "name": "Region > Central America",
+    "area": 523780,
+    "type": "region"
+  },
+  {
+    "name": "Region > Caribbean",
+    "area": 275400,
+    "type": "region"
+  },
+  {
+    "name": "Region > Sub-Saharan Africa",
+    "area": 24300000,
+    "type": "region"
+  },
+  {
+    "name": "Region > Scandinavia",
+    "area": 928057,
+    "type": "region"
+  },
+  {
+    "name": "Region > Baltic States",
+    "area": 175015,
+    "type": "region"
+  },
+  {
+    "name": "Region > Iberian Peninsula",
+    "area": 583254,
+    "type": "region"
+  },
+  {
+    "name": "Region > Arabian Peninsula",
+    "area": 3237500,
+    "type": "region"
+  },
+  {
+    "name": "Region > Indian Subcontinent",
+    "area": 4480000,
+    "type": "region"
+  },
+  {
+    "name": "Afghanistan",
+    "area": 652230,
+    "type": "country",
+    "aliases": [
+      "Afghan"
+    ]
+  },
+  {
+    "name": "Albania",
+    "area": 28748,
+    "type": "country"
+  },
+  {
+    "name": "Algeria",
+    "area": 2381741,
+    "type": "country"
+  },
+  {
+    "name": "Andorra",
+    "area": 468,
+    "type": "country"
+  },
+  {
+    "name": "Angola",
+    "area": 1246700,
+    "type": "country"
+  },
+  {
+    "name": "Antigua and Barbuda",
+    "area": 443,
+    "type": "country"
+  },
+  {
+    "name": "Argentina",
+    "area": 2780400,
+    "type": "country"
+  },
+  {
+    "name": "Armenia",
+    "area": 29743,
+    "type": "country"
+  },
+  {
+    "name": "Australia",
+    "area": 7692024,
+    "type": "country",
+    "aliases": [
+      "Oz",
+      "Aussie"
+    ]
+  },
+  {
+    "name": "Austria",
+    "area": 83871,
+    "type": "country"
+  },
+  {
+    "name": "Azerbaijan",
+    "area": 86600,
+    "type": "country"
+  },
+  {
+    "name": "Bahamas",
+    "area": 13943,
+    "type": "country"
+  },
+  {
+    "name": "Bahrain",
+    "area": 765,
+    "type": "country"
+  },
+  {
+    "name": "Bangladesh",
+    "area": 147570,
+    "type": "country"
+  },
+  {
+    "name": "Barbados",
+    "area": 430,
+    "type": "country"
+  },
+  {
+    "name": "Belarus",
+    "area": 207600,
+    "type": "country"
+  },
+  {
+    "name": "Belgium",
+    "area": 30528,
+    "type": "country"
+  },
+  {
+    "name": "Belize",
+    "area": 22966,
+    "type": "country"
+  },
+  {
+    "name": "Benin",
+    "area": 112622,
+    "type": "country"
+  },
+  {
+    "name": "Bhutan",
+    "area": 38394,
+    "type": "country"
+  },
+  {
+    "name": "Bolivia",
+    "area": 1098581,
+    "type": "country"
+  },
+  {
+    "name": "Bosnia and Herzegovina",
+    "area": 51209,
+    "type": "country",
+    "aliases": [
+      "Bosnia"
+    ]
+  },
+  {
+    "name": "Botswana",
+    "area": 581730,
+    "type": "country"
+  },
+  {
+    "name": "Brazil",
+    "area": 8515767,
+    "type": "country"
+  },
+  {
+    "name": "Brunei",
+    "area": 5765,
+    "type": "country"
+  },
+  {
+    "name": "Bulgaria",
+    "area": 110879,
+    "type": "country"
+  },
+  {
+    "name": "Burkina Faso",
+    "area": 272967,
+    "type": "country"
+  },
+  {
+    "name": "Burundi",
+    "area": 27834,
+    "type": "country"
+  },
+  {
+    "name": "Cabo Verde",
+    "area": 4033,
+    "type": "country",
+    "aliases": [
+      "Cape Verde"
+    ]
+  },
+  {
+    "name": "Cambodia",
+    "area": 181035,
+    "type": "country"
+  },
+  {
+    "name": "Cameroon",
+    "area": 475442,
+    "type": "country"
+  },
+  {
+    "name": "Canada",
+    "area": 9984670,
+    "type": "country"
+  },
+  {
+    "name": "Central African Republic",
+    "area": 622984,
+    "type": "country",
+    "aliases": [
+      "CAR"
+    ]
+  },
+  {
+    "name": "Chad",
+    "area": 1284000,
+    "type": "country"
+  },
+  {
+    "name": "Chile",
+    "area": 756102,
+    "type": "country"
+  },
+  {
+    "name": "China",
+    "area": 9596960,
+    "type": "country",
+    "aliases": [
+      "PRC",
+      "People's Republic of China"
+    ]
+  },
+  {
+    "name": "Colombia",
+    "area": 1141748,
+    "type": "country"
+  },
+  {
+    "name": "Comoros",
+    "area": 2235,
+    "type": "country"
+  },
+  {
+    "name": "Congo (Republic)",
+    "area": 342000,
+    "type": "country",
+    "aliases": [
+      "Republic of the Congo",
+      "Congo-Brazzaville"
+    ]
+  },
+  {
+    "name": "Congo (DRC)",
+    "area": 2344858,
+    "type": "country",
+    "aliases": [
+      "Democratic Republic of the Congo",
+      "DRC",
+      "Congo-Kinshasa",
+      "Zaire"
+    ]
+  },
+  {
+    "name": "Costa Rica",
+    "area": 51100,
+    "type": "country"
+  },
+  {
+    "name": "Croatia",
+    "area": 56594,
+    "type": "country"
+  },
+  {
+    "name": "Cuba",
+    "area": 109884,
+    "type": "country"
+  },
+  {
+    "name": "Cyprus",
+    "area": 9251,
+    "type": "country"
+  },
+  {
+    "name": "Czech Republic",
+    "area": 78866,
+    "type": "country",
+    "aliases": [
+      "Czechia"
+    ]
+  },
+  {
+    "name": "Denmark",
+    "area": 42924,
+    "type": "country"
+  },
+  {
+    "name": "Djibouti",
+    "area": 23200,
+    "type": "country"
+  },
+  {
+    "name": "Dominica",
+    "area": 751,
+    "type": "country"
+  },
+  {
+    "name": "Dominican Republic",
+    "area": 48671,
+    "type": "country"
+  },
+  {
+    "name": "Ecuador",
+    "area": 283561,
+    "type": "country"
+  },
+  {
+    "name": "Egypt",
+    "area": 1002450,
+    "type": "country"
+  },
+  {
+    "name": "El Salvador",
+    "area": 21041,
+    "type": "country"
+  },
+  {
+    "name": "Equatorial Guinea",
+    "area": 28051,
+    "type": "country"
+  },
+  {
+    "name": "Eritrea",
+    "area": 117600,
+    "type": "country"
+  },
+  {
+    "name": "Estonia",
+    "area": 45228,
+    "type": "country"
+  },
+  {
+    "name": "Eswatini",
+    "area": 17364,
+    "type": "country",
+    "aliases": [
+      "Swaziland"
+    ]
+  },
+  {
+    "name": "Ethiopia",
+    "area": 1104300,
+    "type": "country"
+  },
+  {
+    "name": "Fiji",
+    "area": 18274,
+    "type": "country"
+  },
+  {
+    "name": "Finland",
+    "area": 338424,
+    "type": "country"
+  },
+  {
+    "name": "France",
+    "area": 551695,
+    "type": "country"
+  },
+  {
+    "name": "Gabon",
+    "area": 267668,
+    "type": "country"
+  },
+  {
+    "name": "Gambia",
+    "area": 11295,
+    "type": "country"
+  },
+  {
+    "name": "Georgia",
+    "area": 69700,
+    "type": "country"
+  },
+  {
+    "name": "Germany",
+    "area": 357114,
+    "type": "country"
+  },
+  {
+    "name": "Ghana",
+    "area": 238533,
+    "type": "country"
+  },
+  {
+    "name": "Greece",
+    "area": 131957,
+    "type": "country"
+  },
+  {
+    "name": "Grenada",
+    "area": 344,
+    "type": "country"
+  },
+  {
+    "name": "Guatemala",
+    "area": 108889,
+    "type": "country"
+  },
+  {
+    "name": "Guinea",
+    "area": 245857,
+    "type": "country"
+  },
+  {
+    "name": "Guinea-Bissau",
+    "area": 36125,
+    "type": "country"
+  },
+  {
+    "name": "Guyana",
+    "area": 214969,
+    "type": "country"
+  },
+  {
+    "name": "Haiti",
+    "area": 27750,
+    "type": "country"
+  },
+  {
+    "name": "Honduras",
+    "area": 112492,
+    "type": "country"
+  },
+  {
+    "name": "Hungary",
+    "area": 93028,
+    "type": "country"
+  },
+  {
+    "name": "Iceland",
+    "area": 103000,
+    "type": "country"
+  },
+  {
+    "name": "India",
+    "area": 3287263,
+    "type": "country"
+  },
+  {
+    "name": "Indonesia",
+    "area": 1904569,
+    "type": "country"
+  },
+  {
+    "name": "Iran",
+    "area": 1648195,
+    "type": "country",
+    "aliases": [
+      "Persia",
+      "Islamic Republic of Iran"
+    ]
+  },
+  {
+    "name": "Iraq",
+    "area": 438317,
+    "type": "country"
+  },
+  {
+    "name": "Ireland",
+    "area": 70273,
+    "type": "country",
+    "aliases": [
+      "Eire",
+      "Republic of Ireland"
+    ]
+  },
+  {
+    "name": "Israel",
+    "area": 20770,
+    "type": "country"
+  },
+  {
+    "name": "Italy",
+    "area": 301336,
+    "type": "country"
+  },
+  {
+    "name": "Jamaica",
+    "area": 10991,
+    "type": "country"
+  },
+  {
+    "name": "Japan",
+    "area": 377975,
+    "type": "country"
+  },
+  {
+    "name": "Jordan",
+    "area": 89342,
+    "type": "country"
+  },
+  {
+    "name": "Kazakhstan",
+    "area": 2724900,
+    "type": "country"
+  },
+  {
+    "name": "Kenya",
+    "area": 580367,
+    "type": "country"
+  },
+  {
+    "name": "Kiribati",
+    "area": 811,
+    "type": "country"
+  },
+  {
+    "name": "Kuwait",
+    "area": 17818,
+    "type": "country"
+  },
+  {
+    "name": "Kyrgyzstan",
+    "area": 199951,
+    "type": "country"
+  },
+  {
+    "name": "Laos",
+    "area": 236800,
+    "type": "country"
+  },
+  {
+    "name": "Latvia",
+    "area": 64589,
+    "type": "country"
+  },
+  {
+    "name": "Lebanon",
+    "area": 10452,
+    "type": "country"
+  },
+  {
+    "name": "Lesotho",
+    "area": 30355,
+    "type": "country"
+  },
+  {
+    "name": "Liberia",
+    "area": 111369,
+    "type": "country"
+  },
+  {
+    "name": "Libya",
+    "area": 1759541,
+    "type": "country"
+  },
+  {
+    "name": "Liechtenstein",
+    "area": 160,
+    "type": "country"
+  },
+  {
+    "name": "Lithuania",
+    "area": 65300,
+    "type": "country"
+  },
+  {
+    "name": "Luxembourg",
+    "area": 2586,
+    "type": "country"
+  },
+  {
+    "name": "Madagascar",
+    "area": 587041,
+    "type": "country"
+  },
+  {
+    "name": "Malawi",
+    "area": 118484,
+    "type": "country"
+  },
+  {
+    "name": "Malaysia",
+    "area": 329847,
+    "type": "country"
+  },
+  {
+    "name": "Maldives",
+    "area": 300,
+    "type": "country"
+  },
+  {
+    "name": "Mali",
+    "area": 1240192,
+    "type": "country"
+  },
+  {
+    "name": "Malta",
+    "area": 316,
+    "type": "country"
+  },
+  {
+    "name": "Marshall Islands",
+    "area": 181,
+    "type": "country"
+  },
+  {
+    "name": "Mauritania",
+    "area": 1030700,
+    "type": "country"
+  },
+  {
+    "name": "Mauritius",
+    "area": 2040,
+    "type": "country"
+  },
+  {
+    "name": "Mexico",
+    "area": 1964375,
+    "type": "country"
+  },
+  {
+    "name": "Micronesia",
+    "area": 702,
+    "type": "country"
+  },
+  {
+    "name": "Moldova",
+    "area": 33846,
+    "type": "country"
+  },
+  {
+    "name": "Monaco",
+    "area": 2,
+    "type": "country"
+  },
+  {
+    "name": "Mongolia",
+    "area": 1564110,
+    "type": "country"
+  },
+  {
+    "name": "Montenegro",
+    "area": 13812,
+    "type": "country"
+  },
+  {
+    "name": "Morocco",
+    "area": 446550,
+    "type": "country"
+  },
+  {
+    "name": "Mozambique",
+    "area": 801590,
+    "type": "country"
+  },
+  {
+    "name": "Myanmar",
+    "area": 676578,
+    "type": "country",
+    "aliases": [
+      "Burma"
+    ]
+  },
+  {
+    "name": "Namibia",
+    "area": 824292,
+    "type": "country"
+  },
+  {
+    "name": "Nauru",
+    "area": 21,
+    "type": "country"
+  },
+  {
+    "name": "Nepal",
+    "area": 147181,
+    "type": "country"
+  },
+  {
+    "name": "Netherlands",
+    "area": 41543,
+    "type": "country",
+    "aliases": [
+      "Holland"
+    ]
+  },
+  {
+    "name": "New Zealand",
+    "area": 270467,
+    "type": "country",
+    "aliases": [
+      "NZ",
+      "Aotearoa"
+    ]
+  },
+  {
+    "name": "Nicaragua",
+    "area": 130373,
+    "type": "country"
+  },
+  {
+    "name": "Niger",
+    "area": 1267000,
+    "type": "country"
+  },
+  {
+    "name": "Nigeria",
+    "area": 923768,
+    "type": "country"
+  },
+  {
+    "name": "North Korea",
+    "area": 120538,
+    "type": "country",
+    "aliases": [
+      "DPRK",
+      "Democratic People's Republic of Korea"
+    ]
+  },
+  {
+    "name": "North Macedonia",
+    "area": 25713,
+    "type": "country",
+    "aliases": [
+      "Macedonia"
+    ]
+  },
+  {
+    "name": "Norway",
+    "area": 323802,
+    "type": "country"
+  },
+  {
+    "name": "Oman",
+    "area": 309500,
+    "type": "country"
+  },
+  {
+    "name": "Pakistan",
+    "area": 881913,
+    "type": "country"
+  },
+  {
+    "name": "Palau",
+    "area": 459,
+    "type": "country"
+  },
+  {
+    "name": "Palestine",
+    "area": 6020,
+    "type": "country",
+    "aliases": [
+      "Palestinian Territories",
+      "West Bank and Gaza"
+    ]
+  },
+  {
+    "name": "Panama",
+    "area": 75417,
+    "type": "country"
+  },
+  {
+    "name": "Papua New Guinea",
+    "area": 462840,
+    "type": "country",
+    "aliases": [
+      "PNG"
+    ]
+  },
+  {
+    "name": "Paraguay",
+    "area": 406752,
+    "type": "country"
+  },
+  {
+    "name": "Peru",
+    "area": 1285216,
+    "type": "country"
+  },
+  {
+    "name": "Philippines",
+    "area": 300000,
+    "type": "country"
+  },
+  {
+    "name": "Poland",
+    "area": 312696,
+    "type": "country"
+  },
+  {
+    "name": "Portugal",
+    "area": 92212,
+    "type": "country"
+  },
+  {
+    "name": "Qatar",
+    "area": 11586,
+    "type": "country"
+  },
+  {
+    "name": "Romania",
+    "area": 238397,
+    "type": "country"
+  },
+  {
+    "name": "Russia",
+    "area": 17098242,
+    "type": "country",
+    "aliases": [
+      "Russian Federation"
+    ]
+  },
+  {
+    "name": "Rwanda",
+    "area": 26338,
+    "type": "country"
+  },
+  {
+    "name": "Saint Kitts and Nevis",
+    "area": 261,
+    "type": "country"
+  },
+  {
+    "name": "Saint Lucia",
+    "area": 616,
+    "type": "country"
+  },
+  {
+    "name": "Saint Vincent and the Grenadines",
+    "area": 389,
+    "type": "country"
+  },
+  {
+    "name": "Samoa",
+    "area": 2842,
+    "type": "country"
+  },
+  {
+    "name": "San Marino",
+    "area": 61,
+    "type": "country"
+  },
+  {
+    "name": "Sao Tome and Principe",
+    "area": 964,
+    "type": "country"
+  },
+  {
+    "name": "Saudi Arabia",
+    "area": 2149690,
+    "type": "country"
+  },
+  {
+    "name": "Senegal",
+    "area": 196722,
+    "type": "country"
+  },
+  {
+    "name": "Serbia",
+    "area": 77474,
+    "type": "country"
+  },
+  {
+    "name": "Seychelles",
+    "area": 452,
+    "type": "country"
+  },
+  {
+    "name": "Sierra Leone",
+    "area": 71740,
+    "type": "country"
+  },
+  {
+    "name": "Singapore",
+    "area": 719,
+    "type": "country"
+  },
+  {
+    "name": "Slovakia",
+    "area": 49035,
+    "type": "country"
+  },
+  {
+    "name": "Slovenia",
+    "area": 20273,
+    "type": "country"
+  },
+  {
+    "name": "Solomon Islands",
+    "area": 28896,
+    "type": "country"
+  },
+  {
+    "name": "Somalia",
+    "area": 637657,
+    "type": "country"
+  },
+  {
+    "name": "South Africa",
+    "area": 1221037,
+    "type": "country"
+  },
+  {
+    "name": "South Korea",
+    "area": 100210,
+    "type": "country",
+    "aliases": [
+      "Korea",
+      "Republic of Korea",
+      "ROK"
+    ]
+  },
+  {
+    "name": "South Sudan",
+    "area": 619745,
+    "type": "country"
+  },
+  {
+    "name": "Spain",
+    "area": 505990,
+    "type": "country"
+  },
+  {
+    "name": "Sri Lanka",
+    "area": 65610,
+    "type": "country",
+    "aliases": [
+      "Ceylon"
+    ]
+  },
+  {
+    "name": "Sudan",
+    "area": 1861484,
+    "type": "country"
+  },
+  {
+    "name": "Suriname",
+    "area": 163820,
+    "type": "country"
+  },
+  {
+    "name": "Sweden",
+    "area": 450295,
+    "type": "country"
+  },
+  {
+    "name": "Switzerland",
+    "area": 41285,
+    "type": "country"
+  },
+  {
+    "name": "Syria",
+    "area": 185180,
+    "type": "country"
+  },
+  {
+    "name": "Taiwan",
+    "area": 36193,
+    "type": "country",
+    "aliases": [
+      "Republic of China",
+      "ROC",
+      "Formosa"
+    ]
+  },
+  {
+    "name": "Tajikistan",
+    "area": 143100,
+    "type": "country"
+  },
+  {
+    "name": "Tanzania",
+    "area": 945087,
+    "type": "country"
+  },
+  {
+    "name": "Thailand",
+    "area": 513120,
+    "type": "country"
+  },
+  {
+    "name": "Timor-Leste",
+    "area": 14874,
+    "type": "country",
+    "aliases": [
+      "East Timor"
+    ]
+  },
+  {
+    "name": "Togo",
+    "area": 56785,
+    "type": "country"
+  },
+  {
+    "name": "Tonga",
+    "area": 747,
+    "type": "country"
+  },
+  {
+    "name": "Trinidad and Tobago",
+    "area": 5131,
+    "type": "country"
+  },
+  {
+    "name": "Tunisia",
+    "area": 163610,
+    "type": "country"
+  },
+  {
+    "name": "Turkey",
+    "area": 783562,
+    "type": "country",
+    "aliases": [
+      "Türkiye"
+    ]
+  },
+  {
+    "name": "Turkmenistan",
+    "area": 488100,
+    "type": "country"
+  },
+  {
+    "name": "Tuvalu",
+    "area": 26,
+    "type": "country"
+  },
+  {
+    "name": "Uganda",
+    "area": 241550,
+    "type": "country"
+  },
+  {
+    "name": "Ukraine",
+    "area": 603550,
+    "type": "country"
+  },
+  {
+    "name": "United Arab Emirates",
+    "area": 83600,
+    "type": "country",
+    "aliases": [
+      "UAE",
+      "Emirates"
+    ]
+  },
+  {
+    "name": "United Kingdom",
+    "area": 242495,
+    "type": "country",
+    "aliases": [
+      "UK",
+      "Britain",
+      "Great Britain",
+      "England",
+      "GB"
+    ]
+  },
+  {
+    "name": "United States",
+    "area": 9372610,
+    "type": "country",
+    "aliases": [
+      "USA",
+      "US",
+      "America",
+      "United States of America",
+      "The States"
+    ]
+  },
+  {
+    "name": "Uruguay",
+    "area": 176215,
+    "type": "country"
+  },
+  {
+    "name": "Uzbekistan",
+    "area": 448978,
+    "type": "country"
+  },
+  {
+    "name": "Vanuatu",
+    "area": 12189,
+    "type": "country"
+  },
+  {
+    "name": "Vatican City",
+    "area": 0.44,
+    "type": "country",
+    "aliases": [
+      "Holy See",
+      "Vatican"
+    ]
+  },
+  {
+    "name": "Venezuela",
+    "area": 916445,
+    "type": "country"
+  },
+  {
+    "name": "Vietnam",
+    "area": 331212,
+    "type": "country",
+    "aliases": [
+      "Viet Nam"
+    ]
+  },
+  {
+    "name": "Yemen",
+    "area": 527968,
+    "type": "country"
+  },
+  {
+    "name": "Zambia",
+    "area": 752612,
+    "type": "country"
+  },
+  {
+    "name": "Zimbabwe",
+    "area": 390757,
+    "type": "country"
+  },
+  {
+    "name": "Greenland",
+    "area": 2166086,
+    "type": "country",
+    "aliases": [
+      "Kalaallit Nunaat"
+    ]
+  },
+  {
+    "name": "Puerto Rico",
+    "area": 9104,
+    "type": "country"
+  },
+  {
+    "name": "Guam",
+    "area": 549,
+    "type": "country"
+  },
+  {
+    "name": "Hong Kong",
+    "area": 1114,
+    "type": "country"
+  },
+  {
+    "name": "Macau",
+    "area": 32,
+    "type": "country",
+    "aliases": [
+      "Macao"
+    ]
+  },
+  {
+    "name": "New Caledonia",
+    "area": 18575,
+    "type": "country"
+  },
+  {
+    "name": "French Polynesia",
+    "area": 4167,
+    "type": "country"
+  },
+  {
+    "name": "Aruba",
+    "area": 180,
+    "type": "country"
+  },
+  {
+    "name": "Curaçao",
+    "area": 444,
+    "type": "country",
+    "aliases": [
+      "Curacao"
+    ]
+  },
+  {
+    "name": "Western Sahara",
+    "area": 266000,
+    "type": "country"
+  },
+  {
+    "name": "Kosovo",
+    "area": 10887,
+    "type": "country"
+  },
+  {
+    "name": "Falkland Islands",
+    "area": 12173,
+    "type": "country",
+    "aliases": [
+      "Malvinas"
+    ]
+  },
+  {
+    "name": "Faroe Islands",
+    "area": 1393,
+    "type": "country"
+  },
+  {
+    "name": "Gibraltar",
+    "area": 6.5,
+    "type": "country"
+  },
+  {
+    "name": "Isle of Man",
+    "area": 572,
+    "type": "country"
+  },
+  {
+    "name": "Jersey",
+    "area": 116,
+    "type": "country"
+  },
+  {
+    "name": "Guernsey",
+    "area": 78,
+    "type": "country"
+  },
+  {
+    "name": "Réunion",
+    "area": 2511,
+    "type": "country",
+    "aliases": [
+      "Reunion"
+    ]
+  },
+  {
+    "name": "Martinique",
+    "area": 1128,
+    "type": "country"
+  },
+  {
+    "name": "Guadeloupe",
+    "area": 1628,
+    "type": "country"
+  },
+  {
+    "name": "French Guiana",
+    "area": 83534,
+    "type": "country"
+  },
+  {
+    "name": "Mayotte",
+    "area": 374,
+    "type": "country"
+  },
+  {
+    "name": "Saint Pierre and Miquelon",
+    "area": 242,
+    "type": "country"
+  },
+  {
+    "name": "Wallis and Futuna",
+    "area": 142,
+    "type": "country"
+  },
+  {
+    "name": "American Samoa",
+    "area": 199,
+    "type": "country"
+  },
+  {
+    "name": "US Virgin Islands",
+    "area": 347,
+    "type": "country"
+  },
+  {
+    "name": "Northern Mariana Islands",
+    "area": 464,
+    "type": "country"
+  },
+  {
+    "name": "Bermuda",
+    "area": 54,
+    "type": "country"
+  },
+  {
+    "name": "Cayman Islands",
+    "area": 264,
+    "type": "country"
+  },
+  {
+    "name": "British Virgin Islands",
+    "area": 151,
+    "type": "country"
+  },
+  {
+    "name": "Turks and Caicos Islands",
+    "area": 948,
+    "type": "country"
+  },
+  {
+    "name": "Anguilla",
+    "area": 91,
+    "type": "country"
+  },
+  {
+    "name": "Montserrat",
+    "area": 102,
+    "type": "country"
+  },
+  {
+    "name": "Saint Helena",
+    "area": 394,
+    "type": "country"
+  },
+  {
+    "name": "Ascension Island",
+    "area": 88,
+    "type": "country"
+  },
+  {
+    "name": "Tristan da Cunha",
+    "area": 98,
+    "type": "country"
+  },
+  {
+    "name": "Christmas Island",
+    "area": 135,
+    "type": "country"
+  },
+  {
+    "name": "Cocos Islands",
+    "area": 14,
+    "type": "country"
+  },
+  {
+    "name": "Norfolk Island",
+    "area": 35,
+    "type": "country"
+  },
+  {
+    "name": "Niue",
+    "area": 260,
+    "type": "country"
+  },
+  {
+    "name": "Cook Islands",
+    "area": 236,
+    "type": "country"
+  },
+  {
+    "name": "Tokelau",
+    "area": 12,
+    "type": "country"
+  },
+  {
+    "name": "Pitcairn Islands",
+    "area": 47,
+    "type": "country"
+  },
+  {
+    "name": "South Georgia",
+    "area": 3903,
+    "type": "country"
+  },
+  {
+    "name": "British Indian Ocean Territory",
+    "area": 60,
+    "type": "country"
+  },
+  {
+    "name": "USA > Alabama",
+    "area": 135767,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Alaska",
+    "area": 1723337,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Arizona",
+    "area": 295234,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Arkansas",
+    "area": 137732,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > California",
+    "area": 423967,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Colorado",
+    "area": 269601,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Connecticut",
+    "area": 14357,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Delaware",
+    "area": 6446,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Florida",
+    "area": 170312,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Georgia",
+    "area": 153910,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Hawaii",
+    "area": 28313,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Idaho",
+    "area": 216443,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Illinois",
+    "area": 149995,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Indiana",
+    "area": 94326,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Iowa",
+    "area": 145746,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Kansas",
+    "area": 213100,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Kentucky",
+    "area": 104656,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Louisiana",
+    "area": 135659,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Maine",
+    "area": 91633,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Maryland",
+    "area": 32131,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Massachusetts",
+    "area": 27336,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Michigan",
+    "area": 250487,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Minnesota",
+    "area": 225163,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Mississippi",
+    "area": 125438,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Missouri",
+    "area": 180540,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Montana",
+    "area": 380832,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Nebraska",
+    "area": 200330,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Nevada",
+    "area": 286380,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > New Hampshire",
+    "area": 24214,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > New Jersey",
+    "area": 22591,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > New Mexico",
+    "area": 314917,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > New York",
+    "area": 141300,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > North Carolina",
+    "area": 139391,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > North Dakota",
+    "area": 183108,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Ohio",
+    "area": 116098,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Oklahoma",
+    "area": 181037,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Oregon",
+    "area": 254806,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Pennsylvania",
+    "area": 119280,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Rhode Island",
+    "area": 4001,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > South Carolina",
+    "area": 82933,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > South Dakota",
+    "area": 199729,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Tennessee",
+    "area": 109153,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Texas",
+    "area": 695662,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Utah",
+    "area": 219882,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Vermont",
+    "area": 24906,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Virginia",
+    "area": 110787,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Washington",
+    "area": 184661,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > West Virginia",
+    "area": 62756,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Wisconsin",
+    "area": 169635,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > Wyoming",
+    "area": 253335,
+    "type": "us_state"
+  },
+  {
+    "name": "USA > District of Columbia",
+    "area": 159,
+    "type": "us_state"
+  },
+  {
+    "name": "Canada > Alberta",
+    "area": 661848,
+    "type": "ca_province"
+  },
+  {
+    "name": "Canada > British Columbia",
+    "area": 944735,
+    "type": "ca_province"
+  },
+  {
+    "name": "Canada > Manitoba",
+    "area": 647797,
+    "type": "ca_province"
+  },
+  {
+    "name": "Canada > New Brunswick",
+    "area": 72908,
+    "type": "ca_province"
+  },
+  {
+    "name": "Canada > Newfoundland and Labrador",
+    "area": 405212,
+    "type": "ca_province"
+  },
+  {
+    "name": "Canada > Northwest Territories",
+    "area": 1346106,
+    "type": "ca_province"
+  },
+  {
+    "name": "Canada > Nova Scotia",
+    "area": 55284,
+    "type": "ca_province"
+  },
+  {
+    "name": "Canada > Nunavut",
+    "area": 2093190,
+    "type": "ca_province"
+  },
+  {
+    "name": "Canada > Ontario",
+    "area": 1076395,
+    "type": "ca_province"
+  },
+  {
+    "name": "Canada > Prince Edward Island",
+    "area": 5660,
+    "type": "ca_province"
+  },
+  {
+    "name": "Canada > Quebec",
+    "area": 1542056,
+    "type": "ca_province"
+  },
+  {
+    "name": "Canada > Saskatchewan",
+    "area": 651036,
+    "type": "ca_province"
+  },
+  {
+    "name": "Canada > Yukon",
+    "area": 482443,
+    "type": "ca_province"
+  },
+  {
+    "name": "Japan > Aichi",
+    "area": 5173,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Akita",
+    "area": 11638,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Aomori",
+    "area": 9646,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Chiba",
+    "area": 5157,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Ehime",
+    "area": 5676,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Fukui",
+    "area": 4190,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Fukuoka",
+    "area": 4987,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Fukushima",
+    "area": 13784,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Gifu",
+    "area": 10621,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Gunma",
+    "area": 6362,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Hiroshima",
+    "area": 8479,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Hokkaido",
+    "area": 83424,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Hyogo",
+    "area": 8401,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Ibaraki",
+    "area": 6097,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Ishikawa",
+    "area": 4186,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Iwate",
+    "area": 15275,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Kagawa",
+    "area": 1877,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Kagoshima",
+    "area": 9187,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Kanagawa",
+    "area": 2416,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Kochi",
+    "area": 7104,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Kumamoto",
+    "area": 7409,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Kyoto",
+    "area": 4612,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Mie",
+    "area": 5774,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Miyagi",
+    "area": 7282,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Miyazaki",
+    "area": 7735,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Nagano",
+    "area": 13562,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Nagasaki",
+    "area": 4132,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Nara",
+    "area": 3691,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Niigata",
+    "area": 12584,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Oita",
+    "area": 6341,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Okayama",
+    "area": 7115,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Okinawa",
+    "area": 2281,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Osaka",
+    "area": 1905,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Saga",
+    "area": 2441,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Saitama",
+    "area": 3798,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Shiga",
+    "area": 4017,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Shimane",
+    "area": 6708,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Shizuoka",
+    "area": 7777,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Tochigi",
+    "area": 6408,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Tokushima",
+    "area": 4147,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Tokyo",
+    "area": 2194,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Tottori",
+    "area": 3507,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Toyama",
+    "area": 4248,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Wakayama",
+    "area": 4725,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Yamagata",
+    "area": 9323,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Yamaguchi",
+    "area": 6112,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "Japan > Yamanashi",
+    "area": 4465,
+    "type": "jp_prefecture"
+  },
+  {
+    "name": "France > Auvergne-Rhône-Alpes",
+    "area": 69711,
+    "type": "fr_region"
+  },
+  {
+    "name": "France > Bourgogne-Franche-Comté",
+    "area": 47784,
+    "type": "fr_region"
+  },
+  {
+    "name": "France > Bretagne",
+    "area": 27208,
+    "type": "fr_region"
+  },
+  {
+    "name": "France > Centre-Val de Loire",
+    "area": 39151,
+    "type": "fr_region"
+  },
+  {
+    "name": "France > Corse",
+    "area": 8680,
+    "type": "fr_region"
+  },
+  {
+    "name": "France > Grand Est",
+    "area": 57441,
+    "type": "fr_region"
+  },
+  {
+    "name": "France > Hauts-de-France",
+    "area": 31806,
+    "type": "fr_region"
+  },
+  {
+    "name": "France > Île-de-France",
+    "area": 12012,
+    "type": "fr_region"
+  },
+  {
+    "name": "France > Normandie",
+    "area": 29906,
+    "type": "fr_region"
+  },
+  {
+    "name": "France > Nouvelle-Aquitaine",
+    "area": 84036,
+    "type": "fr_region"
+  },
+  {
+    "name": "France > Occitanie",
+    "area": 72724,
+    "type": "fr_region"
+  },
+  {
+    "name": "France > Pays de la Loire",
+    "area": 32082,
+    "type": "fr_region"
+  },
+  {
+    "name": "France > Provence-Alpes-Côte d'Azur",
+    "area": 31400,
+    "type": "fr_region"
+  },
+  {
+    "name": "France > Guadeloupe",
+    "area": 1628,
+    "type": "fr_region"
+  },
+  {
+    "name": "France > Martinique",
+    "area": 1128,
+    "type": "fr_region"
+  },
+  {
+    "name": "France > Guyane",
+    "area": 83534,
+    "type": "fr_region"
+  },
+  {
+    "name": "France > La Réunion",
+    "area": 2511,
+    "type": "fr_region"
+  },
+  {
+    "name": "France > Mayotte",
+    "area": 374,
+    "type": "fr_region"
+  },
+  {
+    "name": "France (Historic) > Alsace",
+    "area": 8280,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Anjou",
+    "area": 7166,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Aquitaine",
+    "area": 41309,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Auvergne",
+    "area": 26013,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Berry",
+    "area": 7235,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Bourgogne",
+    "area": 31582,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Bretagne",
+    "area": 27208,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Champagne",
+    "area": 25606,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Dauphiné",
+    "area": 18334,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Flandre",
+    "area": 2786,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Foix",
+    "area": 4900,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Franche-Comté",
+    "area": 16202,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Gascogne",
+    "area": 25100,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Guyenne",
+    "area": 36000,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Languedoc",
+    "area": 27376,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Limousin",
+    "area": 16942,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Lorraine",
+    "area": 23547,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Lyonnais",
+    "area": 3120,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Maine",
+    "area": 8100,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Marche",
+    "area": 5400,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Navarre",
+    "area": 10000,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Nivernais",
+    "area": 6827,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Normandie",
+    "area": 29906,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Orléanais",
+    "area": 7900,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Paris",
+    "area": 12012,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Picardie",
+    "area": 19399,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Poitou",
+    "area": 14900,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Provence",
+    "area": 31436,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Roussillon",
+    "area": 4086,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Saintonge",
+    "area": 7000,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Savoie",
+    "area": 14700,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Touraine",
+    "area": 6127,
+    "type": "fr_province"
+  },
+  {
+    "name": "France (Historic) > Vendée",
+    "area": 6720,
+    "type": "fr_province"
+  },
+  {
+    "name": "UK > Bedfordshire",
+    "area": 1235,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Berkshire",
+    "area": 1262,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Bristol",
+    "area": 110,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Buckinghamshire",
+    "area": 1874,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Cambridgeshire",
+    "area": 3389,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Cheshire",
+    "area": 2343,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > City of London",
+    "area": 3,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Cornwall",
+    "area": 3563,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Cumbria",
+    "area": 6768,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Derbyshire",
+    "area": 2625,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Devon",
+    "area": 6707,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Dorset",
+    "area": 2653,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Durham",
+    "area": 2676,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > East Riding of Yorkshire",
+    "area": 2479,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > East Sussex",
+    "area": 1725,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Essex",
+    "area": 3670,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Gloucestershire",
+    "area": 3150,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Greater London",
+    "area": 1572,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Greater Manchester",
+    "area": 1276,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Hampshire",
+    "area": 3769,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Herefordshire",
+    "area": 2180,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Hertfordshire",
+    "area": 1643,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Isle of Wight",
+    "area": 380,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Kent",
+    "area": 3736,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Lancashire",
+    "area": 3075,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Leicestershire",
+    "area": 2156,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Lincolnshire",
+    "area": 6959,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Merseyside",
+    "area": 645,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Norfolk",
+    "area": 5371,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > North Yorkshire",
+    "area": 8654,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Northamptonshire",
+    "area": 2364,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Northumberland",
+    "area": 5013,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Nottinghamshire",
+    "area": 2160,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Oxfordshire",
+    "area": 2606,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Rutland",
+    "area": 394,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Shropshire",
+    "area": 3487,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Somerset",
+    "area": 4171,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > South Yorkshire",
+    "area": 1552,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Staffordshire",
+    "area": 2713,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Suffolk",
+    "area": 3801,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Surrey",
+    "area": 1663,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Tyne and Wear",
+    "area": 540,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Warwickshire",
+    "area": 1975,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > West Midlands",
+    "area": 902,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > West Sussex",
+    "area": 1991,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > West Yorkshire",
+    "area": 2029,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Wiltshire",
+    "area": 3485,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Worcestershire",
+    "area": 1741,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Blaenau Gwent",
+    "area": 109,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Bridgend",
+    "area": 251,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Caerphilly",
+    "area": 278,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Cardiff",
+    "area": 140,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Carmarthenshire",
+    "area": 2395,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Ceredigion",
+    "area": 1786,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Conwy",
+    "area": 1130,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Denbighshire",
+    "area": 844,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Flintshire",
+    "area": 438,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Gwynedd",
+    "area": 2548,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Isle of Anglesey",
+    "area": 711,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Merthyr Tydfil",
+    "area": 111,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Monmouthshire",
+    "area": 849,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Neath Port Talbot",
+    "area": 442,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Newport",
+    "area": 190,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Pembrokeshire",
+    "area": 1619,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Powys",
+    "area": 5196,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Rhondda Cynon Taf",
+    "area": 424,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Swansea",
+    "area": 378,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Torfaen",
+    "area": 126,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Vale of Glamorgan",
+    "area": 331,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Wrexham",
+    "area": 499,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Aberdeen City",
+    "area": 186,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Aberdeenshire",
+    "area": 6313,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Angus",
+    "area": 2182,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Argyll and Bute",
+    "area": 6930,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Clackmannanshire",
+    "area": 157,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Dumfries and Galloway",
+    "area": 6426,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Dundee City",
+    "area": 60,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > East Ayrshire",
+    "area": 1262,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > East Dunbartonshire",
+    "area": 174,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > East Lothian",
+    "area": 679,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > East Renfrewshire",
+    "area": 174,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Edinburgh",
+    "area": 264,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Eilean Siar",
+    "area": 3071,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Falkirk",
+    "area": 297,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Fife",
+    "area": 1325,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Glasgow City",
+    "area": 175,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Highland",
+    "area": 25659,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Inverclyde",
+    "area": 160,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Midlothian",
+    "area": 354,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Moray",
+    "area": 2238,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > North Ayrshire",
+    "area": 885,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > North Lanarkshire",
+    "area": 470,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Orkney Islands",
+    "area": 990,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Perth and Kinross",
+    "area": 5286,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Renfrewshire",
+    "area": 261,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Scottish Borders",
+    "area": 4732,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Shetland Islands",
+    "area": 1466,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > South Ayrshire",
+    "area": 1222,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > South Lanarkshire",
+    "area": 1772,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Stirling",
+    "area": 2187,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > West Dunbartonshire",
+    "area": 162,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > West Lothian",
+    "area": 427,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Antrim and Newtownabbey",
+    "area": 563,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Ards and North Down",
+    "area": 384,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Armagh City Banbridge and Craigavon",
+    "area": 1254,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Belfast",
+    "area": 115,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Causeway Coast and Glens",
+    "area": 1982,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Derry City and Strabane",
+    "area": 1258,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Fermanagh and Omagh",
+    "area": 1851,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Lisburn and Castlereagh",
+    "area": 444,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Mid and East Antrim",
+    "area": 1031,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Mid Ulster",
+    "area": 1818,
+    "type": "uk_county"
+  },
+  {
+    "name": "UK > Newry Mourne and Down",
+    "area": 1463,
+    "type": "uk_county"
+  },
+  {
+    "name": "Australia > New South Wales",
+    "area": 800642,
+    "type": "au_state"
+  },
+  {
+    "name": "Australia > Victoria",
+    "area": 227416,
+    "type": "au_state"
+  },
+  {
+    "name": "Australia > Queensland",
+    "area": 1730648,
+    "type": "au_state"
+  },
+  {
+    "name": "Australia > South Australia",
+    "area": 983482,
+    "type": "au_state"
+  },
+  {
+    "name": "Australia > Western Australia",
+    "area": 2529875,
+    "type": "au_state"
+  },
+  {
+    "name": "Australia > Tasmania",
+    "area": 68401,
+    "type": "au_state"
+  },
+  {
+    "name": "Australia > Northern Territory",
+    "area": 1349129,
+    "type": "au_state"
+  },
+  {
+    "name": "Australia > Australian Capital Territory",
+    "area": 2358,
+    "type": "au_state"
+  },
+  {
+    "name": "China > Anhui",
+    "area": 139600,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Beijing",
+    "area": 16411,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Chongqing",
+    "area": 82400,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Fujian",
+    "area": 121400,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Gansu",
+    "area": 454000,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Guangdong",
+    "area": 179800,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Guangxi",
+    "area": 236700,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Guizhou",
+    "area": 176100,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Hainan",
+    "area": 35400,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Hebei",
+    "area": 190000,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Heilongjiang",
+    "area": 473000,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Henan",
+    "area": 167000,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Hubei",
+    "area": 185900,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Hunan",
+    "area": 211800,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Inner Mongolia",
+    "area": 1183000,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Jiangsu",
+    "area": 107200,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Jiangxi",
+    "area": 166900,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Jilin",
+    "area": 187400,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Liaoning",
+    "area": 148600,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Ningxia",
+    "area": 66400,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Qinghai",
+    "area": 720000,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Shaanxi",
+    "area": 205600,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Shandong",
+    "area": 157100,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Shanghai",
+    "area": 6341,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Shanxi",
+    "area": 156300,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Sichuan",
+    "area": 486000,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Tianjin",
+    "area": 11917,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Tibet",
+    "area": 1228400,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Xinjiang",
+    "area": 1664897,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Yunnan",
+    "area": 394100,
+    "type": "cn_province"
+  },
+  {
+    "name": "China > Zhejiang",
+    "area": 101800,
+    "type": "cn_province"
+  },
+  {
+    "name": "India > Andhra Pradesh",
+    "area": 162975,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Arunachal Pradesh",
+    "area": 83743,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Assam",
+    "area": 78438,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Bihar",
+    "area": 94163,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Chhattisgarh",
+    "area": 135192,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Goa",
+    "area": 3702,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Gujarat",
+    "area": 196024,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Haryana",
+    "area": 44212,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Himachal Pradesh",
+    "area": 55673,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Jharkhand",
+    "area": 79716,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Karnataka",
+    "area": 191791,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Kerala",
+    "area": 38852,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Madhya Pradesh",
+    "area": 308252,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Maharashtra",
+    "area": 307713,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Manipur",
+    "area": 22327,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Meghalaya",
+    "area": 22429,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Mizoram",
+    "area": 21081,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Nagaland",
+    "area": 16579,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Odisha",
+    "area": 155707,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Punjab",
+    "area": 50362,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Rajasthan",
+    "area": 342239,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Sikkim",
+    "area": 7096,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Tamil Nadu",
+    "area": 130058,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Telangana",
+    "area": 112077,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Tripura",
+    "area": 10486,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Uttar Pradesh",
+    "area": 240928,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Uttarakhand",
+    "area": 53483,
+    "type": "in_state"
+  },
+  {
+    "name": "India > West Bengal",
+    "area": 88752,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Delhi",
+    "area": 1484,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Jammu and Kashmir",
+    "area": 42241,
+    "type": "in_state"
+  },
+  {
+    "name": "India > Ladakh",
+    "area": 59146,
+    "type": "in_state"
+  },
+  {
+    "name": "Brazil > Acre",
+    "area": 164123,
+    "type": "br_state"
+  },
+  {
+    "name": "Brazil > Alagoas",
+    "area": 27843,
+    "type": "br_state"
+  },
+  {
+    "name": "Brazil > Amapá",
+    "area": 142828,
+    "type": "br_state"
+  },
+  {
+    "name": "Brazil > Amazonas",
+    "area": 1559159,
+    "type": "br_state"
+  },
+  {
+    "name": "Brazil > Bahia",
+    "area": 564733,
+    "type": "br_state"
+  },
+  {
+    "name": "Brazil > Ceará",
+    "area": 148887,
+    "type": "br_state"
+  },
+  {
+    "name": "Brazil > Distrito Federal",
+    "area": 5802,
+    "type": "br_state"
+  },
+  {
+    "name": "Brazil > Espírito Santo",
+    "area": 46095,
+    "type": "br_state"
+  },
+  {
+    "name": "Brazil > Goiás",
+    "area": 340111,
+    "type": "br_state"
+  },
+  {
+    "name": "Brazil > Maranhão",
+    "area": 331983,
+    "type": "br_state"
+  },
+  {
+    "name": "Brazil > Mato Grosso",
+    "area": 903357,
+    "type": "br_state"
+  },
+  {
+    "name": "Brazil > Mato Grosso do Sul",
+    "area": 357145,
+    "type": "br_state"
+  },
+  {
+    "name": "Brazil > Minas Gerais",
+    "area": 586528,
+    "type": "br_state"
+  },
+  {
+    "name": "Brazil > Pará",
+    "area": 1247954,
+    "type": "br_state"
+  },
+  {
+    "name": "Brazil > Paraíba",
+    "area": 56585,
+    "type": "br_state"
+  },
+  {
+    "name": "Brazil > Paraná",
+    "area": 199307,
+    "type": "br_state"
+  },
+  {
+    "name": "Brazil > Pernambuco",
+    "area": 98148,
+    "type": "br_state"
+  },
+  {
+    "name": "Brazil > Piauí",
+    "area": 251529,
+    "type": "br_state"
+  },
+  {
+    "name": "Brazil > Rio de Janeiro",
+    "area": 43780,
+    "type": "br_state"
+  },
+  {
+    "name": "Brazil > Rio Grande do Norte",
+    "area": 52811,
+    "type": "br_state"
+  },
+  {
+    "name": "Brazil > Rio Grande do Sul",
+    "area": 281748,
+    "type": "br_state"
+  },
+  {
+    "name": "Brazil > Rondônia",
+    "area": 237765,
+    "type": "br_state"
+  },
+  {
+    "name": "Brazil > Roraima",
+    "area": 224301,
+    "type": "br_state"
+  },
+  {
+    "name": "Brazil > Santa Catarina",
+    "area": 95736,
+    "type": "br_state"
+  },
+  {
+    "name": "Brazil > São Paulo",
+    "area": 248219,
+    "type": "br_state"
+  },
+  {
+    "name": "Brazil > Sergipe",
+    "area": 21910,
+    "type": "br_state"
+  },
+  {
+    "name": "Brazil > Tocantins",
+    "area": 277621,
+    "type": "br_state"
+  },
+  {
+    "name": "Germany > Baden-Württemberg",
+    "area": 35748,
+    "type": "de_state"
+  },
+  {
+    "name": "Germany > Bavaria",
+    "area": 70552,
+    "type": "de_state"
+  },
+  {
+    "name": "Germany > Berlin",
+    "area": 892,
+    "type": "de_state"
+  },
+  {
+    "name": "Germany > Brandenburg",
+    "area": 29654,
+    "type": "de_state"
+  },
+  {
+    "name": "Germany > Bremen",
+    "area": 419,
+    "type": "de_state"
+  },
+  {
+    "name": "Germany > Hamburg",
+    "area": 755,
+    "type": "de_state"
+  },
+  {
+    "name": "Germany > Hesse",
+    "area": 21115,
+    "type": "de_state"
+  },
+  {
+    "name": "Germany > Lower Saxony",
+    "area": 47614,
+    "type": "de_state"
+  },
+  {
+    "name": "Germany > Mecklenburg-Vorpommern",
+    "area": 23214,
+    "type": "de_state"
+  },
+  {
+    "name": "Germany > North Rhine-Westphalia",
+    "area": 34110,
+    "type": "de_state"
+  },
+  {
+    "name": "Germany > Rhineland-Palatinate",
+    "area": 19854,
+    "type": "de_state"
+  },
+  {
+    "name": "Germany > Saarland",
+    "area": 2571,
+    "type": "de_state"
+  },
+  {
+    "name": "Germany > Saxony",
+    "area": 18416,
+    "type": "de_state"
+  },
+  {
+    "name": "Germany > Saxony-Anhalt",
+    "area": 20452,
+    "type": "de_state"
+  },
+  {
+    "name": "Germany > Schleswig-Holstein",
+    "area": 15800,
+    "type": "de_state"
+  },
+  {
+    "name": "Germany > Thuringia",
+    "area": 16202,
+    "type": "de_state"
+  },
+  {
+    "name": "Spain > Andalusia",
+    "area": 87268,
+    "type": "es_region"
+  },
+  {
+    "name": "Spain > Aragon",
+    "area": 47720,
+    "type": "es_region"
+  },
+  {
+    "name": "Spain > Asturias",
+    "area": 10604,
+    "type": "es_region"
+  },
+  {
+    "name": "Spain > Balearic Islands",
+    "area": 4992,
+    "type": "es_region"
+  },
+  {
+    "name": "Spain > Basque Country",
+    "area": 7234,
+    "type": "es_region"
+  },
+  {
+    "name": "Spain > Canary Islands",
+    "area": 7447,
+    "type": "es_region"
+  },
+  {
+    "name": "Spain > Cantabria",
+    "area": 5321,
+    "type": "es_region"
+  },
+  {
+    "name": "Spain > Castile and León",
+    "area": 94226,
+    "type": "es_region"
+  },
+  {
+    "name": "Spain > Castile-La Mancha",
+    "area": 79463,
+    "type": "es_region"
+  },
+  {
+    "name": "Spain > Catalonia",
+    "area": 32091,
+    "type": "es_region"
+  },
+  {
+    "name": "Spain > Extremadura",
+    "area": 41635,
+    "type": "es_region"
+  },
+  {
+    "name": "Spain > Galicia",
+    "area": 29574,
+    "type": "es_region"
+  },
+  {
+    "name": "Spain > La Rioja",
+    "area": 5045,
+    "type": "es_region"
+  },
+  {
+    "name": "Spain > Community of Madrid",
+    "area": 8028,
+    "type": "es_region"
+  },
+  {
+    "name": "Spain > Murcia",
+    "area": 11313,
+    "type": "es_region"
+  },
+  {
+    "name": "Spain > Navarre",
+    "area": 10391,
+    "type": "es_region"
+  },
+  {
+    "name": "Spain > Valencia",
+    "area": 23255,
+    "type": "es_region"
+  },
+  {
+    "name": "Spain > Ceuta",
+    "area": 19,
+    "type": "es_region"
+  },
+  {
+    "name": "Spain > Melilla",
+    "area": 12,
+    "type": "es_region"
+  },
+  {
+    "name": "Italy > Abruzzo",
+    "area": 10832,
+    "type": "it_region"
+  },
+  {
+    "name": "Italy > Aosta Valley",
+    "area": 3263,
+    "type": "it_region"
+  },
+  {
+    "name": "Italy > Apulia",
+    "area": 19541,
+    "type": "it_region"
+  },
+  {
+    "name": "Italy > Basilicata",
+    "area": 9995,
+    "type": "it_region"
+  },
+  {
+    "name": "Italy > Calabria",
+    "area": 15222,
+    "type": "it_region"
+  },
+  {
+    "name": "Italy > Campania",
+    "area": 13671,
+    "type": "it_region"
+  },
+  {
+    "name": "Italy > Emilia-Romagna",
+    "area": 22453,
+    "type": "it_region"
+  },
+  {
+    "name": "Italy > Friuli-Venezia Giulia",
+    "area": 7858,
+    "type": "it_region"
+  },
+  {
+    "name": "Italy > Lazio",
+    "area": 17242,
+    "type": "it_region"
+  },
+  {
+    "name": "Italy > Liguria",
+    "area": 5422,
+    "type": "it_region"
+  },
+  {
+    "name": "Italy > Lombardy",
+    "area": 23864,
+    "type": "it_region"
+  },
+  {
+    "name": "Italy > Marche",
+    "area": 9401,
+    "type": "it_region"
+  },
+  {
+    "name": "Italy > Molise",
+    "area": 4438,
+    "type": "it_region"
+  },
+  {
+    "name": "Italy > Piedmont",
+    "area": 25387,
+    "type": "it_region"
+  },
+  {
+    "name": "Italy > Sardinia",
+    "area": 24100,
+    "type": "it_region"
+  },
+  {
+    "name": "Italy > Sicily",
+    "area": 25832,
+    "type": "it_region"
+  },
+  {
+    "name": "Italy > Trentino-South Tyrol",
+    "area": 13607,
+    "type": "it_region"
+  },
+  {
+    "name": "Italy > Tuscany",
+    "area": 22987,
+    "type": "it_region"
+  },
+  {
+    "name": "Italy > Umbria",
+    "area": 8456,
+    "type": "it_region"
+  },
+  {
+    "name": "Italy > Veneto",
+    "area": 18399,
+    "type": "it_region"
+  },
+  {
+    "name": "Mexico > Aguascalientes",
+    "area": 5618,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Baja California",
+    "area": 70113,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Baja California Sur",
+    "area": 73922,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Campeche",
+    "area": 57924,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Chiapas",
+    "area": 73887,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Chihuahua",
+    "area": 247455,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Coahuila",
+    "area": 151563,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Colima",
+    "area": 5455,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Durango",
+    "area": 123451,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Guanajuato",
+    "area": 30589,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Guerrero",
+    "area": 63794,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Hidalgo",
+    "area": 20846,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Jalisco",
+    "area": 78599,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Mexico City",
+    "area": 1485,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Mexico State",
+    "area": 22357,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Michoacán",
+    "area": 58643,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Morelos",
+    "area": 4893,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Nayarit",
+    "area": 27815,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Nuevo León",
+    "area": 64924,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Oaxaca",
+    "area": 93793,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Puebla",
+    "area": 34290,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Querétaro",
+    "area": 11769,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Quintana Roo",
+    "area": 42361,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > San Luis Potosí",
+    "area": 62848,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Sinaloa",
+    "area": 57377,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Sonora",
+    "area": 179503,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Tabasco",
+    "area": 24738,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Tamaulipas",
+    "area": 80175,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Tlaxcala",
+    "area": 3914,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Veracruz",
+    "area": 71826,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Yucatán",
+    "area": 39524,
+    "type": "mx_state"
+  },
+  {
+    "name": "Mexico > Zacatecas",
+    "area": 75040,
+    "type": "mx_state"
+  },
+  {
+    "name": "Russia > Sakha Republic",
+    "area": 3083523,
+    "type": "ru_subject"
+  },
+  {
+    "name": "Russia > Krasnoyarsk Krai",
+    "area": 2339700,
+    "type": "ru_subject"
+  },
+  {
+    "name": "Russia > Tyumen Oblast",
+    "area": 1464173,
+    "type": "ru_subject"
+  },
+  {
+    "name": "Russia > Khabarovsk Krai",
+    "area": 787633,
+    "type": "ru_subject"
+  },
+  {
+    "name": "Russia > Irkutsk Oblast",
+    "area": 774846,
+    "type": "ru_subject"
+  },
+  {
+    "name": "Russia > Yamalo-Nenets",
+    "area": 769250,
+    "type": "ru_subject"
+  },
+  {
+    "name": "Russia > Chukotka",
+    "area": 721481,
+    "type": "ru_subject"
+  },
+  {
+    "name": "Russia > Arkhangelsk Oblast",
+    "area": 589913,
+    "type": "ru_subject"
+  },
+  {
+    "name": "Russia > Zabaykalsky Krai",
+    "area": 431892,
+    "type": "ru_subject"
+  },
+  {
+    "name": "Russia > Kamchatka Krai",
+    "area": 464275,
+    "type": "ru_subject"
+  },
+  {
+    "name": "Russia > Magadan Oblast",
+    "area": 462464,
+    "type": "ru_subject"
+  },
+  {
+    "name": "Russia > Primorsky Krai",
+    "area": 164673,
+    "type": "ru_subject"
+  },
+  {
+    "name": "Russia > Vologda Oblast",
+    "area": 144527,
+    "type": "ru_subject"
+  },
+  {
+    "name": "Russia > Sverdlovsk Oblast",
+    "area": 194307,
+    "type": "ru_subject"
+  },
+  {
+    "name": "Russia > Omsk Oblast",
+    "area": 141140,
+    "type": "ru_subject"
+  },
+  {
+    "name": "Russia > Chelyabinsk Oblast",
+    "area": 87900,
+    "type": "ru_subject"
+  },
+  {
+    "name": "Russia > Novosibirsk Oblast",
+    "area": 177756,
+    "type": "ru_subject"
+  },
+  {
+    "name": "Russia > Moscow",
+    "area": 2562,
+    "type": "ru_subject"
+  },
+  {
+    "name": "Russia > Saint Petersburg",
+    "area": 1439,
+    "type": "ru_subject"
+  },
+  {
+    "name": "Island > Greenland",
+    "area": 2166086,
+    "type": "island"
+  },
+  {
+    "name": "Island > New Guinea",
+    "area": 785753,
+    "type": "island"
+  },
+  {
+    "name": "Island > Borneo",
+    "area": 743330,
+    "type": "island"
+  },
+  {
+    "name": "Island > Madagascar",
+    "area": 587041,
+    "type": "island"
+  },
+  {
+    "name": "Island > Baffin Island",
+    "area": 507451,
+    "type": "island"
+  },
+  {
+    "name": "Island > Sumatra",
+    "area": 473481,
+    "type": "island"
+  },
+  {
+    "name": "Island > Honshu",
+    "area": 227960,
+    "type": "island"
+  },
+  {
+    "name": "Island > Victoria Island",
+    "area": 217291,
+    "type": "island"
+  },
+  {
+    "name": "Island > Great Britain",
+    "area": 209331,
+    "type": "island"
+  },
+  {
+    "name": "Island > Ellesmere Island",
+    "area": 196236,
+    "type": "island"
+  },
+  {
+    "name": "Island > Sulawesi",
+    "area": 174600,
+    "type": "island"
+  },
+  {
+    "name": "Island > South Island (NZ)",
+    "area": 150437,
+    "type": "island"
+  },
+  {
+    "name": "Island > Java",
+    "area": 138794,
+    "type": "island"
+  },
+  {
+    "name": "Island > North Island (NZ)",
+    "area": 113729,
+    "type": "island"
+  },
+  {
+    "name": "Island > Luzon",
+    "area": 109965,
+    "type": "island"
+  },
+  {
+    "name": "Island > Iceland",
+    "area": 103000,
+    "type": "island"
+  },
+  {
+    "name": "Island > Mindanao",
+    "area": 97530,
+    "type": "island"
+  },
+  {
+    "name": "Island > Ireland",
+    "area": 84421,
+    "type": "island"
+  },
+  {
+    "name": "Island > Hokkaido",
+    "area": 83424,
+    "type": "island"
+  },
+  {
+    "name": "Island > Sakhalin",
+    "area": 76600,
+    "type": "island"
+  },
+  {
+    "name": "Island > Hispaniola",
+    "area": 76192,
+    "type": "island"
+  },
+  {
+    "name": "Island > Sri Lanka",
+    "area": 65610,
+    "type": "island"
+  },
+  {
+    "name": "Island > Tierra del Fuego",
+    "area": 48100,
+    "type": "island"
+  },
+  {
+    "name": "Island > Tasmania",
+    "area": 68401,
+    "type": "island"
+  },
+  {
+    "name": "Island > Svalbard",
+    "area": 62045,
+    "type": "island"
+  },
+  {
+    "name": "Island > Cuba",
+    "area": 109884,
+    "type": "island"
+  },
+  {
+    "name": "Island > Newfoundland",
+    "area": 111390,
+    "type": "island"
+  },
+  {
+    "name": "Island > Kyushu",
+    "area": 36752,
+    "type": "island"
+  },
+  {
+    "name": "Island > Shikoku",
+    "area": 18800,
+    "type": "island"
+  },
+  {
+    "name": "Island > Sicily",
+    "area": 25832,
+    "type": "island"
+  },
+  {
+    "name": "Island > Sardinia",
+    "area": 24090,
+    "type": "island"
+  },
+  {
+    "name": "Island > Cyprus",
+    "area": 9251,
+    "type": "island"
+  },
+  {
+    "name": "Island > Corsica",
+    "area": 8680,
+    "type": "island"
+  },
+  {
+    "name": "Island > Crete",
+    "area": 8336,
+    "type": "island"
+  },
+  {
+    "name": "Island > Okinawa",
+    "area": 1207,
+    "type": "island"
+  },
+  {
+    "name": "Island > Bali",
+    "area": 5780,
+    "type": "island"
+  },
+  {
+    "name": "Island > Trinidad",
+    "area": 4768,
+    "type": "island"
+  },
+  {
+    "name": "Island > Maui",
+    "area": 1884,
+    "type": "island"
+  },
+  {
+    "name": "Island > Oahu",
+    "area": 1545,
+    "type": "island"
+  },
+  {
+    "name": "Island > Big Island (Hawaii)",
+    "area": 10432,
+    "type": "island"
+  },
+  {
+    "name": "Island > Tenerife",
+    "area": 2034,
+    "type": "island"
+  },
+  {
+    "name": "Island > Canary Islands (total)",
+    "area": 7447,
+    "type": "island"
+  },
+  {
+    "name": "Island > Maldives (total)",
+    "area": 300,
+    "type": "island"
+  },
+  {
+    "name": "Island > Seychelles (total)",
+    "area": 452,
+    "type": "island"
+  },
+  {
+    "name": "Island > Maldives (largest atoll)",
+    "area": 105,
+    "type": "island"
+  },
+  {
+    "name": "Tokyo (City Proper)",
+    "area": 2194,
+    "type": "city",
+    "country": "Japan",
+    "population": 13960000
+  },
+  {
+    "name": "Tokyo (Metro Area)",
+    "area": 13572,
+    "type": "city_metro",
+    "country": "Japan",
+    "population": 37400000
+  },
+  {
+    "name": "Tokyo (Urban Footprint)",
+    "area": 8547,
+    "type": "city_urban",
+    "country": "Japan",
+    "population": 13960000
+  },
+  {
+    "name": "Delhi (City Proper)",
+    "area": 1484,
+    "type": "city",
+    "country": "India",
+    "population": 32941000
+  },
+  {
+    "name": "Delhi (Metro Area)",
+    "area": 2072,
+    "type": "city_metro",
+    "country": "India",
+    "population": 33800000
+  },
+  {
+    "name": "Delhi (Urban Footprint)",
+    "area": 2230,
+    "type": "city_urban",
+    "country": "India",
+    "population": 32941000
+  },
+  {
+    "name": "Shanghai (City Proper)",
+    "area": 6341,
+    "type": "city",
+    "country": "China",
+    "population": 24870000
+  },
+  {
+    "name": "Shanghai (Metro Area)",
+    "area": 6341,
+    "type": "city_metro",
+    "country": "China",
+    "population": 29870000
+  },
+  {
+    "name": "Shanghai (Urban Footprint)",
+    "area": 4015,
+    "type": "city_urban",
+    "country": "China",
+    "population": 24870000
+  },
+  {
+    "name": "São Paulo (City Proper)",
+    "area": 1521,
+    "type": "city",
+    "country": "Brazil",
+    "population": 12325000
+  },
+  {
+    "name": "São Paulo (Metro Area)",
+    "area": 7946,
+    "type": "city_metro",
+    "country": "Brazil",
+    "population": 22430000
+  },
+  {
+    "name": "São Paulo (Urban Footprint)",
+    "area": 3043,
+    "type": "city_urban",
+    "country": "Brazil",
+    "population": 12325000
+  },
+  {
+    "name": "Mexico City (City Proper)",
+    "area": 1485,
+    "type": "city",
+    "country": "Mexico",
+    "population": 9209944
+  },
+  {
+    "name": "Mexico City (Metro Area)",
+    "area": 7866,
+    "type": "city_metro",
+    "country": "Mexico",
+    "population": 21671908
+  },
+  {
+    "name": "Mexico City (Urban Footprint)",
+    "area": 2386,
+    "type": "city_urban",
+    "country": "Mexico",
+    "population": 9209944
+  },
+  {
+    "name": "Cairo (City Proper)",
+    "area": 3085,
+    "type": "city",
+    "country": "Egypt",
+    "population": 10100000
+  },
+  {
+    "name": "Cairo (Metro Area)",
+    "area": 3085,
+    "type": "city_metro",
+    "country": "Egypt",
+    "population": 21750000
+  },
+  {
+    "name": "Cairo (Urban Footprint)",
+    "area": 1918,
+    "type": "city_urban",
+    "country": "Egypt",
+    "population": 10100000
+  },
+  {
+    "name": "Mumbai (City Proper)",
+    "area": 603,
+    "type": "city",
+    "country": "India",
+    "population": 12478447
+  },
+  {
+    "name": "Mumbai (Metro Area)",
+    "area": 4355,
+    "type": "city_metro",
+    "country": "India",
+    "population": 20961472
+  },
+  {
+    "name": "Mumbai (Urban Footprint)",
+    "area": 777,
+    "type": "city_urban",
+    "country": "India",
+    "population": 12478447
+  },
+  {
+    "name": "Beijing (City Proper)",
+    "area": 16411,
+    "type": "city",
+    "country": "China",
+    "population": 21893095
+  },
+  {
+    "name": "Beijing (Metro Area)",
+    "area": 16411,
+    "type": "city_metro",
+    "country": "China",
+    "population": 21893095
+  },
+  {
+    "name": "Beijing (Urban Footprint)",
+    "area": 4164,
+    "type": "city_urban",
+    "country": "China",
+    "population": 21893095
+  },
+  {
+    "name": "Dhaka (City Proper)",
+    "area": 304,
+    "type": "city",
+    "country": "Bangladesh",
+    "population": 10278882
+  },
+  {
+    "name": "Dhaka (Metro Area)",
+    "area": 1463,
+    "type": "city_metro",
+    "country": "Bangladesh",
+    "population": 22478116
+  },
+  {
+    "name": "Dhaka (Urban Footprint)",
+    "area": 726,
+    "type": "city_urban",
+    "country": "Bangladesh",
+    "population": 10278882
+  },
+  {
+    "name": "Osaka (City Proper)",
+    "area": 225,
+    "type": "city",
+    "country": "Japan",
+    "population": 2691185
+  },
+  {
+    "name": "Osaka (Metro Area)",
+    "area": 13228,
+    "type": "city_metro",
+    "country": "Japan",
+    "population": 19303000
+  },
+  {
+    "name": "Osaka (Urban Footprint)",
+    "area": 3004,
+    "type": "city_urban",
+    "country": "Japan",
+    "population": 2691185
+  },
+  {
+    "name": "New York (City Proper)",
+    "area": 783,
+    "type": "city",
+    "country": "USA",
+    "population": 8336817
+  },
+  {
+    "name": "New York (Metro Area)",
+    "area": 17405,
+    "type": "city_metro",
+    "country": "USA",
+    "population": 20140470
+  },
+  {
+    "name": "New York (Urban Footprint)",
+    "area": 11642,
+    "type": "city_urban",
+    "country": "USA",
+    "population": 8336817
+  },
+  {
+    "name": "Karachi (City Proper)",
+    "area": 3527,
+    "type": "city",
+    "country": "Pakistan",
+    "population": 14910352
+  },
+  {
+    "name": "Karachi (Metro Area)",
+    "area": 3527,
+    "type": "city_metro",
+    "country": "Pakistan",
+    "population": 16459472
+  },
+  {
+    "name": "Karachi (Urban Footprint)",
+    "area": 1786,
+    "type": "city_urban",
+    "country": "Pakistan",
+    "population": 14910352
+  },
+  {
+    "name": "Buenos Aires (City Proper)",
+    "area": 203,
+    "type": "city",
+    "country": "Argentina",
+    "population": 3075646
+  },
+  {
+    "name": "Buenos Aires (Metro Area)",
+    "area": 3833,
+    "type": "city_metro",
+    "country": "Argentina",
+    "population": 15594428
+  },
+  {
+    "name": "Buenos Aires (Urban Footprint)",
+    "area": 2266,
+    "type": "city_urban",
+    "country": "Argentina",
+    "population": 3075646
+  },
+  {
+    "name": "Chongqing (City Proper)",
+    "area": 82300,
+    "type": "city",
+    "country": "China",
+    "population": 32000000
+  },
+  {
+    "name": "Chongqing (Metro Area)",
+    "area": 82300,
+    "type": "city_metro",
+    "country": "China",
+    "population": 32000000
+  },
+  {
+    "name": "Chongqing (Urban Footprint)",
+    "area": 1591,
+    "type": "city_urban",
+    "country": "China",
+    "population": 32000000
+  },
+  {
+    "name": "Istanbul (City Proper)",
+    "area": 5343,
+    "type": "city",
+    "country": "Turkey",
+    "population": 15462452
+  },
+  {
+    "name": "Istanbul (Metro Area)",
+    "area": 5343,
+    "type": "city_metro",
+    "country": "Turkey",
+    "population": 15462452
+  },
+  {
+    "name": "Istanbul (Urban Footprint)",
+    "area": 2576,
+    "type": "city_urban",
+    "country": "Turkey",
+    "population": 15462452
+  },
+  {
+    "name": "Kolkata (City Proper)",
+    "area": 185,
+    "type": "city",
+    "country": "India",
+    "population": 4631392
+  },
+  {
+    "name": "Kolkata (Metro Area)",
+    "area": 1886,
+    "type": "city_metro",
+    "country": "India",
+    "population": 14974073
+  },
+  {
+    "name": "Kolkata (Urban Footprint)",
+    "area": 1204,
+    "type": "city_urban",
+    "country": "India",
+    "population": 4631392
+  },
+  {
+    "name": "Manila (City Proper)",
+    "area": 43,
+    "type": "city",
+    "country": "Philippines",
+    "population": 1780148
+  },
+  {
+    "name": "Manila (Metro Area)",
+    "area": 1580,
+    "type": "city_metro",
+    "country": "Philippines",
+    "population": 24922000
+  },
+  {
+    "name": "Manila (Urban Footprint)",
+    "area": 913,
+    "type": "city_urban",
+    "country": "Philippines",
+    "population": 1780148
+  },
+  {
+    "name": "Lagos (City Proper)",
+    "area": 1171,
+    "type": "city",
+    "country": "Nigeria",
+    "population": 9000000
+  },
+  {
+    "name": "Lagos (Metro Area)",
+    "area": 1171,
+    "type": "city_metro",
+    "country": "Nigeria",
+    "population": 15946000
+  },
+  {
+    "name": "Lagos (Urban Footprint)",
+    "area": 2706,
+    "type": "city_urban",
+    "country": "Nigeria",
+    "population": 9000000
+  },
+  {
+    "name": "Kinshasa (City Proper)",
+    "area": 9965,
+    "type": "city",
+    "country": "DRC",
+    "population": 15628085
+  },
+  {
+    "name": "Kinshasa (Metro Area)",
+    "area": 9965,
+    "type": "city_metro",
+    "country": "DRC",
+    "population": 15628085
+  },
+  {
+    "name": "Kinshasa (Urban Footprint)",
+    "area": 1132,
+    "type": "city_urban",
+    "country": "DRC",
+    "population": 15628085
+  },
+  {
+    "name": "Tianjin (City Proper)",
+    "area": 11917,
+    "type": "city",
+    "country": "China",
+    "population": 13589078
+  },
+  {
+    "name": "Tianjin (Metro Area)",
+    "area": 11917,
+    "type": "city_metro",
+    "country": "China",
+    "population": 13589078
+  },
+  {
+    "name": "Tianjin (Urban Footprint)",
+    "area": 2239,
+    "type": "city_urban",
+    "country": "China",
+    "population": 13589078
+  },
+  {
+    "name": "Guangzhou (City Proper)",
+    "area": 7434,
+    "type": "city",
+    "country": "China",
+    "population": 18676605
+  },
+  {
+    "name": "Guangzhou (Metro Area)",
+    "area": 7434,
+    "type": "city_metro",
+    "country": "China",
+    "population": 25772000
+  },
+  {
+    "name": "Guangzhou (Urban Footprint)",
+    "area": 3843,
+    "type": "city_urban",
+    "country": "China",
+    "population": 18676605
+  },
+  {
+    "name": "Los Angeles (City Proper)",
+    "area": 1302,
+    "type": "city",
+    "country": "USA",
+    "population": 3898747
+  },
+  {
+    "name": "Los Angeles (Metro Area)",
+    "area": 12561,
+    "type": "city_metro",
+    "country": "USA",
+    "population": 13291486
+  },
+  {
+    "name": "Los Angeles (Urban Footprint)",
+    "area": 5681,
+    "type": "city_urban",
+    "country": "USA",
+    "population": 3898747
+  },
+  {
+    "name": "Moscow (City Proper)",
+    "area": 2562,
+    "type": "city",
+    "country": "Russia",
+    "population": 12655050
+  },
+  {
+    "name": "Moscow (Metro Area)",
+    "area": 5891,
+    "type": "city_metro",
+    "country": "Russia",
+    "population": 17332000
+  },
+  {
+    "name": "Moscow (Urban Footprint)",
+    "area": 2510,
+    "type": "city_urban",
+    "country": "Russia",
+    "population": 12655050
+  },
+  {
+    "name": "Shenzhen (City Proper)",
+    "area": 1997,
+    "type": "city",
+    "country": "China",
+    "population": 17619000
+  },
+  {
+    "name": "Shenzhen (Metro Area)",
+    "area": 1997,
+    "type": "city_metro",
+    "country": "China",
+    "population": 17619000
+  },
+  {
+    "name": "Shenzhen (Urban Footprint)",
+    "area": 1748,
+    "type": "city_urban",
+    "country": "China",
+    "population": 17619000
+  },
+  {
+    "name": "Lahore (City Proper)",
+    "area": 1772,
+    "type": "city",
+    "country": "Pakistan",
+    "population": 13095000
+  },
+  {
+    "name": "Lahore (Metro Area)",
+    "area": 1772,
+    "type": "city_metro",
+    "country": "Pakistan",
+    "population": 13095000
+  },
+  {
+    "name": "Lahore (Urban Footprint)",
+    "area": 1085,
+    "type": "city_urban",
+    "country": "Pakistan",
+    "population": 13095000
+  },
+  {
+    "name": "Bangalore (City Proper)",
+    "area": 741,
+    "type": "city",
+    "country": "India",
+    "population": 13193000
+  },
+  {
+    "name": "Bangalore (Metro Area)",
+    "area": 8005,
+    "type": "city_metro",
+    "country": "India",
+    "population": 13193000
+  },
+  {
+    "name": "Bangalore (Urban Footprint)",
+    "area": 741,
+    "type": "city_urban",
+    "country": "India",
+    "population": 13193000
+  },
+  {
+    "name": "Paris (City Proper)",
+    "area": 105,
+    "type": "city",
+    "country": "France",
+    "population": 2161000
+  },
+  {
+    "name": "Paris (Metro Area)",
+    "area": 14518,
+    "type": "city_metro",
+    "country": "France",
+    "population": 12341418
+  },
+  {
+    "name": "Paris (Urban Footprint)",
+    "area": 2845,
+    "type": "city_urban",
+    "country": "France",
+    "population": 2161000
+  },
+  {
+    "name": "Bogotá (City Proper)",
+    "area": 1587,
+    "type": "city",
+    "country": "Colombia",
+    "population": 8380801
+  },
+  {
+    "name": "Bogotá (Metro Area)",
+    "area": 1587,
+    "type": "city_metro",
+    "country": "Colombia",
+    "population": 11456392
+  },
+  {
+    "name": "Bogotá (Urban Footprint)",
+    "area": 487,
+    "type": "city_urban",
+    "country": "Colombia",
+    "population": 8380801
+  },
+  {
+    "name": "Jakarta (City Proper)",
+    "area": 661,
+    "type": "city",
+    "country": "Indonesia",
+    "population": 10562088
+  },
+  {
+    "name": "Jakarta (Metro Area)",
+    "area": 6392,
+    "type": "city_metro",
+    "country": "Indonesia",
+    "population": 34540000
+  },
+  {
+    "name": "Jakarta (Urban Footprint)",
+    "area": 3300,
+    "type": "city_urban",
+    "country": "Indonesia",
+    "population": 10562088
+  },
+  {
+    "name": "Chennai (City Proper)",
+    "area": 426,
+    "type": "city",
+    "country": "India",
+    "population": 7088000
+  },
+  {
+    "name": "Chennai (Metro Area)",
+    "area": 5904,
+    "type": "city_metro",
+    "country": "India",
+    "population": 11235018
+  },
+  {
+    "name": "Chennai (Urban Footprint)",
+    "area": 1189,
+    "type": "city_urban",
+    "country": "India",
+    "population": 7088000
+  },
+  {
+    "name": "Lima (City Proper)",
+    "area": 2672,
+    "type": "city",
+    "country": "Peru",
+    "population": 11044607
+  },
+  {
+    "name": "Lima (Metro Area)",
+    "area": 2672,
+    "type": "city_metro",
+    "country": "Peru",
+    "population": 11044607
+  },
+  {
+    "name": "Lima (Urban Footprint)",
+    "area": 2819,
+    "type": "city_urban",
+    "country": "Peru",
+    "population": 11044607
+  },
+  {
+    "name": "Bangkok (City Proper)",
+    "area": 1569,
+    "type": "city",
+    "country": "Thailand",
+    "population": 10539000
+  },
+  {
+    "name": "Bangkok (Metro Area)",
+    "area": 7762,
+    "type": "city_metro",
+    "country": "Thailand",
+    "population": 17573000
+  },
+  {
+    "name": "Bangkok (Urban Footprint)",
+    "area": 2444,
+    "type": "city_urban",
+    "country": "Thailand",
+    "population": 10539000
+  },
+  {
+    "name": "Seoul (City Proper)",
+    "area": 605,
+    "type": "city",
+    "country": "South Korea",
+    "population": 9776000
+  },
+  {
+    "name": "Seoul (Metro Area)",
+    "area": 11704,
+    "type": "city_metro",
+    "country": "South Korea",
+    "population": 25514000
+  },
+  {
+    "name": "Seoul (Urban Footprint)",
+    "area": 2767,
+    "type": "city_urban",
+    "country": "South Korea",
+    "population": 9776000
+  },
+  {
+    "name": "Nagoya (City Proper)",
+    "area": 326,
+    "type": "city",
+    "country": "Japan",
+    "population": 2332176
+  },
+  {
+    "name": "Nagoya (Metro Area)",
+    "area": 5113,
+    "type": "city_metro",
+    "country": "Japan",
+    "population": 10280000
+  },
+  {
+    "name": "Nagoya (Urban Footprint)",
+    "area": 2870,
+    "type": "city_urban",
+    "country": "Japan",
+    "population": 2332176
+  },
+  {
+    "name": "Hyderabad (City Proper)",
+    "area": 650,
+    "type": "city",
+    "country": "India",
+    "population": 10534418
+  },
+  {
+    "name": "Hyderabad (Metro Area)",
+    "area": 7257,
+    "type": "city_metro",
+    "country": "India",
+    "population": 10534418
+  },
+  {
+    "name": "Hyderabad (Urban Footprint)",
+    "area": 1048,
+    "type": "city_urban",
+    "country": "India",
+    "population": 10534418
+  },
+  {
+    "name": "Wuhan (City Proper)",
+    "area": 8569,
+    "type": "city",
+    "country": "China",
+    "population": 13900000
+  },
+  {
+    "name": "Wuhan (Metro Area)",
+    "area": 8569,
+    "type": "city_metro",
+    "country": "China",
+    "population": 13900000
+  },
+  {
+    "name": "Wuhan (Urban Footprint)",
+    "area": 2167,
+    "type": "city_urban",
+    "country": "China",
+    "population": 13900000
+  },
+  {
+    "name": "Ahmedabad (City Proper)",
+    "area": 464,
+    "type": "city",
+    "country": "India",
+    "population": 8059441
+  },
+  {
+    "name": "Ahmedabad (Metro Area)",
+    "area": 2070,
+    "type": "city_metro",
+    "country": "India",
+    "population": 8059441
+  },
+  {
+    "name": "Ahmedabad (Urban Footprint)",
+    "area": 660,
+    "type": "city_urban",
+    "country": "India",
+    "population": 8059441
+  },
+  {
+    "name": "Luanda (City Proper)",
+    "area": 2257,
+    "type": "city",
+    "country": "Angola",
+    "population": 9500000
+  },
+  {
+    "name": "Luanda (Metro Area)",
+    "area": 2257,
+    "type": "city_metro",
+    "country": "Angola",
+    "population": 9500000
+  },
+  {
+    "name": "Luanda (Urban Footprint)",
+    "area": 830,
+    "type": "city_urban",
+    "country": "Angola",
+    "population": 9500000
+  },
+  {
+    "name": "Kuala Lumpur (City Proper)",
+    "area": 243,
+    "type": "city",
+    "country": "Malaysia",
+    "population": 1982000
+  },
+  {
+    "name": "Kuala Lumpur (Metro Area)",
+    "area": 2243,
+    "type": "city_metro",
+    "country": "Malaysia",
+    "population": 8285000
+  },
+  {
+    "name": "Kuala Lumpur (Urban Footprint)",
+    "area": 2450,
+    "type": "city_urban",
+    "country": "Malaysia",
+    "population": 1982000
+  },
+  {
+    "name": "Dar es Salaam (City Proper)",
+    "area": 1393,
+    "type": "city",
+    "country": "Tanzania",
+    "population": 7404689
+  },
+  {
+    "name": "Dar es Salaam (Metro Area)",
+    "area": 1393,
+    "type": "city_metro",
+    "country": "Tanzania",
+    "population": 7404689
+  },
+  {
+    "name": "Dar es Salaam (Urban Footprint)",
+    "area": 524,
+    "type": "city_urban",
+    "country": "Tanzania",
+    "population": 7404689
+  },
+  {
+    "name": "Hong Kong (City Proper)",
+    "area": 1114,
+    "type": "city",
+    "country": "China",
+    "population": 7413100
+  },
+  {
+    "name": "Hong Kong (Metro Area)",
+    "area": 1114,
+    "type": "city_metro",
+    "country": "China",
+    "population": 7413100
+  },
+  {
+    "name": "Hong Kong (Urban Footprint)",
+    "area": 270,
+    "type": "city_urban",
+    "country": "China",
+    "population": 7413100
+  },
+  {
+    "name": "Riyadh (City Proper)",
+    "area": 1913,
+    "type": "city",
+    "country": "Saudi Arabia",
+    "population": 7905891
+  },
+  {
+    "name": "Riyadh (Metro Area)",
+    "area": 1913,
+    "type": "city_metro",
+    "country": "Saudi Arabia",
+    "population": 7905891
+  },
+  {
+    "name": "Riyadh (Urban Footprint)",
+    "area": 1613,
+    "type": "city_urban",
+    "country": "Saudi Arabia",
+    "population": 7905891
+  },
+  {
+    "name": "Baghdad (City Proper)",
+    "area": 4555,
+    "type": "city",
+    "country": "Iraq",
+    "population": 9500000
+  },
+  {
+    "name": "Baghdad (Metro Area)",
+    "area": 4555,
+    "type": "city_metro",
+    "country": "Iraq",
+    "population": 9500000
+  },
+  {
+    "name": "Baghdad (Urban Footprint)",
+    "area": 598,
+    "type": "city_urban",
+    "country": "Iraq",
+    "population": 9500000
+  },
+  {
+    "name": "Santiago (City Proper)",
+    "area": 641,
+    "type": "city",
+    "country": "Chile",
+    "population": 5614000
+  },
+  {
+    "name": "Santiago (Metro Area)",
+    "area": 2030,
+    "type": "city_metro",
+    "country": "Chile",
+    "population": 7112808
+  },
+  {
+    "name": "Santiago (Urban Footprint)",
+    "area": 1104,
+    "type": "city_urban",
+    "country": "Chile",
+    "population": 5614000
+  },
+  {
+    "name": "Singapore (City Proper)",
+    "area": 719,
+    "type": "city",
+    "country": "Singapore",
+    "population": 5868104
+  },
+  {
+    "name": "Singapore (Metro Area)",
+    "area": 719,
+    "type": "city_metro",
+    "country": "Singapore",
+    "population": 5868104
+  },
+  {
+    "name": "Singapore (Urban Footprint)",
+    "area": 530,
+    "type": "city_urban",
+    "country": "Singapore",
+    "population": 5868104
+  },
+  {
+    "name": "Johannesburg (City Proper)",
+    "area": 1645,
+    "type": "city",
+    "country": "South Africa",
+    "population": 5635127
+  },
+  {
+    "name": "Johannesburg (Metro Area)",
+    "area": 1645,
+    "type": "city_metro",
+    "country": "South Africa",
+    "population": 5635127
+  },
+  {
+    "name": "Johannesburg (Urban Footprint)",
+    "area": 3915,
+    "type": "city_urban",
+    "country": "South Africa",
+    "population": 5635127
+  },
+  {
+    "name": "Tehran (City Proper)",
+    "area": 686,
+    "type": "city",
+    "country": "Iran",
+    "population": 9260000
+  },
+  {
+    "name": "Tehran (Metro Area)",
+    "area": 1796,
+    "type": "city_metro",
+    "country": "Iran",
+    "population": 16330000
+  },
+  {
+    "name": "Tehran (Urban Footprint)",
+    "area": 730,
+    "type": "city_urban",
+    "country": "Iran",
+    "population": 9260000
+  },
+  {
+    "name": "London (City Proper)",
+    "area": 1572,
+    "type": "city",
+    "country": "UK",
+    "population": 9540576
+  },
+  {
+    "name": "London (Metro Area)",
+    "area": 11426,
+    "type": "city_metro",
+    "country": "UK",
+    "population": 14372596
+  },
+  {
+    "name": "London (Urban Footprint)",
+    "area": 1738,
+    "type": "city_urban",
+    "country": "UK",
+    "population": 9540576
+  },
+  {
+    "name": "Nairobi (City Proper)",
+    "area": 696,
+    "type": "city",
+    "country": "Kenya",
+    "population": 5118844
+  },
+  {
+    "name": "Nairobi (Metro Area)",
+    "area": 3527,
+    "type": "city_metro",
+    "country": "Kenya",
+    "population": 5118844
+  },
+  {
+    "name": "Nairobi (Urban Footprint)",
+    "area": 696,
+    "type": "city_urban",
+    "country": "Kenya",
+    "population": 5118844
+  },
+  {
+    "name": "Addis Ababa (City Proper)",
+    "area": 527,
+    "type": "city",
+    "country": "Ethiopia",
+    "population": 5228000
+  },
+  {
+    "name": "Addis Ababa (Metro Area)",
+    "area": 527,
+    "type": "city_metro",
+    "country": "Ethiopia",
+    "population": 5228000
+  },
+  {
+    "name": "Addis Ababa (Urban Footprint)",
+    "area": 527,
+    "type": "city_urban",
+    "country": "Ethiopia",
+    "population": 5228000
+  },
+  {
+    "name": "Chicago (City Proper)",
+    "area": 606,
+    "type": "city",
+    "country": "USA",
+    "population": 2696555
+  },
+  {
+    "name": "Chicago (Metro Area)",
+    "area": 9521,
+    "type": "city_metro",
+    "country": "USA",
+    "population": 9458539
+  },
+  {
+    "name": "Chicago (Urban Footprint)",
+    "area": 6792,
+    "type": "city_urban",
+    "country": "USA",
+    "population": 2696555
+  },
+  {
+    "name": "Chittagong (City Proper)",
+    "area": 168,
+    "type": "city",
+    "country": "Bangladesh",
+    "population": 5108000
+  },
+  {
+    "name": "Chittagong (Metro Area)",
+    "area": 339,
+    "type": "city_metro",
+    "country": "Bangladesh",
+    "population": 5108000
+  },
+  {
+    "name": "Chittagong (Urban Footprint)",
+    "area": 275,
+    "type": "city_urban",
+    "country": "Bangladesh",
+    "population": 5108000
+  },
+  {
+    "name": "Ho Chi Minh City (City Proper)",
+    "area": 2061,
+    "type": "city",
+    "country": "Vietnam",
+    "population": 9320866
+  },
+  {
+    "name": "Ho Chi Minh City (Metro Area)",
+    "area": 2061,
+    "type": "city_metro",
+    "country": "Vietnam",
+    "population": 9320866
+  },
+  {
+    "name": "Ho Chi Minh City (Urban Footprint)",
+    "area": 518,
+    "type": "city_urban",
+    "country": "Vietnam",
+    "population": 9320866
+  },
+  {
+    "name": "Yangon (City Proper)",
+    "area": 598,
+    "type": "city",
+    "country": "Myanmar",
+    "population": 7718689
+  },
+  {
+    "name": "Yangon (Metro Area)",
+    "area": 598,
+    "type": "city_metro",
+    "country": "Myanmar",
+    "population": 7718689
+  },
+  {
+    "name": "Yangon (Urban Footprint)",
+    "area": 370,
+    "type": "city_urban",
+    "country": "Myanmar",
+    "population": 7718689
+  },
+  {
+    "name": "Khartoum (City Proper)",
+    "area": 1010,
+    "type": "city",
+    "country": "Sudan",
+    "population": 6160327
+  },
+  {
+    "name": "Khartoum (Metro Area)",
+    "area": 1010,
+    "type": "city_metro",
+    "country": "Sudan",
+    "population": 6160327
+  },
+  {
+    "name": "Khartoum (Urban Footprint)",
+    "area": 679,
+    "type": "city_urban",
+    "country": "Sudan",
+    "population": 6160327
+  },
+  {
+    "name": "Casablanca (City Proper)",
+    "area": 383,
+    "type": "city",
+    "country": "Morocco",
+    "population": 4740000
+  },
+  {
+    "name": "Casablanca (Metro Area)",
+    "area": 1617,
+    "type": "city_metro",
+    "country": "Morocco",
+    "population": 5000000
+  },
+  {
+    "name": "Casablanca (Urban Footprint)",
+    "area": 383,
+    "type": "city_urban",
+    "country": "Morocco",
+    "population": 4740000
+  },
+  {
+    "name": "Abidjan (City Proper)",
+    "area": 2119,
+    "type": "city",
+    "country": "Ivory Coast",
+    "population": 5515000
+  },
+  {
+    "name": "Abidjan (Metro Area)",
+    "area": 2119,
+    "type": "city_metro",
+    "country": "Ivory Coast",
+    "population": 5515000
+  },
+  {
+    "name": "Abidjan (Urban Footprint)",
+    "area": 594,
+    "type": "city_urban",
+    "country": "Ivory Coast",
+    "population": 5515000
+  },
+  {
+    "name": "Kabul (City Proper)",
+    "area": 1023,
+    "type": "city",
+    "country": "Afghanistan",
+    "population": 4600000
+  },
+  {
+    "name": "Kabul (Metro Area)",
+    "area": 1023,
+    "type": "city_metro",
+    "country": "Afghanistan",
+    "population": 4600000
+  },
+  {
+    "name": "Kabul (Urban Footprint)",
+    "area": 438,
+    "type": "city_urban",
+    "country": "Afghanistan",
+    "population": 4600000
+  },
+  {
+    "name": "Kathmandu (City Proper)",
+    "area": 50,
+    "type": "city",
+    "country": "Nepal",
+    "population": 1442271
+  },
+  {
+    "name": "Kathmandu (Metro Area)",
+    "area": 395,
+    "type": "city_metro",
+    "country": "Nepal",
+    "population": 3056000
+  },
+  {
+    "name": "Kathmandu (Urban Footprint)",
+    "area": 50,
+    "type": "city_urban",
+    "country": "Nepal",
+    "population": 1442271
+  },
+  {
+    "name": "Accra (City Proper)",
+    "area": 225,
+    "type": "city",
+    "country": "Ghana",
+    "population": 4197000
+  },
+  {
+    "name": "Accra (Metro Area)",
+    "area": 3245,
+    "type": "city_metro",
+    "country": "Ghana",
+    "population": 4197000
+  },
+  {
+    "name": "Accra (Urban Footprint)",
+    "area": 572,
+    "type": "city_urban",
+    "country": "Ghana",
+    "population": 4197000
+  },
+  {
+    "name": "Belo Horizonte (City Proper)",
+    "area": 331,
+    "type": "city",
+    "country": "Brazil",
+    "population": 2722000
+  },
+  {
+    "name": "Belo Horizonte (Metro Area)",
+    "area": 9461,
+    "type": "city_metro",
+    "country": "Brazil",
+    "population": 6032000
+  },
+  {
+    "name": "Belo Horizonte (Urban Footprint)",
+    "area": 1376,
+    "type": "city_urban",
+    "country": "Brazil",
+    "population": 2722000
+  },
+  {
+    "name": "Hanoi (City Proper)",
+    "area": 3345,
+    "type": "city",
+    "country": "Vietnam",
+    "population": 8053663
+  },
+  {
+    "name": "Hanoi (Metro Area)",
+    "area": 3345,
+    "type": "city_metro",
+    "country": "Vietnam",
+    "population": 8053663
+  },
+  {
+    "name": "Hanoi (Urban Footprint)",
+    "area": 700,
+    "type": "city_urban",
+    "country": "Vietnam",
+    "population": 8053663
+  },
+  {
+    "name": "Dubai (City Proper)",
+    "area": 4114,
+    "type": "city",
+    "country": "UAE",
+    "population": 3550000
+  },
+  {
+    "name": "Dubai (Metro Area)",
+    "area": 4114,
+    "type": "city_metro",
+    "country": "UAE",
+    "population": 3550000
+  },
+  {
+    "name": "Dubai (Urban Footprint)",
+    "area": 977,
+    "type": "city_urban",
+    "country": "UAE",
+    "population": 3550000
+  },
+  {
+    "name": "Rio de Janeiro (City Proper)",
+    "area": 1221,
+    "type": "city",
+    "country": "Brazil",
+    "population": 6748000
+  },
+  {
+    "name": "Rio de Janeiro (Metro Area)",
+    "area": 5619,
+    "type": "city_metro",
+    "country": "Brazil",
+    "population": 13634000
+  },
+  {
+    "name": "Rio de Janeiro (Urban Footprint)",
+    "area": 2399,
+    "type": "city_urban",
+    "country": "Brazil",
+    "population": 6748000
+  },
+  {
+    "name": "Taipei (City Proper)",
+    "area": 272,
+    "type": "city",
+    "country": "Taiwan",
+    "population": 2646204
+  },
+  {
+    "name": "Taipei (Metro Area)",
+    "area": 7418,
+    "type": "city_metro",
+    "country": "Taiwan",
+    "population": 9746600
+  },
+  {
+    "name": "Taipei (Urban Footprint)",
+    "area": 1523,
+    "type": "city_urban",
+    "country": "Taiwan",
+    "population": 2646204
+  },
+  {
+    "name": "Houston (City Proper)",
+    "area": 1777,
+    "type": "city",
+    "country": "USA",
+    "population": 2304580
+  },
+  {
+    "name": "Houston (Metro Area)",
+    "area": 26944,
+    "type": "city_metro",
+    "country": "USA",
+    "population": 7340000
+  },
+  {
+    "name": "Houston (Urban Footprint)",
+    "area": 4703,
+    "type": "city_urban",
+    "country": "USA",
+    "population": 2304580
+  },
+  {
+    "name": "Dallas (City Proper)",
+    "area": 999,
+    "type": "city",
+    "country": "USA",
+    "population": 1345047
+  },
+  {
+    "name": "Dallas (Metro Area)",
+    "area": 24059,
+    "type": "city_metro",
+    "country": "USA",
+    "population": 7637387
+  },
+  {
+    "name": "Dallas (Urban Footprint)",
+    "area": 5760,
+    "type": "city_urban",
+    "country": "USA",
+    "population": 1345047
+  },
+  {
+    "name": "Philadelphia (City Proper)",
+    "area": 369,
+    "type": "city",
+    "country": "USA",
+    "population": 1603797
+  },
+  {
+    "name": "Philadelphia (Metro Area)",
+    "area": 13256,
+    "type": "city_metro",
+    "country": "USA",
+    "population": 6245051
+  },
+  {
+    "name": "Philadelphia (Urban Footprint)",
+    "area": 5130,
+    "type": "city_urban",
+    "country": "USA",
+    "population": 1603797
+  },
+  {
+    "name": "Washington DC (City Proper)",
+    "area": 158,
+    "type": "city",
+    "country": "USA",
+    "population": 712816
+  },
+  {
+    "name": "Washington DC (Metro Area)",
+    "area": 14412,
+    "type": "city_metro",
+    "country": "USA",
+    "population": 6385162
+  },
+  {
+    "name": "Washington DC (Urban Footprint)",
+    "area": 4600,
+    "type": "city_urban",
+    "country": "USA",
+    "population": 712816
+  },
+  {
+    "name": "Phoenix (City Proper)",
+    "area": 1341,
+    "type": "city",
+    "country": "USA",
+    "population": 1608139
+  },
+  {
+    "name": "Phoenix (Metro Area)",
+    "area": 37744,
+    "type": "city_metro",
+    "country": "USA",
+    "population": 5002221
+  },
+  {
+    "name": "Phoenix (Urban Footprint)",
+    "area": 4990,
+    "type": "city_urban",
+    "country": "USA",
+    "population": 1608139
+  },
+  {
+    "name": "San Antonio (City Proper)",
+    "area": 1307,
+    "type": "city",
+    "country": "USA",
+    "population": 1592383
+  },
+  {
+    "name": "San Antonio (Metro Area)",
+    "area": 7580,
+    "type": "city_metro",
+    "country": "USA",
+    "population": 2679721
+  },
+  {
+    "name": "San Antonio (Urban Footprint)",
+    "area": 2047,
+    "type": "city_urban",
+    "country": "USA",
+    "population": 1592383
+  },
+  {
+    "name": "Miami (City Proper)",
+    "area": 143,
+    "type": "city",
+    "country": "USA",
+    "population": 470914
+  },
+  {
+    "name": "Miami (Metro Area)",
+    "area": 6137,
+    "type": "city_metro",
+    "country": "USA",
+    "population": 6265901
+  },
+  {
+    "name": "Miami (Urban Footprint)",
+    "area": 4792,
+    "type": "city_urban",
+    "country": "USA",
+    "population": 470914
+  },
+  {
+    "name": "Toronto (City Proper)",
+    "area": 630,
+    "type": "city",
+    "country": "Canada",
+    "population": 2930000
+  },
+  {
+    "name": "Toronto (Metro Area)",
+    "area": 5905,
+    "type": "city_metro",
+    "country": "Canada",
+    "population": 6418000
+  },
+  {
+    "name": "Toronto (Urban Footprint)",
+    "area": 5903,
+    "type": "city_urban",
+    "country": "Canada",
+    "population": 2930000
+  },
+  {
+    "name": "Montréal (City Proper)",
+    "area": 431,
+    "type": "city",
+    "country": "Canada",
+    "population": 2141000
+  },
+  {
+    "name": "Montréal (Metro Area)",
+    "area": 4604,
+    "type": "city_metro",
+    "country": "Canada",
+    "population": 4291000
+  },
+  {
+    "name": "Montréal (Urban Footprint)",
+    "area": 4259,
+    "type": "city_urban",
+    "country": "Canada",
+    "population": 2141000
+  },
+  {
+    "name": "Vancouver (City Proper)",
+    "area": 115,
+    "type": "city",
+    "country": "Canada",
+    "population": 662248
+  },
+  {
+    "name": "Vancouver (Metro Area)",
+    "area": 2883,
+    "type": "city_metro",
+    "country": "Canada",
+    "population": 2642825
+  },
+  {
+    "name": "Vancouver (Urban Footprint)",
+    "area": 2790,
+    "type": "city_urban",
+    "country": "Canada",
+    "population": 662248
+  },
+  {
+    "name": "Melbourne (City Proper)",
+    "area": 37,
+    "type": "city",
+    "country": "Australia",
+    "population": 169130
+  },
+  {
+    "name": "Melbourne (Metro Area)",
+    "area": 9992,
+    "type": "city_metro",
+    "country": "Australia",
+    "population": 5031000
+  },
+  {
+    "name": "Melbourne (Urban Footprint)",
+    "area": 2453,
+    "type": "city_urban",
+    "country": "Australia",
+    "population": 169130
+  },
+  {
+    "name": "Sydney (City Proper)",
+    "area": 12367,
+    "type": "city",
+    "country": "Australia",
+    "population": 5312000
+  },
+  {
+    "name": "Sydney (Metro Area)",
+    "area": 12367,
+    "type": "city_metro",
+    "country": "Australia",
+    "population": 5312000
+  },
+  {
+    "name": "Sydney (Urban Footprint)",
+    "area": 2037,
+    "type": "city_urban",
+    "country": "Australia",
+    "population": 5312000
+  },
+  {
+    "name": "Osaka-Kobe-Kyoto (Metro Area)",
+    "area": 13350,
+    "type": "city_metro",
+    "country": "Japan",
+    "population": 19511000
+  },
+  {
+    "name": "Osaka-Kobe-Kyoto (Urban Footprint)",
+    "area": 3496,
+    "type": "city_urban",
+    "country": "Japan",
+    "population": 19511000
+  },
+  {
+    "name": "Johannesburg-Pretoria (Metro Area)",
+    "area": 7150,
+    "type": "city_metro",
+    "country": "South Africa",
+    "population": 14000000
+  },
+  {
+    "name": "Johannesburg-Pretoria (Urban Footprint)",
+    "area": 5000,
+    "type": "city_urban",
+    "country": "South Africa",
+    "population": 14000000
+  },
+  {
+    "name": "São Paulo Metro (Metro Area)",
+    "area": 7946,
+    "type": "city_metro",
+    "country": "Brazil",
+    "population": 22430000
+  },
+  {
+    "name": "São Paulo Metro (Urban Footprint)",
+    "area": 3043,
+    "type": "city_urban",
+    "country": "Brazil",
+    "population": 22430000
+  },
+  {
+    "name": "Kinshasa-Brazzaville (Metro Area)",
+    "area": 12000,
+    "type": "city_metro",
+    "country": "Africa",
+    "population": 17000000
+  },
+  {
+    "name": "Kinshasa-Brazzaville (Urban Footprint)",
+    "area": 1500,
+    "type": "city_urban",
+    "country": "Africa",
+    "population": 17000000
+  },
+  {
+    "name": "Rhine-Ruhr (Metro Area)",
+    "area": 7110,
+    "type": "city_metro",
+    "country": "Germany",
+    "population": 10700000
+  },
+  {
+    "name": "Rhine-Ruhr (Urban Footprint)",
+    "area": 4435,
+    "type": "city_urban",
+    "country": "Germany",
+    "population": 10700000
+  },
+  {
+    "name": "Randstad (Metro Area)",
+    "area": 8287,
+    "type": "city_metro",
+    "country": "Netherlands",
+    "population": 8200000
+  },
+  {
+    "name": "Randstad (Urban Footprint)",
+    "area": 3040,
+    "type": "city_urban",
+    "country": "Netherlands",
+    "population": 8200000
+  },
+  {
+    "name": "Greater Cairo (Metro Area)",
+    "area": 53088,
+    "type": "city_metro",
+    "country": "Egypt",
+    "population": 21750000
+  },
+  {
+    "name": "Greater Cairo (Urban Footprint)",
+    "area": 1918,
+    "type": "city_urban",
+    "country": "Egypt",
+    "population": 21750000
+  },
+  {
+    "name": "Pearl River Delta (Metro Area)",
+    "area": 56000,
+    "type": "city_metro",
+    "country": "China",
+    "population": 80000000
+  },
+  {
+    "name": "Pearl River Delta (Urban Footprint)",
+    "area": 15000,
+    "type": "city_urban",
+    "country": "China",
+    "population": 80000000
+  },
+  {
+    "name": "Yangtze River Delta (Metro Area)",
+    "area": 99600,
+    "type": "city_metro",
+    "country": "China",
+    "population": 83000000
+  },
+  {
+    "name": "Yangtze River Delta (Urban Footprint)",
+    "area": 13000,
+    "type": "city_urban",
+    "country": "China",
+    "population": 83000000
+  }
 ]
