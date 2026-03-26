@@ -209,12 +209,14 @@
             color: white;
             font-size: 9px;
             font-weight: bold;
-            padding: 2px 6px;
+            padding: 3px 7px;
             border-radius: 10px;
             white-space: nowrap;
             pointer-events: none;
             z-index: 900;
             box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+            line-height: 1.4;
+            text-align: center;
         }
 
         /* ── HELP MODAL ── */
@@ -447,9 +449,12 @@
         document.getElementById('loading').style.display = 'none';
         setupSearch();
 
+        // Load state: URL params take priority (shared links), then sessionStorage
         const urlParams = new URLSearchParams(window.location.search);
         const mapData = urlParams.get('map');
         if (mapData) {
+            // Shared link — load from URL, then clear the ?map= param so
+            // swipe-back can't restore an old state unexpectedly
             try {
                 mapData.split('|').forEach(str => {
                     const parts = str.split(':');
@@ -460,7 +465,19 @@
                     }
                 });
             } catch(e) { console.error('URL parse error', e); }
+            // Remove ?map= from URL bar so browser history stays clean
+            window.history.replaceState({}, '', window.location.pathname);
+        } else {
+            // No shared link — restore previous session if available
+            if (loadSessionState()) render();
         }
+
+        // Block popstate (swipe back/forward) from navigating away mid-session
+        window.addEventListener('popstate', (e) => {
+            // Push a new state to keep us on this page
+            window.history.pushState(null, '', window.location.pathname);
+        });
+        window.history.pushState(null, '', window.location.pathname);
 
         // Show help on very first visit
         if (!localStorage.getItem('squarescale_seen')) {
@@ -527,12 +544,36 @@
         });
     }
 
-    // ── URL STATE ────────────────────────────────────────────────────────────
+    // ── STATE PERSISTENCE ────────────────────────────────────────────────────
+    // We save canvas state to sessionStorage on every change.
+    // The URL is only used for intentional shares (Share button).
+    // This prevents mobile swipe-back/forward from corrupting the canvas.
+    function saveState() {
+        const state = addedItems.map(i => ({
+            name: i.name, area: i.area, color: i.color,
+            x: i.x, y: i.y,
+            parts: i.parts || null
+        }));
+        try { sessionStorage.setItem('squarescale_state', JSON.stringify(state)); } catch(e) {}
+    }
+
+    function loadSessionState() {
+        try {
+            const raw = sessionStorage.getItem('squarescale_state');
+            if (!raw) return false;
+            const state = JSON.parse(raw);
+            if (!Array.isArray(state) || state.length === 0) return false;
+            addedItems = state;
+            return true;
+        } catch(e) { return false; }
+    }
+
     function updateURL() {
+        // Only update URL for the Share button — do NOT call this on every add/delete.
         const state = addedItems
             .map(i => `${encodeURIComponent(i.name)}:${i.area}`)
             .join('|');
-        window.history.replaceState({}, '', state ? `?map=${state}` : window.location.pathname);
+        return state ? `${window.location.origin}${window.location.pathname}?map=${state}` : window.location.href;
     }
 
     // ── RENDER ───────────────────────────────────────────────────────────────
@@ -580,13 +621,15 @@
             sq.style.left = item.x + 'px';
             sq.style.top  = item.y + 'px';
 
-            sq.innerHTML = `<div class="label"><b>${item.name}</b><br>${Math.round(item.area).toLocaleString()} km²</div>`;
-
             if (isTiny) {
+                // Tiny squares: name only inside (no room for area), area goes in badge
+                sq.innerHTML = `<div class="label"><b>${item.name}</b></div>`;
                 const badge = document.createElement('div');
                 badge.className = 'tiny-badge';
-                badge.textContent = '⚠ NOT TO SCALE';
+                badge.textContent = `⚠ NOT TO SCALE · ${Math.round(item.area).toLocaleString()} km²`;
                 sq.appendChild(badge);
+            } else {
+                sq.innerHTML = `<div class="label"><b>${item.name}</b><br>${Math.round(item.area).toLocaleString()} km²</div>`;
             }
 
             sq.addEventListener('pointerdown', () => {
@@ -650,7 +693,7 @@
             dragging = false;
             pointerId = null;
             el.style.zIndex = '';
-            updateURL();
+            saveState();
             updateUI();
         });
 
@@ -719,6 +762,7 @@
 
         selectedIndex = addedItems.length - 1;
         render();
+        saveState();
     }
 
     function decombineSelected() {
@@ -727,6 +771,7 @@
         addedItems.push(...parts);
         selectedIndex = null;
         render();
+        saveState();
     }
 
     // ── DELETE ───────────────────────────────────────────────────────────────
@@ -735,6 +780,7 @@
             addedItems.splice(selectedIndex, 1);
             selectedIndex = null;
             render();
+            saveState();
         }
     }
 
@@ -816,12 +862,12 @@
         selectedIndex = addedItems.length - 1;
         lastAddTime = Date.now();
         render();
-        if (isNew) updateURL();
+        saveState();
     }
 
     // ── SHARE ────────────────────────────────────────────────────────────────
     function shareScale() {
-        const url = window.location.href;
+        const url = updateURL(); // builds share URL from current state
         if (navigator.share) {
             navigator.share({ title: 'Square Scale comparison', url })
                 .catch(() => copyToClipboard(url));
@@ -853,7 +899,7 @@
         selectedIndex = null;
         lastAddTime = Date.now();
         render();
-        updateURL();
+        saveState();
     }
 
     // ── TOAST ────────────────────────────────────────────────────────────────
