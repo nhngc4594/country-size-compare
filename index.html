@@ -19,6 +19,8 @@
             --danger: #e74c3c;
             --success: #27ae60;
             --bg: #f8f9fa;
+            --panel-height: 130px;
+            --header-height: 38px;
         }
 
         * { box-sizing: border-box; }
@@ -26,91 +28,118 @@
         body {
             font-family: -apple-system, system-ui, sans-serif;
             margin: 0;
-            display: flex;
-            flex-direction: column;
             height: 100vh;
             background: var(--bg);
             overflow: hidden;
-        }
-
-        /* ── HEADER ── */
-        .header-nav {
-            background: var(--primary);
-            color: white;
-            z-index: 1000;
-            flex-shrink: 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-
-        header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8px 12px;
             position: relative;
         }
 
-        header span {
+        /* ── HEADER (slim, floats over canvas) ── */
+        #app-header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: var(--header-height);
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+        }
+
+        #app-header span {
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1rem;
+            letter-spacing: 0.02em;
         }
 
         #helpBtn {
             position: absolute;
             right: 12px;
-            background: rgba(255,255,255,0.2);
-            border: none;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.18);
+            border: 1px solid rgba(255,255,255,0.35);
             color: white;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            font-size: 15px;
+            height: 24px;
+            padding: 0 10px;
+            border-radius: 12px;
+            font-size: 11px;
             font-weight: bold;
             cursor: pointer;
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            padding: 0;
+            letter-spacing: 0.03em;
             min-width: unset;
+            touch-action: manipulation;
+            flex: none;
         }
 
-        /* ── CONTROLS ── */
-        .controls-container {
+        #helpBtn:active { opacity: 0.7; }
+
+        /* ── STAGE (full screen, padded so canvas area avoids header and panel) ── */
+        #stage {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(#d1d1d1 0.8px, transparent 0.8px);
+            background-size: 40px 40px;
+            touch-action: none;
+            overflow: hidden;
+        }
+
+        /* ── FLOATING PANEL ── */
+        #float-panel {
+            position: fixed;
+            bottom: 12px;
+            left: 12px;
+            right: 12px;
             background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.18);
             padding: 10px 12px;
-            border-bottom: 1px solid #ddd;
+            z-index: 1000;
+            transition: opacity 0.5s ease;
+            max-width: 540px;
+            margin: 0 auto;
         }
 
+
+        /* Search row */
         .input-wrapper {
-            max-width: 500px;
-            margin: 0 auto;
             position: relative;
+            margin-bottom: 8px;
         }
 
         input[type="text"] {
             width: 100%;
-            padding: 11px 14px;
+            padding: 10px 14px;
             border: 2px solid #dfe6e9;
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 16px;
             outline: none;
             transition: border-color 0.2s;
+            background: #f8f9fa;
         }
 
-        input[type="text"]:focus { border-color: var(--accent); }
+        input[type="text"]:focus {
+            border-color: var(--accent);
+            background: white;
+        }
 
+        /* Results dropdown opens UPWARD from the panel */
         #results-box {
             position: absolute;
-            top: calc(100% + 2px);
+            bottom: calc(100% + 4px);
             left: 0;
             right: 0;
             background: white;
             border: 1px solid #ddd;
             z-index: 2000;
             display: none;
-            border-radius: 0 0 8px 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            max-height: 280px;
+            border-radius: 12px 12px 4px 4px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+            max-height: 260px;
             overflow-y: auto;
         }
 
@@ -123,6 +152,7 @@
             gap: 2px;
         }
 
+        .result-item:last-child { border-bottom: none; }
         .result-item:hover, .result-item:active, .result-item.highlighted { background: #f0f7ff; }
 
         .result-title {
@@ -136,38 +166,29 @@
             color: #888;
         }
 
+        /* Button row */
         .btn-row {
             display: flex;
-            gap: 6px;
-            justify-content: center;
-            margin-top: 8px;
-            flex-wrap: wrap;
+            gap: 5px;
+            flex-wrap: nowrap;
         }
 
         button {
-            padding: 9px 13px;
+            padding: 8px 6px;
             cursor: pointer;
-            border-radius: 6px;
+            border-radius: 8px;
             border: none;
             background: var(--accent);
             color: white;
             font-weight: bold;
-            font-size: 11px;
-            min-width: 88px;
+            font-size: 10px;
+            flex: 1;
             touch-action: manipulation;
+            white-space: nowrap;
+            min-width: 0;
         }
 
         button:active { opacity: 0.8; }
-
-        /* ── STAGE ── */
-        #stage {
-            flex-grow: 1;
-            position: relative;
-            overflow: hidden;
-            background-image: radial-gradient(#d1d1d1 0.8px, transparent 0.8px);
-            background-size: 40px 40px;
-            touch-action: none;
-        }
 
         /* ── MODE TOGGLE ANIMATION ── */
         .shape {
@@ -318,7 +339,7 @@
         /* ── TOAST ── */
         #toast {
             position: fixed;
-            bottom: 24px;
+            bottom: 160px;
             left: 50%;
             transform: translateX(-50%) translateY(80px);
             background: #2c3e50;
@@ -369,44 +390,44 @@
     <p>Loading data…</p>
 </div>
 
-<!-- Header -->
-<div class="header-nav">
-    <header>
-        <span>Square Scale</span>
-        <button id="helpBtn" onclick="openHelp()" title="How to use">?</button>
-    </header>
-    <div class="controls-container">
-        <div class="input-wrapper">
-            <div style="position:relative;">
-                <input type="text" id="entitySearch" placeholder="Search country, city, state, island…" autocomplete="off" spellcheck="false" style="position:relative; z-index:2; background:transparent;">
-                <div id="ghostText" style="
-                    position:absolute; top:0; left:0; right:0; bottom:0;
-                    padding:11px 14px;
-                    font-size:16px;
-                    color:#bbb;
-                    pointer-events:none;
-                    z-index:1;
-                    white-space:nowrap;
-                    overflow:hidden;
-                    border: 2px solid transparent;
-                    border-radius:8px;
-                    box-sizing:border-box;
-                "></div>
-            </div>
-            <div id="results-box"></div>
-        </div>
-        <div class="btn-row">
-            <button id="actionBtn" style="background:var(--success)" onclick="handleAction()">Combine Touching</button>
-            <button id="deleteBtn" style="background:var(--danger); display:none;" onclick="deleteSelected()">Delete</button>
-            <button id="modeBtn" style="background:#8e44ad" onclick="toggleMode()">⬤ Population</button>
-            <button style="background:var(--accent)" onclick="shareScale()">Share</button>
-            <button style="background:#7f8c8d" onclick="clearAll()">Clear All</button>
-        </div>
-    </div>
+<!-- Header (slim, fixed) -->
+<div id="app-header">
+    <span>Square Scale</span>
+    <button id="helpBtn" onclick="openHelp()">Guide</button>
 </div>
 
-<!-- Stage -->
+<!-- Stage (full screen) -->
 <div id="stage"></div>
+
+<!-- Floating Panel -->
+<div id="float-panel">
+    <div class="input-wrapper">
+        <div style="position:relative;">
+            <input type="text" id="entitySearch" placeholder="Search country, city, state, island…" autocomplete="off" spellcheck="false" style="position:relative; z-index:2; background:transparent;">
+            <div id="ghostText" style="
+                position:absolute; top:0; left:0; right:0; bottom:0;
+                padding:10px 14px;
+                font-size:16px;
+                color:#bbb;
+                pointer-events:none;
+                z-index:1;
+                white-space:nowrap;
+                overflow:hidden;
+                border: 2px solid transparent;
+                border-radius:10px;
+                box-sizing:border-box;
+            "></div>
+        </div>
+        <div id="results-box"></div>
+    </div>
+    <div class="btn-row">
+        <button id="actionBtn" style="background:var(--success)" onclick="handleAction()">Merge Overlapping</button>
+        <button id="deleteBtn" style="background:var(--danger); display:none;" onclick="deleteSelected()">Delete</button>
+        <button id="modeBtn" style="background:#8e44ad" onclick="toggleMode()">Population</button>
+        <button style="background:var(--accent)" onclick="shareScale()">Share</button>
+        <button style="background:#7f8c8d" onclick="clearAll()">Clear All</button>
+    </div>
+</div>
 
 <!-- Help Modal -->
 <div class="modal-overlay" id="helpModal" onclick="closeHelpOnOverlay(event)">
@@ -428,7 +449,7 @@
         </div>
         <div class="help-step">
             <div class="help-num">4</div>
-            <div class="help-text"><strong>Combine touching squares.</strong> Drag two or more squares so they overlap, select one, then tap <strong>Combine Touching</strong>. They merge into a single square showing the combined area — great for "how many Californias fit in Russia?"</div>
+            <div class="help-text"><strong>Merge overlapping shapes.</strong> Drag two or more shapes so they overlap, select one, then tap <strong>Merge Overlapping</strong>. They merge into a single shape showing the combined area — great for "how many Californias fit in Russia?"</div>
         </div>
         <div class="help-step">
             <div class="help-num">5</div>
@@ -457,6 +478,25 @@
     let addedItems = [];
     let selectedIndex = null;
     let displayMode = 'area'; // 'area' or 'population'
+
+    // ── PANEL (no fade — always fully visible) ───────────────────────────────
+    const floatPanel = document.getElementById('float-panel');
+    function wakePanel() {}          // no-op, kept so call sites don't error
+    function wakePanelFromCanvas() {}
+
+    // ── SAFE ZONE ─────────────────────────────────────────────────────────────
+    // Canvas area excludes the header at top and panel at bottom.
+    // These are used for placement and clamping.
+    function getSafeZone() {
+        const headerH = document.getElementById('app-header').offsetHeight;
+        const panelH  = floatPanel.offsetHeight + 12 + 12; // height + bottom margin + buffer
+        return {
+            top:    headerH + 10,
+            bottom: stage.offsetHeight - panelH - 10,
+            left:   10,
+            right:  stage.offsetWidth - 10,
+        };
+    }
     const stage = document.getElementById('stage');
 
     // ── TYPE LABELS ──────────────────────────────────────────────────────────
@@ -632,6 +672,7 @@
         }
 
         input.addEventListener('input', (e) => {
+            wakePanel();
             doSearch(e.target.value);
         });
 
@@ -759,8 +800,9 @@
             sq.style.backgroundColor = item.color;
 
             if (item.x == null || item.y == null) {
-                item.x = Math.max(12, stage.offsetWidth  / 2 - side / 2);
-                item.y = Math.max(12, stage.offsetHeight / 2 - side / 2);
+                const safe = getSafeZone();
+                item.x = safe.left + (safe.right  - safe.left) / 2 - side / 2;
+                item.y = safe.top  + (safe.bottom - safe.top)  / 2 - side / 2;
             }
             sq.style.left = item.x + 'px';
             sq.style.top  = item.y + 'px';
@@ -785,6 +827,7 @@
 
             sq.addEventListener('pointerdown', () => {
                 selectedIndex = index;
+                wakePanelFromCanvas();
                 updateUI();
             });
 
@@ -816,25 +859,29 @@
         el.addEventListener('pointermove', (e) => {
             if (!dragging || e.pointerId !== pointerId) return;
             e.preventDefault();
-            addedItems[index].x = e.clientX - ix;
-            addedItems[index].y = e.clientY - iy;
+
+            const safe = getSafeZone();
+            const s1 = Math.max(25, Math.sqrt(getDisplayValue(addedItems[index])) * scale);
+
+            // Clamp to safe zone so squares can't be dragged behind header or panel
+            addedItems[index].x = Math.min(Math.max(e.clientX - ix, safe.left), safe.right  - s1);
+            addedItems[index].y = Math.min(Math.max(e.clientY - iy, safe.top),  safe.bottom - s1);
 
             requestAnimationFrame(() => {
                 el.style.left = addedItems[index].x + 'px';
                 el.style.top  = addedItems[index].y + 'px';
 
-                const s1 = Math.max(25, Math.sqrt(addedItems[index].area) * scale);
-                const squares = document.querySelectorAll('.square');
+                const shapes = document.querySelectorAll('.shape');
                 addedItems.forEach((other, i) => {
                     if (i === index) return;
-                    const s2 = Math.max(25, Math.sqrt(other.area) * scale);
+                    const s2 = Math.max(25, Math.sqrt(getDisplayValue(other)) * scale);
                     const overlap = !(
                         addedItems[index].x + s1 < other.x ||
                         addedItems[index].x > other.x + s2 ||
                         addedItems[index].y + s1 < other.y ||
                         addedItems[index].y > other.y + s2
                     );
-                    squares[i].classList.toggle('highlight', overlap);
+                    shapes[i].classList.toggle('highlight', overlap);
                 });
             });
         });
@@ -867,7 +914,7 @@
         // Safety guard: don't allow combining within 400ms of the last add/clear.
         // This prevents accidental auto-combines on mobile when squares rescale.
         if (Date.now() - lastAddTime < 400) {
-            showToast('Drag squares together until they overlap, then combine.');
+            showToast('Drag shapes together until they overlap, then merge.');
             return;
         }
         const scale = getScale();
@@ -877,8 +924,8 @@
 
         addedItems.forEach((item, i) => {
             if (i === selectedIndex) return;
-            const s1 = Math.max(25, Math.sqrt(target.area) * scale);
-            const s2 = Math.max(25, Math.sqrt(item.area) * scale);
+            const s1 = Math.max(25, Math.sqrt(getDisplayValue(target)) * scale);
+            const s2 = Math.max(25, Math.sqrt(getDisplayValue(item)) * scale);
             const overlap = !(
                 target.x + s1 < item.x || target.x > item.x + s2 ||
                 target.y + s1 < item.y || target.y > item.y + s2
@@ -943,11 +990,11 @@
         if (selectedIndex !== null && addedItems[selectedIndex]) {
             deleteBtn.style.display = 'inline-block';
             const isCombined = !!addedItems[selectedIndex].parts;
-            actionBtn.textContent = isCombined ? 'De-combine' : 'Combine Touching';
+            actionBtn.textContent = isCombined ? 'Split Apart' : 'Merge Overlapping';
             actionBtn.style.background = isCombined ? 'var(--primary)' : 'var(--success)';
         } else {
             deleteBtn.style.display = 'none';
-            actionBtn.textContent = 'Combine Touching';
+            actionBtn.textContent = 'Merge Overlapping';
             actionBtn.style.background = 'var(--success)';
         }
     }
@@ -966,15 +1013,16 @@
         const tempItems = [...addedItems, { ...item }];
         const maxArea   = Math.max(...tempItems.map(i => i.area));
         const scale     = (Math.min(stage.offsetWidth, stage.offsetHeight) * 0.75) / Math.sqrt(maxArea);
-        const newSide   = Math.max(25, Math.sqrt(item.area) * scale);
-        const margin    = 12;
+        const newSide   = Math.max(25, Math.sqrt(getDisplayValue(item)) * scale);
+        const margin    = 14;
         const step      = newSide + margin;
+        const safe      = getSafeZone();
 
-        // Build list of occupied rectangles (using current items' sizes at new scale)
+        // Build list of occupied rectangles within safe zone
         const occupied = addedItems
             .filter(i => i.x != null)
             .map(i => {
-                const s = Math.max(25, Math.sqrt(i.area) * scale);
+                const s = Math.max(25, Math.sqrt(getDisplayValue(i)) * scale);
                 return { x: i.x, y: i.y, w: s, h: s };
             });
 
@@ -988,21 +1036,18 @@
             return false;
         }
 
-        let px = margin, py = margin;
-        const maxX = stage.offsetWidth  - newSide - margin;
-        const maxY = stage.offsetHeight - newSide - margin;
-
-        // Spiral-grid search: try positions across stage until a free spot is found
-        outer: for (let row = 0; py + newSide < stage.offsetHeight - margin; row++, py += step) {
-            px = margin;
-            for (let col = 0; px + newSide < stage.offsetWidth - margin; col++, px += step) {
+        // Search only within the safe zone
+        let px = safe.left, py = safe.top;
+        outer: for (let row = 0; py + newSide <= safe.bottom; row++, py += step) {
+            px = safe.left;
+            for (let col = 0; px + newSide <= safe.right; col++, px += step) {
                 if (!overlapsAny(px, py)) break outer;
             }
         }
 
-        // Clamp to stage bounds
-        px = Math.min(px, Math.max(margin, maxX));
-        py = Math.min(py, Math.max(margin, maxY));
+        // Clamp strictly to safe zone
+        px = Math.min(px, Math.max(safe.left, safe.right  - newSide));
+        py = Math.min(py, Math.max(safe.top,  safe.bottom - newSide));
 
         addedItems.push({
             ...item,
@@ -1020,13 +1065,9 @@
     function toggleMode() {
         displayMode = displayMode === 'area' ? 'population' : 'area';
         const btn = document.getElementById('modeBtn');
-        if (displayMode === 'population') {
-            btn.textContent = '■ Area';
-            btn.style.background = '#27ae60';
-        } else {
-            btn.textContent = '⬤ Population';
-            btn.style.background = '#8e44ad';
-        }
+        // Button always stays purple — text shows current mode
+        btn.style.background = '#8e44ad';
+        btn.textContent = displayMode === 'population' ? 'Show Area' : 'Population';
         // Reset scale tracking so positions rescale cleanly
         lastScale = null;
         render();
