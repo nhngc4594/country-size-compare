@@ -561,9 +561,9 @@
             sq.style.height = side + 'px';
             sq.style.backgroundColor = item.color;
 
-            if (item.x == null) {
-                item.x = stage.offsetWidth  / 2 - side / 2;
-                item.y = stage.offsetHeight / 2 - side / 2;
+            if (item.x == null || item.y == null) {
+                item.x = Math.max(12, stage.offsetWidth  / 2 - side / 2);
+                item.y = Math.max(12, stage.offsetHeight / 2 - side / 2);
             }
             sq.style.left = item.x + 'px';
             sq.style.top  = item.y + 'px';
@@ -741,11 +741,57 @@
             gtag('event', 'select_country', { country_name: item.name });
         }
         const hue = Math.floor(Math.random() * 360);
+
+        // Calculate a non-overlapping position for the new square.
+        // We compute the scale *after* this item is added, then place the
+        // new square in the first free grid cell, scanning left-to-right,
+        // top-to-bottom from the top-left corner with a small margin.
+        const tempItems = [...addedItems, { ...item }];
+        const maxArea   = Math.max(...tempItems.map(i => i.area));
+        const scale     = (Math.min(stage.offsetWidth, stage.offsetHeight) * 0.75) / Math.sqrt(maxArea);
+        const newSide   = Math.max(25, Math.sqrt(item.area) * scale);
+        const margin    = 12;
+        const step      = newSide + margin;
+
+        // Build list of occupied rectangles (using current items' sizes at new scale)
+        const occupied = addedItems
+            .filter(i => i.x != null)
+            .map(i => {
+                const s = Math.max(25, Math.sqrt(i.area) * scale);
+                return { x: i.x, y: i.y, w: s, h: s };
+            });
+
+        function overlapsAny(px, py) {
+            for (const r of occupied) {
+                if (!(px + newSide + margin < r.x || px > r.x + r.w + margin ||
+                      py + newSide + margin < r.y || py > r.y + r.h + margin)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        let px = margin, py = margin;
+        const maxX = stage.offsetWidth  - newSide - margin;
+        const maxY = stage.offsetHeight - newSide - margin;
+
+        // Spiral-grid search: try positions across stage until a free spot is found
+        outer: for (let row = 0; py + newSide < stage.offsetHeight - margin; row++, py += step) {
+            px = margin;
+            for (let col = 0; px + newSide < stage.offsetWidth - margin; col++, px += step) {
+                if (!overlapsAny(px, py)) break outer;
+            }
+        }
+
+        // Clamp to stage bounds
+        px = Math.min(px, Math.max(margin, maxX));
+        py = Math.min(py, Math.max(margin, maxY));
+
         addedItems.push({
             ...item,
             color: `hsla(${hue}, 70%, 65%, 0.75)`,
-            x: null,
-            y: null,
+            x: px,
+            y: py,
         });
         selectedIndex = addedItems.length - 1;
         render();
