@@ -169,29 +169,39 @@
             touch-action: none;
         }
 
-        /* ── SQUARES ── */
-        .square {
+        /* ── MODE TOGGLE ANIMATION ── */
+        .shape {
             position: absolute;
-            border: 1.5px solid rgba(0,0,0,0.25);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             cursor: grab;
             touch-action: none;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
             will-change: left, top;
-            border-radius: 3px;
-            transition: box-shadow 0.15s;
+            transition: border-radius 0.4s ease, width 0.4s ease, height 0.4s ease, background-color 0.3s ease;
         }
 
-        .square:active { cursor: grabbing; }
-        .square.selected { border: 3px solid #000 !important; z-index: 800 !important; box-shadow: 0 4px 16px rgba(0,0,0,0.25) !important; }
-        .square.highlight { border: 3px dashed var(--success) !important; }
-
-        .square.is-tiny {
+        .shape:active { cursor: grabbing; }
+        .shape.selected { border: 3px solid #000 !important; z-index: 800 !important; box-shadow: 0 4px 16px rgba(0,0,0,0.25) !important; }
+        .shape.highlight { border: 3px dashed var(--success) !important; }
+        .shape.is-tiny {
             border: 2px solid #e67e22 !important;
             box-shadow: 0 0 10px rgba(230,126,34,0.7) !important;
+        }
+
+        /* ── SQUARES ── */
+        .square {
+            border: 1.5px solid rgba(0,0,0,0.25);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+            border-radius: 3px;
+        }
+
+        /* ── CIRCLES ── */
+        .circle {
+            border: 1.5px solid rgba(0,0,0,0.25);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+            border-radius: 50%;
         }
 
         .label {
@@ -388,6 +398,7 @@
         <div class="btn-row">
             <button id="actionBtn" style="background:var(--success)" onclick="handleAction()">Combine Touching</button>
             <button id="deleteBtn" style="background:var(--danger); display:none;" onclick="deleteSelected()">Delete</button>
+            <button id="modeBtn" style="background:#8e44ad" onclick="toggleMode()">⬤ Population</button>
             <button style="background:var(--accent)" onclick="shareScale()">Share</button>
             <button style="background:#7f8c8d" onclick="clearAll()">Clear All</button>
         </div>
@@ -445,6 +456,7 @@
     let masterData = [];
     let addedItems = [];
     let selectedIndex = null;
+    let displayMode = 'area'; // 'area' or 'population'
     const stage = document.getElementById('stage');
 
     // ── TYPE LABELS ──────────────────────────────────────────────────────────
@@ -696,10 +708,19 @@
     // ── RENDER ───────────────────────────────────────────────────────────────
     let lastScale = null;
 
+    // Returns the value used for sizing in the current mode.
+    // In population mode, items without population data fall back to area.
+    function getDisplayValue(item) {
+        if (displayMode === 'population') {
+            return item.population || item.area;
+        }
+        return item.area;
+    }
+
     function getScale() {
         if (addedItems.length === 0) return 1;
-        const maxArea = Math.max(...addedItems.map(i => i.area));
-        return (Math.min(stage.offsetWidth, stage.offsetHeight) * 0.75) / Math.sqrt(maxArea);
+        const maxVal = Math.max(...addedItems.map(i => getDisplayValue(i)));
+        return (Math.min(stage.offsetWidth, stage.offsetHeight) * 0.75) / Math.sqrt(maxVal);
     }
 
     function render() {
@@ -718,13 +739,19 @@
         }
         lastScale = scale;
 
+        const isPopMode = displayMode === 'population';
+
         addedItems.forEach((item, index) => {
-            const trueSide = Math.sqrt(item.area) * scale;
+            const displayVal = getDisplayValue(item);
+            const hasPopData = item.population != null;
+            const trueSide = Math.sqrt(displayVal) * scale;
             const side = Math.max(25, trueSide);
             const isTiny = trueSide < 25;
+            const noData = isPopMode && !hasPopData;
 
             const sq = document.createElement('div');
-            sq.className = 'square'
+            const shapeClass = isPopMode ? 'circle' : 'square';
+            sq.className = 'shape ' + shapeClass
                 + (selectedIndex === index ? ' selected' : '')
                 + (isTiny ? ' is-tiny' : '');
             sq.style.width  = side + 'px';
@@ -738,15 +765,22 @@
             sq.style.left = item.x + 'px';
             sq.style.top  = item.y + 'px';
 
-            if (isTiny) {
-                // Tiny squares: name only inside (no room for area), area goes in badge
+            const mainValue = isPopMode
+                ? (hasPopData ? item.population.toLocaleString() + ' people' : 'No data')
+                : Math.round(item.area).toLocaleString() + ' km²';
+
+            if (isTiny || noData) {
                 sq.innerHTML = `<div class="label"><b>${item.name}</b></div>`;
                 const badge = document.createElement('div');
                 badge.className = 'tiny-badge';
-                badge.textContent = `⚠ NOT TO SCALE · ${Math.round(item.area).toLocaleString()} km²`;
+                if (noData) {
+                    badge.textContent = `⚠ NO POP. DATA`;
+                } else {
+                    badge.textContent = `⚠ NOT TO SCALE · ${mainValue}`;
+                }
                 sq.appendChild(badge);
             } else {
-                sq.innerHTML = `<div class="label"><b>${item.name}</b><br>${Math.round(item.area).toLocaleString()} km²</div>`;
+                sq.innerHTML = `<div class="label"><b>${item.name}</b><br>${mainValue}</div>`;
             }
 
             sq.addEventListener('pointerdown', () => {
@@ -774,7 +808,7 @@
             iy = e.clientY - addedItems[index].y;
             el.style.zIndex = 1000;
             selectedIndex = index;
-            document.querySelectorAll('.square').forEach(s => s.classList.remove('selected'));
+            document.querySelectorAll('.shape').forEach(s => s.classList.remove('selected'));
             el.classList.add('selected');
             updateUI();
         });
@@ -980,6 +1014,23 @@
         lastAddTime = Date.now();
         render();
         saveState();
+    }
+
+    // ── MODE TOGGLE ──────────────────────────────────────────────────────────
+    function toggleMode() {
+        displayMode = displayMode === 'area' ? 'population' : 'area';
+        const btn = document.getElementById('modeBtn');
+        if (displayMode === 'population') {
+            btn.textContent = '■ Area';
+            btn.style.background = '#27ae60';
+        } else {
+            btn.textContent = '⬤ Population';
+            btn.style.background = '#8e44ad';
+        }
+        // Reset scale tracking so positions rescale cleanly
+        lastScale = null;
+        render();
+        if (typeof gtag === 'function') gtag('event', 'toggle_mode', { mode: displayMode });
     }
 
     // ── SHARE ────────────────────────────────────────────────────────────────
