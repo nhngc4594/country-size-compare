@@ -5772,5 +5772,71 @@
     "type": "city_urban",
     "country": "China",
     "population": 83000000
+  },
+  {
+    "name": "Scotland",
+    "area": 77933,
+    "type": "country",
+    "aliases": [
+      "Alba"
+    ]
+  },
+  {
+    "name": "England",
+    "area": 130279,
+    "type": "country"
+  },
+  {
+    "name": "Wales",
+    "area": 20779,
+    "type": "country",
+    "aliases": [
+      "Cymru"
+    ]
+  },
+  {
+    "name": "Northern Ireland",
+    "area": 13843,
+    "type": "country"
+  },
+  {
+    "name": "Crimea",
+    "area": 26100,
+    "type": "region"
+  },
+  {
+    "name": "Region > Appalachia",
+    "area": 420000,
+    "type": "region"
+  },
+  {
+    "name": "Region > Great Plains",
+    "area": 1300000,
+    "type": "region"
+  },
+  {
+    "name": "Region > Pacific Northwest",
+    "area": 708000,
+    "type": "region"
+  },
+  {
+    "name": "Region > New England",
+    "area": 186458,
+    "type": "region"
+  },
+  {
+    "name": "Region > Sahara Desert",
+    "area": 9200000,
+    "type": "region"
+  },
+  {
+    "name": "Region > Amazon Basin",
+    "area": 7000000,
+    "type": "region"
+  },
+  {
+    "name": "Region > Himalayas",
+    "area": 600000,
+    "type": "region"
   }
 ]
