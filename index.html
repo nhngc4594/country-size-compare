@@ -536,6 +536,8 @@
     }
 
     // ── RENDER ───────────────────────────────────────────────────────────────
+    let lastScale = null;
+
     function getScale() {
         if (addedItems.length === 0) return 1;
         const maxArea = Math.max(...addedItems.map(i => i.area));
@@ -544,9 +546,19 @@
 
     function render() {
         stage.innerHTML = '';
-        if (addedItems.length === 0) { selectedIndex = null; updateUI(); return; }
+        if (addedItems.length === 0) { selectedIndex = null; lastScale = null; updateUI(); return; }
 
         const scale = getScale();
+
+        // When scale changes (e.g. a large country added shrinks everything),
+        // rescale all x/y positions proportionally so squares stay spread out.
+        if (lastScale !== null && lastScale !== scale) {
+            const ratio = scale / lastScale;
+            addedItems.forEach(item => {
+                if (item.x != null) { item.x *= ratio; item.y *= ratio; }
+            });
+        }
+        lastScale = scale;
 
         addedItems.forEach((item, index) => {
             const trueSide = Math.sqrt(item.area) * scale;
@@ -649,6 +661,8 @@
     }
 
     // ── COMBINE / DECOMBINE ──────────────────────────────────────────────────
+    let lastAddTime = 0; // guard: prevent accidental combines right after adding
+
     function handleAction() {
         if (selectedIndex === null) return;
         if (addedItems[selectedIndex].parts) decombineSelected();
@@ -656,6 +670,12 @@
     }
 
     function mergeTouching() {
+        // Safety guard: don't allow combining within 400ms of the last add/clear.
+        // This prevents accidental auto-combines on mobile when squares rescale.
+        if (Date.now() - lastAddTime < 400) {
+            showToast('Drag squares together until they overlap, then combine.');
+            return;
+        }
         const scale = getScale();
         const target = addedItems[selectedIndex];
         const toMerge = [selectedIndex];
@@ -794,6 +814,7 @@
             y: py,
         });
         selectedIndex = addedItems.length - 1;
+        lastAddTime = Date.now();
         render();
         if (isNew) updateURL();
     }
@@ -830,6 +851,7 @@
     function clearAll() {
         addedItems = [];
         selectedIndex = null;
+        lastAddTime = Date.now();
         render();
         updateURL();
     }
