@@ -115,18 +115,25 @@
         }
 
         .result-item {
-            padding: 12px 15px;
+            padding: 10px 15px;
             border-bottom: 1px solid #eee;
             cursor: pointer;
-            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
         }
 
-        .result-item:hover, .result-item:active { background: #f0f7ff; }
+        .result-item:hover, .result-item:active, .result-item.highlighted { background: #f0f7ff; }
 
-        .result-type {
+        .result-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #222;
+        }
+
+        .result-sub {
             font-size: 11px;
             color: #888;
-            margin-left: 6px;
         }
 
         .btn-row {
@@ -360,7 +367,22 @@
     </header>
     <div class="controls-container">
         <div class="input-wrapper">
-            <input type="text" id="entitySearch" placeholder="Search country, city, state, island…" autocomplete="off" spellcheck="false">
+            <div style="position:relative;">
+                <input type="text" id="entitySearch" placeholder="Search country, city, state, island…" autocomplete="off" spellcheck="false" style="position:relative; z-index:2; background:transparent;">
+                <div id="ghostText" style="
+                    position:absolute; top:0; left:0; right:0; bottom:0;
+                    padding:11px 14px;
+                    font-size:16px;
+                    color:#bbb;
+                    pointer-events:none;
+                    z-index:1;
+                    white-space:nowrap;
+                    overflow:hidden;
+                    border: 2px solid transparent;
+                    border-radius:8px;
+                    box-sizing:border-box;
+                "></div>
+            </div>
             <div id="results-box"></div>
         </div>
         <div class="btn-row">
@@ -487,59 +509,154 @@
     }
 
     // ── SEARCH ───────────────────────────────────────────────────────────────
+    let ghostCompletion = ''; // the full autocomplete suggestion
+
+    // Returns a human-friendly display name and subtitle for a result item
+    function getDisplayParts(item, matchedAlias) {
+        const parts = item.name.split('>');
+        if (parts.length === 2) {
+            // e.g. "UK > Greater London" → title: "Greater London", sub: "UK · County"
+            const region = parts[0].trim();
+            const placeName = parts[1].trim();
+            const tl = typeLabel[item.type] || '';
+            return { title: placeName, sub: `${region} · ${tl}` };
+        }
+        // Top-level item (country, continent, island, city…)
+        const tl = typeLabel[item.type] || '';
+        const sub = matchedAlias ? `Also known as: ${matchedAlias} · ${tl}` : tl;
+        return { title: item.name, sub };
+    }
+
     function setupSearch() {
         const input = document.getElementById('entitySearch');
         const box   = document.getElementById('results-box');
+        // Ghost-text overlay sits behind the real input
+        const ghost = document.getElementById('ghostText');
+        let currentResults = [];
+        let highlightedIdx = -1;
 
-        input.addEventListener('input', (e) => {
-            const val = e.target.value.toLowerCase().trim();
+        function doSearch(val) {
             box.innerHTML = '';
-            if (val.length < 2) { box.style.display = 'none'; return; }
+            ghostCompletion = '';
+            ghost.textContent = '';
+            highlightedIdx = -1;
 
-            // Score-based matching: name match scores higher than alias match
+            if (val.length < 2) { box.style.display = 'none'; currentResults = []; return; }
+
+            const valL = val.toLowerCase();
             const results = [];
+
             for (const item of masterData) {
                 let score = 0;
+                let matchedAlias = null;
                 const nameLower = item.name.toLowerCase();
-                if (nameLower.includes(val)) {
-                    score = nameLower.startsWith(val) ? 100 : 50;
+
+                if (nameLower.includes(valL)) {
+                    score = nameLower.startsWith(valL) ? 100 : 50;
+                    // Also check the short part after '>' for prefix matches
+                    const shortName = item.name.includes('>') 
+                        ? item.name.split('>').pop().trim().toLowerCase() 
+                        : null;
+                    if (shortName && shortName.startsWith(valL)) score = Math.max(score, 90);
                 } else if (item.aliases) {
                     for (const alias of item.aliases) {
-                        if (alias.toLowerCase().includes(val)) {
-                            score = alias.toLowerCase().startsWith(val) ? 40 : 20;
+                        const aL = alias.toLowerCase();
+                        if (aL.includes(valL)) {
+                            score = aL.startsWith(valL) ? 40 : 20;
+                            matchedAlias = alias;
                             break;
                         }
                     }
                 }
-                if (score > 0) results.push({ item, score });
+                if (score > 0) results.push({ item, score, matchedAlias });
             }
 
             results.sort((a, b) => b.score - a.score || a.item.name.localeCompare(b.item.name));
-            const top = results.slice(0, 10);
+            currentResults = results.slice(0, 10);
 
-            if (top.length === 0) { box.style.display = 'none'; return; }
+            if (currentResults.length === 0) { box.style.display = 'none'; return; }
+
+            // Ghost autocomplete: show completion of the top result's display title
+            const topParts = getDisplayParts(currentResults[0].item, currentResults[0].matchedAlias);
+            const topTitle = topParts.title;
+            if (topTitle.toLowerCase().startsWith(valL) && topTitle.length > val.length) {
+                ghostCompletion = topTitle;
+                // Show the untyped suffix in the ghost overlay
+                ghost.textContent = val + topTitle.slice(val.length);
+            }
 
             box.style.display = 'block';
-            top.forEach(({ item }) => {
+            renderResults();
+        }
+
+        function renderResults() {
+            box.innerHTML = '';
+            currentResults.forEach(({ item, matchedAlias }, idx) => {
+                const { title, sub } = getDisplayParts(item, matchedAlias);
                 const div = document.createElement('div');
-                div.className = 'result-item';
-                const tl = typeLabel[item.type] || item.type || '';
-                div.innerHTML = `${item.name}<span class="result-type">${tl}</span>`;
+                div.className = 'result-item' + (idx === highlightedIdx ? ' highlighted' : '');
+                div.innerHTML = `<span class="result-title">${title}</span><span class="result-sub">${sub}</span>`;
                 div.addEventListener('pointerdown', (ev) => {
                     ev.preventDefault();
-                    addSquare(item);
-                    box.style.display = 'none';
-                    input.value = '';
-                    input.blur();
+                    selectResult(item);
                 });
                 box.appendChild(div);
             });
+        }
+
+        function selectResult(item) {
+            addSquare(item);
+            box.style.display = 'none';
+            ghost.textContent = '';
+            ghostCompletion = '';
+            input.value = '';
+            input.blur();
+        }
+
+        function acceptGhost() {
+            if (!ghostCompletion || currentResults.length === 0) return false;
+            selectResult(currentResults[0].item);
+            return true;
+        }
+
+        input.addEventListener('input', (e) => {
+            doSearch(e.target.value);
         });
 
-        // Close dropdown when clicking elsewhere
+        // Tab or ArrowRight at end of input = accept ghost completion
+        input.addEventListener('keydown', (e) => {
+            if ((e.key === 'Tab' || e.key === 'ArrowRight') && ghostCompletion) {
+                if (acceptGhost()) { e.preventDefault(); return; }
+            }
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                highlightedIdx = Math.min(highlightedIdx + 1, currentResults.length - 1);
+                renderResults();
+            }
+            if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                highlightedIdx = Math.max(highlightedIdx - 1, -1);
+                renderResults();
+            }
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                if (highlightedIdx >= 0 && currentResults[highlightedIdx]) {
+                    selectResult(currentResults[highlightedIdx].item);
+                } else if (currentResults.length > 0) {
+                    selectResult(currentResults[0].item);
+                }
+            }
+            if (e.key === 'Escape') {
+                box.style.display = 'none';
+                ghost.textContent = '';
+            }
+        });
+
+        // Close dropdown when tapping elsewhere
         document.addEventListener('pointerdown', (e) => {
             if (!e.target.closest('.input-wrapper')) {
                 box.style.display = 'none';
+                ghost.textContent = '';
             }
         });
     }
