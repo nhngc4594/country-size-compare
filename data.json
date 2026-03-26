@@ -4045,13 +4045,6 @@
     "type": "island"
   },
   {
-    "name": "Tokyo (City Proper)",
-    "area": 2194,
-    "type": "city",
-    "country": "Japan",
-    "population": 13960000
-  },
-  {
     "name": "Tokyo (Metro Area)",
     "area": 13572,
     "type": "city_metro",
@@ -4085,13 +4078,6 @@
     "type": "city_urban",
     "country": "India",
     "population": 32941000
-  },
-  {
-    "name": "Shanghai (City Proper)",
-    "area": 6341,
-    "type": "city",
-    "country": "China",
-    "population": 24870000
   },
   {
     "name": "Shanghai (Metro Area)",
