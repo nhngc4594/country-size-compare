@@ -8,209 +8,804 @@
       gtag('js', new Date());
       gtag('config', 'G-4QWG8TF8P3');
     </script>
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Square Scale Pro</title>
+    <title>Square Scale</title>
     <style>
-        :root { --primary: #2c3e50; --accent: #3498db; --danger: #e74c3c; --success: #27ae60; --bg: #f8f9fa; }
-        body { font-family: -apple-system, system-ui, sans-serif; margin: 0; display: flex; flex-direction: column; height: 100vh; background: var(--bg); overflow: hidden; }
-        .header-nav { background: var(--primary); color: white; z-index: 1000; flex-shrink: 0; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
-        header { padding: 8px; font-weight: bold; text-align: center; font-size: 1.1rem; }
-        .controls-container { background: white; padding: 12px; border-bottom: 1px solid #ddd; color: #333; }
-        .input-wrapper { max-width: 500px; margin: 0 auto; position: relative; }
-        input { width: 100%; padding: 12px; border: 2px solid #dfe6e9; border-radius: 8px; font-size: 16px; box-sizing: border-box; outline: none; }
-        #results-box { position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ddd; z-index: 2000; display: none; border-radius: 0 0 8px 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
-        .result-item { padding: 15px; border-bottom: 1px solid #eee; cursor: pointer; }
-        .btn-row { display: flex; gap: 6px; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
-        button { padding: 10px 14px; cursor: pointer; border-radius: 6px; border: none; background: var(--accent); color: white; font-weight: bold; font-size: 11px; min-width: 90px; }
-        #stage { flex-grow: 1; position: relative; overflow: hidden; background-image: radial-gradient(#d1d1d1 0.8px, transparent 0.8px); background-size: 40px 40px; }
-        .square { position: absolute; border: 1.5px solid rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; cursor: grab; touch-action: none; box-shadow: 0 2px 5px rgba(0,0,0,0.1); will-change: left, top; }
-        .square.selected { border: 3px solid #000 !important; z-index: 800 !important; }
+        :root {
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --danger: #e74c3c;
+            --success: #27ae60;
+            --bg: #f8f9fa;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, system-ui, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background: var(--bg);
+            overflow: hidden;
+        }
+
+        /* ── HEADER ── */
+        .header-nav {
+            background: var(--primary);
+            color: white;
+            z-index: 1000;
+            flex-shrink: 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 12px;
+            position: relative;
+        }
+
+        header span {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        #helpBtn {
+            position: absolute;
+            right: 12px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            min-width: unset;
+        }
+
+        /* ── CONTROLS ── */
+        .controls-container {
+            background: white;
+            padding: 10px 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .input-wrapper {
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 11px 14px;
+            border: 2px solid #dfe6e9;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus { border-color: var(--accent); }
+
+        #results-box {
+            position: absolute;
+            top: calc(100% + 2px);
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #ddd;
+            z-index: 2000;
+            display: none;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            max-height: 280px;
+            overflow-y: auto;
+        }
+
+        .result-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .result-item:hover, .result-item:active { background: #f0f7ff; }
+
+        .result-type {
+            font-size: 11px;
+            color: #888;
+            margin-left: 6px;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 9px 13px;
+            cursor: pointer;
+            border-radius: 6px;
+            border: none;
+            background: var(--accent);
+            color: white;
+            font-weight: bold;
+            font-size: 11px;
+            min-width: 88px;
+            touch-action: manipulation;
+        }
+
+        button:active { opacity: 0.8; }
+
+        /* ── STAGE ── */
+        #stage {
+            flex-grow: 1;
+            position: relative;
+            overflow: hidden;
+            background-image: radial-gradient(#d1d1d1 0.8px, transparent 0.8px);
+            background-size: 40px 40px;
+            touch-action: none;
+        }
+
+        /* ── SQUARES ── */
+        .square {
+            position: absolute;
+            border: 1.5px solid rgba(0,0,0,0.25);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: grab;
+            touch-action: none;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+            will-change: left, top;
+            border-radius: 3px;
+            transition: box-shadow 0.15s;
+        }
+
+        .square:active { cursor: grabbing; }
+        .square.selected { border: 3px solid #000 !important; z-index: 800 !important; box-shadow: 0 4px 16px rgba(0,0,0,0.25) !important; }
         .square.highlight { border: 3px dashed var(--success) !important; }
-        .square.is-tiny { border: 2px solid #e67e22; box-shadow: 0 0 8px #e67e22; }
-        .label { font-size: 10px; font-weight: bold; text-align: center; pointer-events: none; color: rgba(0,0,0,0.9); padding: 5px; line-height: 1.2; overflow: hidden; }
+
+        .square.is-tiny {
+            border: 2px solid #e67e22 !important;
+            box-shadow: 0 0 10px rgba(230,126,34,0.7) !important;
+        }
+
+        .label {
+            font-size: 10px;
+            font-weight: bold;
+            text-align: center;
+            pointer-events: none;
+            color: rgba(0,0,0,0.85);
+            padding: 4px 5px;
+            line-height: 1.3;
+            overflow: hidden;
+            word-break: break-word;
+            max-width: 100%;
+        }
+
+        .tiny-badge {
+            position: absolute;
+            bottom: calc(100% + 5px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: #e67e22;
+            color: white;
+            font-size: 9px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 10px;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 900;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+        }
+
+        /* ── HELP MODAL ── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            z-index: 5000;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .modal-overlay.open { display: flex; }
+
+        .modal {
+            background: white;
+            border-radius: 14px;
+            max-width: 440px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 24px 20px 20px;
+            position: relative;
+        }
+
+        .modal h2 {
+            margin: 0 0 16px;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            color: #666;
+            min-width: unset;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .help-step {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            align-items: flex-start;
+        }
+
+        .help-num {
+            background: var(--accent);
+            color: white;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+
+        .help-text { font-size: 14px; line-height: 1.5; color: #333; }
+        .help-text strong { color: var(--primary); }
+
+        .help-tip {
+            background: #f0f7ff;
+            border-left: 3px solid var(--accent);
+            padding: 10px 12px;
+            border-radius: 0 6px 6px 0;
+            font-size: 13px;
+            color: #444;
+            margin-top: 12px;
+        }
+
+        /* ── TOAST ── */
+        #toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: #2c3e50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-size: 14px;
+            z-index: 9999;
+            transition: transform 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        #toast.show { transform: translateX(-50%) translateY(0); }
+
+        /* ── LOADING ── */
+        #loading {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9000;
+            gap: 14px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #ddd;
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        #loading p { color: #666; font-size: 14px; margin: 0; }
     </style>
 </head>
 <body>
 
+<!-- Loading screen -->
+<div id="loading">
+    <div class="spinner"></div>
+    <p>Loading data…</p>
+</div>
+
+<!-- Header -->
 <div class="header-nav">
-    <header>Square Scale</header>
+    <header>
+        <span>Square Scale</span>
+        <button id="helpBtn" onclick="openHelp()" title="How to use">?</button>
+    </header>
     <div class="controls-container">
         <div class="input-wrapper">
-            <input type="text" id="entitySearch" placeholder="Search Country/Region..." autocomplete="off">
+            <input type="text" id="entitySearch" placeholder="Search country, city, state, island…" autocomplete="off" spellcheck="false">
             <div id="results-box"></div>
         </div>
         <div class="btn-row">
             <button id="actionBtn" style="background:var(--success)" onclick="handleAction()">Combine Touching</button>
-            <button id="deleteBtn" style="background:var(--danger); display:none;" onclick="deleteSelected()">Delete Selected</button>
-            <button style="background:var(--accent)" onclick="shareScale()">Share Layout</button>
+            <button id="deleteBtn" style="background:var(--danger); display:none;" onclick="deleteSelected()">Delete</button>
+            <button style="background:var(--accent)" onclick="shareScale()">Share</button>
             <button style="background:#7f8c8d" onclick="clearAll()">Clear All</button>
         </div>
     </div>
 </div>
+
+<!-- Stage -->
 <div id="stage"></div>
 
+<!-- Help Modal -->
+<div class="modal-overlay" id="helpModal" onclick="closeHelpOnOverlay(event)">
+    <div class="modal">
+        <button class="modal-close" onclick="closeHelp()">×</button>
+        <h2>How to use Square Scale</h2>
+
+        <div class="help-step">
+            <div class="help-num">1</div>
+            <div class="help-text"><strong>Search for a place.</strong> Type any country, US state, city, island, Japanese prefecture, or region into the search box and tap a result to add it to the canvas.</div>
+        </div>
+        <div class="help-step">
+            <div class="help-num">2</div>
+            <div class="help-text"><strong>Each square represents area.</strong> The bigger the square, the bigger the place. All squares are to the same scale, so you can directly compare sizes at a glance.</div>
+        </div>
+        <div class="help-step">
+            <div class="help-num">3</div>
+            <div class="help-text"><strong>Drag squares around.</strong> Tap and drag any square to move it. Tap a square to select it (black border).</div>
+        </div>
+        <div class="help-step">
+            <div class="help-num">4</div>
+            <div class="help-text"><strong>Combine touching squares.</strong> Drag two or more squares so they overlap, select one, then tap <strong>Combine Touching</strong>. They merge into a single square showing the combined area — great for "how many Californias fit in Russia?"</div>
+        </div>
+        <div class="help-step">
+            <div class="help-num">5</div>
+            <div class="help-text"><strong>Split them back apart.</strong> Select a combined square and tap <strong>De-combine</strong> to restore the originals.</div>
+        </div>
+        <div class="help-step">
+            <div class="help-num">6</div>
+            <div class="help-text"><strong>Share your comparison.</strong> Tap <strong>Share</strong> to copy a link that recreates your exact layout for anyone you send it to.</div>
+        </div>
+
+        <div class="help-tip">
+            💡 <strong>Tiny places</strong> (like Monaco or Singapore) are shown with an orange glow and a <em>"NOT TO SCALE"</em> badge — they're enlarged so you can see them, but aren't drawn to the same scale as larger regions.
+        </div>
+        <div class="help-tip" style="margin-top:8px;">
+            💡 <strong>Cities</strong> appear in three versions: <em>City Proper</em>, <em>Metro Area</em>, and <em>Urban Footprint</em> — add all three to compare how differently each boundary is drawn.
+        </div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div id="toast"></div>
+
 <script>
-    let masterData = [], addedItems = [], selectedIndex = null;
+    // ── STATE ────────────────────────────────────────────────────────────────
+    let masterData = [];
+    let addedItems = [];
+    let selectedIndex = null;
     const stage = document.getElementById('stage');
 
+    // ── TYPE LABELS ──────────────────────────────────────────────────────────
+    const typeLabel = {
+        country: 'Country', continent: 'Continent', region: 'Region',
+        us_state: 'US State', ca_province: 'CA Province', jp_prefecture: 'Japan',
+        fr_region: 'France', fr_province: 'France (Historic)', uk_county: 'UK',
+        au_state: 'Australia', cn_province: 'China', in_state: 'India',
+        br_state: 'Brazil', de_state: 'Germany', es_region: 'Spain',
+        it_region: 'Italy', mx_state: 'Mexico', ru_subject: 'Russia',
+        island: 'Island', city: 'City', city_metro: 'City (Metro)', city_urban: 'City (Urban)',
+    };
+
+    // ── INIT ─────────────────────────────────────────────────────────────────
     async function init() {
         try {
-            const res = await fetch('https://restcountries.com/v3.1/all?fields=name,area');
-            const countries = await res.json();
-            masterData = countries.map(c => ({ name: c.name.common, area: c.area, parts: null })).sort((a,b) => a.name.localeCompare(b.name));
-        } catch(e) {}
+            const res = await fetch('data.json');
+            masterData = await res.json();
+        } catch(e) {
+            showToast('Could not load data. Please refresh.');
+            console.error(e);
+        }
+
+        document.getElementById('loading').style.display = 'none';
         setupSearch();
 
         const urlParams = new URLSearchParams(window.location.search);
         const mapData = urlParams.get('map');
         if (mapData) {
-            mapData.split('|').forEach(str => {
-                const [name, area] = str.split(':');
-                if(name && area) addSquare({ name: decodeURIComponent(name), area: parseFloat(area) }, false);
-            });
+            try {
+                mapData.split('|').forEach(str => {
+                    const parts = str.split(':');
+                    if (parts.length >= 2) {
+                        const area = parseFloat(parts[parts.length - 1]);
+                        const name = decodeURIComponent(parts.slice(0, -1).join(':'));
+                        if (name && !isNaN(area)) addSquare({ name, area }, false);
+                    }
+                });
+            } catch(e) { console.error('URL parse error', e); }
+        }
+
+        // Show help on very first visit
+        if (!localStorage.getItem('squarescale_seen')) {
+            localStorage.setItem('squarescale_seen', '1');
+            openHelp();
         }
     }
 
+    // ── SEARCH ───────────────────────────────────────────────────────────────
     function setupSearch() {
-        const input = document.getElementById('entitySearch'), box = document.getElementById('results-box');
-        input.oninput = (e) => {
-            const val = e.target.value.toLowerCase(); box.innerHTML = "";
-            if (val.length < 2) { box.style.display = "none"; return; }
-            const matches = masterData.filter(i => i.name.toLowerCase().includes(val)).slice(0, 8);
-            if (matches.length > 0) {
-                box.style.display = "block";
-                matches.forEach(m => {
-                    const div = document.createElement('div'); div.className = "result-item"; div.innerText = m.name;
-                    div.onclick = () => { addSquare(m); box.style.display = "none"; input.value = ""; };
-                    box.appendChild(div);
-                });
+        const input = document.getElementById('entitySearch');
+        const box   = document.getElementById('results-box');
+
+        input.addEventListener('input', (e) => {
+            const val = e.target.value.toLowerCase().trim();
+            box.innerHTML = '';
+            if (val.length < 2) { box.style.display = 'none'; return; }
+
+            // Score-based matching: name match scores higher than alias match
+            const results = [];
+            for (const item of masterData) {
+                let score = 0;
+                const nameLower = item.name.toLowerCase();
+                if (nameLower.includes(val)) {
+                    score = nameLower.startsWith(val) ? 100 : 50;
+                } else if (item.aliases) {
+                    for (const alias of item.aliases) {
+                        if (alias.toLowerCase().includes(val)) {
+                            score = alias.toLowerCase().startsWith(val) ? 40 : 20;
+                            break;
+                        }
+                    }
+                }
+                if (score > 0) results.push({ item, score });
             }
-        };
+
+            results.sort((a, b) => b.score - a.score || a.item.name.localeCompare(b.item.name));
+            const top = results.slice(0, 10);
+
+            if (top.length === 0) { box.style.display = 'none'; return; }
+
+            box.style.display = 'block';
+            top.forEach(({ item }) => {
+                const div = document.createElement('div');
+                div.className = 'result-item';
+                const tl = typeLabel[item.type] || item.type || '';
+                div.innerHTML = `${item.name}<span class="result-type">${tl}</span>`;
+                div.addEventListener('pointerdown', (ev) => {
+                    ev.preventDefault();
+                    addSquare(item);
+                    box.style.display = 'none';
+                    input.value = '';
+                    input.blur();
+                });
+                box.appendChild(div);
+            });
+        });
+
+        // Close dropdown when clicking elsewhere
+        document.addEventListener('pointerdown', (e) => {
+            if (!e.target.closest('.input-wrapper')) {
+                box.style.display = 'none';
+            }
+        });
     }
 
+    // ── URL STATE ────────────────────────────────────────────────────────────
     function updateURL() {
-        const state = addedItems.map(i => `${encodeURIComponent(i.name)}:${i.area}`).join('|');
+        const state = addedItems
+            .map(i => `${encodeURIComponent(i.name)}:${i.area}`)
+            .join('|');
         window.history.replaceState({}, '', state ? `?map=${state}` : window.location.pathname);
     }
 
-    function render() {
-        stage.innerHTML = "";
-        if (addedItems.length === 0) { selectedIndex = null; updateUI(); return; }
+    // ── RENDER ───────────────────────────────────────────────────────────────
+    function getScale() {
+        if (addedItems.length === 0) return 1;
         const maxArea = Math.max(...addedItems.map(i => i.area));
-        const scale = (Math.min(stage.offsetWidth, stage.offsetHeight) * 0.75) / Math.sqrt(maxArea);
-        
+        return (Math.min(stage.offsetWidth, stage.offsetHeight) * 0.75) / Math.sqrt(maxArea);
+    }
+
+    function render() {
+        stage.innerHTML = '';
+        if (addedItems.length === 0) { selectedIndex = null; updateUI(); return; }
+
+        const scale = getScale();
+
         addedItems.forEach((item, index) => {
             const trueSide = Math.sqrt(item.area) * scale;
             const side = Math.max(25, trueSide);
+            const isTiny = trueSide < 25;
+
             const sq = document.createElement('div');
-            sq.className = 'square' + (selectedIndex === index ? ' selected' : '') + (trueSide < 25 ? ' is-tiny' : '');
-            sq.style.width = sq.style.height = side + 'px';
+            sq.className = 'square'
+                + (selectedIndex === index ? ' selected' : '')
+                + (isTiny ? ' is-tiny' : '');
+            sq.style.width  = side + 'px';
+            sq.style.height = side + 'px';
             sq.style.backgroundColor = item.color;
-            if(!item.x) { item.x = (stage.offsetWidth/2 - side/2); item.y = (stage.offsetHeight/2 - side/2); }
-            sq.style.left = item.x + 'px'; sq.style.top = item.y + 'px';
+
+            if (item.x == null) {
+                item.x = stage.offsetWidth  / 2 - side / 2;
+                item.y = stage.offsetHeight / 2 - side / 2;
+            }
+            sq.style.left = item.x + 'px';
+            sq.style.top  = item.y + 'px';
+
             sq.innerHTML = `<div class="label"><b>${item.name}</b><br>${Math.round(item.area).toLocaleString()} km²</div>`;
-            sq.onmousedown = sq.ontouchstart = () => { selectedIndex = index; updateUI(); };
+
+            if (isTiny) {
+                const badge = document.createElement('div');
+                badge.className = 'tiny-badge';
+                badge.textContent = '⚠ NOT TO SCALE';
+                sq.appendChild(badge);
+            }
+
+            sq.addEventListener('pointerdown', () => {
+                selectedIndex = index;
+                updateUI();
+            });
+
             stage.appendChild(sq);
             makeDraggable(sq, index, scale);
         });
+
         updateUI();
     }
 
+    // ── DRAG ─────────────────────────────────────────────────────────────────
     function makeDraggable(el, index, scale) {
-        let ix, iy, dragging = false;
-        const start = (e) => { 
-            dragging = true; 
-            const t = e.type.startsWith("touch") ? e.touches[0] : e; 
-            ix = t.clientX - addedItems[index].x; 
-            iy = t.clientY - addedItems[index].y; 
+        let ix, iy, dragging = false, pointerId = null;
+
+        el.addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            el.setPointerCapture(e.pointerId);
+            pointerId = e.pointerId;
+            dragging = true;
+            ix = e.clientX - addedItems[index].x;
+            iy = e.clientY - addedItems[index].y;
             el.style.zIndex = 1000;
             selectedIndex = index;
             document.querySelectorAll('.square').forEach(s => s.classList.remove('selected'));
             el.classList.add('selected');
-        };
-        const move = (e) => { 
-            if (!dragging) return; 
+            updateUI();
+        });
+
+        el.addEventListener('pointermove', (e) => {
+            if (!dragging || e.pointerId !== pointerId) return;
             e.preventDefault();
-            const t = e.type.startsWith("touch") ? e.touches[0] : e;
-            addedItems[index].x = t.clientX - ix; 
-            addedItems[index].y = t.clientY - iy;
+            addedItems[index].x = e.clientX - ix;
+            addedItems[index].y = e.clientY - iy;
+
             requestAnimationFrame(() => {
-                el.style.left = addedItems[index].x + 'px'; el.style.top = addedItems[index].y + 'px';
+                el.style.left = addedItems[index].x + 'px';
+                el.style.top  = addedItems[index].y + 'px';
+
+                const s1 = Math.max(25, Math.sqrt(addedItems[index].area) * scale);
                 const squares = document.querySelectorAll('.square');
                 addedItems.forEach((other, i) => {
-                    if(i !== index) {
-                        const s1 = Math.max(25, Math.sqrt(addedItems[index].area) * scale);
-                        const s2 = Math.max(25, Math.sqrt(other.area) * scale);
-                        const overlap = !(addedItems[index].x + s1 < other.x || addedItems[index].x > other.x + s2 || addedItems[index].y + s1 < other.y || addedItems[index].y > other.y + s2);
-                        if(overlap) squares[i].classList.add('highlight'); else squares[i].classList.remove('highlight');
-                    }
+                    if (i === index) return;
+                    const s2 = Math.max(25, Math.sqrt(other.area) * scale);
+                    const overlap = !(
+                        addedItems[index].x + s1 < other.x ||
+                        addedItems[index].x > other.x + s2 ||
+                        addedItems[index].y + s1 < other.y ||
+                        addedItems[index].y > other.y + s2
+                    );
+                    squares[i].classList.toggle('highlight', overlap);
                 });
             });
-        };
-        const stop = () => { if(dragging) { dragging = false; updateURL(); updateUI(); } };
-        el.addEventListener("touchstart", start, {passive:false}); window.addEventListener("touchmove", move, {passive:false}); window.addEventListener("touchend", stop);
-        el.addEventListener("mousedown", start); window.addEventListener("mousemove", move); window.addEventListener("mouseup", stop);
+        });
+
+        el.addEventListener('pointerup', (e) => {
+            if (!dragging) return;
+            dragging = false;
+            pointerId = null;
+            el.style.zIndex = '';
+            updateURL();
+            updateUI();
+        });
+
+        el.addEventListener('pointercancel', () => {
+            dragging = false;
+            pointerId = null;
+        });
     }
 
+    // ── COMBINE / DECOMBINE ──────────────────────────────────────────────────
     function handleAction() {
         if (selectedIndex === null) return;
-        if (addedItems[selectedIndex].parts) decombineSelected(); else mergeTouching();
+        if (addedItems[selectedIndex].parts) decombineSelected();
+        else mergeTouching();
     }
 
     function mergeTouching() {
-        const maxArea = Math.max(...addedItems.map(i => i.area));
-        const scale = (Math.min(stage.offsetWidth, stage.offsetHeight) * 0.75) / Math.sqrt(maxArea);
+        const scale = getScale();
         const target = addedItems[selectedIndex];
-        let toMerge = [selectedIndex], others = [];
+        const toMerge = [selectedIndex];
+        const others  = [];
+
         addedItems.forEach((item, i) => {
-            if (i !== selectedIndex) {
-                const s1 = Math.max(25, Math.sqrt(target.area) * scale), s2 = Math.max(25, Math.sqrt(item.area) * scale);
-                if (!(target.x + s1 < item.x || target.x > item.x + s2 || target.y + s1 < item.y || target.y > item.y + s2)) toMerge.push(i);
-                else others.push(item);
-            }
+            if (i === selectedIndex) return;
+            const s1 = Math.max(25, Math.sqrt(target.area) * scale);
+            const s2 = Math.max(25, Math.sqrt(item.area) * scale);
+            const overlap = !(
+                target.x + s1 < item.x || target.x > item.x + s2 ||
+                target.y + s1 < item.y || target.y > item.y + s2
+            );
+            if (overlap) toMerge.push(i); else others.push(item);
         });
-        if (toMerge.length < 2) return;
-        if (typeof gtag === 'function') gtag('event', 'combine_regions', { 'count': toMerge.length });
+
+        if (toMerge.length < 2) {
+            showToast('Drag squares together until they overlap, then combine.');
+            return;
+        }
+
+        if (typeof gtag === 'function') gtag('event', 'combine_regions', { count: toMerge.length });
+
         const mergedParts = [];
         toMerge.forEach(idx => {
-            if (addedItems[idx].parts) mergedParts.push(...addedItems[idx].parts); else mergedParts.push(addedItems[idx]);
+            if (addedItems[idx].parts) mergedParts.push(...addedItems[idx].parts);
+            else mergedParts.push(addedItems[idx]);
         });
+
         const totalArea = mergedParts.reduce((s, i) => s + i.area, 0);
-        const newName = Array.from(new Set(mergedParts.map(p => p.name.split('>').pop().trim()))).join(' + ');
-        addedItems = [...others, { name: newName, area: totalArea, color: mergedParts[0].color, x: target.x, y: target.y, parts: mergedParts }];
-        selectedIndex = addedItems.length - 1; render();
+        const newName   = [...new Set(mergedParts.map(p => p.name.split('>').pop().trim()))].join(' + ');
+
+        addedItems = [...others, {
+            name:  newName,
+            area:  totalArea,
+            color: mergedParts[0].color,
+            x:     target.x,
+            y:     target.y,
+            parts: mergedParts,
+        }];
+
+        selectedIndex = addedItems.length - 1;
+        render();
     }
 
     function decombineSelected() {
         const parts = addedItems[selectedIndex].parts;
         addedItems.splice(selectedIndex, 1);
         addedItems.push(...parts);
-        selectedIndex = null; render();
+        selectedIndex = null;
+        render();
     }
 
-    function deleteSelected() { if (selectedIndex !== null) { addedItems.splice(selectedIndex, 1); selectedIndex = null; render(); } }
+    // ── DELETE ───────────────────────────────────────────────────────────────
+    function deleteSelected() {
+        if (selectedIndex !== null) {
+            addedItems.splice(selectedIndex, 1);
+            selectedIndex = null;
+            render();
+        }
+    }
 
+    // ── UI STATE ─────────────────────────────────────────────────────────────
     function updateUI() {
-        const actionBtn = document.getElementById('actionBtn'), deleteBtn = document.getElementById('deleteBtn');
+        const actionBtn = document.getElementById('actionBtn');
+        const deleteBtn = document.getElementById('deleteBtn');
+
         if (selectedIndex !== null && addedItems[selectedIndex]) {
             deleteBtn.style.display = 'inline-block';
-            actionBtn.innerText = addedItems[selectedIndex].parts ? "De-combine" : "Combine Touching";
-            actionBtn.style.background = addedItems[selectedIndex].parts ? "var(--primary)" : "var(--success)";
-        } else { deleteBtn.style.display = 'none'; }
+            const isCombined = !!addedItems[selectedIndex].parts;
+            actionBtn.textContent = isCombined ? 'De-combine' : 'Combine Touching';
+            actionBtn.style.background = isCombined ? 'var(--primary)' : 'var(--success)';
+        } else {
+            deleteBtn.style.display = 'none';
+            actionBtn.textContent = 'Combine Touching';
+            actionBtn.style.background = 'var(--success)';
+        }
     }
 
+    // ── ADD SQUARE ───────────────────────────────────────────────────────────
     function addSquare(item, isNew = true) {
-        if (isNew && typeof gtag === 'function') gtag('event', 'select_country', { 'country_name': item.name });
+        if (isNew && typeof gtag === 'function') {
+            gtag('event', 'select_country', { country_name: item.name });
+        }
         const hue = Math.floor(Math.random() * 360);
-        addedItems.push({ ...item, color: `hsla(${hue}, 75%, 65%, 0.7)`, x: null, y: null });
-        selectedIndex = addedItems.length - 1; render();
+        addedItems.push({
+            ...item,
+            color: `hsla(${hue}, 70%, 65%, 0.75)`,
+            x: null,
+            y: null,
+        });
+        selectedIndex = addedItems.length - 1;
+        render();
+        if (isNew) updateURL();
     }
 
-    function shareScale() { navigator.clipboard.writeText(window.location.href).then(() => { alert("Comparison Link copied!"); }); }
-    function clearAll() { addedItems = []; render(); }
-    window.onresize = render; init();
+    // ── SHARE ────────────────────────────────────────────────────────────────
+    function shareScale() {
+        const url = window.location.href;
+        if (navigator.share) {
+            navigator.share({ title: 'Square Scale comparison', url })
+                .catch(() => copyToClipboard(url));
+        } else {
+            copyToClipboard(url);
+        }
+    }
+
+    function copyToClipboard(text) {
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(text).then(() => showToast('Link copied to clipboard!'));
+        } else {
+            // Fallback
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            showToast('Link copied!');
+        }
+    }
+
+    // ── CLEAR ────────────────────────────────────────────────────────────────
+    function clearAll() {
+        addedItems = [];
+        selectedIndex = null;
+        render();
+        updateURL();
+    }
+
+    // ── TOAST ────────────────────────────────────────────────────────────────
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2800);
+    }
+
+    // ── HELP MODAL ───────────────────────────────────────────────────────────
+    function openHelp()  { document.getElementById('helpModal').classList.add('open'); }
+    function closeHelp() { document.getElementById('helpModal').classList.remove('open'); }
+    function closeHelpOnOverlay(e) { if (e.target === document.getElementById('helpModal')) closeHelp(); }
+
+    // ── RESIZE ───────────────────────────────────────────────────────────────
+    window.addEventListener('resize', render);
+
+    // ── START ────────────────────────────────────────────────────────────────
+    init();
 </script>
 </body>
 </html>
