@@ -105,42 +105,50 @@
     "type": "country",
     "aliases": [
       "Afghan"
-    ]
+    ],
+    "population": 42239854
   },
   {
     "name": "Albania",
     "area": 28748,
-    "type": "country"
+    "type": "country",
+    "population": 2793592
   },
   {
     "name": "Algeria",
     "area": 2381741,
-    "type": "country"
+    "type": "country",
+    "population": 45606480
   },
   {
     "name": "Andorra",
     "area": 468,
-    "type": "country"
+    "type": "country",
+    "population": 77543
   },
   {
     "name": "Angola",
     "area": 1246700,
-    "type": "country"
+    "type": "country",
+    "population": 35588987
   },
   {
     "name": "Antigua and Barbuda",
     "area": 443,
-    "type": "country"
+    "type": "country",
+    "population": 93763
   },
   {
     "name": "Argentina",
     "area": 2780400,
-    "type": "country"
+    "type": "country",
+    "population": 45773884
   },
   {
     "name": "Armenia",
     "area": 29743,
-    "type": "country"
+    "type": "country",
+    "population": 2777970
   },
   {
     "name": "Australia",
@@ -149,67 +157,80 @@
     "aliases": [
       "Oz",
       "Aussie"
-    ]
+    ],
+    "population": 26439111
   },
   {
     "name": "Austria",
     "area": 83871,
-    "type": "country"
+    "type": "country",
+    "population": 9104772
   },
   {
     "name": "Azerbaijan",
     "area": 86600,
-    "type": "country"
+    "type": "country",
+    "population": 10412651
   },
   {
     "name": "Bahamas",
     "area": 13943,
-    "type": "country"
+    "type": "country",
+    "population": 400516
   },
   {
     "name": "Bahrain",
     "area": 765,
-    "type": "country"
+    "type": "country",
+    "population": 1463265
   },
   {
     "name": "Bangladesh",
     "area": 147570,
-    "type": "country"
+    "type": "country",
+    "population": 169356251
   },
   {
     "name": "Barbados",
     "area": 430,
-    "type": "country"
+    "type": "country",
+    "population": 281995
   },
   {
     "name": "Belarus",
     "area": 207600,
-    "type": "country"
+    "type": "country",
+    "population": 9498700
   },
   {
     "name": "Belgium",
     "area": 30528,
-    "type": "country"
+    "type": "country",
+    "population": 11686140
   },
   {
     "name": "Belize",
     "area": 22966,
-    "type": "country"
+    "type": "country",
+    "population": 410825
   },
   {
     "name": "Benin",
     "area": 112622,
-    "type": "country"
+    "type": "country",
+    "population": 13712828
   },
   {
     "name": "Bhutan",
     "area": 38394,
-    "type": "country"
+    "type": "country",
+    "population": 787941
   },
   {
     "name": "Bolivia",
     "area": 1098581,
-    "type": "country"
+    "type": "country",
+    "population": 12079472
   },
   {
     "name": "Bosnia and Herzegovina",
@@ -217,37 +238,44 @@
     "type": "country",
     "aliases": [
       "Bosnia"
-    ]
+    ],
+    "population": 3210847
   },
   {
     "name": "Botswana",
     "area": 581730,
-    "type": "country"
+    "type": "country",
+    "population": 2630296
   },
   {
     "name": "Brazil",
     "area": 8515767,
-    "type": "country"
+    "type": "country",
+    "population": 214326223
   },
   {
     "name": "Brunei",
     "area": 5765,
-    "type": "country"
+    "type": "country",
+    "population": 449002
   },
   {
     "name": "Bulgaria",
     "area": 110879,
-    "type": "country"
+    "type": "country",
+    "population": 6520314
   },
   {
     "name": "Burkina Faso",
     "area": 272967,
-    "type": "country"
+    "type": "country",
+    "population": 22673762
   },
   {
     "name": "Burundi",
     "area": 27834,
-    "type": "country"
+    "type": "country",
+    "population": 12889576
   },
   {
     "name": "Cabo Verde",
@@ -255,22 +283,26 @@
     "type": "country",
     "aliases": [
       "Cape Verde"
-    ]
+    ],
+    "population": 587925
   },
   {
     "name": "Cambodia",
     "area": 181035,
-    "type": "country"
+    "type": "country",
+    "population": 16767842
   },
   {
     "name": "Cameroon",
     "area": 475442,
-    "type": "country"
+    "type": "country",
+    "population": 27914536
   },
   {
     "name": "Canada",
     "area": 9984670,
-    "type": "country"
+    "type": "country",
+    "population": 38781292
   },
   {
     "name": "Central African Republic",
@@ -278,17 +310,20 @@
     "type": "country",
     "aliases": [
       "CAR"
-    ]
+    ],
+    "population": 5579144
   },
   {
     "name": "Chad",
     "area": 1284000,
-    "type": "country"
+    "type": "country",
+    "population": 17413580
   },
   {
     "name": "Chile",
     "area": 756102,
-    "type": "country"
+    "type": "country",
+    "population": 19629590
   },
   {
     "name": "China",
@@ -297,17 +332,20 @@
     "aliases": [
       "PRC",
       "People's Republic of China"
-    ]
+    ],
+    "population": 1412600000
   },
   {
     "name": "Colombia",
     "area": 1141748,
-    "type": "country"
+    "type": "country",
+    "population": 51874024
   },
   {
     "name": "Comoros",
     "area": 2235,
-    "type": "country"
+    "type": "country",
+    "population": 836774
   },
   {
     "name": "Congo (Republic)",
@@ -316,7 +354,8 @@
     "aliases": [
       "Republic of the Congo",
       "Congo-Brazzaville"
-    ]
+    ],
+    "population": 5797805
   },
   {
     "name": "Congo (DRC)",
@@ -327,27 +366,32 @@
       "DRC",
       "Congo-Kinshasa",
       "Zaire"
-    ]
+    ],
+    "population": 99010212
   },
   {
     "name": "Costa Rica",
     "area": 51100,
-    "type": "country"
+    "type": "country",
+    "population": 5180829
   },
   {
     "name": "Croatia",
     "area": 56594,
-    "type": "country"
+    "type": "country",
+    "population": 3871833
   },
   {
     "name": "Cuba",
     "area": 109884,
-    "type": "country"
+    "type": "country",
+    "population": 11212191
   },
   {
     "name": "Cyprus",
     "area": 9251,
-    "type": "country"
+    "type": "country",
+    "population": 1251488
   },
   {
     "name": "Czech Republic",
@@ -355,57 +399,68 @@
     "type": "country",
     "aliases": [
       "Czechia"
-    ]
+    ],
+    "population": 10827529
   },
   {
     "name": "Denmark",
     "area": 42924,
-    "type": "country"
+    "type": "country",
+    "population": 5910913
   },
   {
     "name": "Djibouti",
     "area": 23200,
-    "type": "country"
+    "type": "country",
+    "population": 1105557
   },
   {
     "name": "Dominica",
     "area": 751,
-    "type": "country"
+    "type": "country",
+    "population": 72737
   },
   {
     "name": "Dominican Republic",
     "area": 48671,
-    "type": "country"
+    "type": "country",
+    "population": 11117873
   },
   {
     "name": "Ecuador",
     "area": 283561,
-    "type": "country"
+    "type": "country",
+    "population": 18001000
   },
   {
     "name": "Egypt",
     "area": 1002450,
-    "type": "country"
+    "type": "country",
+    "population": 104258327
   },
   {
     "name": "El Salvador",
     "area": 21041,
-    "type": "country"
+    "type": "country",
+    "population": 6364943
   },
   {
     "name": "Equatorial Guinea",
     "area": 28051,
-    "type": "country"
+    "type": "country",
+    "population": 1468777
   },
   {
     "name": "Eritrea",
     "area": 117600,
-    "type": "country"
+    "type": "country",
+    "population": 3748901
   },
   {
     "name": "Estonia",
     "area": 45228,
-    "type": "country"
+    "type": "country",
+    "population": 1365884
   },
   {
     "name": "Eswatini",
@@ -413,112 +468,134 @@
     "type": "country",
     "aliases": [
       "Swaziland"
-    ]
+    ],
+    "population": 1202000
   },
   {
     "name": "Ethiopia",
     "area": 1104300,
-    "type": "country"
+    "type": "country",
+    "population": 123379924
   },
   {
     "name": "Fiji",
     "area": 18274,
-    "type": "country"
+    "type": "country",
+    "population": 929766
   },
   {
     "name": "Finland",
     "area": 338424,
-    "type": "country"
+    "type": "country",
+    "population": 5563970
   },
   {
     "name": "France",
     "area": 551695,
-    "type": "country"
+    "type": "country",
+    "population": 68042591
   },
   {
     "name": "Gabon",
     "area": 267668,
-    "type": "country"
+    "type": "country",
+    "population": 2388992
   },
   {
     "name": "Gambia",
     "area": 11295,
-    "type": "country"
+    "type": "country",
+    "population": 2705992
   },
   {
     "name": "Georgia",
     "area": 69700,
-    "type": "country"
+    "type": "country",
+    "population": 3712000
   },
   {
     "name": "Germany",
     "area": 357114,
-    "type": "country"
+    "type": "country",
+    "population": 84607016
   },
   {
     "name": "Ghana",
     "area": 238533,
-    "type": "country"
+    "type": "country",
+    "population": 32819325
   },
   {
     "name": "Greece",
     "area": 131957,
-    "type": "country"
+    "type": "country",
+    "population": 10482487
   },
   {
     "name": "Grenada",
     "area": 344,
-    "type": "country"
+    "type": "country",
+    "population": 125438
   },
   {
     "name": "Guatemala",
     "area": 108889,
-    "type": "country"
+    "type": "country",
+    "population": 17109746
   },
   {
     "name": "Guinea",
     "area": 245857,
-    "type": "country"
+    "type": "country",
+    "population": 13531906
   },
   {
     "name": "Guinea-Bissau",
     "area": 36125,
-    "type": "country"
+    "type": "country",
+    "population": 2026778
   },
   {
     "name": "Guyana",
     "area": 214969,
-    "type": "country"
+    "type": "country",
+    "population": 804567
   },
   {
     "name": "Haiti",
     "area": 27750,
-    "type": "country"
+    "type": "country",
+    "population": 11584996
   },
   {
     "name": "Honduras",
     "area": 112492,
-    "type": "country"
+    "type": "country",
+    "population": 10278345
   },
   {
     "name": "Hungary",
     "area": 93028,
-    "type": "country"
+    "type": "country",
+    "population": 9689010
   },
   {
     "name": "Iceland",
     "area": 103000,
-    "type": "country"
+    "type": "country",
+    "population": 370335
   },
   {
     "name": "India",
     "area": 3287263,
-    "type": "country"
+    "type": "country",
+    "population": 1428627663
   },
   {
     "name": "Indonesia",
     "area": 1904569,
-    "type": "country"
+    "type": "country",
+    "population": 277534122
   },
   {
     "name": "Iran",
@@ -527,12 +604,14 @@
     "aliases": [
       "Persia",
       "Islamic Republic of Iran"
-    ]
+    ],
+    "population": 86758304
   },
   {
     "name": "Iraq",
     "area": 438317,
-    "type": "country"
+    "type": "country",
+    "population": 42164965
   },
   {
     "name": "Ireland",
@@ -541,187 +620,224 @@
     "aliases": [
       "Eire",
       "Republic of Ireland"
-    ]
+    ],
+    "population": 5056935
   },
   {
     "name": "Israel",
     "area": 20770,
-    "type": "country"
+    "type": "country",
+    "population": 9174520
   },
   {
     "name": "Italy",
     "area": 301336,
-    "type": "country"
+    "type": "country",
+    "population": 58940425
   },
   {
     "name": "Jamaica",
     "area": 10991,
-    "type": "country"
+    "type": "country",
+    "population": 2820436
   },
   {
     "name": "Japan",
     "area": 377975,
-    "type": "country"
+    "type": "country",
+    "population": 123294513
   },
   {
     "name": "Jordan",
     "area": 89342,
-    "type": "country"
+    "type": "country",
+    "population": 10203134
   },
   {
     "name": "Kazakhstan",
     "area": 2724900,
-    "type": "country"
+    "type": "country",
+    "population": 19606633
   },
   {
     "name": "Kenya",
     "area": 580367,
-    "type": "country"
+    "type": "country",
+    "population": 54027487
   },
   {
     "name": "Kiribati",
     "area": 811,
-    "type": "country"
+    "type": "country",
+    "population": 119446
   },
   {
     "name": "Kuwait",
     "area": 17818,
-    "type": "country"
+    "type": "country",
+    "population": 4310108
   },
   {
     "name": "Kyrgyzstan",
     "area": 199951,
-    "type": "country"
+    "type": "country",
+    "population": 6735347
   },
   {
     "name": "Laos",
     "area": 236800,
-    "type": "country"
+    "type": "country",
+    "population": 7425057
   },
   {
     "name": "Latvia",
     "area": 64589,
-    "type": "country"
+    "type": "country",
+    "population": 1830211
   },
   {
     "name": "Lebanon",
     "area": 10452,
-    "type": "country"
+    "type": "country",
+    "population": 5353930
   },
   {
     "name": "Lesotho",
     "area": 30355,
-    "type": "country"
+    "type": "country",
+    "population": 2281454
   },
   {
     "name": "Liberia",
     "area": 111369,
-    "type": "country"
+    "type": "country",
+    "population": 5418377
   },
   {
     "name": "Libya",
     "area": 1759541,
-    "type": "country"
+    "type": "country",
+    "population": 6888388
   },
   {
     "name": "Liechtenstein",
     "area": 160,
-    "type": "country"
+    "type": "country",
+    "population": 39327
   },
   {
     "name": "Lithuania",
     "area": 65300,
-    "type": "country"
+    "type": "country",
+    "population": 2718352
   },
   {
     "name": "Luxembourg",
     "area": 2586,
-    "type": "country"
+    "type": "country",
+    "population": 660809
   },
   {
     "name": "Madagascar",
     "area": 587041,
-    "type": "country"
+    "type": "country",
+    "population": 28915653
   },
   {
     "name": "Malawi",
     "area": 118484,
-    "type": "country"
+    "type": "country",
+    "population": 20405317
   },
   {
     "name": "Malaysia",
     "area": 329847,
-    "type": "country"
+    "type": "country",
+    "population": 33573874
   },
   {
     "name": "Maldives",
     "area": 300,
-    "type": "country"
+    "type": "country",
+    "population": 521457
   },
   {
     "name": "Mali",
     "area": 1240192,
-    "type": "country"
+    "type": "country",
+    "population": 22414995
   },
   {
     "name": "Malta",
     "area": 316,
-    "type": "country"
+    "type": "country",
+    "population": 535064
   },
   {
     "name": "Marshall Islands",
     "area": 181,
-    "type": "country"
+    "type": "country",
+    "population": 41996
   },
   {
     "name": "Mauritania",
     "area": 1030700,
-    "type": "country"
+    "type": "country",
+    "population": 4614974
   },
   {
     "name": "Mauritius",
     "area": 2040,
-    "type": "country"
+    "type": "country",
+    "population": 1261208
   },
   {
     "name": "Mexico",
     "area": 1964375,
-    "type": "country"
+    "type": "country",
+    "population": 128455567
   },
   {
     "name": "Micronesia",
     "area": 702,
-    "type": "country"
+    "type": "country",
+    "population": 115023
   },
   {
     "name": "Moldova",
     "area": 33846,
-    "type": "country"
+    "type": "country",
+    "population": 3272996
   },
   {
     "name": "Monaco",
     "area": 2,
-    "type": "country"
+    "type": "country",
+    "population": 36297
   },
   {
     "name": "Mongolia",
     "area": 1564110,
-    "type": "country"
+    "type": "country",
+    "population": 3398366
   },
   {
     "name": "Montenegro",
     "area": 13812,
-    "type": "country"
+    "type": "country",
+    "population": 626485
   },
   {
     "name": "Morocco",
     "area": 446550,
-    "type": "country"
+    "type": "country",
+    "population": 37840044
   },
   {
     "name": "Mozambique",
     "area": 801590,
-    "type": "country"
+    "type": "country",
+    "population": 32790338
   },
   {
     "name": "Myanmar",
@@ -729,22 +845,26 @@
     "type": "country",
     "aliases": [
       "Burma"
-    ]
+    ],
+    "population": 54409800
   },
   {
     "name": "Namibia",
     "area": 824292,
-    "type": "country"
+    "type": "country",
+    "population": 2567012
   },
   {
     "name": "Nauru",
     "area": 21,
-    "type": "country"
+    "type": "country",
+    "population": 10824
   },
   {
     "name": "Nepal",
     "area": 147181,
-    "type": "country"
+    "type": "country",
+    "population": 30034989
   },
   {
     "name": "Netherlands",
@@ -752,7 +872,8 @@
     "type": "country",
     "aliases": [
       "Holland"
-    ]
+    ],
+    "population": 17890000
   },
   {
     "name": "New Zealand",
@@ -761,22 +882,26 @@
     "aliases": [
       "NZ",
       "Aotearoa"
-    ]
+    ],
+    "population": 5123400
   },
   {
     "name": "Nicaragua",
     "area": 130373,
-    "type": "country"
+    "type": "country",
+    "population": 6948392
   },
   {
     "name": "Niger",
     "area": 1267000,
-    "type": "country"
+    "type": "country",
+    "population": 25252722
   },
   {
     "name": "Nigeria",
     "area": 923768,
-    "type": "country"
+    "type": "country",
+    "population": 218541212
   },
   {
     "name": "North Korea",
@@ -785,7 +910,8 @@
     "aliases": [
       "DPRK",
       "Democratic People's Republic of Korea"
-    ]
+    ],
+    "population": 25971909
   },
   {
     "name": "North Macedonia",
@@ -793,27 +919,32 @@
     "type": "country",
     "aliases": [
       "Macedonia"
-    ]
+    ],
+    "population": 2093599
   },
   {
     "name": "Norway",
     "area": 323802,
-    "type": "country"
+    "type": "country",
+    "population": 5474360
   },
   {
     "name": "Oman",
     "area": 309500,
-    "type": "country"
+    "type": "country",
+    "population": 4644384
   },
   {
     "name": "Pakistan",
     "area": 881913,
-    "type": "country"
+    "type": "country",
+    "population": 231402117
   },
   {
     "name": "Palau",
     "area": 459,
-    "type": "country"
+    "type": "country",
+    "population": 18055
   },
   {
     "name": "Palestine",
@@ -822,12 +953,14 @@
     "aliases": [
       "Palestinian Territories",
       "West Bank and Gaza"
-    ]
+    ],
+    "population": 5250072
   },
   {
     "name": "Panama",
     "area": 75417,
-    "type": "country"
+    "type": "country",
+    "population": 4351267
   },
   {
     "name": "Papua New Guinea",
@@ -835,42 +968,50 @@
     "type": "country",
     "aliases": [
       "PNG"
-    ]
+    ],
+    "population": 10329931
   },
   {
     "name": "Paraguay",
     "area": 406752,
-    "type": "country"
+    "type": "country",
+    "population": 7359000
   },
   {
     "name": "Peru",
     "area": 1285216,
-    "type": "country"
+    "type": "country",
+    "population": 33359418
   },
   {
     "name": "Philippines",
     "area": 300000,
-    "type": "country"
+    "type": "country",
+    "population": 113964000
   },
   {
     "name": "Poland",
     "area": 312696,
-    "type": "country"
+    "type": "country",
+    "population": 37654247
   },
   {
     "name": "Portugal",
     "area": 92212,
-    "type": "country"
+    "type": "country",
+    "population": 10247605
   },
   {
     "name": "Qatar",
     "area": 11586,
-    "type": "country"
+    "type": "country",
+    "population": 2695122
   },
   {
     "name": "Romania",
     "area": 238397,
-    "type": "country"
+    "type": "country",
+    "population": 19051562
   },
   {
     "name": "Russia",
@@ -878,97 +1019,116 @@
     "type": "country",
     "aliases": [
       "Russian Federation"
-    ]
+    ],
+    "population": 144444359
   },
   {
     "name": "Rwanda",
     "area": 26338,
-    "type": "country"
+    "type": "country",
+    "population": 13776698
   },
   {
     "name": "Saint Kitts and Nevis",
     "area": 261,
-    "type": "country"
+    "type": "country",
+    "population": 47657
   },
   {
     "name": "Saint Lucia",
     "area": 616,
-    "type": "country"
+    "type": "country",
+    "population": 180251
   },
   {
     "name": "Saint Vincent and the Grenadines",
     "area": 389,
-    "type": "country"
+    "type": "country",
+    "population": 110589
   },
   {
     "name": "Samoa",
     "area": 2842,
-    "type": "country"
+    "type": "country",
+    "population": 222382
   },
   {
     "name": "San Marino",
     "area": 61,
-    "type": "country"
+    "type": "country",
+    "population": 34017
   },
   {
     "name": "Sao Tome and Principe",
     "area": 964,
-    "type": "country"
+    "type": "country",
+    "population": 231856
   },
   {
     "name": "Saudi Arabia",
     "area": 2149690,
-    "type": "country"
+    "type": "country",
+    "population": 35950396
   },
   {
     "name": "Senegal",
     "area": 196722,
-    "type": "country"
+    "type": "country",
+    "population": 17763163
   },
   {
     "name": "Serbia",
     "area": 77474,
-    "type": "country"
+    "type": "country",
+    "population": 6833288
   },
   {
     "name": "Seychelles",
     "area": 452,
-    "type": "country"
+    "type": "country",
+    "population": 107660
   },
   {
     "name": "Sierra Leone",
     "area": 71740,
-    "type": "country"
+    "type": "country",
+    "population": 8605718
   },
   {
     "name": "Singapore",
     "area": 719,
-    "type": "country"
+    "type": "country",
+    "population": 5917600
   },
   {
     "name": "Slovakia",
     "area": 49035,
-    "type": "country"
+    "type": "country",
+    "population": 5460185
   },
   {
     "name": "Slovenia",
     "area": 20273,
-    "type": "country"
+    "type": "country",
+    "population": 2119675
   },
   {
     "name": "Solomon Islands",
     "area": 28896,
-    "type": "country"
+    "type": "country",
+    "population": 720482
   },
   {
     "name": "Somalia",
     "area": 637657,
-    "type": "country"
+    "type": "country",
+    "population": 17065581
   },
   {
     "name": "South Africa",
     "area": 1221037,
-    "type": "country"
+    "type": "country",
+    "population": 60414495
   },
   {
     "name": "South Korea",
@@ -978,17 +1138,20 @@
       "Korea",
       "Republic of Korea",
       "ROK"
-    ]
+    ],
+    "population": 51744876
   },
   {
     "name": "South Sudan",
     "area": 619745,
-    "type": "country"
+    "type": "country",
+    "population": 11088796
   },
   {
     "name": "Spain",
     "area": 505990,
-    "type": "country"
+    "type": "country",
+    "population": 47415750
   },
   {
     "name": "Sri Lanka",
@@ -996,32 +1159,38 @@
     "type": "country",
     "aliases": [
       "Ceylon"
-    ]
+    ],
+    "population": 22037000
   },
   {
     "name": "Sudan",
     "area": 1861484,
-    "type": "country"
+    "type": "country",
+    "population": 45657202
   },
   {
     "name": "Suriname",
     "area": 163820,
-    "type": "country"
+    "type": "country",
+    "population": 623236
   },
   {
     "name": "Sweden",
     "area": 450295,
-    "type": "country"
+    "type": "country",
+    "population": 10521556
   },
   {
     "name": "Switzerland",
     "area": 41285,
-    "type": "country"
+    "type": "country",
+    "population": 8738791
   },
   {
     "name": "Syria",
     "area": 185180,
-    "type": "country"
+    "type": "country",
+    "population": 21324000
   },
   {
     "name": "Taiwan",
@@ -1031,22 +1200,26 @@
       "Republic of China",
       "ROC",
       "Formosa"
-    ]
+    ],
+    "population": 23570000
   },
   {
     "name": "Tajikistan",
     "area": 143100,
-    "type": "country"
+    "type": "country",
+    "population": 9952787
   },
   {
     "name": "Tanzania",
     "area": 945087,
-    "type": "country"
+    "type": "country",
+    "population": 63298550
   },
   {
     "name": "Thailand",
     "area": 513120,
-    "type": "country"
+    "type": "country",
+    "population": 71801279
   },
   {
     "name": "Timor-Leste",
@@ -1054,27 +1227,32 @@
     "type": "country",
     "aliases": [
       "East Timor"
-    ]
+    ],
+    "population": 1340513
   },
   {
     "name": "Togo",
     "area": 56785,
-    "type": "country"
+    "type": "country",
+    "population": 8848699
   },
   {
     "name": "Tonga",
     "area": 747,
-    "type": "country"
+    "type": "country",
+    "population": 100651
   },
   {
     "name": "Trinidad and Tobago",
     "area": 5131,
-    "type": "country"
+    "type": "country",
+    "population": 1531044
   },
   {
     "name": "Tunisia",
     "area": 163610,
-    "type": "country"
+    "type": "country",
+    "population": 12046656
   },
   {
     "name": "Turkey",
@@ -1082,27 +1260,32 @@
     "type": "country",
     "aliases": [
       "Türkiye"
-    ]
+    ],
+    "population": 85279553
   },
   {
     "name": "Turkmenistan",
     "area": 488100,
-    "type": "country"
+    "type": "country",
+    "population": 6117924
   },
   {
     "name": "Tuvalu",
     "area": 26,
-    "type": "country"
+    "type": "country",
+    "population": 11312
   },
   {
     "name": "Uganda",
     "area": 241550,
-    "type": "country"
+    "type": "country",
+    "population": 47249585
   },
   {
     "name": "Ukraine",
     "area": 603550,
-    "type": "country"
+    "type": "country",
+    "population": 43531422
   },
   {
     "name": "United Arab Emirates",
@@ -1111,7 +1294,8 @@
     "aliases": [
       "UAE",
       "Emirates"
-    ]
+    ],
+    "population": 9890400
   },
   {
     "name": "United Kingdom",
@@ -1123,7 +1307,8 @@
       "Great Britain",
       "England",
       "GB"
-    ]
+    ],
+    "population": 67736802
   },
   {
     "name": "United States",
@@ -1135,22 +1320,26 @@
       "America",
       "United States of America",
       "The States"
-    ]
+    ],
+    "population": 335893238
   },
   {
     "name": "Uruguay",
     "area": 176215,
-    "type": "country"
+    "type": "country",
+    "population": 3423108
   },
   {
     "name": "Uzbekistan",
     "area": 448978,
-    "type": "country"
+    "type": "country",
+    "population": 35300000
   },
   {
     "name": "Vanuatu",
     "area": 12189,
-    "type": "country"
+    "type": "country",
+    "population": 334506
   },
   {
     "name": "Vatican City",
@@ -1159,12 +1348,14 @@
     "aliases": [
       "Holy See",
       "Vatican"
-    ]
+    ],
+    "population": 800
   },
   {
     "name": "Venezuela",
     "area": 916445,
-    "type": "country"
+    "type": "country",
+    "population": 28838499
   },
   {
     "name": "Vietnam",
@@ -1172,22 +1363,26 @@
     "type": "country",
     "aliases": [
       "Viet Nam"
-    ]
+    ],
+    "population": 97468029
   },
   {
     "name": "Yemen",
     "area": 527968,
-    "type": "country"
+    "type": "country",
+    "population": 33696614
   },
   {
     "name": "Zambia",
     "area": 752612,
-    "type": "country"
+    "type": "country",
+    "population": 20017675
   },
   {
     "name": "Zimbabwe",
     "area": 390757,
-    "type": "country"
+    "type": "country",
+    "population": 16320537
   },
   {
     "name": "Greenland",
@@ -1195,22 +1390,26 @@
     "type": "country",
     "aliases": [
       "Kalaallit Nunaat"
-    ]
+    ],
+    "population": 56583
   },
   {
     "name": "Puerto Rico",
     "area": 9104,
-    "type": "country"
+    "type": "country",
+    "population": 3221789
   },
   {
     "name": "Guam",
     "area": 549,
-    "type": "country"
+    "type": "country",
+    "population": 153836
   },
   {
     "name": "Hong Kong",
     "area": 1114,
-    "type": "country"
+    "type": "country",
+    "population": 7413100
   },
   {
     "name": "Macau",
@@ -1218,22 +1417,26 @@
     "type": "country",
     "aliases": [
       "Macao"
-    ]
+    ],
+    "population": 672800
   },
   {
     "name": "New Caledonia",
     "area": 18575,
-    "type": "country"
+    "type": "country",
+    "population": 271407
   },
   {
     "name": "French Polynesia",
     "area": 4167,
-    "type": "country"
+    "type": "country",
+    "population": 306279
   },
   {
     "name": "Aruba",
     "area": 180,
-    "type": "country"
+    "type": "country",
+    "population": 106537
   },
   {
     "name": "Curaçao",
@@ -1241,17 +1444,20 @@
     "type": "country",
     "aliases": [
       "Curacao"
-    ]
+    ],
+    "population": 152369
   },
   {
     "name": "Western Sahara",
     "area": 266000,
-    "type": "country"
+    "type": "country",
+    "population": 575986
   },
   {
     "name": "Kosovo",
     "area": 10887,
-    "type": "country"
+    "type": "country",
+    "population": 1775680
   },
   {
     "name": "Falkland Islands",
@@ -1259,32 +1465,38 @@
     "type": "country",
     "aliases": [
       "Malvinas"
-    ]
+    ],
+    "population": 3480
   },
   {
     "name": "Faroe Islands",
     "area": 1393,
-    "type": "country"
+    "type": "country",
+    "population": 54000
   },
   {
     "name": "Gibraltar",
     "area": 6.5,
-    "type": "country"
+    "type": "country",
+    "population": 32649
   },
   {
     "name": "Isle of Man",
     "area": 572,
-    "type": "country"
+    "type": "country",
+    "population": 84069
   },
   {
     "name": "Jersey",
     "area": 116,
-    "type": "country"
+    "type": "country",
+    "population": 103267
   },
   {
     "name": "Guernsey",
     "area": 78,
-    "type": "country"
+    "type": "country",
+    "population": 63026
   },
   {
     "name": "Réunion",
@@ -1292,397 +1504,476 @@
     "type": "country",
     "aliases": [
       "Reunion"
-    ]
+    ],
+    "population": 974052
   },
   {
     "name": "Martinique",
     "area": 1128,
-    "type": "country"
+    "type": "country",
+    "population": 364508
   },
   {
     "name": "Guadeloupe",
     "area": 1628,
-    "type": "country"
+    "type": "country",
+    "population": 395700
   },
   {
     "name": "French Guiana",
     "area": 83534,
-    "type": "country"
+    "type": "country",
+    "population": 304557
   },
   {
     "name": "Mayotte",
     "area": 374,
-    "type": "country"
+    "type": "country",
+    "population": 385942
   },
   {
     "name": "Saint Pierre and Miquelon",
     "area": 242,
-    "type": "country"
+    "type": "country",
+    "population": 5794
   },
   {
     "name": "Wallis and Futuna",
     "area": 142,
-    "type": "country"
+    "type": "country",
+    "population": 11369
   },
   {
     "name": "American Samoa",
     "area": 199,
-    "type": "country"
+    "type": "country",
+    "population": 44273
   },
   {
     "name": "US Virgin Islands",
     "area": 347,
-    "type": "country"
+    "type": "country",
+    "population": 100091
   },
   {
     "name": "Northern Mariana Islands",
     "area": 464,
-    "type": "country"
+    "type": "country",
+    "population": 47329
   },
   {
     "name": "Bermuda",
     "area": 54,
-    "type": "country"
+    "type": "country",
+    "population": 63867
   },
   {
     "name": "Cayman Islands",
     "area": 264,
-    "type": "country"
+    "type": "country",
+    "population": 81788
   },
   {
     "name": "British Virgin Islands",
     "area": 151,
-    "type": "country"
+    "type": "country",
+    "population": 31538
   },
   {
     "name": "Turks and Caicos Islands",
     "area": 948,
-    "type": "country"
+    "type": "country",
+    "population": 44819
   },
   {
     "name": "Anguilla",
     "area": 91,
-    "type": "country"
+    "type": "country",
+    "population": 18090
   },
   {
     "name": "Montserrat",
     "area": 102,
-    "type": "country"
+    "type": "country",
+    "population": 4386
   },
   {
     "name": "Saint Helena",
     "area": 394,
-    "type": "country"
+    "type": "country",
+    "population": 5633
   },
   {
     "name": "Ascension Island",
     "area": 88,
-    "type": "country"
+    "type": "country",
+    "population": 806
   },
   {
     "name": "Tristan da Cunha",
     "area": 98,
-    "type": "country"
+    "type": "country",
+    "population": 250
   },
   {
     "name": "Christmas Island",
     "area": 135,
-    "type": "country"
+    "type": "country",
+    "population": 1692
   },
   {
     "name": "Cocos Islands",
     "area": 14,
-    "type": "country"
+    "type": "country",
+    "population": 596
   },
   {
     "name": "Norfolk Island",
     "area": 35,
-    "type": "country"
+    "type": "country",
+    "population": 2188
   },
   {
     "name": "Niue",
     "area": 260,
-    "type": "country"
+    "type": "country",
+    "population": 1549
   },
   {
     "name": "Cook Islands",
     "area": 236,
-    "type": "country"
+    "type": "country",
+    "population": 17011
   },
   {
     "name": "Tokelau",
     "area": 12,
-    "type": "country"
+    "type": "country",
+    "population": 1647
   },
   {
     "name": "Pitcairn Islands",
     "area": 47,
-    "type": "country"
+    "type": "country",
+    "population": 47
   },
   {
     "name": "South Georgia",
     "area": 3903,
-    "type": "country"
+    "type": "country",
+    "population": 30
   },
   {
     "name": "British Indian Ocean Territory",
     "area": 60,
-    "type": "country"
+    "type": "country",
+    "population": 3000
   },
   {
     "name": "USA > Alabama",
     "area": 135767,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 5108468
   },
   {
     "name": "USA > Alaska",
     "area": 1723337,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 733583
   },
   {
     "name": "USA > Arizona",
     "area": 295234,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 7431344
   },
   {
     "name": "USA > Arkansas",
     "area": 137732,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 3067732
   },
   {
     "name": "USA > California",
     "area": 423967,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 38965193
   },
   {
     "name": "USA > Colorado",
     "area": 269601,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 5877610
   },
   {
     "name": "USA > Connecticut",
     "area": 14357,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 3617176
   },
   {
     "name": "USA > Delaware",
     "area": 6446,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 1031890
   },
   {
     "name": "USA > Florida",
     "area": 170312,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 22610726
   },
   {
     "name": "USA > Georgia",
     "area": 153910,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 11029227
   },
   {
     "name": "USA > Hawaii",
     "area": 28313,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 1435138
   },
   {
     "name": "USA > Idaho",
     "area": 216443,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 1964726
   },
   {
     "name": "USA > Illinois",
     "area": 149995,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 12549689
   },
   {
     "name": "USA > Indiana",
     "area": 94326,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 6862199
   },
   {
     "name": "USA > Iowa",
     "area": 145746,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 3207004
   },
   {
     "name": "USA > Kansas",
     "area": 213100,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 2940865
   },
   {
     "name": "USA > Kentucky",
     "area": 104656,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 4526154
   },
   {
     "name": "USA > Louisiana",
     "area": 135659,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 4573749
   },
   {
     "name": "USA > Maine",
     "area": 91633,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 1385340
   },
   {
     "name": "USA > Maryland",
     "area": 32131,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 6180253
   },
   {
     "name": "USA > Massachusetts",
     "area": 27336,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 7001399
   },
   {
     "name": "USA > Michigan",
     "area": 250487,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 10037261
   },
   {
     "name": "USA > Minnesota",
     "area": 225163,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 5737915
   },
   {
     "name": "USA > Mississippi",
     "area": 125438,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 2939690
   },
   {
     "name": "USA > Missouri",
     "area": 180540,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 6196156
   },
   {
     "name": "USA > Montana",
     "area": 380832,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 1132812
   },
   {
     "name": "USA > Nebraska",
     "area": 200330,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 1978379
   },
   {
     "name": "USA > Nevada",
     "area": 286380,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 3194176
   },
   {
     "name": "USA > New Hampshire",
     "area": 24214,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 1402054
   },
   {
     "name": "USA > New Jersey",
     "area": 22591,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 9290841
   },
   {
     "name": "USA > New Mexico",
     "area": 314917,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 2114371
   },
   {
     "name": "USA > New York",
     "area": 141300,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 19571216
   },
   {
     "name": "USA > North Carolina",
     "area": 139391,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 10835491
   },
   {
     "name": "USA > North Dakota",
     "area": 183108,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 783926
   },
   {
     "name": "USA > Ohio",
     "area": 116098,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 11785935
   },
   {
     "name": "USA > Oklahoma",
     "area": 181037,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 4053824
   },
   {
     "name": "USA > Oregon",
     "area": 254806,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 4233358
   },
   {
     "name": "USA > Pennsylvania",
     "area": 119280,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 12961683
   },
   {
     "name": "USA > Rhode Island",
     "area": 4001,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 1095962
   },
   {
     "name": "USA > South Carolina",
     "area": 82933,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 5373555
   },
   {
     "name": "USA > South Dakota",
     "area": 199729,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 919318
   },
   {
     "name": "USA > Tennessee",
     "area": 109153,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 7126489
   },
   {
     "name": "USA > Texas",
     "area": 695662,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 30503301
   },
   {
     "name": "USA > Utah",
     "area": 219882,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 3417734
   },
   {
     "name": "USA > Vermont",
     "area": 24906,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 647464
   },
   {
     "name": "USA > Virginia",
     "area": 110787,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 8715698
   },
   {
     "name": "USA > Washington",
     "area": 184661,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 7812880
   },
   {
     "name": "USA > West Virginia",
     "area": 62756,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 1775156
   },
   {
     "name": "USA > Wisconsin",
     "area": 169635,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 5910955
   },
   {
     "name": "USA > Wyoming",
     "area": 253335,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 584057
   },
   {
     "name": "USA > District of Columbia",
     "area": 159,
-    "type": "us_state"
+    "type": "us_state",
+    "population": 678972
   },
   {
     "name": "Canada > Alberta",
@@ -5779,12 +6070,14 @@
     "type": "country",
     "aliases": [
       "Alba"
-    ]
+    ],
+    "population": 5479900
   },
   {
     "name": "England",
     "area": 130279,
-    "type": "country"
+    "type": "country",
+    "population": 56490048
   },
   {
     "name": "Wales",
@@ -5792,12 +6085,14 @@
     "type": "country",
     "aliases": [
       "Cymru"
-    ]
+    ],
+    "population": 3176000
   },
   {
     "name": "Northern Ireland",
     "area": 13843,
-    "type": "country"
+    "type": "country",
+    "population": 1903100
   },
   {
     "name": "Crimea",
