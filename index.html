@@ -92,6 +92,8 @@
             transition: opacity 0.5s ease;
             max-width: 540px;
             margin: 0 auto;
+            overflow: hidden;
+            -webkit-overflow-scrolling: auto;
         }
 
 
@@ -395,7 +397,7 @@
 <div id="float-panel">
     <div class="input-wrapper">
         <div style="position:relative;">
-            <input type="text" id="entitySearch" placeholder="Search country, city, state, island…" autocomplete="off" spellcheck="false" style="position:relative; z-index:2; background:transparent;">
+            <input type="text" id="entitySearch" placeholder="Search country, city, state, island…" autocomplete="off" spellcheck="false" style="position:relative; z-index:2; background:white;">
             <div id="ghostText" style="
                 position:absolute; top:0; left:0; right:0; bottom:0;
                 padding:10px 14px;
