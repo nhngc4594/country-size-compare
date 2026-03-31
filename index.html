@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4QWG8TF8P3"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-4QWG8TF8P3');
-    </script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Square Scale</title>
@@ -19,14 +11,13 @@
             --danger: #e74c3c;
             --success: #27ae60;
             --bg: #f8f9fa;
-            --panel-height: 130px;
-            --header-height: 38px;
+            --header-h: 44px;
         }
 
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
-            font-family: -apple-system, system-ui, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
             height: 100vh;
             background: var(--bg);
@@ -34,1112 +25,341 @@
             position: relative;
         }
 
-        /* ── HEADER (slim, floats over canvas) ── */
+        /* ── HEADER ── */
         #app-header {
             position: fixed;
             top: 0; left: 0; right: 0;
-            height: var(--header-height);
+            height: var(--header-h);
             background: var(--primary);
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-        }
-
-        #app-header span {
-            font-weight: bold;
-            font-size: 1rem;
-            letter-spacing: 0.02em;
+            z-index: 2000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
         #helpBtn {
             position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: rgba(255,255,255,0.75);
-            font-size: 11px;
+            right: 15px;
+            font-size: 12px;
             font-weight: bold;
+            opacity: 0.8;
             cursor: pointer;
-            letter-spacing: 0.03em;
         }
 
-        #helpBtn:active { opacity: 0.6; }
-
-        /* ── STAGE (full screen, padded so canvas area avoids header and panel) ── */
+        /* ── STAGE ── */
         #stage {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: radial-gradient(#d1d1d1 0.8px, transparent 0.8px);
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(#d1d1d1 1px, transparent 1px);
             background-size: 40px 40px;
             touch-action: none;
-            overflow: hidden;
         }
 
         /* ── FLOATING PANEL ── */
         #float-panel {
             position: fixed;
-            bottom: 12px;
+            bottom: 20px;
             left: 12px;
             right: 12px;
+            max-width: 500px;
+            margin: 0 auto;
             background: white;
             border-radius: 16px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.18);
-            padding: 10px 12px;
-            z-index: 1000;
-            transition: opacity 0.5s ease;
-            max-width: 540px;
-            margin: 0 auto;
-            overflow: hidden;
-            -webkit-overflow-scrolling: auto;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            padding: 12px;
+            z-index: 3000;
         }
 
+        .input-wrapper { position: relative; margin-bottom: 10px; }
 
-        /* Search row */
-        .input-wrapper {
-            position: relative;
-            margin-bottom: 8px;
-        }
-
+        /* Cleaned Input (No Ghost Text) */
         input[type="text"] {
             width: 100%;
-            padding: 10px 14px;
-            border: 2px solid #dfe6e9;
-            border-radius: 10px;
-            font-size: 16px;
+            padding: 14px;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            font-size: 16px; /* Prevents iOS auto-zoom */
             outline: none;
             transition: border-color 0.2s;
-            background: white;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            color: #222;
-            box-shadow: none;
-            /* Prevent browser dark-mode or system accent from overriding bg */
-            color-scheme: light;
         }
+        input[type="text"]:focus { border-color: var(--accent); }
 
-        /* Force-override browser autofill background (the dark pill culprit on mobile) */
-        input[type="text"]:-webkit-autofill,
-        input[type="text"]:-webkit-autofill:focus,
-        input[type="text"]:-webkit-autofill:hover {
-            -webkit-box-shadow: 0 0 0px 1000px white inset !important;
-            box-shadow: 0 0 0px 1000px white inset !important;
-            -webkit-text-fill-color: #222 !important;
-            background-color: white !important;
-        }
-
-        input[type="text"]:focus {
-            border-color: var(--accent);
-            background: white;
-        }
-
-        /* Results dropdown opens UPWARD from the panel */
         #results-box {
             position: absolute;
-            bottom: calc(100% + 4px);
-            left: 0;
-            right: 0;
+            bottom: calc(100% + 10px);
+            left: 0; right: 0;
             background: white;
-            border: 1px solid #ddd;
-            z-index: 2000;
-            display: none;
-            border-radius: 12px 12px 4px 4px;
+            border-radius: 12px;
             box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
-            max-height: 260px;
+            max-height: 250px;
             overflow-y: auto;
+            display: none;
         }
 
         .result-item {
-            padding: 10px 15px;
-            border-bottom: 1px solid #eee;
-            cursor: pointer;
+            padding: 12px 15px;
+            border-bottom: 1px solid #f0f0f0;
             display: flex;
             flex-direction: column;
-            gap: 2px;
         }
+        .result-item:active { background: #f0f7ff; }
+        .result-title { font-weight: bold; font-size: 14px; }
+        .result-sub { font-size: 11px; color: #888; margin-top: 2px; }
 
-        .result-item:last-child { border-bottom: none; }
-        .result-item:hover, .result-item:active, .result-item.highlighted { background: #f0f7ff; }
-
-        .result-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: #222;
-        }
-
-        .result-sub {
-            font-size: 11px;
-            color: #888;
-        }
-
-        /* Button row */
-        .btn-row {
-            display: flex;
-            gap: 5px;
-            flex-wrap: nowrap;
-        }
-
+        .btn-row { display: flex; gap: 6px; }
         button {
-            padding: 8px 6px;
-            cursor: pointer;
-            border-radius: 8px;
+            flex: 1;
             border: none;
-            background: var(--accent);
+            border-radius: 8px;
+            padding: 10px 4px;
             color: white;
             font-weight: bold;
-            font-size: 10px;
-            touch-action: manipulation;
-            white-space: nowrap;
-            min-width: 0;
+            font-size: 11px;
+            background: var(--accent);
         }
 
-        button:active { opacity: 0.8; }
-
-        /* Only panel buttons stretch to fill the row */
-        .btn-row button { flex: 1; }
-
-        /* ── MODE TOGGLE ANIMATION ── */
+        /* ── SHAPES ── */
         .shape {
             position: absolute;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            cursor: grab;
-            touch-action: none;
-            will-change: left, top;
-            transition: border-radius 0.4s ease, width 0.4s ease, height 0.4s ease, background-color 0.3s ease;
+            border: 1.5px solid rgba(0,0,0,0.2);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: border-radius 0.3s ease;
         }
-
-        .shape:active { cursor: grabbing; }
-        .shape.selected { border: 3px solid #000 !important; z-index: 800 !important; box-shadow: 0 4px 16px rgba(0,0,0,0.25) !important; }
-        .shape.highlight { border: 3px dashed var(--success) !important; }
-        .shape.is-tiny {
-            border: 2px solid #e67e22 !important;
-            box-shadow: 0 0 10px rgba(230,126,34,0.7) !important;
-        }
-
-        /* ── SQUARES ── */
-        .square {
-            border: 1.5px solid rgba(0,0,0,0.25);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-            border-radius: 3px;
-        }
-
-        /* ── CIRCLES ── */
-        .circle {
-            border: 1.5px solid rgba(0,0,0,0.25);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-            border-radius: 50%;
-        }
+        .shape.square { border-radius: 4px; }
+        .shape.circle { border-radius: 50%; }
+        .shape.selected { border: 3px solid #000; z-index: 100; }
+        .shape.highlight { border: 3px dashed var(--success); }
 
         .label {
             font-size: 10px;
             font-weight: bold;
             text-align: center;
             pointer-events: none;
-            color: rgba(0,0,0,0.85);
-            padding: 4px 5px;
-            line-height: 1.3;
-            overflow: hidden;
-            word-break: break-word;
-            max-width: 100%;
+            padding: 4px;
         }
 
-        .tiny-badge {
-            position: absolute;
-            bottom: calc(100% + 5px);
-            left: 50%;
-            transform: translateX(-50%);
-            background: #e67e22;
-            color: white;
-            font-size: 9px;
-            font-weight: bold;
-            padding: 3px 7px;
-            border-radius: 10px;
-            white-space: nowrap;
-            pointer-events: none;
-            z-index: 900;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-            line-height: 1.4;
-            text-align: center;
-        }
-
-        /* ── HELP MODAL ── */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.55);
-            z-index: 5000;
-            align-items: center;
-            justify-content: center;
-            padding: 16px;
-        }
-
-        .modal-overlay.open { display: flex; }
-
-        .modal {
-            background: white;
-            border-radius: 14px;
-            max-width: 440px;
-            width: 100%;
-            max-height: 85vh;
-            overflow-y: auto;
-            padding: 24px 20px 20px;
-            position: relative;
-        }
-
-        .modal h2 {
-            margin: 0 0 16px;
-            font-size: 1.2rem;
-            color: var(--primary);
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 14px;
-            right: 16px;
-            background: none;
-            border: none;
-            font-size: 22px;
-            cursor: pointer;
-            color: #666;
-            min-width: unset;
-            padding: 0;
-            line-height: 1;
-        }
-
-        .help-step {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 16px;
-            align-items: flex-start;
-        }
-
-        .help-num {
-            background: var(--accent);
-            color: white;
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 13px;
-            flex-shrink: 0;
-        }
-
-        .help-text { font-size: 14px; line-height: 1.5; color: #333; }
-        .help-text strong { color: var(--primary); }
-
-        .help-tip {
-            background: #f0f7ff;
-            border-left: 3px solid var(--accent);
-            padding: 10px 12px;
-            border-radius: 0 6px 6px 0;
-            font-size: 13px;
-            color: #444;
-            margin-top: 12px;
-        }
-
-        /* ── TOAST ── */
-        #toast {
-            position: fixed;
-            bottom: 160px;
-            left: 50%;
-            transform: translateX(-50%) translateY(80px);
-            background: #2c3e50;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 24px;
-            font-size: 14px;
-            z-index: 9999;
-            transition: transform 0.3s ease;
-            pointer-events: none;
-            white-space: nowrap;
-        }
-
-        #toast.show { transform: translateX(-50%) translateY(0); }
-
-        /* ── LOADING ── */
+        /* ── LOADING & MODALS ── */
         #loading {
-            position: fixed;
-            inset: 0;
-            background: var(--bg);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 9000;
-            gap: 14px;
+            position: fixed; inset: 0; background: white; z-index: 9999;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid #ddd;
-            border-top-color: var(--accent);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
+        .spinner { width: 30px; height: 30px; border: 3px solid #eee; border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        #loading p { color: #666; font-size: 14px; margin: 0; }
+        #toast {
+            position: fixed; bottom: 150px; left: 50%; transform: translateX(-50%);
+            background: #333; color: white; padding: 8px 16px; border-radius: 20px;
+            font-size: 13px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 5000;
+        }
+        #toast.show { opacity: 1; }
     </style>
 </head>
 <body>
 
-<!-- Loading screen -->
-<div id="loading">
-    <div class="spinner"></div>
-    <p>Loading data…</p>
-</div>
+<div id="loading"><div class="spinner"></div><p>Loading regions...</p></div>
 
-<!-- Header (slim, fixed) -->
 <div id="app-header">
     <span>Square Scale</span>
-    <span id="helpBtn" onclick="openHelp()">Guide</span>
+    <div id="helpBtn" onclick="toggleHelp()">Guide</div>
 </div>
 
-<!-- Stage (full screen) -->
 <div id="stage"></div>
 
-<!-- Floating Panel -->
 <div id="float-panel">
     <div class="input-wrapper">
-        <div style="position:relative;">
-            <input type="text" id="entitySearch" placeholder="Search country, city, state, island…" autocomplete="off" spellcheck="false" style="position:relative; z-index:2; background:white;">
-            <div id="ghostText" style="
-                position:absolute; top:0; left:0; right:0; bottom:0;
-                padding:10px 14px;
-                font-size:16px;
-                color:#bbb;
-                pointer-events:none;
-                z-index:1;
-                white-space:nowrap;
-                overflow:hidden;
-                border: 2px solid transparent;
-                border-radius:10px;
-                box-sizing:border-box;
-                background:transparent;
-            "></div>
-        </div>
+        <input type="text" id="entitySearch" placeholder="Search country, state, or city..." autocomplete="off">
         <div id="results-box"></div>
     </div>
     <div class="btn-row">
-        <button id="actionBtn" style="background:var(--success)" onclick="handleAction()">Merge Overlapping</button>
-        <button id="deleteBtn" style="background:var(--danger); display:none;" onclick="deleteSelected()">Delete</button>
+        <button id="actionBtn" style="background:var(--success)" onclick="handleMerge()">Merge Overlapping</button>
         <button id="modeBtn" style="background:#8e44ad" onclick="toggleMode()">Population</button>
-        <button style="background:var(--accent)" onclick="shareScale()">Share</button>
-        <button style="background:#7f8c8d" onclick="clearAll()">Clear All</button>
+        <button id="delBtn" style="background:var(--danger); display:none;" onclick="deleteSelected()">Delete</button>
+        <button onclick="clearAll()" style="background:#7f8c8d">Clear</button>
     </div>
 </div>
 
-<!-- Help Modal -->
-<div class="modal-overlay" id="helpModal" onclick="closeHelpOnOverlay(event)">
-    <div class="modal">
-        <button class="modal-close" onclick="closeHelp()">×</button>
-        <h2>How to use Square Scale</h2>
-
-        <div class="help-step">
-            <div class="help-num">1</div>
-            <div class="help-text"><strong>Search for a place.</strong> Type any country, US state, city, island, Japanese prefecture, or region into the search box and tap a result to add it to the canvas.</div>
-        </div>
-        <div class="help-step">
-            <div class="help-num">2</div>
-            <div class="help-text"><strong>Each square represents area.</strong> The bigger the square, the bigger the place. All squares are to the same scale, so you can directly compare sizes at a glance.</div>
-        </div>
-        <div class="help-step">
-            <div class="help-num">3</div>
-            <div class="help-text"><strong>Drag squares around.</strong> Tap and drag any square to move it. Tap a square to select it (black border).</div>
-        </div>
-        <div class="help-step">
-            <div class="help-num">4</div>
-            <div class="help-text"><strong>Merge overlapping shapes.</strong> Drag two or more shapes so they overlap, select one, then tap <strong>Merge Overlapping</strong>. They merge into a single shape showing the combined area — great for "how many Californias fit in Russia?"</div>
-        </div>
-        <div class="help-step">
-            <div class="help-num">5</div>
-            <div class="help-text"><strong>Split them back apart.</strong> Select a combined square and tap <strong>De-combine</strong> to restore the originals.</div>
-        </div>
-        <div class="help-step">
-            <div class="help-num">6</div>
-            <div class="help-text"><strong>Share your comparison.</strong> Tap <strong>Share</strong> to copy a link that recreates your exact layout for anyone you send it to.</div>
-        </div>
-
-        <div class="help-tip">
-            💡 <strong>Tiny places</strong> (like Monaco or Singapore) are shown with an orange glow and a <em>"NOT TO SCALE"</em> badge — they're enlarged so you can see them, but aren't drawn to the same scale as larger regions.
-        </div>
-        <div class="help-tip" style="margin-top:8px;">
-            💡 <strong>Cities</strong> appear in three versions: <em>City Proper</em>, <em>Metro Area</em>, and <em>Urban Footprint</em> — add all three to compare how differently each boundary is drawn.
-        </div>
-    </div>
-</div>
-
-<!-- Toast -->
 <div id="toast"></div>
 
 <script>
-    // ── STATE ────────────────────────────────────────────────────────────────
     let masterData = [];
     let addedItems = [];
-    let selectedIndex = null;
-    let displayMode = 'area'; // 'area' or 'population'
+    let selectedIdx = null;
+    let mode = 'area'; // 'area' or 'population'
 
-    // ── PANEL (no fade — always fully visible) ───────────────────────────────
-    const floatPanel = document.getElementById('float-panel');
-    function wakePanel() {}          // no-op, kept so call sites don't error
-    function wakePanelFromCanvas() {}
-
-    // ── SAFE ZONE ─────────────────────────────────────────────────────────────
-    // Canvas area excludes the header at top and panel at bottom.
-    // These are used for placement and clamping.
-    function getSafeZone() {
-        const headerH = document.getElementById('app-header').offsetHeight;
-        const panelRect = floatPanel.getBoundingClientRect();
-        return {
-            top:    headerH,
-            bottom: panelRect.top,   // exactly the top edge of the panel
-            left:   0,
-            right:  stage.offsetWidth,
-        };
-    }
     const stage = document.getElementById('stage');
+    const input = document.getElementById('entitySearch');
+    const resultsBox = document.getElementById('results-box');
 
-    // ── TYPE LABELS ──────────────────────────────────────────────────────────
-    const typeLabel = {
-        country: 'Country', continent: 'Continent', region: 'Region',
-        us_state: 'US State', ca_province: 'CA Province', jp_prefecture: 'Japan',
-        fr_region: 'France', fr_province: 'France (Historic)', uk_county: 'UK',
-        au_state: 'Australia', cn_province: 'China', in_state: 'India',
-        br_state: 'Brazil', de_state: 'Germany', es_region: 'Spain',
-        it_region: 'Italy', mx_state: 'Mexico', ru_subject: 'Russia',
-        island: 'Island', city: 'City', city_metro: 'City (Metro)', city_urban: 'City (Urban)',
-    };
-
-    // ── INIT ─────────────────────────────────────────────────────────────────
     async function init() {
         try {
             const res = await fetch('data.json');
             masterData = await res.json();
-        } catch(e) {
-            showToast('Could not load data. Please refresh.');
-            console.error(e);
-        }
-
+        } catch(e) { console.error(e); }
         document.getElementById('loading').style.display = 'none';
-        setupSearch();
-
-        // Load state: URL params take priority (shared links), then sessionStorage
-        const urlParams = new URLSearchParams(window.location.search);
-        const mapData = urlParams.get('map');
-        if (mapData) {
-            // Shared link — load from URL, then clear the ?map= param so
-            // swipe-back can't restore an old state unexpectedly
-            try {
-                mapData.split('|').forEach(str => {
-                    const parts = str.split(':');
-                    if (parts.length >= 2) {
-                        const area = parseFloat(parts[parts.length - 1]);
-                        const name = decodeURIComponent(parts.slice(0, -1).join(':'));
-                        if (name && !isNaN(area)) addSquare({ name, area }, false);
-                    }
-                });
-            } catch(e) { console.error('URL parse error', e); }
-            // Remove ?map= from URL bar so browser history stays clean
-            window.history.replaceState({}, '', window.location.pathname);
-        } else {
-            // No shared link — restore previous session if available
-            if (loadSessionState()) render();
-        }
-
-        // Block popstate (swipe back/forward) from navigating away mid-session
-        window.addEventListener('popstate', (e) => {
-            // Push a new state to keep us on this page
-            window.history.pushState(null, '', window.location.pathname);
-        });
-        window.history.pushState(null, '', window.location.pathname);
-
-        // Show help on very first visit
-        if (!localStorage.getItem('squarescale_seen')) {
-            localStorage.setItem('squarescale_seen', '1');
-            openHelp();
-        }
-    }
-
-    // ── SEARCH ───────────────────────────────────────────────────────────────
-    let ghostCompletion = ''; // the full autocomplete suggestion
-
-    // Returns a human-friendly display name and subtitle for a result item
-    function getDisplayParts(item, matchedAlias) {
-        const parts = item.name.split('>');
-        if (parts.length === 2) {
-            // e.g. "UK > Greater London" → title: "Greater London", sub: "UK · County"
-            const region = parts[0].trim();
-            const placeName = parts[1].trim();
-            const tl = typeLabel[item.type] || '';
-            return { title: placeName, sub: `${region} · ${tl}` };
-        }
-        // Top-level item (country, continent, island, city…)
-        const tl = typeLabel[item.type] || '';
-        const sub = matchedAlias ? `Also known as: ${matchedAlias} · ${tl}` : tl;
-        return { title: item.name, sub };
-    }
-
-    function setupSearch() {
-        const input = document.getElementById('entitySearch');
-        const box   = document.getElementById('results-box');
-        // Ghost-text overlay sits behind the real input
-        const ghost = document.getElementById('ghostText');
-        let currentResults = [];
-        let highlightedIdx = -1;
-
-        function doSearch(val) {
-            box.innerHTML = '';
-            ghostCompletion = '';
-            ghost.textContent = '';
-            highlightedIdx = -1;
-
-            if (val.length < 2) { box.style.display = 'none'; currentResults = []; return; }
-
-            const valL = val.toLowerCase();
-            const results = [];
-
-            for (const item of masterData) {
-                let score = 0;
-                let matchedAlias = null;
-                const nameLower = item.name.toLowerCase();
-
-                if (nameLower.includes(valL)) {
-                    score = nameLower.startsWith(valL) ? 100 : 50;
-                    // Also check the short part after '>' for prefix matches
-                    const shortName = item.name.includes('>') 
-                        ? item.name.split('>').pop().trim().toLowerCase() 
-                        : null;
-                    if (shortName && shortName.startsWith(valL)) score = Math.max(score, 90);
-                } else if (item.aliases) {
-                    for (const alias of item.aliases) {
-                        const aL = alias.toLowerCase();
-                        if (aL.includes(valL)) {
-                            score = aL.startsWith(valL) ? 40 : 20;
-                            matchedAlias = alias;
-                            break;
-                        }
-                    }
-                }
-                if (score > 0) results.push({ item, score, matchedAlias });
-            }
-
-            results.sort((a, b) => b.score - a.score || a.item.name.localeCompare(b.item.name));
-            currentResults = results.slice(0, 10);
-
-            if (currentResults.length === 0) { box.style.display = 'none'; return; }
-
-            // Ghost autocomplete: show completion of the top result's display title
-            const topParts = getDisplayParts(currentResults[0].item, currentResults[0].matchedAlias);
-            const topTitle = topParts.title;
-            if (topTitle.toLowerCase().startsWith(valL) && topTitle.length > val.length) {
-                ghostCompletion = topTitle;
-                // Show the untyped suffix in the ghost overlay
-                ghost.textContent = val + topTitle.slice(val.length);
-            }
-
-            box.style.display = 'block';
-            renderResults();
-        }
-
-        function renderResults() {
-            box.innerHTML = '';
-            currentResults.forEach(({ item, matchedAlias }, idx) => {
-                const { title, sub } = getDisplayParts(item, matchedAlias);
-                const div = document.createElement('div');
-                div.className = 'result-item' + (idx === highlightedIdx ? ' highlighted' : '');
-                div.innerHTML = `<span class="result-title">${title}</span><span class="result-sub">${sub}</span>`;
-                div.addEventListener('pointerdown', (ev) => {
-                    ev.preventDefault();
-                    selectResult(item);
-                });
-                box.appendChild(div);
-            });
-        }
-
-        function selectResult(item) {
-            addSquare(item);
-            box.style.display = 'none';
-            ghost.textContent = '';
-            ghostCompletion = '';
-            input.value = '';
-            input.blur();
-        }
-
-        function acceptGhost() {
-            if (!ghostCompletion || currentResults.length === 0) return false;
-            selectResult(currentResults[0].item);
-            return true;
-        }
-
-        input.addEventListener('input', (e) => {
-            wakePanel();
-            doSearch(e.target.value);
-        });
-
-        // Tab or ArrowRight at end of input = accept ghost completion
-        input.addEventListener('keydown', (e) => {
-            if ((e.key === 'Tab' || e.key === 'ArrowRight') && ghostCompletion) {
-                if (acceptGhost()) { e.preventDefault(); return; }
-            }
-            if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                highlightedIdx = Math.min(highlightedIdx + 1, currentResults.length - 1);
-                renderResults();
-            }
-            if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                highlightedIdx = Math.max(highlightedIdx - 1, -1);
-                renderResults();
-            }
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                if (highlightedIdx >= 0 && currentResults[highlightedIdx]) {
-                    selectResult(currentResults[highlightedIdx].item);
-                } else if (currentResults.length > 0) {
-                    selectResult(currentResults[0].item);
-                }
-            }
-            if (e.key === 'Escape') {
-                box.style.display = 'none';
-                ghost.textContent = '';
-            }
-        });
-
-        // Close dropdown when tapping elsewhere
-        document.addEventListener('pointerdown', (e) => {
-            if (!e.target.closest('.input-wrapper')) {
-                box.style.display = 'none';
-                ghost.textContent = '';
-            }
+        
+        input.addEventListener('input', e => {
+            const val = e.target.value.toLowerCase();
+            if(val.length < 2) { resultsBox.style.display = 'none'; return; }
+            const matches = masterData.filter(d => 
+                d.name.toLowerCase().includes(val) || 
+                (d.aliases && d.aliases.some(a => a.toLowerCase().includes(val)))
+            ).slice(0, 8);
+            
+            resultsBox.innerHTML = matches.map(m => `
+                <div class="result-item" onpointerdown="addRegion('${encodeURIComponent(JSON.stringify(m))}')">
+                    <span class="result-title">${m.name}</span>
+                    <span class="result-sub">${m.type.replace('_',' ')}</span>
+                </div>
+            `).join('');
+            resultsBox.style.display = 'block';
         });
     }
 
-    // ── STATE PERSISTENCE ────────────────────────────────────────────────────
-    // We save canvas state to sessionStorage on every change.
-    // The URL is only used for intentional shares (Share button).
-    // This prevents mobile swipe-back/forward from corrupting the canvas.
-    function saveState() {
-        const state = addedItems.map(i => ({
-            name: i.name, area: i.area, color: i.color,
-            x: i.x, y: i.y,
-            parts: i.parts || null
-        }));
-        try { sessionStorage.setItem('squarescale_state', JSON.stringify(state)); } catch(e) {}
-    }
-
-    function loadSessionState() {
-        try {
-            const raw = sessionStorage.getItem('squarescale_state');
-            if (!raw) return false;
-            const state = JSON.parse(raw);
-            if (!Array.isArray(state) || state.length === 0) return false;
-            addedItems = state;
-            return true;
-        } catch(e) { return false; }
-    }
-
-    function updateURL() {
-        // Only update URL for the Share button — do NOT call this on every add/delete.
-        const state = addedItems
-            .map(i => `${encodeURIComponent(i.name)}:${i.area}`)
-            .join('|');
-        return state ? `${window.location.origin}${window.location.pathname}?map=${state}` : window.location.href;
-    }
-
-    // ── RENDER ───────────────────────────────────────────────────────────────
-    let lastScale = null;
-
-    // Returns the value used for sizing in the current mode.
-    // In population mode, items without population data fall back to area.
-    function getDisplayValue(item) {
-        if (displayMode === 'population') {
-            return item.population || item.area;
-        }
-        return item.area;
+    function addRegion(encoded) {
+        const data = JSON.parse(decodeURIComponent(encoded));
+        const hue = Math.floor(Math.random() * 360);
+        addedItems.push({
+            ...data,
+            color: `hsla(${hue}, 70%, 65%, 0.8)`,
+            x: window.innerWidth / 2 - 40,
+            y: window.innerHeight / 2 - 40
+        });
+        selectedIdx = addedItems.length - 1;
+        input.value = '';
+        resultsBox.style.display = 'none';
+        render();
     }
 
     function getScale() {
-        if (addedItems.length === 0) return 1;
-        const maxVal = Math.max(...addedItems.map(i => getDisplayValue(i)));
-        return (Math.min(stage.offsetWidth, stage.offsetHeight) * 0.75) / Math.sqrt(maxVal);
+        if (!addedItems.length) return 1;
+        const max = Math.max(...addedItems.map(i => mode === 'population' ? (i.population || i.area) : i.area));
+        const viewMin = Math.min(window.innerWidth, window.innerHeight);
+        return (viewMin * 0.7) / Math.sqrt(max);
     }
 
     function render() {
         stage.innerHTML = '';
-        if (addedItems.length === 0) { selectedIndex = null; lastScale = null; updateUI(); return; }
-
         const scale = getScale();
-
-        // When scale changes (e.g. a large country added shrinks everything),
-        // rescale all x/y positions proportionally so squares stay spread out.
-        if (lastScale !== null && lastScale !== scale) {
-            const ratio = scale / lastScale;
-            addedItems.forEach(item => {
-                if (item.x != null) { item.x *= ratio; item.y *= ratio; }
-            });
-        }
-        lastScale = scale;
-
-        const isPopMode = displayMode === 'population';
-
-        addedItems.forEach((item, index) => {
-            const displayVal = getDisplayValue(item);
-            const hasPopData = item.population != null;
-            const trueSide = Math.sqrt(displayVal) * scale;
-            const side = Math.max(25, trueSide);
-            const isTiny = trueSide < 25;
-            const noData = isPopMode && !hasPopData;
-
-            const sq = document.createElement('div');
-            const shapeClass = isPopMode ? 'circle' : 'square';
-            sq.className = 'shape ' + shapeClass
-                + (selectedIndex === index ? ' selected' : '')
-                + (isTiny ? ' is-tiny' : '');
-            sq.style.width  = side + 'px';
-            sq.style.height = side + 'px';
-            sq.style.backgroundColor = item.color;
-
-            if (item.x == null || item.y == null) {
-                const safe = getSafeZone();
-                item.x = safe.left + (safe.right  - safe.left) / 2 - side / 2;
-                item.y = safe.top  + (safe.bottom - safe.top)  / 2 - side / 2;
-            }
-            sq.style.left = item.x + 'px';
-            sq.style.top  = item.y + 'px';
-
-            const mainValue = isPopMode
-                ? (hasPopData ? item.population.toLocaleString() + ' people' : 'No data')
-                : Math.round(item.area).toLocaleString() + ' km²';
-
-            if (isTiny || noData) {
-                sq.innerHTML = `<div class="label"><b>${item.name}</b></div>`;
-                const badge = document.createElement('div');
-                badge.className = 'tiny-badge';
-                if (noData) {
-                    badge.textContent = `⚠ NO POP. DATA`;
-                } else {
-                    badge.textContent = `⚠ NOT TO SCALE · ${mainValue}`;
-                }
-                sq.appendChild(badge);
-            } else {
-                sq.innerHTML = `<div class="label"><b>${item.name}</b><br>${mainValue}</div>`;
-            }
-
-            sq.addEventListener('pointerdown', () => {
-                selectedIndex = index;
-                wakePanelFromCanvas();
-                updateUI();
-            });
-
-            stage.appendChild(sq);
-            makeDraggable(sq, index, scale);
-        });
-
-        updateUI();
-    }
-
-    // ── DRAG ─────────────────────────────────────────────────────────────────
-    function makeDraggable(el, index, scale) {
-        let ix, iy, dragging = false, pointerId = null;
-
-        el.addEventListener('pointerdown', (e) => {
-            e.stopPropagation();
-            el.setPointerCapture(e.pointerId);
-            pointerId = e.pointerId;
-            dragging = true;
-            ix = e.clientX - addedItems[index].x;
-            iy = e.clientY - addedItems[index].y;
-            el.style.zIndex = 1000;
-            selectedIndex = index;
-            document.querySelectorAll('.shape').forEach(s => s.classList.remove('selected'));
-            el.classList.add('selected');
-            updateUI();
-        });
-
-        el.addEventListener('pointermove', (e) => {
-            if (!dragging || e.pointerId !== pointerId) return;
-            e.preventDefault();
-
-            const safe = getSafeZone();
-            const s1 = Math.max(25, Math.sqrt(getDisplayValue(addedItems[index])) * scale);
-
-            // Clamp to safe zone so squares can't be dragged behind header or panel
-            addedItems[index].x = Math.min(Math.max(e.clientX - ix, safe.left), safe.right  - s1);
-            addedItems[index].y = Math.min(Math.max(e.clientY - iy, safe.top),  safe.bottom - s1);
-
-            requestAnimationFrame(() => {
-                el.style.left = addedItems[index].x + 'px';
-                el.style.top  = addedItems[index].y + 'px';
-
-                const shapes = document.querySelectorAll('.shape');
-                addedItems.forEach((other, i) => {
-                    if (i === index) return;
-                    const s2 = Math.max(25, Math.sqrt(getDisplayValue(other)) * scale);
-                    const overlap = !(
-                        addedItems[index].x + s1 < other.x ||
-                        addedItems[index].x > other.x + s2 ||
-                        addedItems[index].y + s1 < other.y ||
-                        addedItems[index].y > other.y + s2
-                    );
-                    shapes[i].classList.toggle('highlight', overlap);
-                });
-            });
-        });
-
-        el.addEventListener('pointerup', (e) => {
-            if (!dragging) return;
-            dragging = false;
-            pointerId = null;
-            el.style.zIndex = '';
-            saveState();
-            updateUI();
-        });
-
-        el.addEventListener('pointercancel', () => {
-            dragging = false;
-            pointerId = null;
-        });
-    }
-
-    // ── COMBINE / DECOMBINE ──────────────────────────────────────────────────
-    let lastAddTime = 0; // guard: prevent accidental combines right after adding
-
-    function handleAction() {
-        if (selectedIndex === null) return;
-        if (addedItems[selectedIndex].parts) decombineSelected();
-        else mergeTouching();
-    }
-
-    function mergeTouching() {
-        // Safety guard: don't allow combining within 400ms of the last add/clear.
-        // This prevents accidental auto-combines on mobile when squares rescale.
-        if (Date.now() - lastAddTime < 400) {
-            showToast('Drag shapes together until they overlap, then merge.');
-            return;
-        }
-        const scale = getScale();
-        const target = addedItems[selectedIndex];
-        const toMerge = [selectedIndex];
-        const others  = [];
-
+        
         addedItems.forEach((item, i) => {
-            if (i === selectedIndex) return;
-            const s1 = Math.max(25, Math.sqrt(getDisplayValue(target)) * scale);
-            const s2 = Math.max(25, Math.sqrt(getDisplayValue(item)) * scale);
-            const overlap = !(
-                target.x + s1 < item.x || target.x > item.x + s2 ||
-                target.y + s1 < item.y || target.y > item.y + s2
-            );
-            if (overlap) toMerge.push(i); else others.push(item);
+            const val = mode === 'population' ? (item.population || item.area) : item.area;
+            const size = Math.max(35, Math.sqrt(val) * scale);
+            
+            const div = document.createElement('div');
+            div.className = `shape ${mode === 'population' ? 'circle' : 'square'} ${selectedIdx === i ? 'selected' : ''}`;
+            div.style.width = size + 'px';
+            div.style.height = size + 'px';
+            div.style.backgroundColor = item.color;
+            div.style.left = item.x + 'px';
+            div.style.top = item.y + 'px';
+            
+            const labelVal = mode === 'population' 
+                ? (item.population ? (item.population/1000000).toFixed(1)+'M' : 'N/A')
+                : Math.round(item.area).toLocaleString() + ' km²';
+            
+            div.innerHTML = `<div class="label">${item.name}<br>${labelVal}</div>`;
+            
+            div.onpointerdown = e => {
+                selectedIdx = i;
+                const offset = { x: e.clientX - item.x, y: e.clientY - item.y };
+                
+                function move(me) {
+                    item.x = me.clientX - offset.x;
+                    item.y = me.clientY - offset.y;
+                    div.style.left = item.x + 'px';
+                    div.style.top = item.y + 'px';
+                }
+                function up() {
+                    window.removeEventListener('pointermove', move);
+                    window.removeEventListener('pointerup', up);
+                }
+                window.addEventListener('pointermove', move);
+                window.addEventListener('pointerup', up);
+                render(); 
+            };
+            
+            stage.appendChild(div);
         });
-
-        if (toMerge.length < 2) {
-            showToast('Drag squares together until they overlap, then combine.');
-            return;
-        }
-
-        if (typeof gtag === 'function') gtag('event', 'combine_regions', { count: toMerge.length });
-
-        const mergedParts = [];
-        toMerge.forEach(idx => {
-            if (addedItems[idx].parts) mergedParts.push(...addedItems[idx].parts);
-            else mergedParts.push(addedItems[idx]);
-        });
-
-        const totalArea = mergedParts.reduce((s, i) => s + i.area, 0);
-        const newName   = [...new Set(mergedParts.map(p => p.name.split('>').pop().trim()))].join(' + ');
-
-        addedItems = [...others, {
-            name:  newName,
-            area:  totalArea,
-            color: mergedParts[0].color,
-            x:     target.x,
-            y:     target.y,
-            parts: mergedParts,
-        }];
-
-        selectedIndex = addedItems.length - 1;
-        render();
-        saveState();
-    }
-
-    function decombineSelected() {
-        const parts = addedItems[selectedIndex].parts;
-        addedItems.splice(selectedIndex, 1);
-        addedItems.push(...parts);
-        selectedIndex = null;
-        render();
-        saveState();
-    }
-
-    // ── DELETE ───────────────────────────────────────────────────────────────
-    function deleteSelected() {
-        if (selectedIndex !== null) {
-            addedItems.splice(selectedIndex, 1);
-            selectedIndex = null;
-            render();
-            saveState();
-        }
-    }
-
-    // ── UI STATE ─────────────────────────────────────────────────────────────
-    function updateUI() {
+        
+        document.getElementById('delBtn').style.display = selectedIdx !== null ? 'block' : 'none';
         const actionBtn = document.getElementById('actionBtn');
-        const deleteBtn = document.getElementById('deleteBtn');
-
-        if (selectedIndex !== null && addedItems[selectedIndex]) {
-            deleteBtn.style.display = 'inline-block';
-            const isCombined = !!addedItems[selectedIndex].parts;
-            actionBtn.textContent = isCombined ? 'Split Apart' : 'Merge Overlapping';
-            actionBtn.style.background = isCombined ? 'var(--primary)' : 'var(--success)';
+        if(selectedIdx !== null && addedItems[selectedIdx].parts) {
+            actionBtn.textContent = "Split Apart";
         } else {
-            deleteBtn.style.display = 'none';
-            actionBtn.textContent = 'Merge Overlapping';
-            actionBtn.style.background = 'var(--success)';
+            actionBtn.textContent = "Merge Overlapping";
         }
     }
 
-    // ── ADD SQUARE ───────────────────────────────────────────────────────────
-    function addSquare(item, isNew = true) {
-        if (isNew && typeof gtag === 'function') {
-            gtag('event', 'select_country', { country_name: item.name });
-        }
-        const hue = Math.floor(Math.random() * 360);
-
-        // Calculate a non-overlapping position for the new square.
-        // We compute the scale *after* this item is added, then place the
-        // new square in the first free grid cell, scanning left-to-right,
-        // top-to-bottom from the top-left corner with a small margin.
-        const tempItems = [...addedItems, { ...item }];
-        const maxArea   = Math.max(...tempItems.map(i => i.area));
-        const scale     = (Math.min(stage.offsetWidth, stage.offsetHeight) * 0.75) / Math.sqrt(maxArea);
-        const newSide   = Math.max(25, Math.sqrt(getDisplayValue(item)) * scale);
-        const margin    = 14;
-        const step      = newSide + margin;
-        const safe      = getSafeZone();
-
-        // Build list of occupied rectangles within safe zone
-        const occupied = addedItems
-            .filter(i => i.x != null)
-            .map(i => {
-                const s = Math.max(25, Math.sqrt(getDisplayValue(i)) * scale);
-                return { x: i.x, y: i.y, w: s, h: s };
+    function handleMerge() {
+        if(selectedIdx === null) return;
+        const target = addedItems[selectedIdx];
+        
+        if(target.parts) {
+            const parts = target.parts;
+            addedItems.splice(selectedIdx, 1);
+            addedItems.push(...parts);
+            selectedIdx = null;
+        } else {
+            const scale = getScale();
+            const s1 = Math.sqrt(target.area) * scale;
+            const toMerge = [selectedIdx];
+            const others = [];
+            
+            addedItems.forEach((item, i) => {
+                if(i === selectedIdx) return;
+                const s2 = Math.sqrt(item.area) * scale;
+                const overlap = !(target.x + s1 < item.x || target.x > item.x + s2 || target.y + s1 < item.y || target.y > item.y + s2);
+                if(overlap) toMerge.push(i);
+                else others.push(item);
             });
 
-        function overlapsAny(px, py) {
-            for (const r of occupied) {
-                if (!(px + newSide + margin < r.x || px > r.x + r.w + margin ||
-                      py + newSide + margin < r.y || py > r.y + r.h + margin)) {
-                    return true;
-                }
+            if(toMerge.length > 1) {
+                const parts = [];
+                toMerge.forEach(idx => {
+                    if(addedItems[idx].parts) parts.push(...addedItems[idx].parts);
+                    else parts.push(addedItems[idx]);
+                });
+                const totalArea = parts.reduce((s, p) => s + p.area, 0);
+                const totalPop = parts.reduce((s, p) => s + (p.population || 0), 0);
+                addedItems = [...others, {
+                    name: "Combined Area",
+                    area: totalArea,
+                    population: totalPop,
+                    color: target.color,
+                    x: target.x, y: target.y,
+                    parts: parts
+                }];
+                selectedIdx = addedItems.length - 1;
+            } else {
+                showToast("Overlap shapes first!");
             }
-            return false;
         }
-
-        // Search only within the safe zone
-        let px = safe.left, py = safe.top;
-        outer: for (let row = 0; py + newSide <= safe.bottom; row++, py += step) {
-            px = safe.left;
-            for (let col = 0; px + newSide <= safe.right; col++, px += step) {
-                if (!overlapsAny(px, py)) break outer;
-            }
-        }
-
-        // Clamp strictly to safe zone
-        px = Math.min(px, Math.max(safe.left, safe.right  - newSide));
-        py = Math.min(py, Math.max(safe.top,  safe.bottom - newSide));
-
-        addedItems.push({
-            ...item,
-            color: `hsla(${hue}, 70%, 65%, 0.75)`,
-            x: px,
-            y: py,
-        });
-        selectedIndex = addedItems.length - 1;
-        lastAddTime = Date.now();
         render();
-        saveState();
     }
 
-    // ── MODE TOGGLE ──────────────────────────────────────────────────────────
     function toggleMode() {
-        displayMode = displayMode === 'area' ? 'population' : 'area';
-        const btn = document.getElementById('modeBtn');
-        // Button always stays purple — text shows current mode
-        btn.style.background = '#8e44ad';
-        btn.textContent = displayMode === 'population' ? 'Show Area' : 'Population';
-        // Reset scale tracking so positions rescale cleanly
-        lastScale = null;
+        mode = mode === 'area' ? 'population' : 'area';
+        document.getElementById('modeBtn').textContent = mode === 'area' ? 'Population' : 'Area';
         render();
-        if (typeof gtag === 'function') gtag('event', 'toggle_mode', { mode: displayMode });
     }
 
-    // ── SHARE ────────────────────────────────────────────────────────────────
-    function shareScale() {
-        const url = updateURL(); // builds share URL from current state
-        if (navigator.share) {
-            navigator.share({ title: 'Square Scale comparison', url })
-                .catch(() => copyToClipboard(url));
-        } else {
-            copyToClipboard(url);
+    function deleteSelected() {
+        if(selectedIdx !== null) {
+            addedItems.splice(selectedIdx, 1);
+            selectedIdx = null;
+            render();
         }
     }
 
-    function copyToClipboard(text) {
-        if (navigator.clipboard) {
-            navigator.clipboard.writeText(text).then(() => showToast('Link copied to clipboard!'));
-        } else {
-            // Fallback
-            const ta = document.createElement('textarea');
-            ta.value = text;
-            ta.style.position = 'fixed';
-            ta.style.opacity = '0';
-            document.body.appendChild(ta);
-            ta.select();
-            document.execCommand('copy');
-            document.body.removeChild(ta);
-            showToast('Link copied!');
-        }
-    }
+    function clearAll() { addedItems = []; selectedIdx = null; render(); }
+    function showToast(m) { const t = document.getElementById('toast'); t.textContent = m; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'), 2000); }
+    function toggleHelp() { showToast("Drag shapes to compare. Overlap and Merge to combine."); }
 
-    // ── CLEAR ────────────────────────────────────────────────────────────────
-    function clearAll() {
-        addedItems = [];
-        selectedIndex = null;
-        lastAddTime = Date.now();
-        render();
-        saveState();
-    }
-
-    // ── TOAST ────────────────────────────────────────────────────────────────
-    function showToast(msg) {
-        const t = document.getElementById('toast');
-        t.textContent = msg;
-        t.classList.add('show');
-        setTimeout(() => t.classList.remove('show'), 2800);
-    }
-
-    // ── HELP MODAL ───────────────────────────────────────────────────────────
-    function openHelp()  { document.getElementById('helpModal').classList.add('open'); }
-    function closeHelp() { document.getElementById('helpModal').classList.remove('open'); }
-    function closeHelpOnOverlay(e) { if (e.target === document.getElementById('helpModal')) closeHelp(); }
-
-    // ── RESIZE ───────────────────────────────────────────────────────────────
-    window.addEventListener('resize', render);
-
-    // ── START ────────────────────────────────────────────────────────────────
     init();
 </script>
 </body>
