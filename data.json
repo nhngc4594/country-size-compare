@@ -2,102 +2,122 @@
   {
     "name": "Earth > Africa",
     "area": 30370000,
-    "type": "continent"
+    "type": "continent",
+    "population": 1460481772
   },
   {
     "name": "Earth > Antarctica",
     "area": 14000000,
-    "type": "continent"
+    "type": "continent",
+    "population": 1100
   },
   {
     "name": "Earth > Asia",
     "area": 44579000,
-    "type": "continent"
+    "type": "continent",
+    "population": 4753079726
   },
   {
     "name": "Earth > Europe",
     "area": 10530000,
-    "type": "continent"
+    "type": "continent",
+    "population": 748000000
   },
   {
     "name": "Earth > North America",
     "area": 24709000,
-    "type": "continent"
+    "type": "continent",
+    "population": 604182517
   },
   {
     "name": "Earth > Oceania",
     "area": 8526000,
-    "type": "continent"
+    "type": "continent",
+    "population": 45038000
   },
   {
     "name": "Earth > South America",
     "area": 17840000,
-    "type": "continent"
+    "type": "continent",
+    "population": 439719009
   },
   {
     "name": "Earth > World",
     "area": 510072000,
-    "type": "continent"
+    "type": "continent",
+    "population": 8100000000
   },
   {
     "name": "Region > European Union",
     "area": 4233262,
-    "type": "region"
+    "type": "region",
+    "population": 450000000
   },
   {
     "name": "Region > Western Europe",
     "area": 3452000,
-    "type": "region"
+    "type": "region",
+    "population": 196000000
   },
   {
     "name": "Region > Middle East",
     "area": 6000000,
-    "type": "region"
+    "type": "region",
+    "population": 371000000
   },
   {
     "name": "Region > Southeast Asia",
     "area": 4522518,
-    "type": "region"
+    "type": "region",
+    "population": 685000000
   },
   {
     "name": "Region > Central America",
     "area": 523780,
-    "type": "region"
+    "type": "region",
+    "population": 51000000
   },
   {
     "name": "Region > Caribbean",
     "area": 275400,
-    "type": "region"
+    "type": "region",
+    "population": 45000000
   },
   {
     "name": "Region > Sub-Saharan Africa",
     "area": 24300000,
-    "type": "region"
+    "type": "region",
+    "population": 1200000000
   },
   {
     "name": "Region > Scandinavia",
     "area": 928057,
-    "type": "region"
+    "type": "region",
+    "population": 21700000
   },
   {
     "name": "Region > Baltic States",
     "area": 175015,
-    "type": "region"
+    "type": "region",
+    "population": 6000000
   },
   {
     "name": "Region > Iberian Peninsula",
     "area": 583254,
-    "type": "region"
+    "type": "region",
+    "population": 58000000
   },
   {
     "name": "Region > Arabian Peninsula",
     "area": 3237500,
-    "type": "region"
+    "type": "region",
+    "population": 90000000
   },
   {
     "name": "Region > Indian Subcontinent",
     "area": 4480000,
-    "type": "region"
+    "type": "region",
+    "population": 1900000000
   },
   {
     "name": "Afghanistan",
@@ -1978,2362 +1998,2834 @@
   {
     "name": "Canada > Alberta",
     "area": 661848,
-    "type": "ca_province"
+    "type": "ca_province",
+    "population": 4647178
   },
   {
     "name": "Canada > British Columbia",
     "area": 944735,
-    "type": "ca_province"
+    "type": "ca_province",
+    "population": 5399118
   },
   {
     "name": "Canada > Manitoba",
     "area": 647797,
-    "type": "ca_province"
+    "type": "ca_province",
+    "population": 1431792
   },
   {
     "name": "Canada > New Brunswick",
     "area": 72908,
-    "type": "ca_province"
+    "type": "ca_province",
+    "population": 824642
   },
   {
     "name": "Canada > Newfoundland and Labrador",
     "area": 405212,
-    "type": "ca_province"
+    "type": "ca_province",
+    "population": 531948
   },
   {
     "name": "Canada > Northwest Territories",
     "area": 1346106,
-    "type": "ca_province"
+    "type": "ca_province",
+    "population": 45504
   },
   {
     "name": "Canada > Nova Scotia",
     "area": 55284,
-    "type": "ca_province"
+    "type": "ca_province",
+    "population": 1037782
   },
   {
     "name": "Canada > Nunavut",
     "area": 2093190,
-    "type": "ca_province"
+    "type": "ca_province",
+    "population": 40586
   },
   {
     "name": "Canada > Ontario",
     "area": 1076395,
-    "type": "ca_province"
+    "type": "ca_province",
+    "population": 15386407
   },
   {
     "name": "Canada > Prince Edward Island",
     "area": 5660,
-    "type": "ca_province"
+    "type": "ca_province",
+    "population": 173954
   },
   {
     "name": "Canada > Quebec",
     "area": 1542056,
-    "type": "ca_province"
+    "type": "ca_province",
+    "population": 8794702
   },
   {
     "name": "Canada > Saskatchewan",
     "area": 651036,
-    "type": "ca_province"
+    "type": "ca_province",
+    "population": 1214618
   },
   {
     "name": "Canada > Yukon",
     "area": 482443,
-    "type": "ca_province"
+    "type": "ca_province",
+    "population": 43964
   },
   {
     "name": "Japan > Aichi",
     "area": 5173,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 7542415
   },
   {
     "name": "Japan > Akita",
     "area": 11638,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 966159
   },
   {
     "name": "Japan > Aomori",
     "area": 9646,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 1237984
   },
   {
     "name": "Japan > Chiba",
     "area": 5157,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 6279026
   },
   {
     "name": "Japan > Ehime",
     "area": 5676,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 1323722
   },
   {
     "name": "Japan > Fukui",
     "area": 4190,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 766863
   },
   {
     "name": "Japan > Fukuoka",
     "area": 4987,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 5116615
   },
   {
     "name": "Japan > Fukushima",
     "area": 13784,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 1833172
   },
   {
     "name": "Japan > Gifu",
     "area": 10621,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 1978742
   },
   {
     "name": "Japan > Gunma",
     "area": 6362,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 1939075
   },
   {
     "name": "Japan > Hiroshima",
     "area": 8479,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 2799702
   },
   {
     "name": "Japan > Hokkaido",
     "area": 83424,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 5224614
   },
   {
     "name": "Japan > Hyogo",
     "area": 8401,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 5465002
   },
   {
     "name": "Japan > Ibaraki",
     "area": 6097,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 2868041
   },
   {
     "name": "Japan > Ishikawa",
     "area": 4186,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 1132526
   },
   {
     "name": "Japan > Iwate",
     "area": 15275,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 1210534
   },
   {
     "name": "Japan > Kagawa",
     "area": 1877,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 950244
   },
   {
     "name": "Japan > Kagoshima",
     "area": 9187,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 1588256
   },
   {
     "name": "Japan > Kanagawa",
     "area": 2416,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 9240411
   },
   {
     "name": "Japan > Kochi",
     "area": 7104,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 691527
   },
   {
     "name": "Japan > Kumamoto",
     "area": 7409,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 1738301
   },
   {
     "name": "Japan > Kyoto",
     "area": 4612,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 2578087
   },
   {
     "name": "Japan > Mie",
     "area": 5774,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 1770254
   },
   {
     "name": "Japan > Miyagi",
     "area": 7282,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 2301996
   },
   {
     "name": "Japan > Miyazaki",
     "area": 7735,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 1069576
   },
   {
     "name": "Japan > Nagano",
     "area": 13562,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 2048011
   },
   {
     "name": "Japan > Nagasaki",
     "area": 4132,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 1312317
   },
   {
     "name": "Japan > Nara",
     "area": 3691,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 1324473
   },
   {
     "name": "Japan > Niigata",
     "area": 12584,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 2201272
   },
   {
     "name": "Japan > Oita",
     "area": 6341,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 1123852
   },
   {
     "name": "Japan > Okayama",
     "area": 7115,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 1906879
   },
   {
     "name": "Japan > Okinawa",
     "area": 2281,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 1468410
   },
   {
     "name": "Japan > Osaka",
     "area": 1905,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 8837685
   },
   {
     "name": "Japan > Saga",
     "area": 2441,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 811442
   },
   {
     "name": "Japan > Saitama",
     "area": 3798,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 7337330
   },
   {
     "name": "Japan > Shiga",
     "area": 4017,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 1413959
   },
   {
     "name": "Japan > Shimane",
     "area": 6708,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 671126
   },
   {
     "name": "Japan > Shizuoka",
     "area": 7777,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 3633202
   },
   {
     "name": "Japan > Tochigi",
     "area": 6408,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 1933146
   },
   {
     "name": "Japan > Tokushima",
     "area": 4147,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 719559
   },
   {
     "name": "Japan > Tokyo",
     "area": 2194,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 13960000
   },
   {
     "name": "Japan > Tottori",
     "area": 3507,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 553407
   },
   {
     "name": "Japan > Toyama",
     "area": 4248,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 1034814
   },
   {
     "name": "Japan > Wakayama",
     "area": 4725,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 923033
   },
   {
     "name": "Japan > Yamagata",
     "area": 9323,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 1068027
   },
   {
     "name": "Japan > Yamaguchi",
     "area": 6112,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 1342059
   },
   {
     "name": "Japan > Yamanashi",
     "area": 4465,
-    "type": "jp_prefecture"
+    "type": "jp_prefecture",
+    "population": 810635
   },
   {
     "name": "France > Auvergne-Rhône-Alpes",
     "area": 69711,
-    "type": "fr_region"
+    "type": "fr_region",
+    "population": 8100000
   },
   {
     "name": "France > Bourgogne-Franche-Comté",
     "area": 47784,
-    "type": "fr_region"
+    "type": "fr_region",
+    "population": 2807600
   },
   {
     "name": "France > Bretagne",
     "area": 27208,
-    "type": "fr_region"
+    "type": "fr_region",
+    "population": 3395000
   },
   {
     "name": "France > Centre-Val de Loire",
     "area": 39151,
-    "type": "fr_region"
+    "type": "fr_region",
+    "population": 2572000
   },
   {
     "name": "France > Corse",
     "area": 8680,
-    "type": "fr_region"
+    "type": "fr_region",
+    "population": 344679
   },
   {
     "name": "France > Grand Est",
     "area": 57441,
-    "type": "fr_region"
+    "type": "fr_region",
+    "population": 5562000
   },
   {
     "name": "France > Hauts-de-France",
     "area": 31806,
-    "type": "fr_region"
+    "type": "fr_region",
+    "population": 6009900
   },
   {
     "name": "France > Île-de-France",
     "area": 12012,
-    "type": "fr_region"
+    "type": "fr_region",
+    "population": 12278210
   },
   {
     "name": "France > Normandie",
     "area": 29906,
-    "type": "fr_region"
+    "type": "fr_region",
+    "population": 3303500
   },
   {
     "name": "France > Nouvelle-Aquitaine",
     "area": 84036,
-    "type": "fr_region"
+    "type": "fr_region",
+    "population": 6109000
   },
   {
     "name": "France > Occitanie",
     "area": 72724,
-    "type": "fr_region"
+    "type": "fr_region",
+    "population": 5924858
   },
   {
     "name": "France > Pays de la Loire",
     "area": 32082,
-    "type": "fr_region"
+    "type": "fr_region",
+    "population": 3801797
   },
   {
     "name": "France > Provence-Alpes-Côte d'Azur",
     "area": 31400,
-    "type": "fr_region"
+    "type": "fr_region",
+    "population": 5055651
   },
   {
     "name": "France > Guadeloupe",
     "area": 1628,
-    "type": "fr_region"
+    "type": "fr_region",
+    "population": 395700
   },
   {
     "name": "France > Martinique",
     "area": 1128,
-    "type": "fr_region"
+    "type": "fr_region",
+    "population": 364508
   },
   {
     "name": "France > Guyane",
     "area": 83534,
-    "type": "fr_region"
+    "type": "fr_region",
+    "population": 304557
   },
   {
     "name": "France > La Réunion",
     "area": 2511,
-    "type": "fr_region"
+    "type": "fr_region",
+    "population": 974052
   },
   {
     "name": "France > Mayotte",
     "area": 374,
-    "type": "fr_region"
+    "type": "fr_region",
+    "population": 385942
   },
   {
     "name": "France (Historic) > Alsace",
     "area": 8280,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 1900000
   },
   {
     "name": "France (Historic) > Anjou",
     "area": 7166,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 800000
   },
   {
     "name": "France (Historic) > Aquitaine",
     "area": 41309,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 3300000
   },
   {
     "name": "France (Historic) > Auvergne",
     "area": 26013,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 1340000
   },
   {
     "name": "France (Historic) > Berry",
     "area": 7235,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 480000
   },
   {
     "name": "France (Historic) > Bourgogne",
     "area": 31582,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 1650000
   },
   {
     "name": "France (Historic) > Bretagne",
     "area": 27208,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 3395000
   },
   {
     "name": "France (Historic) > Champagne",
     "area": 25606,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 1340000
   },
   {
     "name": "France (Historic) > Dauphiné",
     "area": 18334,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 1200000
   },
   {
     "name": "France (Historic) > Flandre",
     "area": 2786,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 1050000
   },
   {
     "name": "France (Historic) > Foix",
     "area": 4900,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 155000
   },
   {
     "name": "France (Historic) > Franche-Comté",
     "area": 16202,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 1180000
   },
   {
     "name": "France (Historic) > Gascogne",
     "area": 25100,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 700000
   },
   {
     "name": "France (Historic) > Guyenne",
     "area": 36000,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 1500000
   },
   {
     "name": "France (Historic) > Languedoc",
     "area": 27376,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 2800000
   },
   {
     "name": "France (Historic) > Limousin",
     "area": 16942,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 740000
   },
   {
     "name": "France (Historic) > Lorraine",
     "area": 23547,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 2350000
   },
   {
     "name": "France (Historic) > Lyonnais",
     "area": 3120,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 1900000
   },
   {
     "name": "France (Historic) > Maine",
     "area": 8100,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 560000
   },
   {
     "name": "France (Historic) > Marche",
     "area": 5400,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 380000
   },
   {
     "name": "France (Historic) > Navarre",
     "area": 10000,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 290000
   },
   {
     "name": "France (Historic) > Nivernais",
     "area": 6827,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 215000
   },
   {
     "name": "France (Historic) > Normandie",
     "area": 29906,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 3303500
   },
   {
     "name": "France (Historic) > Orléanais",
     "area": 7900,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 680000
   },
   {
     "name": "France (Historic) > Paris",
     "area": 12012,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 12278210
   },
   {
     "name": "France (Historic) > Picardie",
     "area": 19399,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 1970000
   },
   {
     "name": "France (Historic) > Poitou",
     "area": 14900,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 850000
   },
   {
     "name": "France (Historic) > Provence",
     "area": 31436,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 2000000
   },
   {
     "name": "France (Historic) > Roussillon",
     "area": 4086,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 480000
   },
   {
     "name": "France (Historic) > Saintonge",
     "area": 7000,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 420000
   },
   {
     "name": "France (Historic) > Savoie",
     "area": 14700,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 950000
   },
   {
     "name": "France (Historic) > Touraine",
     "area": 6127,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 610000
   },
   {
     "name": "France (Historic) > Vendée",
     "area": 6720,
-    "type": "fr_province"
+    "type": "fr_province",
+    "population": 685000
   },
   {
     "name": "UK > Bedfordshire",
     "area": 1235,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 688527
   },
   {
     "name": "UK > Berkshire",
     "area": 1262,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 988000
   },
   {
     "name": "UK > Bristol",
     "area": 110,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 472458
   },
   {
     "name": "UK > Buckinghamshire",
     "area": 1874,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 803000
   },
   {
     "name": "UK > Cambridgeshire",
     "area": 3389,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 882000
   },
   {
     "name": "UK > Cheshire",
     "area": 2343,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 1080000
   },
   {
     "name": "UK > City of London",
     "area": 3,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 8600
   },
   {
     "name": "UK > Cornwall",
     "area": 3563,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 568210
   },
   {
     "name": "UK > Cumbria",
     "area": 6768,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 498888
   },
   {
     "name": "UK > Derbyshire",
     "area": 2625,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 1060000
   },
   {
     "name": "UK > Devon",
     "area": 6707,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 1194000
   },
   {
     "name": "UK > Dorset",
     "area": 2653,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 422000
   },
   {
     "name": "UK > Durham",
     "area": 2676,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 930000
   },
   {
     "name": "UK > East Riding of Yorkshire",
     "area": 2479,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 600000
   },
   {
     "name": "UK > East Sussex",
     "area": 1725,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 830000
   },
   {
     "name": "UK > Essex",
     "area": 3670,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 1500000
   },
   {
     "name": "UK > Gloucestershire",
     "area": 3150,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 650000
   },
   {
     "name": "UK > Greater London",
     "area": 1572,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 8982000
   },
   {
     "name": "UK > Greater Manchester",
     "area": 1276,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 2812000
   },
   {
     "name": "UK > Hampshire",
     "area": 3769,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 1360000
   },
   {
     "name": "UK > Herefordshire",
     "area": 2180,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 192000
   },
   {
     "name": "UK > Hertfordshire",
     "area": 1643,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 1180000
   },
   {
     "name": "UK > Isle of Wight",
     "area": 380,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 140000
   },
   {
     "name": "UK > Kent",
     "area": 3736,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 1800000
   },
   {
     "name": "UK > Lancashire",
     "area": 3075,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 1490000
   },
   {
     "name": "UK > Leicestershire",
     "area": 2156,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 1020000
   },
   {
     "name": "UK > Lincolnshire",
     "area": 6959,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 770000
   },
   {
     "name": "UK > Merseyside",
     "area": 645,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 1416000
   },
   {
     "name": "UK > Norfolk",
     "area": 5371,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 906000
   },
   {
     "name": "UK > North Yorkshire",
     "area": 8654,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 620000
   },
   {
     "name": "UK > Northamptonshire",
     "area": 2364,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 747000
   },
   {
     "name": "UK > Northumberland",
     "area": 5013,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 320000
   },
   {
     "name": "UK > Nottinghamshire",
     "area": 2160,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 1140000
   },
   {
     "name": "UK > Oxfordshire",
     "area": 2606,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 688000
   },
   {
     "name": "UK > Rutland",
     "area": 394,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 43000
   },
   {
     "name": "UK > Shropshire",
     "area": 3487,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 320000
   },
   {
     "name": "UK > Somerset",
     "area": 4171,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 570000
   },
   {
     "name": "UK > South Yorkshire",
     "area": 1552,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 1402000
   },
   {
     "name": "UK > Staffordshire",
     "area": 2713,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 1120000
   },
   {
     "name": "UK > Suffolk",
     "area": 3801,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 768000
   },
   {
     "name": "UK > Surrey",
     "area": 1663,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 1200000
   },
   {
     "name": "UK > Tyne and Wear",
     "area": 540,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 1140000
   },
   {
     "name": "UK > Warwickshire",
     "area": 1975,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 590000
   },
   {
     "name": "UK > West Midlands",
     "area": 902,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 2900000
   },
   {
     "name": "UK > West Sussex",
     "area": 1991,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 870000
   },
   {
     "name": "UK > West Yorkshire",
     "area": 2029,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 2320000
   },
   {
     "name": "UK > Wiltshire",
     "area": 3485,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 500000
   },
   {
     "name": "UK > Worcestershire",
     "area": 1741,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 590000
   },
   {
     "name": "UK > Blaenau Gwent",
     "area": 109,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 69000
   },
   {
     "name": "UK > Bridgend",
     "area": 251,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 145000
   },
   {
     "name": "UK > Caerphilly",
     "area": 278,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 180000
   },
   {
     "name": "UK > Cardiff",
     "area": 140,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 362000
   },
   {
     "name": "UK > Carmarthenshire",
     "area": 2395,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 185000
   },
   {
     "name": "UK > Ceredigion",
     "area": 1786,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 72000
   },
   {
     "name": "UK > Conwy",
     "area": 1130,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 115000
   },
   {
     "name": "UK > Denbighshire",
     "area": 844,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 95000
   },
   {
     "name": "UK > Flintshire",
     "area": 438,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 157000
   },
   {
     "name": "UK > Gwynedd",
     "area": 2548,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 121000
   },
   {
     "name": "UK > Isle of Anglesey",
     "area": 711,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 70000
   },
   {
     "name": "UK > Merthyr Tydfil",
     "area": 111,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 61000
   },
   {
     "name": "UK > Monmouthshire",
     "area": 849,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 92000
   },
   {
     "name": "UK > Neath Port Talbot",
     "area": 442,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 139000
   },
   {
     "name": "UK > Newport",
     "area": 190,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 155000
   },
   {
     "name": "UK > Pembrokeshire",
     "area": 1619,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 125000
   },
   {
     "name": "UK > Powys",
     "area": 5196,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 133000
   },
   {
     "name": "UK > Rhondda Cynon Taf",
     "area": 424,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 237000
   },
   {
     "name": "UK > Swansea",
     "area": 378,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 246000
   },
   {
     "name": "UK > Torfaen",
     "area": 126,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 92000
   },
   {
     "name": "UK > Vale of Glamorgan",
     "area": 331,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 130000
   },
   {
     "name": "UK > Wrexham",
     "area": 499,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 136000
   },
   {
     "name": "UK > Aberdeen City",
     "area": 186,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 228800
   },
   {
     "name": "UK > Aberdeenshire",
     "area": 6313,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 261460
   },
   {
     "name": "UK > Angus",
     "area": 2182,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 116900
   },
   {
     "name": "UK > Argyll and Bute",
     "area": 6930,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 86260
   },
   {
     "name": "UK > Clackmannanshire",
     "area": 157,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 51400
   },
   {
     "name": "UK > Dumfries and Galloway",
     "area": 6426,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 148790
   },
   {
     "name": "UK > Dundee City",
     "area": 60,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 148710
   },
   {
     "name": "UK > East Ayrshire",
     "area": 1262,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 122700
   },
   {
     "name": "UK > East Dunbartonshire",
     "area": 174,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 107540
   },
   {
     "name": "UK > East Lothian",
     "area": 679,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 107650
   },
   {
     "name": "UK > East Renfrewshire",
     "area": 174,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 95060
   },
   {
     "name": "UK > Edinburgh",
     "area": 264,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 524930
   },
   {
     "name": "UK > Eilean Siar",
     "area": 3071,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 26830
   },
   {
     "name": "UK > Falkirk",
     "area": 297,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 160130
   },
   {
     "name": "UK > Fife",
     "area": 1325,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 373260
   },
   {
     "name": "UK > Glasgow City",
     "area": 175,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 635640
   },
   {
     "name": "UK > Highland",
     "area": 25659,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 235430
   },
   {
     "name": "UK > Inverclyde",
     "area": 160,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 79000
   },
   {
     "name": "UK > Midlothian",
     "area": 354,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 91340
   },
   {
     "name": "UK > Moray",
     "area": 2238,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 95510
   },
   {
     "name": "UK > North Ayrshire",
     "area": 885,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 135140
   },
   {
     "name": "UK > North Lanarkshire",
     "area": 470,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 340160
   },
   {
     "name": "UK > Orkney Islands",
     "area": 990,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 22740
   },
   {
     "name": "UK > Perth and Kinross",
     "area": 5286,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 151780
   },
   {
     "name": "UK > Renfrewshire",
     "area": 261,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 177240
   },
   {
     "name": "UK > Scottish Borders",
     "area": 4732,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 114020
   },
   {
     "name": "UK > Shetland Islands",
     "area": 1466,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 22920
   },
   {
     "name": "UK > South Ayrshire",
     "area": 1222,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 112800
   },
   {
     "name": "UK > South Lanarkshire",
     "area": 1772,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 318040
   },
   {
     "name": "UK > Stirling",
     "area": 2187,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 97290
   },
   {
     "name": "UK > West Dunbartonshire",
     "area": 162,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 88720
   },
   {
     "name": "UK > West Lothian",
     "area": 427,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 182090
   },
   {
     "name": "UK > Antrim and Newtownabbey",
     "area": 563,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 144000
   },
   {
     "name": "UK > Ards and North Down",
     "area": 384,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 160000
   },
   {
     "name": "UK > Armagh City Banbridge and Craigavon",
     "area": 1254,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 216000
   },
   {
     "name": "UK > Belfast",
     "area": 115,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 343000
   },
   {
     "name": "UK > Causeway Coast and Glens",
     "area": 1982,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 144000
   },
   {
     "name": "UK > Derry City and Strabane",
     "area": 1258,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 151000
   },
   {
     "name": "UK > Fermanagh and Omagh",
     "area": 1851,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 116000
   },
   {
     "name": "UK > Lisburn and Castlereagh",
     "area": 444,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 144000
   },
   {
     "name": "UK > Mid and East Antrim",
     "area": 1031,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 138000
   },
   {
     "name": "UK > Mid Ulster",
     "area": 1818,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 148000
   },
   {
     "name": "UK > Newry Mourne and Down",
     "area": 1463,
-    "type": "uk_county"
+    "type": "uk_county",
+    "population": 180000
   },
   {
     "name": "Australia > New South Wales",
     "area": 800642,
-    "type": "au_state"
+    "type": "au_state",
+    "population": 8166369
   },
   {
     "name": "Australia > Victoria",
     "area": 227416,
-    "type": "au_state"
+    "type": "au_state",
+    "population": 6680636
   },
   {
     "name": "Australia > Queensland",
     "area": 1730648,
-    "type": "au_state"
+    "type": "au_state",
+    "population": 5322954
   },
   {
     "name": "Australia > South Australia",
     "area": 983482,
-    "type": "au_state"
+    "type": "au_state",
+    "population": 1820529
   },
   {
     "name": "Australia > Western Australia",
     "area": 2529875,
-    "type": "au_state"
+    "type": "au_state",
+    "population": 2785906
   },
   {
     "name": "Australia > Tasmania",
     "area": 68401,
-    "type": "au_state"
+    "type": "au_state",
+    "population": 571508
   },
   {
     "name": "Australia > Northern Territory",
     "area": 1349129,
-    "type": "au_state"
+    "type": "au_state",
+    "population": 250634
   },
   {
     "name": "Australia > Australian Capital Territory",
     "area": 2358,
-    "type": "au_state"
+    "type": "au_state",
+    "population": 456652
   },
   {
     "name": "China > Anhui",
     "area": 139600,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 61027171
   },
   {
     "name": "China > Beijing",
     "area": 16411,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 21893095
   },
   {
     "name": "China > Chongqing",
     "area": 82400,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 32041552
   },
   {
     "name": "China > Fujian",
     "area": 121400,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 41540086
   },
   {
     "name": "China > Gansu",
     "area": 454000,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 25019831
   },
   {
     "name": "China > Guangdong",
     "area": 179800,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 126012510
   },
   {
     "name": "China > Guangxi",
     "area": 236700,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 50126804
   },
   {
     "name": "China > Guizhou",
     "area": 176100,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 38562148
   },
   {
     "name": "China > Hainan",
     "area": 35400,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 10081232
   },
   {
     "name": "China > Hebei",
     "area": 190000,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 74610235
   },
   {
     "name": "China > Heilongjiang",
     "area": 473000,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 31850088
   },
   {
     "name": "China > Henan",
     "area": 167000,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 99365519
   },
   {
     "name": "China > Hubei",
     "area": 185900,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 57752557
   },
   {
     "name": "China > Hunan",
     "area": 211800,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 66444864
   },
   {
     "name": "China > Inner Mongolia",
     "area": 1183000,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 24049155
   },
   {
     "name": "China > Jiangsu",
     "area": 107200,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 84748016
   },
   {
     "name": "China > Jiangxi",
     "area": 166900,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 45188635
   },
   {
     "name": "China > Jilin",
     "area": 187400,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 24073453
   },
   {
     "name": "China > Liaoning",
     "area": 148600,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 42591407
   },
   {
     "name": "China > Ningxia",
     "area": 66400,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 7202654
   },
   {
     "name": "China > Qinghai",
     "area": 720000,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 5923957
   },
   {
     "name": "China > Shaanxi",
     "area": 205600,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 39528999
   },
   {
     "name": "China > Shandong",
     "area": 157100,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 101527453
   },
   {
     "name": "China > Shanghai",
     "area": 6341,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 24870895
   },
   {
     "name": "China > Shanxi",
     "area": 156300,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 34915616
   },
   {
     "name": "China > Sichuan",
     "area": 486000,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 83674866
   },
   {
     "name": "China > Tianjin",
     "area": 11917,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 13866009
   },
   {
     "name": "China > Tibet",
     "area": 1228400,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 3648100
   },
   {
     "name": "China > Xinjiang",
     "area": 1664897,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 25852345
   },
   {
     "name": "China > Yunnan",
     "area": 394100,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 47209277
   },
   {
     "name": "China > Zhejiang",
     "area": 101800,
-    "type": "cn_province"
+    "type": "cn_province",
+    "population": 64567588
   },
   {
     "name": "India > Andhra Pradesh",
     "area": 162975,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 53903393
   },
   {
     "name": "India > Arunachal Pradesh",
     "area": 83743,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 1570458
   },
   {
     "name": "India > Assam",
     "area": 78438,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 35607039
   },
   {
     "name": "India > Bihar",
     "area": 94163,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 128500364
   },
   {
     "name": "India > Chhattisgarh",
     "area": 135192,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 32199722
   },
   {
     "name": "India > Goa",
     "area": 3702,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 1586250
   },
   {
     "name": "India > Gujarat",
     "area": 196024,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 70400153
   },
   {
     "name": "India > Haryana",
     "area": 44212,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 28204692
   },
   {
     "name": "India > Himachal Pradesh",
     "area": 55673,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 7451955
   },
   {
     "name": "India > Jharkhand",
     "area": 79716,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 38593948
   },
   {
     "name": "India > Karnataka",
     "area": 191791,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 67562686
   },
   {
     "name": "India > Kerala",
     "area": 38852,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 35699443
   },
   {
     "name": "India > Madhya Pradesh",
     "area": 308252,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 85358965
   },
   {
     "name": "India > Maharashtra",
     "area": 307713,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 123144223
   },
   {
     "name": "India > Manipur",
     "area": 22327,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 3091545
   },
   {
     "name": "India > Meghalaya",
     "area": 22429,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 3366710
   },
   {
     "name": "India > Mizoram",
     "area": 21081,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 1239244
   },
   {
     "name": "India > Nagaland",
     "area": 16579,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 2249695
   },
   {
     "name": "India > Odisha",
     "area": 155707,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 46356334
   },
   {
     "name": "India > Punjab",
     "area": 50362,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 30141373
   },
   {
     "name": "India > Rajasthan",
     "area": 342239,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 81032689
   },
   {
     "name": "India > Sikkim",
     "area": 7096,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 690251
   },
   {
     "name": "India > Tamil Nadu",
     "area": 130058,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 77841267
   },
   {
     "name": "India > Telangana",
     "area": 112077,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 39362732
   },
   {
     "name": "India > Tripura",
     "area": 10486,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 4169794
   },
   {
     "name": "India > Uttar Pradesh",
     "area": 240928,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 237882725
   },
   {
     "name": "India > Uttarakhand",
     "area": 53483,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 11141948
   },
   {
     "name": "India > West Bengal",
     "area": 88752,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 99609303
   },
   {
     "name": "India > Delhi",
     "area": 1484,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 32941000
   },
   {
     "name": "India > Jammu and Kashmir",
     "area": 42241,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 13606320
   },
   {
     "name": "India > Ladakh",
     "area": 59146,
-    "type": "in_state"
+    "type": "in_state",
+    "population": 274289
   },
   {
     "name": "Brazil > Acre",
     "area": 164123,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 906876
   },
   {
     "name": "Brazil > Alagoas",
     "area": 27843,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 3351543
   },
   {
     "name": "Brazil > Amapá",
     "area": 142828,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 877613
   },
   {
     "name": "Brazil > Amazonas",
     "area": 1559159,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 4269995
   },
   {
     "name": "Brazil > Bahia",
     "area": 564733,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 14873064
   },
   {
     "name": "Brazil > Ceará",
     "area": 148887,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 9240580
   },
   {
     "name": "Brazil > Distrito Federal",
     "area": 5802,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 3094325
   },
   {
     "name": "Brazil > Espírito Santo",
     "area": 46095,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 4108508
   },
   {
     "name": "Brazil > Goiás",
     "area": 340111,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 7206589
   },
   {
     "name": "Brazil > Maranhão",
     "area": 331983,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 7153262
   },
   {
     "name": "Brazil > Mato Grosso",
     "area": 903357,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 3784239
   },
   {
     "name": "Brazil > Mato Grosso do Sul",
     "area": 357145,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 2833742
   },
   {
     "name": "Brazil > Minas Gerais",
     "area": 586528,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 21292666
   },
   {
     "name": "Brazil > Pará",
     "area": 1247954,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 8777124
   },
   {
     "name": "Brazil > Paraíba",
     "area": 56585,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 4059905
   },
   {
     "name": "Brazil > Paraná",
     "area": 199307,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 11597484
   },
   {
     "name": "Brazil > Pernambuco",
     "area": 98148,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 9674793
   },
   {
     "name": "Brazil > Piauí",
     "area": 251529,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 3289290
   },
   {
     "name": "Brazil > Rio de Janeiro",
     "area": 43780,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 17463349
   },
   {
     "name": "Brazil > Rio Grande do Norte",
     "area": 52811,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 3560903
   },
   {
     "name": "Brazil > Rio Grande do Sul",
     "area": 281748,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 11466630
   },
   {
     "name": "Brazil > Rondônia",
     "area": 237765,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 1815278
   },
   {
     "name": "Brazil > Roraima",
     "area": 224301,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 652713
   },
   {
     "name": "Brazil > Santa Catarina",
     "area": 95736,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 7610361
   },
   {
     "name": "Brazil > São Paulo",
     "area": 248219,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 46649132
   },
   {
     "name": "Brazil > Sergipe",
     "area": 21910,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 2338474
   },
   {
     "name": "Brazil > Tocantins",
     "area": 277621,
-    "type": "br_state"
+    "type": "br_state",
+    "population": 1607363
   },
   {
     "name": "Germany > Baden-Württemberg",
     "area": 35748,
-    "type": "de_state"
+    "type": "de_state",
+    "population": 11280257
   },
   {
     "name": "Germany > Bavaria",
     "area": 70552,
-    "type": "de_state"
+    "type": "de_state",
+    "population": 13369393
   },
   {
     "name": "Germany > Berlin",
     "area": 892,
-    "type": "de_state"
+    "type": "de_state",
+    "population": 3677472
   },
   {
     "name": "Germany > Brandenburg",
     "area": 29654,
-    "type": "de_state"
+    "type": "de_state",
+    "population": 2537868
   },
   {
     "name": "Germany > Bremen",
     "area": 419,
-    "type": "de_state"
+    "type": "de_state",
+    "population": 684862
   },
   {
     "name": "Germany > Hamburg",
     "area": 755,
-    "type": "de_state"
+    "type": "de_state",
+    "population": 1945532
   },
   {
     "name": "Germany > Hesse",
     "area": 21115,
-    "type": "de_state"
+    "type": "de_state",
+    "population": 6391360
   },
   {
     "name": "Germany > Lower Saxony",
     "area": 47614,
-    "type": "de_state"
+    "type": "de_state",
+    "population": 8003421
   },
   {
     "name": "Germany > Mecklenburg-Vorpommern",
     "area": 23214,
-    "type": "de_state"
+    "type": "de_state",
+    "population": 1628378
   },
   {
     "name": "Germany > North Rhine-Westphalia",
     "area": 34110,
-    "type": "de_state"
+    "type": "de_state",
+    "population": 17924591
   },
   {
     "name": "Germany > Rhineland-Palatinate",
     "area": 19854,
-    "type": "de_state"
+    "type": "de_state",
+    "population": 4106485
   },
   {
     "name": "Germany > Saarland",
     "area": 2571,
-    "type": "de_state"
+    "type": "de_state",
+    "population": 994187
   },
   {
     "name": "Germany > Saxony",
     "area": 18416,
-    "type": "de_state"
+    "type": "de_state",
+    "population": 4086152
   },
   {
     "name": "Germany > Saxony-Anhalt",
     "area": 20452,
-    "type": "de_state"
+    "type": "de_state",
+    "population": 2245470
   },
   {
     "name": "Germany > Schleswig-Holstein",
     "area": 15800,
-    "type": "de_state"
+    "type": "de_state",
+    "population": 2922005
   },
   {
     "name": "Germany > Thuringia",
     "area": 16202,
-    "type": "de_state"
+    "type": "de_state",
+    "population": 2143145
   },
   {
     "name": "Spain > Andalusia",
     "area": 87268,
-    "type": "es_region"
+    "type": "es_region",
+    "population": 8472407
   },
   {
     "name": "Spain > Aragon",
     "area": 47720,
-    "type": "es_region"
+    "type": "es_region",
+    "population": 1329391
   },
   {
     "name": "Spain > Asturias",
     "area": 10604,
-    "type": "es_region"
+    "type": "es_region",
+    "population": 1011792
   },
   {
     "name": "Spain > Balearic Islands",
     "area": 4992,
-    "type": "es_region"
+    "type": "es_region",
+    "population": 1173008
   },
   {
     "name": "Spain > Basque Country",
     "area": 7234,
-    "type": "es_region"
+    "type": "es_region",
+    "population": 2213993
   },
   {
     "name": "Spain > Canary Islands",
     "area": 7447,
-    "type": "es_region"
+    "type": "es_region",
+    "population": 2172944
   },
   {
     "name": "Spain > Cantabria",
     "area": 5321,
-    "type": "es_region"
+    "type": "es_region",
+    "population": 582905
   },
   {
     "name": "Spain > Castile and León",
     "area": 94226,
-    "type": "es_region"
+    "type": "es_region",
+    "population": 2383139
   },
   {
     "name": "Spain > Castile-La Mancha",
     "area": 79463,
-    "type": "es_region"
+    "type": "es_region",
+    "population": 2045221
   },
   {
     "name": "Spain > Catalonia",
     "area": 32091,
-    "type": "es_region"
+    "type": "es_region",
+    "population": 7780479
   },
   {
     "name": "Spain > Extremadura",
     "area": 41635,
-    "type": "es_region"
+    "type": "es_region",
+    "population": 1059501
   },
   {
     "name": "Spain > Galicia",
     "area": 29574,
-    "type": "es_region"
+    "type": "es_region",
+    "population": 2695645
   },
   {
     "name": "Spain > La Rioja",
     "area": 5045,
-    "type": "es_region"
+    "type": "es_region",
+    "population": 319914
   },
   {
     "name": "Spain > Community of Madrid",
     "area": 8028,
-    "type": "es_region"
+    "type": "es_region",
+    "population": 6751251
   },
   {
     "name": "Spain > Murcia",
     "area": 11313,
-    "type": "es_region"
+    "type": "es_region",
+    "population": 1511251
   },
   {
     "name": "Spain > Navarre",
     "area": 10391,
-    "type": "es_region"
+    "type": "es_region",
+    "population": 661537
   },
   {
     "name": "Spain > Valencia",
     "area": 23255,
-    "type": "es_region"
+    "type": "es_region",
+    "population": 5058138
   },
   {
     "name": "Spain > Ceuta",
     "area": 19,
-    "type": "es_region"
+    "type": "es_region",
+    "population": 84202
   },
   {
     "name": "Spain > Melilla",
     "area": 12,
-    "type": "es_region"
+    "type": "es_region",
+    "population": 87076
   },
   {
     "name": "Italy > Abruzzo",
     "area": 10832,
-    "type": "it_region"
+    "type": "it_region",
+    "population": 1293941
   },
   {
     "name": "Italy > Aosta Valley",
     "area": 3263,
-    "type": "it_region"
+    "type": "it_region",
+    "population": 125034
   },
   {
     "name": "Italy > Apulia",
     "area": 19541,
-    "type": "it_region"
+    "type": "it_region",
+    "population": 3953305
   },
   {
     "name": "Italy > Basilicata",
     "area": 9995,
-    "type": "it_region"
+    "type": "it_region",
+    "population": 562869
   },
   {
     "name": "Italy > Calabria",
     "area": 15222,
-    "type": "it_region"
+    "type": "it_region",
+    "population": 1894110
   },
   {
     "name": "Italy > Campania",
     "area": 13671,
-    "type": "it_region"
+    "type": "it_region",
+    "population": 5712143
   },
   {
     "name": "Italy > Emilia-Romagna",
     "area": 22453,
-    "type": "it_region"
+    "type": "it_region",
+    "population": 4467118
   },
   {
     "name": "Italy > Friuli-Venezia Giulia",
     "area": 7858,
-    "type": "it_region"
+    "type": "it_region",
+    "population": 1206216
   },
   {
     "name": "Italy > Lazio",
     "area": 17242,
-    "type": "it_region"
+    "type": "it_region",
+    "population": 5879082
   },
   {
     "name": "Italy > Liguria",
     "area": 5422,
-    "type": "it_region"
+    "type": "it_region",
+    "population": 1524826
   },
   {
     "name": "Italy > Lombardy",
     "area": 23864,
-    "type": "it_region"
+    "type": "it_region",
+    "population": 10036732
   },
   {
     "name": "Italy > Marche",
     "area": 9401,
-    "type": "it_region"
+    "type": "it_region",
+    "population": 1512672
   },
   {
     "name": "Italy > Molise",
     "area": 4438,
-    "type": "it_region"
+    "type": "it_region",
+    "population": 300516
   },
   {
     "name": "Italy > Piedmont",
     "area": 25387,
-    "type": "it_region"
+    "type": "it_region",
+    "population": 4311217
   },
   {
     "name": "Italy > Sardinia",
     "area": 24100,
-    "type": "it_region"
+    "type": "it_region",
+    "population": 1611621
   },
   {
     "name": "Italy > Sicily",
     "area": 25832,
-    "type": "it_region"
+    "type": "it_region",
+    "population": 4875290
   },
   {
     "name": "Italy > Trentino-South Tyrol",
     "area": 13607,
-    "type": "it_region"
+    "type": "it_region",
+    "population": 1078069
   },
   {
     "name": "Italy > Tuscany",
     "area": 22987,
-    "type": "it_region"
+    "type": "it_region",
+    "population": 3692555
   },
   {
     "name": "Italy > Umbria",
     "area": 8456,
-    "type": "it_region"
+    "type": "it_region",
+    "population": 882015
   },
   {
     "name": "Italy > Veneto",
     "area": 18399,
-    "type": "it_region"
+    "type": "it_region",
+    "population": 4907529
   },
   {
     "name": "Mexico > Aguascalientes",
     "area": 5618,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 1425607
   },
   {
     "name": "Mexico > Baja California",
     "area": 70113,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 3769020
   },
   {
     "name": "Mexico > Baja California Sur",
     "area": 73922,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 798447
   },
   {
     "name": "Mexico > Campeche",
     "area": 57924,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 928363
   },
   {
     "name": "Mexico > Chiapas",
     "area": 73887,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 5543828
   },
   {
     "name": "Mexico > Chihuahua",
     "area": 247455,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 3741869
   },
   {
     "name": "Mexico > Coahuila",
     "area": 151563,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 3146771
   },
   {
     "name": "Mexico > Colima",
     "area": 5455,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 731391
   },
   {
     "name": "Mexico > Durango",
     "area": 123451,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 1832650
   },
   {
     "name": "Mexico > Guanajuato",
     "area": 30589,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 6228175
   },
   {
     "name": "Mexico > Guerrero",
     "area": 63794,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 3657048
   },
   {
     "name": "Mexico > Hidalgo",
     "area": 20846,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 3082841
   },
   {
     "name": "Mexico > Jalisco",
     "area": 78599,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 8348151
   },
   {
     "name": "Mexico > Mexico City",
     "area": 1485,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 9209944
   },
   {
     "name": "Mexico > Mexico State",
     "area": 22357,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 16992418
   },
   {
     "name": "Mexico > Michoacán",
     "area": 58643,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 4748846
   },
   {
     "name": "Mexico > Morelos",
     "area": 4893,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 2011878
   },
   {
     "name": "Mexico > Nayarit",
     "area": 27815,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 1235456
   },
   {
     "name": "Mexico > Nuevo León",
     "area": 64924,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 5784442
   },
   {
     "name": "Mexico > Oaxaca",
     "area": 93793,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 4132148
   },
   {
     "name": "Mexico > Puebla",
     "area": 34290,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 6583278
   },
   {
     "name": "Mexico > Querétaro",
     "area": 11769,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 2368467
   },
   {
     "name": "Mexico > Quintana Roo",
     "area": 42361,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 1857985
   },
   {
     "name": "Mexico > San Luis Potosí",
     "area": 62848,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 2822255
   },
   {
     "name": "Mexico > Sinaloa",
     "area": 57377,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 3026163
   },
   {
     "name": "Mexico > Sonora",
     "area": 179503,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 2944840
   },
   {
     "name": "Mexico > Tabasco",
     "area": 24738,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 2402598
   },
   {
     "name": "Mexico > Tamaulipas",
     "area": 80175,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 3527735
   },
   {
     "name": "Mexico > Tlaxcala",
     "area": 3914,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 1342977
   },
   {
     "name": "Mexico > Veracruz",
     "area": 71826,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 8062579
   },
   {
     "name": "Mexico > Yucatán",
     "area": 39524,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 2320898
   },
   {
     "name": "Mexico > Zacatecas",
     "area": 75040,
-    "type": "mx_state"
+    "type": "mx_state",
+    "population": 1622138
   },
   {
     "name": "Russia > Sakha Republic",
     "area": 3083523,
-    "type": "ru_subject"
+    "type": "ru_subject",
+    "population": 995686
   },
   {
     "name": "Russia > Krasnoyarsk Krai",
     "area": 2339700,
-    "type": "ru_subject"
+    "type": "ru_subject",
+    "population": 2876497
   },
   {
     "name": "Russia > Tyumen Oblast",
     "area": 1464173,
-    "type": "ru_subject"
+    "type": "ru_subject",
+    "population": 3866212
   },
   {
     "name": "Russia > Khabarovsk Krai",
     "area": 787633,
-    "type": "ru_subject"
+    "type": "ru_subject",
+    "population": 1323995
   },
   {
     "name": "Russia > Irkutsk Oblast",
     "area": 774846,
-    "type": "ru_subject"
+    "type": "ru_subject",
+    "population": 2375203
   },
   {
     "name": "Russia > Yamalo-Nenets",
     "area": 769250,
-    "type": "ru_subject"
+    "type": "ru_subject",
+    "population": 544444
   },
   {
     "name": "Russia > Chukotka",
     "area": 721481,
-    "type": "ru_subject"
+    "type": "ru_subject",
+    "population": 49527
   },
   {
     "name": "Russia > Arkhangelsk Oblast",
     "area": 589913,
-    "type": "ru_subject"
+    "type": "ru_subject",
+    "population": 1143228
   },
   {
     "name": "Russia > Zabaykalsky Krai",
     "area": 431892,
-    "type": "ru_subject"
+    "type": "ru_subject",
+    "population": 1059700
   },
   {
     "name": "Russia > Kamchatka Krai",
     "area": 464275,
-    "type": "ru_subject"
+    "type": "ru_subject",
+    "population": 314734
   },
   {
     "name": "Russia > Magadan Oblast",
     "area": 462464,
-    "type": "ru_subject"
+    "type": "ru_subject",
+    "population": 140399
   },
   {
     "name": "Russia > Primorsky Krai",
     "area": 164673,
-    "type": "ru_subject"
+    "type": "ru_subject",
+    "population": 1895971
   },
   {
     "name": "Russia > Vologda Oblast",
     "area": 144527,
-    "type": "ru_subject"
+    "type": "ru_subject",
+    "population": 1160881
   },
   {
     "name": "Russia > Sverdlovsk Oblast",
     "area": 194307,
-    "type": "ru_subject"
+    "type": "ru_subject",
+    "population": 4325256
   },
   {
     "name": "Russia > Omsk Oblast",
     "area": 141140,
-    "type": "ru_subject"
+    "type": "ru_subject",
+    "population": 1960081
   },
   {
     "name": "Russia > Chelyabinsk Oblast",
     "area": 87900,
-    "type": "ru_subject"
+    "type": "ru_subject",
+    "population": 3442788
   },
   {
     "name": "Russia > Novosibirsk Oblast",
     "area": 177756,
-    "type": "ru_subject"
+    "type": "ru_subject",
+    "population": 2792811
   },
   {
     "name": "Russia > Moscow",
     "area": 2562,
-    "type": "ru_subject"
+    "type": "ru_subject",
+    "population": 12655050
   },
   {
     "name": "Russia > Saint Petersburg",
     "area": 1439,
-    "type": "ru_subject"
+    "type": "ru_subject",
+    "population": 5601911
   },
   {
     "name": "Island > Greenland",
     "area": 2166086,
-    "type": "island"
+    "type": "island",
+    "population": 56583
   },
   {
     "name": "Island > New Guinea",
     "area": 785753,
-    "type": "island"
+    "type": "island",
+    "population": 13000000
   },
   {
     "name": "Island > Borneo",
     "area": 743330,
-    "type": "island"
+    "type": "island",
+    "population": 21258000
   },
   {
     "name": "Island > Madagascar",
     "area": 587041,
-    "type": "island"
+    "type": "island",
+    "population": 28915653
   },
   {
     "name": "Island > Baffin Island",
     "area": 507451,
-    "type": "island"
+    "type": "island",
+    "population": 13000
   },
   {
     "name": "Island > Sumatra",
     "area": 473481,
-    "type": "island"
+    "type": "island",
+    "population": 58553500
   },
   {
     "name": "Island > Honshu",
     "area": 227960,
-    "type": "island"
+    "type": "island",
+    "population": 104000000
   },
   {
     "name": "Island > Victoria Island",
     "area": 217291,
-    "type": "island"
+    "type": "island",
+    "population": 2200
   },
   {
     "name": "Island > Great Britain",
     "area": 209331,
-    "type": "island"
+    "type": "island",
+    "population": 66435550
   },
   {
     "name": "Island > Ellesmere Island",
     "area": 196236,
-    "type": "island"
+    "type": "island",
+    "population": 146
   },
   {
     "name": "Island > Sulawesi",
     "area": 174600,
-    "type": "island"
+    "type": "island",
+    "population": 18455058
   },
   {
     "name": "Island > South Island (NZ)",
     "area": 150437,
-    "type": "island"
+    "type": "island",
+    "population": 1100000
   },
   {
     "name": "Island > Java",
     "area": 138794,
-    "type": "island"
+    "type": "island",
+    "population": 151600000
   },
   {
     "name": "Island > North Island (NZ)",
     "area": 113729,
-    "type": "island"
+    "type": "island",
+    "population": 3900000
   },
   {
     "name": "Island > Luzon",
     "area": 109965,
-    "type": "island"
+    "type": "island",
+    "population": 60800000
   },
   {
     "name": "Island > Iceland",
     "area": 103000,
-    "type": "island"
+    "type": "island",
+    "population": 370335
   },
   {
     "name": "Island > Mindanao",
     "area": 97530,
-    "type": "island"
+    "type": "island",
+    "population": 26000000
   },
   {
     "name": "Island > Ireland",
     "area": 84421,
-    "type": "island"
+    "type": "island",
+    "population": 7000000
   },
   {
     "name": "Island > Hokkaido",
     "area": 83424,
-    "type": "island"
+    "type": "island",
+    "population": 5224614
   },
   {
     "name": "Island > Sakhalin",
     "area": 76600,
-    "type": "island"
+    "type": "island",
+    "population": 490000
   },
   {
     "name": "Island > Hispaniola",
     "area": 76192,
-    "type": "island"
+    "type": "island",
+    "population": 23000000
   },
   {
     "name": "Island > Sri Lanka",
     "area": 65610,
-    "type": "island"
+    "type": "island",
+    "population": 22037000
   },
   {
     "name": "Island > Tierra del Fuego",
     "area": 48100,
-    "type": "island"
+    "type": "island",
+    "population": 150000
   },
   {
     "name": "Island > Tasmania",
     "area": 68401,
-    "type": "island"
+    "type": "island",
+    "population": 571508
   },
   {
     "name": "Island > Svalbard",
     "area": 62045,
-    "type": "island"
+    "type": "island",
+    "population": 2939
   },
   {
     "name": "Island > Cuba",
     "area": 109884,
-    "type": "island"
+    "type": "island",
+    "population": 11212191
   },
   {
     "name": "Island > Newfoundland",
     "area": 111390,
-    "type": "island"
+    "type": "island",
+    "population": 521000
   },
   {
     "name": "Island > Kyushu",
     "area": 36752,
-    "type": "island"
+    "type": "island",
+    "population": 13000000
   },
   {
     "name": "Island > Shikoku",
     "area": 18800,
-    "type": "island"
+    "type": "island",
+    "population": 3800000
   },
   {
     "name": "Island > Sicily",
     "area": 25832,
-    "type": "island"
+    "type": "island",
+    "population": 4875290
   },
   {
     "name": "Island > Sardinia",
     "area": 24090,
-    "type": "island"
+    "type": "island",
+    "population": 1611621
   },
   {
     "name": "Island > Cyprus",
     "area": 9251,
-    "type": "island"
+    "type": "island",
+    "population": 1251488
   },
   {
     "name": "Island > Corsica",
     "area": 8680,
-    "type": "island"
+    "type": "island",
+    "population": 344679
   },
   {
     "name": "Island > Crete",
     "area": 8336,
-    "type": "island"
+    "type": "island",
+    "population": 634930
   },
   {
     "name": "Island > Okinawa",
     "area": 1207,
-    "type": "island"
+    "type": "island",
+    "population": 1468410
   },
   {
     "name": "Island > Bali",
     "area": 5780,
-    "type": "island"
+    "type": "island",
+    "population": 4317000
   },
   {
     "name": "Island > Trinidad",
     "area": 4768,
-    "type": "island"
+    "type": "island",
+    "population": 1400000
   },
   {
     "name": "Island > Maui",
     "area": 1884,
-    "type": "island"
+    "type": "island",
+    "population": 167417
   },
   {
     "name": "Island > Oahu",
     "area": 1545,
-    "type": "island"
+    "type": "island",
+    "population": 1016508
   },
   {
     "name": "Island > Big Island (Hawaii)",
     "area": 10432,
-    "type": "island"
+    "type": "island",
+    "population": 200000
   },
   {
     "name": "Island > Tenerife",
     "area": 2034,
-    "type": "island"
+    "type": "island",
+    "population": 928604
   },
   {
     "name": "Island > Canary Islands (total)",
     "area": 7447,
-    "type": "island"
+    "type": "island",
+    "population": 2172944
   },
   {
     "name": "Island > Maldives (total)",
     "area": 300,
-    "type": "island"
+    "type": "island",
+    "population": 521457
   },
   {
     "name": "Island > Seychelles (total)",
     "area": 452,
-    "type": "island"
+    "type": "island",
+    "population": 107660
   },
   {
     "name": "Island > Maldives (largest atoll)",
     "area": 105,
-    "type": "island"
+    "type": "island",
+    "population": 20000
   },
   {
     "name": "Tokyo (Metro Area)",
@@ -6097,41 +6589,49 @@
   {
     "name": "Crimea",
     "area": 26100,
-    "type": "region"
+    "type": "region",
+    "population": 1913731
   },
   {
     "name": "Region > Appalachia",
     "area": 420000,
-    "type": "region"
+    "type": "region",
+    "population": 25000000
   },
   {
     "name": "Region > Great Plains",
     "area": 1300000,
-    "type": "region"
+    "type": "region",
+    "population": 3500000
   },
   {
     "name": "Region > Pacific Northwest",
     "area": 708000,
-    "type": "region"
+    "type": "region",
+    "population": 8000000
   },
   {
     "name": "Region > New England",
     "area": 186458,
-    "type": "region"
+    "type": "region",
+    "population": 15000000
   },
   {
     "name": "Region > Sahara Desert",
     "area": 9200000,
-    "type": "region"
+    "type": "region",
+    "population": 2500000
   },
   {
     "name": "Region > Amazon Basin",
     "area": 7000000,
-    "type": "region"
+    "type": "region",
+    "population": 33000000
   },
   {
     "name": "Region > Himalayas",
     "area": 600000,
-    "type": "region"
+    "type": "region",
+    "population": 52700000
   }
 ]
