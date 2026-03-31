@@ -46,6 +46,7 @@
             font-weight: bold;
             opacity: 0.8;
             cursor: pointer;
+            padding: 10px;
         }
 
         /* ── STAGE ── */
@@ -74,13 +75,12 @@
 
         .input-wrapper { position: relative; margin-bottom: 10px; }
 
-        /* Cleaned Input (No Ghost Text) */
         input[type="text"] {
             width: 100%;
             padding: 14px;
             border: 2px solid #eee;
             border-radius: 12px;
-            font-size: 16px; /* Prevents iOS auto-zoom */
+            font-size: 16px;
             outline: none;
             transition: border-color 0.2s;
         }
@@ -129,11 +129,11 @@
             border: 1.5px solid rgba(0,0,0,0.2);
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
             transition: border-radius 0.3s ease;
+            cursor: grab;
         }
         .shape.square { border-radius: 4px; }
         .shape.circle { border-radius: 50%; }
         .shape.selected { border: 3px solid #000; z-index: 100; }
-        .shape.highlight { border: 3px dashed var(--success); }
 
         .label {
             font-size: 10px;
@@ -141,22 +141,49 @@
             text-align: center;
             pointer-events: none;
             padding: 4px;
+            color: #222;
         }
 
-        /* ── LOADING & MODALS ── */
+        /* ── MODAL ── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 5000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.open { display: flex; }
+        .modal {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            max-width: 400px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        .modal-close {
+            position: absolute;
+            top: 10px; right: 10px;
+            border: none; background: none; font-size: 24px; cursor: pointer;
+        }
+
+        /* ── TOAST & LOADING ── */
+        #toast {
+            position: fixed; bottom: 150px; left: 50%; transform: translateX(-50%);
+            background: #333; color: white; padding: 8px 16px; border-radius: 20px;
+            font-size: 13px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 6000;
+        }
+        #toast.show { opacity: 1; }
         #loading {
             position: fixed; inset: 0; background: white; z-index: 9999;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
         .spinner { width: 30px; height: 30px; border: 3px solid #eee; border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
-
-        #toast {
-            position: fixed; bottom: 150px; left: 50%; transform: translateX(-50%);
-            background: #333; color: white; padding: 8px 16px; border-radius: 20px;
-            font-size: 13px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 5000;
-        }
-        #toast.show { opacity: 1; }
     </style>
 </head>
 <body>
@@ -180,6 +207,19 @@
         <button id="modeBtn" style="background:#8e44ad" onclick="toggleMode()">Population</button>
         <button id="delBtn" style="background:var(--danger); display:none;" onclick="deleteSelected()">Delete</button>
         <button onclick="clearAll()" style="background:#7f8c8d">Clear</button>
+    </div>
+</div>
+
+<div class="modal-overlay" id="helpModal" onclick="closeHelpOnOverlay(event)">
+    <div class="modal">
+        <button class="modal-close" onclick="toggleHelp()">×</button>
+        <h2 style="margin-top:0">Guide</h2>
+        <p style="font-size: 14px; line-height: 1.6; color: #444;">
+            • <b>Search</b> for regions to see them as proportional squares.<br>
+            • <b>Drag</b> shapes to move them around the canvas.<br>
+            • <b>Overlap</b> shapes and click <b>Merge</b> to combine sizes.<br>
+            • Toggle <b>Population</b> mode to compare by people instead of land area.
+        </p>
     </div>
 </div>
 
@@ -227,7 +267,7 @@
             ...data,
             color: `hsla(${hue}, 70%, 65%, 0.8)`,
             x: window.innerWidth / 2 - 40,
-            y: window.innerHeight / 2 - 40
+            y: window.innerHeight / 2 - 80
         });
         selectedIdx = addedItems.length - 1;
         input.value = '';
@@ -264,12 +304,9 @@
             
             div.innerHTML = `<div class="label">${item.name}<br>${labelVal}</div>`;
             
-            // OPTIMIZED DRAG LOGIC
             div.onpointerdown = e => {
                 e.preventDefault();
                 selectedIdx = i;
-                
-                // Highlight selection immediately without a full re-render
                 document.querySelectorAll('.shape').forEach(s => s.classList.remove('selected'));
                 div.classList.add('selected');
                 
@@ -278,25 +315,24 @@
                 function move(me) {
                     item.x = me.clientX - offset.x;
                     item.y = me.clientY - offset.y;
-                    // Only update the style, don't trigger a full render()
                     div.style.left = item.x + 'px';
                     div.style.top = item.y + 'px';
                 }
-
                 function up() {
                     window.removeEventListener('pointermove', move);
                     window.removeEventListener('pointerup', up);
-                    render(); // Final cleanup render to sync everything
+                    render(); 
                 }
-
                 window.addEventListener('pointermove', move);
                 window.addEventListener('pointerup', up);
+                updateUI();
             };
-            
             stage.appendChild(div);
         });
-        
-        // Update UI buttons
+        updateUI();
+    }
+
+    function updateUI() {
         document.getElementById('delBtn').style.display = selectedIdx !== null ? 'block' : 'none';
         const actionBtn = document.getElementById('actionBtn');
         if(selectedIdx !== null && addedItems[selectedIdx].parts) {
@@ -317,13 +353,14 @@
             selectedIdx = null;
         } else {
             const scale = getScale();
-            const s1 = Math.sqrt(target.area) * scale;
+            const s1 = Math.sqrt(mode === 'population' ? (target.population || target.area) : target.area) * scale;
             const toMerge = [selectedIdx];
             const others = [];
             
             addedItems.forEach((item, i) => {
                 if(i === selectedIdx) return;
-                const s2 = Math.sqrt(item.area) * scale;
+                const val2 = mode === 'population' ? (item.population || item.area) : item.area;
+                const s2 = Math.sqrt(val2) * scale;
                 const overlap = !(target.x + s1 < item.x || target.x > item.x + s2 || target.y + s1 < item.y || target.y > item.y + s2);
                 if(overlap) toMerge.push(i);
                 else others.push(item);
@@ -338,7 +375,7 @@
                 const totalArea = parts.reduce((s, p) => s + p.area, 0);
                 const totalPop = parts.reduce((s, p) => s + (p.population || 0), 0);
                 addedItems = [...others, {
-                    name: "Combined Area",
+                    name: "Combined",
                     area: totalArea,
                     population: totalPop,
                     color: target.color,
@@ -369,7 +406,13 @@
 
     function clearAll() { addedItems = []; selectedIdx = null; render(); }
     function showToast(m) { const t = document.getElementById('toast'); t.textContent = m; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'), 2000); }
-    function toggleHelp() { showToast("Drag shapes to compare. Overlap and Merge to combine."); }
+    
+    function toggleHelp() { 
+        document.getElementById('helpModal').classList.toggle('open'); 
+    }
+    function closeHelpOnOverlay(e) { 
+        if(e.target.id === 'helpModal') toggleHelp(); 
+    }
 
     init();
 </script>
