@@ -189,7 +189,7 @@
     let masterData = [];
     let addedItems = [];
     let selectedIdx = null;
-    let mode = 'area'; // 'area' or 'population'
+    let mode = 'area'; 
 
     const stage = document.getElementById('stage');
     const input = document.getElementById('entitySearch');
@@ -264,28 +264,39 @@
             
             div.innerHTML = `<div class="label">${item.name}<br>${labelVal}</div>`;
             
+            // OPTIMIZED DRAG LOGIC
             div.onpointerdown = e => {
+                e.preventDefault();
                 selectedIdx = i;
+                
+                // Highlight selection immediately without a full re-render
+                document.querySelectorAll('.shape').forEach(s => s.classList.remove('selected'));
+                div.classList.add('selected');
+                
                 const offset = { x: e.clientX - item.x, y: e.clientY - item.y };
                 
                 function move(me) {
                     item.x = me.clientX - offset.x;
                     item.y = me.clientY - offset.y;
+                    // Only update the style, don't trigger a full render()
                     div.style.left = item.x + 'px';
                     div.style.top = item.y + 'px';
                 }
+
                 function up() {
                     window.removeEventListener('pointermove', move);
                     window.removeEventListener('pointerup', up);
+                    render(); // Final cleanup render to sync everything
                 }
+
                 window.addEventListener('pointermove', move);
                 window.addEventListener('pointerup', up);
-                render(); 
             };
             
             stage.appendChild(div);
         });
         
+        // Update UI buttons
         document.getElementById('delBtn').style.display = selectedIdx !== null ? 'block' : 'none';
         const actionBtn = document.getElementById('actionBtn');
         if(selectedIdx !== null && addedItems[selectedIdx].parts) {
