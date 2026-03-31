@@ -12,6 +12,7 @@
             --success: #27ae60;
             --bg: #f8f9fa;
             --header-h: 44px;
+            --panel-h: 155px; /* Combined height of search + buttons */
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -82,10 +83,10 @@
             border-radius: 12px;
             font-size: 16px;
             outline: none;
-            transition: border-color 0.2s;
         }
         input[type="text"]:focus { border-color: var(--accent); }
 
+        /* FIX 1: The "Drop-Up" Menu Scrollability */
         #results-box {
             position: absolute;
             bottom: calc(100% + 10px);
@@ -93,9 +94,10 @@
             background: white;
             border-radius: 12px;
             box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
-            max-height: 250px;
+            max-height: 35vh; /* Limits height so it doesn't hit the top */
             overflow-y: auto;
             display: none;
+            z-index: 4000;
         }
 
         .result-item {
@@ -128,7 +130,6 @@
             justify-content: center;
             border: 1.5px solid rgba(0,0,0,0.2);
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            transition: border-radius 0.3s ease;
             cursor: grab;
         }
         .shape.square { border-radius: 4px; }
@@ -163,21 +164,20 @@
             max-width: 400px;
             width: 100%;
             position: relative;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
         }
         .modal-close {
             position: absolute;
             top: 10px; right: 10px;
-            border: none; background: none; font-size: 24px; cursor: pointer;
+            border: none; background: none; font-size: 24px;
         }
 
-        /* ── TOAST & LOADING ── */
         #toast {
-            position: fixed; bottom: 150px; left: 50%; transform: translateX(-50%);
+            position: fixed; bottom: 180px; left: 50%; transform: translateX(-50%);
             background: #333; color: white; padding: 8px 16px; border-radius: 20px;
             font-size: 13px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 6000;
         }
         #toast.show { opacity: 1; }
+        
         #loading {
             position: fixed; inset: 0; background: white; z-index: 9999;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -199,7 +199,7 @@
 
 <div id="float-panel">
     <div class="input-wrapper">
-        <input type="text" id="entitySearch" placeholder="Search country, state, or city..." autocomplete="off">
+        <input type="text" id="entitySearch" placeholder="Search region..." autocomplete="off">
         <div id="results-box"></div>
     </div>
     <div class="btn-row">
@@ -215,10 +215,10 @@
         <button class="modal-close" onclick="toggleHelp()">×</button>
         <h2 style="margin-top:0">Guide</h2>
         <p style="font-size: 14px; line-height: 1.6; color: #444;">
-            • <b>Search</b> for regions to see them as proportional squares.<br>
-            • <b>Drag</b> shapes to move them around the canvas.<br>
+            • <b>Search</b> to see regions as proportional squares.<br>
+            • <b>Drag</b> shapes to move them (they won't slide under UI bars).<br>
             • <b>Overlap</b> shapes and click <b>Merge</b> to combine sizes.<br>
-            • Toggle <b>Population</b> mode to compare by people instead of land area.
+            • Toggle <b>Population</b> mode to compare people instead of land.
         </p>
     </div>
 </div>
@@ -260,14 +260,21 @@
         });
     }
 
+    // FIX 2: Spawning in the "Safe Zone"
     function addRegion(encoded) {
         const data = JSON.parse(decodeURIComponent(encoded));
         const hue = Math.floor(Math.random() * 360);
+        
+        // Define safe spawn center (between header and bottom panel)
+        const headerH = 44;
+        const panelSpace = 180;
+        const safeY = (window.innerHeight - panelSpace - headerH) / 2 + headerH;
+
         addedItems.push({
             ...data,
             color: `hsla(${hue}, 70%, 65%, 0.8)`,
             x: window.innerWidth / 2 - 40,
-            y: window.innerHeight / 2 - 80
+            y: safeY - 40
         });
         selectedIdx = addedItems.length - 1;
         input.value = '';
@@ -312,12 +319,25 @@
                 
                 const offset = { x: e.clientX - item.x, y: e.clientY - item.y };
                 
+                // FIX 3: Movement Bumpers (Stay within visible vertical space)
                 function move(me) {
-                    item.x = me.clientX - offset.x;
-                    item.y = me.clientY - offset.y;
+                    let newX = me.clientX - offset.x;
+                    let newY = me.clientY - offset.y;
+
+                    const headerH = 44;
+                    const panelH = 175; // Approx bottom UI height
+                    const h = div.offsetHeight;
+
+                    // Clink against top/bottom
+                    if(newY < headerH) newY = headerH;
+                    if(newY > window.innerHeight - panelH - h) newY = window.innerHeight - panelH - h;
+
+                    item.x = newX;
+                    item.y = newY;
                     div.style.left = item.x + 'px';
                     div.style.top = item.y + 'px';
                 }
+
                 function up() {
                     window.removeEventListener('pointermove', move);
                     window.removeEventListener('pointerup', up);
@@ -345,7 +365,6 @@
     function handleMerge() {
         if(selectedIdx === null) return;
         const target = addedItems[selectedIdx];
-        
         if(target.parts) {
             const parts = target.parts;
             addedItems.splice(selectedIdx, 1);
@@ -356,7 +375,6 @@
             const s1 = Math.sqrt(mode === 'population' ? (target.population || target.area) : target.area) * scale;
             const toMerge = [selectedIdx];
             const others = [];
-            
             addedItems.forEach((item, i) => {
                 if(i === selectedIdx) return;
                 const val2 = mode === 'population' ? (item.population || item.area) : item.area;
@@ -365,27 +383,20 @@
                 if(overlap) toMerge.push(i);
                 else others.push(item);
             });
-
             if(toMerge.length > 1) {
                 const parts = [];
                 toMerge.forEach(idx => {
                     if(addedItems[idx].parts) parts.push(...addedItems[idx].parts);
                     else parts.push(addedItems[idx]);
                 });
-                const totalArea = parts.reduce((s, p) => s + p.area, 0);
-                const totalPop = parts.reduce((s, p) => s + (p.population || 0), 0);
                 addedItems = [...others, {
                     name: "Combined",
-                    area: totalArea,
-                    population: totalPop,
-                    color: target.color,
-                    x: target.x, y: target.y,
-                    parts: parts
+                    area: parts.reduce((s, p) => s + p.area, 0),
+                    population: parts.reduce((s, p) => s + (p.population || 0), 0),
+                    color: target.color, x: target.x, y: target.y, parts: parts
                 }];
                 selectedIdx = addedItems.length - 1;
-            } else {
-                showToast("Overlap shapes first!");
-            }
+            } else { showToast("Overlap shapes first!"); }
         }
         render();
     }
@@ -396,23 +407,11 @@
         render();
     }
 
-    function deleteSelected() {
-        if(selectedIdx !== null) {
-            addedItems.splice(selectedIdx, 1);
-            selectedIdx = null;
-            render();
-        }
-    }
-
+    function deleteSelected() { if(selectedIdx !== null) { addedItems.splice(selectedIdx, 1); selectedIdx = null; render(); } }
     function clearAll() { addedItems = []; selectedIdx = null; render(); }
     function showToast(m) { const t = document.getElementById('toast'); t.textContent = m; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'), 2000); }
-    
-    function toggleHelp() { 
-        document.getElementById('helpModal').classList.toggle('open'); 
-    }
-    function closeHelpOnOverlay(e) { 
-        if(e.target.id === 'helpModal') toggleHelp(); 
-    }
+    function toggleHelp() { document.getElementById('helpModal').classList.toggle('open'); }
+    function closeHelpOnOverlay(e) { if(e.target.id === 'helpModal') toggleHelp(); }
 
     init();
 </script>
