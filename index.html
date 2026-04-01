@@ -11,7 +11,7 @@
             --danger: #e74c3c;
             --success: #27ae10;
             --bg: #f8f9fa;
-            --header-h: 36px; /* Slimmed down */
+            --header-h: 36px;
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -23,9 +23,9 @@
             background: var(--bg);
             overflow: hidden;
             position: relative;
+            touch-action: none; /* Prevents pull-to-refresh interference */
         }
 
-        /* ── HEADER (Slim) ── */
         #app-header {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -51,7 +51,6 @@
             border-radius: 4px;
         }
 
-        /* ── STAGE ── */
         #stage {
             position: absolute;
             inset: 0;
@@ -60,7 +59,6 @@
             touch-action: none;
         }
 
-        /* ── TOP CONTROL PANEL ── */
         #top-panel {
             position: fixed;
             top: calc(var(--header-h) + 8px);
@@ -92,22 +90,15 @@
             max-height: 50vh;
             overflow-y: auto;
             display: none;
-            /* Custom Scrollbar for visual cue */
-            scrollbar-width: thin;
-            scrollbar-color: var(--accent) #eee;
         }
-        #results-box::-webkit-scrollbar { width: 6px; }
-        #results-box::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
 
         .result-item {
             padding: 12px 15px;
             border-bottom: 1px solid #f0f0f0;
             cursor: pointer;
-            transition: background 0.1s;
         }
         .result-item.clicked { background: #d0e7ff; }
 
-        /* ── BOTTOM BUTTON BAR ── */
         #bottom-panel {
             position: fixed;
             bottom: 15px;
@@ -130,7 +121,6 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         }
 
-        /* ── SHAPES ── */
         .shape {
             position: absolute;
             display: flex;
@@ -140,13 +130,13 @@
             border: 1.5px solid rgba(0,0,0,0.2);
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
             transition: border-radius 0.3s;
+            will-change: transform, left, top; /* Performance boost */
         }
         .shape.square { border-radius: 4px; }
         .shape.circle { border-radius: 50%; }
         .shape.selected { border: 3px solid #000; z-index: 100; }
-        
-        /* Not to Scale Warning */
         .shape.not-to-scale { border: 3px solid var(--danger) !important; }
+        
         .nts-icon { color: var(--danger); font-weight: 900; font-size: 14px; margin-bottom: 2px; }
 
         .label {
@@ -158,7 +148,6 @@
             line-height: 1.1;
         }
 
-        /* ── MODAL & TOAST ── */
         .modal-overlay {
             display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7);
             z-index: 5000; align-items: center; justify-content: center; padding: 20px;
@@ -212,10 +201,10 @@
         <button class="modal-close" onclick="toggleHelp()">×</button>
         <h3>Guide</h3>
         <p style="font-size: 13px; color: #555;">
-            • Search is now at the top! (3 letters to start)<br>
-            • Drag shapes partially under bars to save space.<br>
-            • <b style="color:red">Red borders</b> mean a region is too small to show to scale.<br>
-            • Merge shapes to combine their total area/population.
+            • Search is at the top. (3 letters to trigger)<br>
+            • Drag shapes partially under bars to maximize space.<br>
+            • <b style="color:red">Red borders [!]</b> = Region is not to scale (too small).<br>
+            • Merge overlapping shapes to combine totals.
         </p>
     </div>
 </div>
@@ -227,7 +216,7 @@
     let addedItems = [];
     let selectedIdx = null;
     let mode = 'area'; 
-    const MIN_SIZE = 40; // Minimum tapable size
+    const MIN_SIZE = 40;
 
     const stage = document.getElementById('stage');
     const input = document.getElementById('entitySearch');
@@ -242,16 +231,14 @@
         
         input.addEventListener('input', e => {
             const val = e.target.value.toLowerCase();
-            // TRIGGER: Now 3 letters
             if(val.length < 3) { resultsBox.style.display = 'none'; return; }
             
-            // PRIORITY MATCHING: Starts with first
             const startsWith = masterData.filter(d => d.name.toLowerCase().startsWith(val));
             const contains = masterData.filter(d => !d.name.toLowerCase().startsWith(val) && d.name.toLowerCase().includes(val));
             const matches = [...startsWith, ...contains].slice(0, 15);
             
             resultsBox.innerHTML = matches.map(m => `
-                <div class="result-item" onclick="selectResult(this, '${encodeURIComponent(JSON.stringify(m))}')">
+                <div class="result-item" onpointerdown="selectResult(this, '${encodeURIComponent(JSON.stringify(m))}')">
                     <div style="font-weight:bold; font-size:14px">${m.name}</div>
                     <div style="font-size:11px; color:#888">${m.type.replace('_',' ')}</div>
                 </div>
@@ -261,7 +248,7 @@
     }
 
     function selectResult(el, encoded) {
-        el.classList.add('clicked'); // Visual Flash
+        el.classList.add('clicked');
         setTimeout(() => {
             addRegion(encoded);
             resultsBox.style.display = 'none';
@@ -272,8 +259,6 @@
     function addRegion(encoded) {
         const data = JSON.parse(decodeURIComponent(encoded));
         const hue = Math.floor(Math.random() * 360);
-        
-        // Spawn in Safe Center
         const headerH = 36;
         const panelH = 100;
         const safeY = (window.innerHeight - panelH - headerH) / 2 + headerH;
@@ -304,11 +289,7 @@
             let size = Math.sqrt(val) * scale;
             let isNTS = false;
 
-            // SAFETY NET: If too small to see
-            if (size < MIN_SIZE) {
-                size = MIN_SIZE;
-                isNTS = true;
-            }
+            if (size < MIN_SIZE) { size = MIN_SIZE; isNTS = true; }
             
             const div = document.createElement('div');
             div.className = `shape ${mode === 'population' ? 'circle' : 'square'} ${selectedIdx === i ? 'selected' : ''} ${isNTS ? 'not-to-scale' : ''}`;
@@ -328,35 +309,33 @@
             `;
             
             div.onpointerdown = e => {
+                if (e.pointerType === 'touch') div.releasePointerCapture(e.pointerId);
                 e.preventDefault();
                 selectedIdx = i;
-                render(); // Refresh selection
+                render(); 
                 
                 const offset = { x: e.clientX - item.x, y: e.clientY - item.y };
                 
                 function move(me) {
-                    let newX = me.clientX - offset.x;
-                    let newY = me.clientY - offset.y;
-
-                    // BOUNDARY LOGIC: Allow 50% submergence
-                    const hLimit = size / 2;
-                    const topWall = 36 - hLimit;
-                    const bottomWall = window.innerHeight - 80 - hLimit;
-
-                    if(newY < topWall) newY = topWall;
-                    if(newY > bottomWall) newY = bottomWall;
-
-                    item.x = newX;
-                    item.y = newY;
-                    div.style.left = item.x + 'px';
-                    div.style.top = item.y + 'px';
+                    requestAnimationFrame(() => {
+                        let newX = me.clientX - offset.x;
+                        let newY = me.clientY - offset.y;
+                        const hLimit = size / 2;
+                        const topWall = 36 - hLimit;
+                        const bottomWall = window.innerHeight - 80 - hLimit;
+                        if(newY < topWall) newY = topWall;
+                        if(newY > bottomWall) newY = bottomWall;
+                        item.x = newX;
+                        item.y = newY;
+                        div.style.left = item.x + 'px';
+                        div.style.top = item.y + 'px';
+                    });
                 }
-
                 function up() {
                     window.removeEventListener('pointermove', move);
                     window.removeEventListener('pointerup', up);
                 }
-                window.addEventListener('pointermove', move);
+                window.addEventListener('pointermove', move, { passive: false });
                 window.addEventListener('pointerup', up);
             };
             stage.appendChild(div);
@@ -367,11 +346,7 @@
     function updateUI() {
         document.getElementById('delBtn').style.display = selectedIdx !== null ? 'block' : 'none';
         const actionBtn = document.getElementById('actionBtn');
-        if(selectedIdx !== null && addedItems[selectedIdx].parts) {
-            actionBtn.textContent = "Split";
-        } else {
-            actionBtn.textContent = "Merge";
-        }
+        actionBtn.textContent = (selectedIdx !== null && addedItems[selectedIdx].parts) ? "Split" : "Merge";
     }
 
     function handleMerge() {
@@ -389,11 +364,9 @@
             const others = [];
             addedItems.forEach((item, i) => {
                 if(i === selectedIdx) return;
-                const val2 = mode === 'population' ? (item.population || item.area) : item.area;
-                const s2 = Math.sqrt(val2) * scale;
+                const s2 = Math.sqrt(mode === 'population' ? (item.population || item.area) : item.area) * scale;
                 const overlap = !(target.x + s1 < item.x || target.x > item.x + s2 || target.y + s1 < item.y || target.y > item.y + s2);
-                if(overlap) toMerge.push(i);
-                else others.push(item);
+                if(overlap) toMerge.push(i); else others.push(item);
             });
             if(toMerge.length > 1) {
                 const parts = [];
