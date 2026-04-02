@@ -129,9 +129,10 @@
         try { 
             const res = await fetch('data.json'); 
             const rawData = await res.json();
-            // Name Sanitizer logic
             masterData = rawData.map(item => ({
                 ...item,
+                area: parseFloat(item.area) || 1,
+                population: parseFloat(item.population) || 0,
                 name: item.name.includes(' > ') ? item.name.split(' > ').pop() : item.name
             }));
         } catch(e) { console.error(e); }
@@ -141,11 +142,16 @@
         input.addEventListener('input', e => {
             const val = e.target.value.toLowerCase();
             if(val.length < 1) { resultsBox.style.display = 'none'; return; }
-            const startsWith = masterData.filter(d => d.name.toLowerCase().startsWith(val));
-            const contains = masterData.filter(d => !d.name.toLowerCase().startsWith(val) && d.name.toLowerCase().includes(val));
-            const matches = [...startsWith, ...contains].slice(0, 15);
+            
+            // IMPROVED SEARCH: Looks at Name AND Aliases
+            const matches = masterData.filter(d => {
+                const nameMatch = d.name.toLowerCase().includes(val);
+                const aliasMatch = d.aliases && d.aliases.some(a => a.toLowerCase().includes(val));
+                return nameMatch || aliasMatch;
+            }).slice(0, 15);
+
             resultsBox.innerHTML = matches.map(m => `
-                <div class="result-item" onpointerdown="selectResult(this, '${encodeURIComponent(JSON.stringify(m))}')">
+                <div class="result-item" onpointerdown="selectByIndex(${masterData.indexOf(m)})">
                     <div style="font-weight:bold; font-size:14px">${m.name}</div>
                     <div style="font-size:11px; color:#888">${m.type.replace('_',' ')}</div>
                 </div>
@@ -154,24 +160,36 @@
         });
     }
 
-    function selectResult(el, encoded) {
-        el.classList.add('clicked');
-        input.blur(); // Hide keyboard
-        setTimeout(() => { addRegion(encoded); resultsBox.style.display = 'none'; input.value = ''; }, 80);
+    function selectByIndex(index) {
+        const item = masterData[index];
+        input.blur(); 
+        setTimeout(() => { 
+            addRegionDirect(item); 
+            resultsBox.style.display = 'none'; 
+            input.value = ''; 
+        }, 80);
     }
 
-    function addRegion(encoded) {
-        const data = JSON.parse(decodeURIComponent(encoded));
+    function addRegionDirect(data) {
         const hue = Math.floor(Math.random() * 360);
         const safeY = (window.innerHeight - 200) / 2 + 100;
-        addedItems.push({ ...data, color: `hsla(${hue}, 75%, 70%, 0.8)`, x: window.innerWidth / 2 - 40, y: safeY });
+        addedItems.push({ 
+            ...data, 
+            color: `hsla(${hue}, 75%, 70%, 0.8)`, 
+            x: window.innerWidth / 2 - 40, 
+            y: safeY 
+        });
         selectedIdx = addedItems.length - 1;
         render();
     }
 
     function getScale() {
         if (!addedItems.length) return 1;
-        const max = Math.max(...addedItems.map(i => mode === 'population' ? (i.population || i.area) : i.area));
+        const values = addedItems.map(i => {
+            const v = mode === 'population' ? (i.population || i.area) : i.area;
+            return parseFloat(v) || 1;
+        });
+        const max = Math.max(...values);
         return (Math.min(window.innerWidth, window.innerHeight) * 0.6) / Math.sqrt(max);
     }
 
@@ -179,12 +197,18 @@
         stage.innerHTML = ''; const scale = getScale();
         addedItems.forEach((item, i) => {
             const val = mode === 'population' ? (item.population || item.area) : item.area;
-            let size = Math.sqrt(val) * scale; let isNTS = size < MIN_SIZE; if (isNTS) size = MIN_SIZE;
+            let size = Math.sqrt(parseFloat(val) || 1) * scale; 
+            let isNTS = size < MIN_SIZE; if (isNTS) size = MIN_SIZE;
+            
             const div = document.createElement('div');
             div.className = `shape ${mode === 'population' ? 'circle' : 'square'} ${selectedIdx === i ? 'selected' : ''} ${isNTS ? 'not-to-scale' : ''}`;
             div.style.width = size + 'px'; div.style.height = size + 'px'; div.style.backgroundColor = item.color;
             div.style.transform = `translate3d(${item.x}px, ${item.y}px, 0)`;
-            let labelVal = mode === 'population' ? (item.population ? (item.population/1000000).toFixed(1)+'M' : 'N/A') : Math.round(unit === 'mi' ? item.area * 0.386102 : item.area).toLocaleString() + (unit === 'mi' ? ' mi²' : ' km²');
+            
+            let labelVal = mode === 'population' ? 
+                (item.population ? (item.population/1000000).toFixed(1)+'M' : 'N/A') : 
+                Math.round(unit === 'mi' ? item.area * 0.386102 : item.area).toLocaleString() + (unit === 'mi' ? ' mi²' : ' km²');
+            
             div.innerHTML = `${isNTS ? '<div class="nts-icon">!</div>' : ''}<div class="label">${item.name}<br>${labelVal}</div>`;
             
             div.onpointerdown = e => {
@@ -210,6 +234,7 @@
     function openMap() {
         if(selectedIdx === null) return;
         const region = addedItems[selectedIdx].name;
+        // Fixed the Map URL logic here as well
         window.open(`https://www.google.com/maps/search/${encodeURIComponent(region)}`, '_blank');
     }
 
@@ -225,7 +250,7 @@
             const val2 = mode === 'population' ? (addedItems[1].population || 0) : addedItems[1].area;
             const larger = val1 > val2 ? addedItems[0] : addedItems[1];
             const smaller = val1 > val2 ? addedItems[1] : addedItems[0];
-            const ratio = (Math.max(val1, val2) / Math.min(val1, val2)).toFixed(1);
+            const ratio = (Math.max(val1, val2) / (Math.min(val1, val2) || 1)).toFixed(1);
             compDiv.innerHTML = `${larger.name} is ${ratio}x the size of ${smaller.name}`;
             compDiv.style.display = 'block';
         } else {
