@@ -22,10 +22,8 @@
         }
         #settingsBtn { position: absolute; left: 10px; font-size: 20px; cursor: pointer; }
         #helpBtn { position: absolute; right: 10px; font-size: 12px; font-weight: bold; cursor: pointer; padding: 6px 12px; background: rgba(255,255,255,0.2); border-radius: 6px; }
-        
         #stage { position: absolute; inset: 0; background-image: radial-gradient(#d1d1d1 1px, transparent 1px); background-size: 40px 40px; }
 
-        /* NEW: Controls moved to top for better ergonomics */
         #top-controls {
             position: fixed; top: calc(var(--header-h) + 8px);
             left: 10px; right: 10px; max-width: 500px; margin: 0 auto; z-index: 3500;
@@ -50,14 +48,14 @@
             max-height: 40vh; overflow-y: auto; display: none; z-index: 3600;
         }
 
-        .result-item { padding: 15px; border-bottom: 1px solid #f0f0f0; }
+        .result-item { padding: 15px; border-bottom: 1px solid #f0f0f0; cursor: pointer; }
 
-        /* Comparison Overlay */
         #comparison-overlay {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            background: white; padding: 10px 20px; border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2000;
-            font-weight: bold; font-size: 14px; display: none; border: 2px solid var(--accent);
+            background: white; padding: 12px 24px; border-radius: 25px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2); z-index: 2000;
+            font-weight: bold; font-size: 14px; display: none; border: 2.5px solid var(--accent);
+            text-align: center; color: var(--primary);
         }
 
         .shape {
@@ -66,7 +64,7 @@
         }
         .shape.square { border-radius: 4px; }
         .shape.circle { border-radius: 50%; }
-        .shape.selected { border: 3px solid #000; z-index: 100; }
+        .shape.selected { border: 3.5px solid #000; z-index: 100; }
         .shape.not-to-scale { border: 3px solid var(--danger) !important; }
         
         .label { font-size: 10px; font-weight: bold; text-align: center; pointer-events: none; color: #222; }
@@ -124,9 +122,9 @@
         <h3 style="margin-top:0">Quick Start</h3>
         <p style="font-size: 14px; color: #444; line-height: 1.5;">
             1. <b>Search</b> for two regions.<br>
-            2. <b>Drag</b> them to overlap.<br>
-            3. <b>Compare</b> sizes automatically at the bottom.<br>
-            4. <b>Merge</b> shapes to create custom regions.
+            2. <b>Drag</b> them to compare sizes.<br>
+            3. <b>Check</b> the percentage at the bottom.<br>
+            4. <b>Overlap & Merge</b> to combine areas.
         </p>
         <button onclick="toggleHelp()" style="width:100%; padding:12px; border-radius:8px; border:none; background:var(--primary); color:white">Got it!</button>
     </div>
@@ -136,16 +134,20 @@
     let masterData = []; let addedItems = []; let selectedIdx = null; let mode = 'area'; let unit = 'km'; const MIN_SIZE = 40;
     const stage = document.getElementById('stage'); const input = document.getElementById('entitySearch'); const resultsBox = document.getElementById('results-box');
 
+    // Helper: Removes "USA > " or "Europe > " from names
+    function cleanName(n) { return n.split('>').pop().trim(); }
+
     async function init() {
         try { const res = await fetch('data.json'); masterData = await res.json(); } catch(e) { console.error(e); }
         document.getElementById('loading').style.display = 'none';
+        
         input.addEventListener('input', e => {
             const val = e.target.value.toLowerCase();
-            if(val.length < 2) { resultsBox.style.display = 'none'; return; }
+            if(val.length < 1) { resultsBox.style.display = 'none'; return; } // START AT 1 CHAR
             const matches = masterData.filter(d => d.name.toLowerCase().includes(val)).slice(0, 15);
             resultsBox.innerHTML = matches.map(m => `
                 <div class="result-item" onpointerdown="selectResult(this, '${encodeURIComponent(JSON.stringify(m))}')">
-                    <div style="font-weight:bold; font-size:14px">${m.name}</div>
+                    <div style="font-weight:bold; font-size:14px">${cleanName(m.name)}</div>
                     <div style="font-size:11px; color:#888">${m.type.replace('_',' ')}</div>
                 </div>
             `).join('');
@@ -157,7 +159,7 @@
         addRegion(encoded);
         resultsBox.style.display = 'none';
         input.value = '';
-        input.blur(); // NEW: Hides mobile keyboard automatically
+        input.blur();
     }
 
     function addRegion(encoded) {
@@ -169,27 +171,44 @@
     }
 
     function render() {
-        stage.innerHTML = ''; const scale = (Math.min(window.innerWidth, window.innerHeight) * 0.6) / Math.sqrt(Math.max(...addedItems.map(i => mode === 'population' ? (i.population || i.area) : i.area), 1));
+        stage.innerHTML = '';
+        if (addedItems.length === 0) { updateUI(); return; }
+        
+        const scale = (Math.min(window.innerWidth, window.innerHeight) * 0.6) / Math.sqrt(Math.max(...addedItems.map(i => mode === 'population' ? (i.population || i.area) : i.area), 1));
         
         addedItems.forEach((item, i) => {
             const val = mode === 'population' ? (item.population || item.area) : item.area;
             let size = Math.sqrt(val) * scale; let isNTS = size < MIN_SIZE; if (isNTS) size = MIN_SIZE;
+            
             const div = document.createElement('div');
             div.className = `shape ${mode === 'population' ? 'circle' : 'square'} ${selectedIdx === i ? 'selected' : ''} ${isNTS ? 'not-to-scale' : ''}`;
             div.style.width = size + 'px'; div.style.height = size + 'px'; div.style.backgroundColor = item.color;
             div.style.transform = `translate3d(${item.x}px, ${item.y}px, 0)`;
+            
             let labelVal = mode === 'population' ? (item.population ? (item.population/1000000).toFixed(1)+'M' : 'N/A') : Math.round(unit === 'mi' ? item.area * 0.386102 : item.area).toLocaleString() + (unit === 'mi' ? ' mi²' : ' km²');
-            div.innerHTML = `<div class="label">${item.name}<br>${labelVal}</div>`;
+            div.innerHTML = `<div class="label">${cleanName(item.name)}<br>${labelVal}</div>`;
+            
             div.onpointerdown = e => {
-                div.setPointerCapture(e.pointerId); e.preventDefault(); selectedIdx = i;
-                document.querySelectorAll('.shape').forEach(s => s.classList.remove('selected')); div.classList.add('selected');
+                div.setPointerCapture(e.pointerId);
+                e.preventDefault();
+                selectedIdx = i;
+                render(); // Re-render to update selection border
+                
                 const offset = { x: e.clientX - item.x, y: e.clientY - item.y };
-                function move(me) { requestAnimationFrame(() => {
-                    let nX = me.clientX-offset.x; let nY = me.clientY-offset.y;
-                    item.x = nX; item.y = nY; div.style.transform = `translate3d(${nX}px, ${nY}px, 0)`;
-                });}
-                function up() { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); updateUI(); }
-                window.addEventListener('pointermove', move); window.addEventListener('pointerup', up);
+                function move(me) {
+                    requestAnimationFrame(() => {
+                        item.x = me.clientX - offset.x;
+                        item.y = me.clientY - offset.y;
+                        div.style.transform = `translate3d(${item.x}px, ${item.y}px, 0)`;
+                    });
+                }
+                function up() {
+                    window.removeEventListener('pointermove', move);
+                    window.removeEventListener('pointerup', up);
+                    updateUI();
+                }
+                window.addEventListener('pointermove', move);
+                window.addEventListener('pointerup', up);
             };
             stage.appendChild(div);
         });
@@ -201,28 +220,56 @@
         document.getElementById('delBtn').style.display = hasSel ? 'block' : 'none';
         document.getElementById('mapBtn').style.display = hasSel ? 'block' : 'none';
         
-        // NEW: Automatic Comparison Logic
         const overlay = document.getElementById('comparison-overlay');
         if (addedItems.length === 2) {
             const v1 = mode === 'area' ? addedItems[0].area : addedItems[0].population;
             const v2 = mode === 'area' ? addedItems[1].area : addedItems[1].population;
             const big = Math.max(v1, v2); const small = Math.min(v1, v2);
-            const nameBig = v1 > v2 ? addedItems[0].name : addedItems[1].name;
-            const nameSmall = v1 > v2 ? addedItems[1].name : addedItems[0].name;
-            const times = (big / small).toFixed(1);
-            overlay.innerHTML = `${nameBig} is ${times}x larger than ${nameSmall}`;
+            const nameBig = cleanName(v1 >= v2 ? addedItems[0].name : addedItems[1].name);
+            const nameSmall = cleanName(v1 >= v2 ? addedItems[1].name : addedItems[0].name);
+            
+            // MATH: % Bigger formula
+            const percent = (((big - small) / small) * 100).toFixed(0);
+            overlay.innerHTML = `${nameBig} is ${percent}% larger than ${nameSmall}`;
             overlay.style.display = 'block';
         } else { overlay.style.display = 'none'; }
+
+        document.getElementById('actionBtn').textContent = (hasSel && addedItems[selectedIdx].parts) ? "Split" : "Merge";
     }
 
-    function openMap() { window.open(`https://www.google.com/maps/search/${encodeURIComponent(addedItems[selectedIdx].name)}`, '_blank'); }
+    function handleMerge() {
+        if(selectedIdx === null) return;
+        const target = addedItems[selectedIdx];
+        if(target.parts) {
+            const pts = target.parts; addedItems.splice(selectedIdx, 1); addedItems.push(...pts); selectedIdx = null;
+        } else {
+            const sc = (Math.min(window.innerWidth, window.innerHeight) * 0.6) / Math.sqrt(Math.max(...addedItems.map(i => mode === 'population' ? (i.population || i.area) : i.area), 1));
+            const s1 = Math.sqrt(mode === 'population' ? (target.population || target.area) : target.area) * sc;
+            const toM = [selectedIdx]; const others = [];
+            addedItems.forEach((it, i) => {
+                if(i === selectedIdx) return;
+                const s2 = Math.sqrt(mode === 'population' ? (it.population || it.area) : it.area) * sc;
+                const overlap = !(target.x + s1 < it.x || target.x > it.x + s2 || target.y + s1 < it.y || target.y > it.y + s2);
+                if(overlap) toM.push(i); else others.push(it);
+            });
+            if(toM.length > 1) {
+                const p = []; toM.forEach(idx => { if(addedItems[idx].parts) p.push(...addedItems[idx].parts); else p.push(addedItems[idx]); });
+                addedItems = [...others, { name: "Combined", area: p.reduce((s, x) => s + x.area, 0), population: p.reduce((s, x) => s + (x.population || 0), 0), color: target.color, x: target.x, y: target.y, parts: p }];
+                selectedIdx = addedItems.length - 1;
+            }
+        }
+        render();
+    }
+
+    function openMap() { window.open(`http://googleusercontent.com/maps.google.com/3{encodeURIComponent(cleanName(addedItems[selectedIdx].name))}`, '_blank'); }
     function setUnit(u) { unit = u; toggleSettings(); render(); }
-    function toggleMode() { mode = (mode === 'area' ? 'population' : 'area'); render(); }
-    function handleMerge() { /* Same logic as before */ render(); }
+    function toggleMode() { mode = (mode === 'area' ? 'population' : 'area'); document.getElementById('modeBtn').textContent = mode === 'area' ? 'Pop. Mode' : 'Area Mode'; render(); }
     function deleteSelected() { addedItems.splice(selectedIdx, 1); selectedIdx = null; render(); }
     function clearAll() { addedItems = []; selectedIdx = null; render(); }
     function toggleHelp() { document.getElementById('helpModal').classList.toggle('open'); }
     function toggleSettings() { document.getElementById('settingsModal').classList.toggle('open'); }
+    function closeSettingsOnOverlay(e) { if(e.target.id === 'settingsModal') toggleSettings(); }
+    function closeHelpOnOverlay(e) { if(e.target.id === 'helpModal') toggleHelp(); }
     init();
 </script>
 </body>
