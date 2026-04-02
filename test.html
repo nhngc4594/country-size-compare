@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Square Scale</title>
+    <style>
+        :root {
+            --primary: #2c3e50; --accent: #3498db; --danger: #e74c3c;
+            --success: #27ae10; --bg: #f8f9fa; --header-h: 36px;
+        }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0; height: 100vh; background: var(--bg); overflow: hidden;
+            position: relative; touch-action: none; user-select: none; -webkit-user-select: none;
+        }
+        #app-header {
+            position: fixed; top: 0; left: 0; right: 0; height: var(--header-h);
+            background: var(--primary); color: white; display: flex; align-items: center;
+            justify-content: center; z-index: 4000; box-shadow: 0 1px 4px rgba(0,0,0,0.2); font-size: 14px;
+        }
+        #settingsBtn { position: absolute; left: 10px; font-size: 18px; cursor: pointer; padding: 5px; }
+        #helpBtn { position: absolute; right: 10px; font-size: 11px; font-weight: bold; cursor: pointer; padding: 5px 10px; background: rgba(255,255,255,0.1); border-radius: 4px; }
+        #stage { position: absolute; inset: 0; background-image: radial-gradient(#d1d1d1 1px, transparent 1px); background-size: 40px 40px; touch-action: none; }
+        #top-panel { position: fixed; top: calc(var(--header-h) + 8px); left: 10px; right: 10px; max-width: 500px; margin: 0 auto; z-index: 3500; }
+        input[type="text"] { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; font-size: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); outline: none; }
+        #results-box { position: absolute; top: calc(100% + 5px); left: 0; right: 0; background: white; border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); max-height: 45vh; overflow-y: auto; display: none; }
+        .result-item { padding: 12px 15px; border-bottom: 1px solid #f0f0f0; cursor: pointer; }
+        .result-item.clicked { background: #d0e7ff; }
+        #bottom-panel { position: fixed; bottom: 15px; left: 10px; right: 10px; max-width: 500px; margin: 0 auto; display: flex; gap: 6px; z-index: 3000; }
+        button { flex: 1; border: none; border-radius: 8px; padding: 12px 2px; color: white; font-weight: bold; font-size: 11px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); transition: transform 0.1s; }
+        button:active { transform: scale(0.95); }
+        .shape {
+            position: absolute; top: 0; left: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            border: 1.5px solid rgba(0,0,0,0.2); box-shadow: 0 2px 8px rgba(0,0,0,0.15); will-change: transform; touch-action: none;
+        }
+        .shape.square { border-radius: 4px; }
+        .shape.circle { border-radius: 50%; }
+        .shape.selected { border: 3px solid #000; z-index: 100; }
+        .shape.not-to-scale { border: 3px solid var(--danger) !important; }
+        .nts-icon { color: var(--danger); font-weight: 900; font-size: 14px; }
+        .label { font-size: 10px; font-weight: bold; text-align: center; pointer-events: none; color: #222; line-height: 1.1; }
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 5000; align-items: center; justify-content: center; padding: 20px; }
+        .modal-overlay.open { display: flex; }
+        .modal { background: white; padding: 20px; border-radius: 12px; max-width: 350px; position: relative; }
+        .modal-close { position: absolute; top: 5px; right: 10px; border: none; background: none; font-size: 24px; }
+        #toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.8); color: white; padding: 10px 20px; border-radius: 20px; font-size: 14px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 6000; }
+        #toast.show { opacity: 1; }
+        #loading { position: fixed; inset: 0; background: white; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .spinner { width: 30px; height: 30px; border: 3px solid #eee; border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+<div id="loading"><div class="spinner"></div><p>Loading...</p></div>
+<div id="app-header">
+    <div id="settingsBtn" onclick="toggleSettings()">⚙️</div>
+    <span>Square Scale</span>
+    <div id="helpBtn" onclick="toggleHelp()">Guide</div>
+</div>
+
+<div id="stage"></div>
+<div id="top-panel"><input type="text" id="entitySearch" placeholder="Enter 3+ letters..." autocomplete="off"><div id="results-box"></div></div>
+<div id="bottom-panel">
+    <button id="actionBtn" style="background:var(--success)" onclick="handleMerge()">Merge</button>
+    <button id="modeBtn" style="background:#8e44ad" onclick="toggleMode()">Population</button>
+    <button id="mapBtn" style="background:var(--accent); display:none;" onclick="openMap()">📍 Map</button>
+    <button id="delBtn" style="background:var(--danger); display:none;" onclick="deleteSelected()">Delete</button>
+    <button onclick="clearAll()" style="background:#7f8c8d">Clear</button>
+</div>
+
+<div class="modal-overlay" id="settingsModal" onclick="closeSettingsOnOverlay(event)">
+    <div class="modal">
+        <button class="modal-close" onclick="toggleSettings()">×</button>
+        <h3>Settings</h3>
+        <p>Preferred Unit:</p>
+        <div style="display:flex; gap:10px;">
+            <button id="unitMetric" style="background:var(--accent)" onclick="setUnit('km')">Metric (km²)</button>
+            <button id="unitImperial" style="background:#bdc3c7" onclick="setUnit('mi')">Imperial (mi²)</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="helpModal" onclick="closeHelpOnOverlay(event)">
+    <div class="modal">
+        <button class="modal-close" onclick="toggleHelp()">×</button>
+        <h3>Guide</h3>
+        <p style="font-size: 13px; color: #555;">
+            • Select a region and tap 📍 to see it on a map.<br>
+            • Drag shapes under bars to save space.<br>
+            • Toggle units in ⚙️ settings.
+        </p>
+    </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+    let masterData = []; let addedItems = []; let selectedIdx = null; let mode = 'area'; let unit = 'km'; const MIN_SIZE = 40;
+    const stage = document.getElementById('stage'); const input = document.getElementById('entitySearch'); const resultsBox = document.getElementById('results-box');
+
+    async function init() {
+        try { const res = await fetch('data.json'); masterData = await res.json(); } catch(e) { console.error(e); }
+        document.getElementById('loading').style.display = 'none';
+        input.addEventListener('input', e => {
+            const val = e.target.value.toLowerCase();
+            if(val.length < 3) { resultsBox.style.display = 'none'; return; }
+            const startsWith = masterData.filter(d => d.name.toLowerCase().startsWith(val));
+            const contains = masterData.filter(d => !d.name.toLowerCase().startsWith(val) && d.name.toLowerCase().includes(val));
+            const matches = [...startsWith, ...contains].slice(0, 15);
+            resultsBox.innerHTML = matches.map(m => `
+                <div class="result-item" onpointerdown="selectResult(this, '${encodeURIComponent(JSON.stringify(m))}')">
+                    <div style="font-weight:bold; font-size:14px">${m.name}</div>
+                    <div style="font-size:11px; color:#888">${m.type.replace('_',' ')}</div>
+                </div>
+            `).join('');
+            resultsBox.style.display = 'block';
+        });
+    }
+
+    function selectResult(el, encoded) {
+        el.classList.add('clicked');
+        setTimeout(() => { addRegion(encoded); resultsBox.style.display = 'none'; input.value = ''; }, 80);
+    }
+
+    function addRegion(encoded) {
+        const data = JSON.parse(decodeURIComponent(encoded));
+        const hue = Math.floor(Math.random() * 360);
+        const safeY = (window.innerHeight - 200) / 2 + 40;
+        addedItems.push({ ...data, color: `hsla(${hue}, 75%, 70%, 0.8)`, x: window.innerWidth / 2 - 40, y: safeY - 40 });
+        selectedIdx = addedItems.length - 1;
+        render();
+    }
+
+    function getScale() {
+        if (!addedItems.length) return 1;
+        const max = Math.max(...addedItems.map(i => mode === 'population' ? (i.population || i.area) : i.area));
+        return (Math.min(window.innerWidth, window.innerHeight) * 0.65) / Math.sqrt(max);
+    }
+
+    function render() {
+        stage.innerHTML = ''; const scale = getScale();
+        addedItems.forEach((item, i) => {
+            const val = mode === 'population' ? (item.population || item.area) : item.area;
+            let size = Math.sqrt(val) * scale; let isNTS = size < MIN_SIZE; if (isNTS) size = MIN_SIZE;
+            const div = document.createElement('div');
+            div.className = `shape ${mode === 'population' ? 'circle' : 'square'} ${selectedIdx === i ? 'selected' : ''} ${isNTS ? 'not-to-scale' : ''}`;
+            div.style.width = size + 'px'; div.style.height = size + 'px'; div.style.backgroundColor = item.color;
+            div.style.transform = `translate3d(${item.x}px, ${item.y}px, 0)`;
+            let labelVal = mode === 'population' ? (item.population ? (item.population/1000000).toFixed(1)+'M' : 'N/A') : Math.round(unit === 'mi' ? item.area * 0.386102 : item.area).toLocaleString() + (unit === 'mi' ? ' mi²' : ' km²');
+            div.innerHTML = `${isNTS ? '<div class="nts-icon">!</div>' : ''}<div class="label">${item.name}<br>${labelVal}</div>`;
+            div.onpointerdown = e => {
+                div.setPointerCapture(e.pointerId); e.preventDefault(); selectedIdx = i;
+                document.querySelectorAll('.shape').forEach(s => s.classList.remove('selected'));
+                div.classList.add('selected');
+                const offset = { x: e.clientX - item.x, y: e.clientY - item.y };
+                function move(me) { requestAnimationFrame(() => {
+                    let newX = me.clientX - offset.x; let newY = me.clientY - offset.y;
+                    const wLimit = size / 2; const hLimit = size / 2;
+                    if(newX < -wLimit) newX = -wLimit; if(newX > window.innerWidth - wLimit) newX = window.innerWidth - wLimit;
+                    const tW = 36 - hLimit; const bW = window.innerHeight - 80 - hLimit;
+                    if(newY < tW) newY = tW; if(newY > bW) newY = bW;
+                    item.x = newX; item.y = newY; div.style.transform = `translate3d(${newX}px, ${newY}px, 0)`;
+                }); }
+                function up() { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); updateUI(); }
+                window.addEventListener('pointermove', move, { passive: false }); window.addEventListener('pointerup', up);
+            };
+            stage.appendChild(div);
+        });
+        updateUI();
+    }
+
+    function openMap() {
+        if(selectedIdx === null) return;
+        const region = addedItems[selectedIdx].name;
+        // Search Google Maps by name
+        window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(region)}`, '_blank');
+    }
+
+    function updateUI() {
+        const hasSel = selectedIdx !== null;
+        document.getElementById('delBtn').style.display = hasSel ? 'block' : 'none';
+        document.getElementById('mapBtn').style.display = hasSel ? 'block' : 'none';
+        document.getElementById('actionBtn').textContent = (hasSel && addedItems[selectedIdx].parts) ? "Split" : "Merge";
+    }
+
+    function handleMerge() {
+        if(selectedIdx === null) return;
+        const target = addedItems[selectedIdx];
+        if(target.parts) {
+            const pts = target.parts; addedItems.splice(selectedIdx, 1); addedItems.push(...pts); selectedIdx = null;
+        } else {
+            const sc = getScale(); const s1 = Math.sqrt(mode === 'population' ? (target.population || target.area) : target.area) * sc;
+            const toM = [selectedIdx]; const others = [];
+            addedItems.forEach((it, i) => {
+                if(i === selectedIdx) return;
+                const s2 = Math.sqrt(mode === 'population' ? (it.population || it.area) : it.area) * sc;
+                if(!(target.x + s1 < it.x || target.x > it.x + s2 || target.y + s1 < it.y || target.y > it.y + s2)) toM.push(i); else others.push(it);
+            });
+            if(toM.length > 1) {
+                const p = []; toM.forEach(idx => { if(addedItems[idx].parts) p.push(...addedItems[idx].parts); else p.push(addedItems[idx]); });
+                addedItems = [...others, { name: "Combined", area: p.reduce((s, x) => s + x.area, 0), population: p.reduce((s, x) => s + (x.population || 0), 0), color: target.color, x: target.x, y: target.y, parts: p }];
+                selectedIdx = addedItems.length - 1;
+            } else { showToast("Overlap first!"); }
+        }
+        render();
+    }
+
+    function toggleMode() { mode = mode === 'area' ? 'population' : 'area'; document.getElementById('modeBtn').textContent = mode === 'area' ? 'Population' : 'Area'; render(); }
+    function setUnit(u) { unit = u; document.getElementById('unitMetric').style.background = u === 'km' ? 'var(--accent)' : '#bdc3c7'; document.getElementById('unitImperial').style.background = u === 'mi' ? 'var(--accent)' : '#bdc3c7'; render(); }
+    function deleteSelected() { if(selectedIdx !== null) { addedItems.splice(selectedIdx, 1); selectedIdx = null; render(); } }
+    function clearAll() { addedItems = []; selectedIdx = null; render(); }
+    function showToast(m) { const t = document.getElementById('toast'); t.textContent = m; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'), 2000); }
+    function toggleHelp() { document.getElementById('helpModal').classList.toggle('open'); }
+    function closeHelpOnOverlay(e) { if(e.target.id === 'helpModal') toggleHelp(); }
+    function toggleSettings() { document.getElementById('settingsModal').classList.toggle('open'); }
+    function closeSettingsOnOverlay(e) { if(e.target.id === 'settingsModal') toggleSettings(); }
+    init();
+</script>
+</body>
+</html>
