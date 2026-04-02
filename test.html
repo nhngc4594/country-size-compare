@@ -38,11 +38,11 @@
         button:active { transform: scale(0.95); }
 
         #comparison-overlay {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            background: rgba(0,0,0,0.85); color: white; padding: 12px 24px;
+            position: fixed; bottom: 20px; left: 10px; right: 10px; max-width: 500px; margin: 0 auto;
+            background: rgba(0,0,0,0.85); color: white; padding: 12px 20px;
             border-radius: 30px; font-weight: bold; font-size: 14px;
             pointer-events: none; display: none; z-index: 4000;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3); text-align: center; white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); text-align: center;
         }
 
         .shape {
@@ -143,7 +143,6 @@
             const val = e.target.value.toLowerCase();
             if(val.length < 1) { resultsBox.style.display = 'none'; return; }
             
-            // IMPROVED SEARCH: Looks at Name AND Aliases
             const matches = masterData.filter(d => {
                 const nameMatch = d.name.toLowerCase().includes(val);
                 const aliasMatch = d.aliases && d.aliases.some(a => a.toLowerCase().includes(val));
@@ -234,7 +233,6 @@
     function openMap() {
         if(selectedIdx === null) return;
         const region = addedItems[selectedIdx].name;
-        // Fixed the Map URL logic here as well
         window.open(`https://www.google.com/maps/search/${encodeURIComponent(region)}`, '_blank');
     }
 
@@ -248,10 +246,19 @@
         if (addedItems.length === 2) {
             const val1 = mode === 'population' ? (addedItems[0].population || 0) : addedItems[0].area;
             const val2 = mode === 'population' ? (addedItems[1].population || 0) : addedItems[1].area;
-            const larger = val1 > val2 ? addedItems[0] : addedItems[1];
-            const smaller = val1 > val2 ? addedItems[1] : addedItems[0];
-            const ratio = (Math.max(val1, val2) / (Math.min(val1, val2) || 1)).toFixed(1);
-            compDiv.innerHTML = `${larger.name} is ${ratio}x the size of ${smaller.name}`;
+            
+            if (val1 === val2) {
+                compDiv.innerHTML = `${addedItems[0].name} and ${addedItems[1].name} are identical in size`;
+            } else {
+                const larger = val1 > val2 ? addedItems[0] : addedItems[1];
+                const smaller = val1 > val2 ? addedItems[1] : addedItems[0];
+                const lVal = Math.max(val1, val2);
+                const sVal = Math.min(val1, val2) || 1;
+                
+                // Calculate percentage larger
+                const percent = (((lVal / sVal) - 1) * 100).toLocaleString(undefined, {maximumFractionDigits: 1});
+                compDiv.innerHTML = `${larger.name} is ${percent}% larger than ${smaller.name}`;
+            }
             compDiv.style.display = 'block';
         } else {
             compDiv.style.display = 'none';
