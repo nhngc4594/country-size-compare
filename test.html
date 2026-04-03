@@ -31,11 +31,9 @@
         input[type="text"] { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; font-size: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); outline: none; }
         #results-box { position: absolute; top: calc(100% + 5px); left: 0; right: 0; background: white; border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); max-height: 45vh; overflow-y: auto; display: none; }
         .result-item { padding: 12px 15px; border-bottom: 1px solid #f0f0f0; cursor: pointer; }
-        .result-item.clicked { background: #d0e7ff; }
         
         #button-bar { display: flex; gap: 6px; margin-top: 8px; }
         button { flex: 1; border: none; border-radius: 8px; padding: 12px 2px; color: white; font-weight: bold; font-size: 11px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); transition: transform 0.1s; cursor: pointer; }
-        button:active { transform: scale(0.95); }
 
         #comparison-overlay {
             position: fixed; bottom: 20px; left: 10px; right: 10px; max-width: 500px; margin: 0 auto;
@@ -51,17 +49,23 @@
         }
         .shape.square { border-radius: 4px; }
         .shape.circle { border-radius: 50%; }
-        .shape.selected { border: 3px solid #000; z-index: 100; }
-        .shape.not-to-scale { border: 3px solid var(--danger) !important; }
-        .nts-icon { color: var(--danger); font-weight: 900; font-size: 14px; }
-        .label { font-size: 10px; font-weight: bold; text-align: center; pointer-events: none; color: #222; line-height: 1.1; }
+        .shape.selected { border: 3px solid #000 !important; z-index: 500 !important; }
+        .shape.not-to-scale { border: 2px dashed var(--danger) !important; }
+        
+        /* High Contrast Label */
+        .label { 
+            font-size: 10px; font-weight: 800; text-align: center; pointer-events: none; 
+            color: white; line-height: 1.1;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8), -1px -1px 2px rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.2); padding: 2px 4px; border-radius: 4px;
+        }
         
         .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 5000; align-items: center; justify-content: center; padding: 20px; }
         .modal-overlay.open { display: flex; }
         .modal { background: white; padding: 20px; border-radius: 12px; max-width: 350px; position: relative; }
         .modal-close { position: absolute; top: 5px; right: 10px; border: none; background: none; font-size: 24px; color: #000; padding: 10px; }
         
-        #toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.8); color: white; padding: 10px 20px; border-radius: 20px; font-size: 14px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 6000; text-align: center; width: 220px; }
+        #toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.8); color: white; padding: 10px 20px; border-radius: 20px; font-size: 14px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 6000; text-align: center; }
         #toast.show { opacity: 1; }
         #loading { position: fixed; inset: 0; background: white; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .spinner { width: 30px; height: 30px; border: 3px solid #eee; border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
@@ -122,7 +126,7 @@
 <div id="toast"></div>
 
 <script>
-    let masterData = []; let addedItems = []; let selectedIdx = null; let mode = 'area'; let unit = 'km'; const MIN_SIZE = 40;
+    let masterData = []; let addedItems = []; let selectedIdx = null; let mode = 'area'; let unit = 'km'; const MIN_SIZE = 35;
     const stage = document.getElementById('stage'); const input = document.getElementById('entitySearch'); const resultsBox = document.getElementById('results-box');
 
     async function init() {
@@ -137,12 +141,14 @@
             }));
         } catch(e) { console.error(e); }
         
+        // Add Ghost Reference Object
+        addGhost();
+        
         document.getElementById('loading').style.display = 'none';
         
         input.addEventListener('input', e => {
             const val = e.target.value.toLowerCase();
             if(val.length < 1) { resultsBox.style.display = 'none'; return; }
-            
             const matches = masterData.filter(d => {
                 const nameMatch = d.name.toLowerCase().includes(val);
                 const aliasMatch = d.aliases && d.aliases.some(a => a.toLowerCase().includes(val));
@@ -159,69 +165,85 @@
         });
     }
 
+    function addGhost() {
+        const isMetric = unit === 'km';
+        const ghost = {
+            name: isMetric ? "Soccer Pitch" : "Baseball Diamond",
+            area: isMetric ? 0.00714 : 0.00809, // Approx km2
+            population: 0,
+            type: "reference",
+            color: "rgba(46, 204, 113, 0.5)",
+            x: window.innerWidth / 2 - 20,
+            y: window.innerHeight / 2 + 100
+        };
+        addedItems.push(ghost);
+        render();
+    }
+
     function selectByIndex(index) {
         const item = masterData[index];
         input.blur(); 
-        setTimeout(() => { 
-            addRegionDirect(item); 
-            resultsBox.style.display = 'none'; 
-            input.value = ''; 
-        }, 80);
+        setTimeout(() => { addRegionDirect(item); resultsBox.style.display = 'none'; input.value = ''; }, 80);
     }
 
     function addRegionDirect(data) {
         const hue = Math.floor(Math.random() * 360);
-        const safeY = (window.innerHeight - 200) / 2 + 100;
-        addedItems.push({ 
-            ...data, 
-            color: `hsla(${hue}, 75%, 70%, 0.8)`, 
-            x: window.innerWidth / 2 - 40, 
-            y: safeY 
-        });
+        addedItems.push({ ...data, color: `hsla(${hue}, 70%, 65%, 0.8)`, x: window.innerWidth / 2 - 40, y: window.innerHeight / 2 });
         selectedIdx = addedItems.length - 1;
         render();
     }
 
     function getScale() {
         if (!addedItems.length) return 1;
-        const values = addedItems.map(i => {
-            const v = mode === 'population' ? (i.population || i.area) : i.area;
-            return parseFloat(v) || 1;
-        });
-        const max = Math.max(...values);
+        const values = addedItems.map(i => mode === 'population' ? (i.population || 0) : i.area);
+        const max = Math.max(...values, 0.01);
         return (Math.min(window.innerWidth, window.innerHeight) * 0.6) / Math.sqrt(max);
     }
 
     function render() {
-        stage.innerHTML = ''; const scale = getScale();
-        addedItems.forEach((item, i) => {
-            const val = mode === 'population' ? (item.population || item.area) : item.area;
-            let size = Math.sqrt(parseFloat(val) || 1) * scale; 
+        stage.innerHTML = ''; 
+        const scale = getScale();
+
+        // SORTING: Smallest area items last (so they appear on top)
+        const sortedItems = [...addedItems].map((item, originalIndex) => ({...item, originalIndex}))
+            .sort((a, b) => b.area - a.area);
+
+        sortedItems.forEach((itemObj) => {
+            const item = addedItems[itemObj.originalIndex];
+            const val = mode === 'population' ? (item.population || 0) : item.area;
+            let size = Math.sqrt(val) * scale; 
             let isNTS = size < MIN_SIZE; if (isNTS) size = MIN_SIZE;
             
             const div = document.createElement('div');
-            div.className = `shape ${mode === 'population' ? 'circle' : 'square'} ${selectedIdx === i ? 'selected' : ''} ${isNTS ? 'not-to-scale' : ''}`;
+            div.className = `shape ${mode === 'population' ? 'circle' : 'square'} ${selectedIdx === itemObj.originalIndex ? 'selected' : ''} ${isNTS ? 'not-to-scale' : ''}`;
             div.style.width = size + 'px'; div.style.height = size + 'px'; div.style.backgroundColor = item.color;
             div.style.transform = `translate3d(${item.x}px, ${item.y}px, 0)`;
             
-            let labelVal = mode === 'population' ? 
-                (item.population ? (item.population/1000000).toFixed(1)+'M' : 'N/A') : 
-                Math.round(unit === 'mi' ? item.area * 0.386102 : item.area).toLocaleString() + (unit === 'mi' ? ' mi²' : ' km²');
+            // DYNAMIC UNIT SWAPPING
+            let labelVal = "";
+            if (mode === 'population') {
+                labelVal = item.population >= 1000000 ? (item.population/1000000).toFixed(1)+'M' : item.population.toLocaleString();
+            } else {
+                const areaKm = item.area;
+                if (unit === 'km') {
+                    labelVal = areaKm < 0.1 ? (areaKm * 1000000).toLocaleString() + " m²" : areaKm.toLocaleString() + " km²";
+                } else {
+                    const areaMi = areaKm * 0.386102;
+                    labelVal = areaMi < 0.01 ? (areaMi * 27878400).toLocaleString() + " ft²" : areaMi.toLocaleString() + " mi²";
+                }
+            }
             
-            div.innerHTML = `${isNTS ? '<div class="nts-icon">!</div>' : ''}<div class="label">${item.name}<br>${labelVal}</div>`;
+            div.innerHTML = `<div class="label">${item.name}<br>${labelVal}</div>`;
             
             div.onpointerdown = e => {
-                div.setPointerCapture(e.pointerId); e.preventDefault(); selectedIdx = i;
-                document.querySelectorAll('.shape').forEach(s => s.classList.remove('selected'));
-                div.classList.add('selected');
+                div.setPointerCapture(e.pointerId); e.preventDefault(); 
+                selectedIdx = itemObj.originalIndex;
+                render(); // Re-render to show selection border
                 const offset = { x: e.clientX - item.x, y: e.clientY - item.y };
-                function move(me) { requestAnimationFrame(() => {
-                    let newX = me.clientX - offset.x; let newY = me.clientY - offset.y;
-                    const limit = size / 2;
-                    if(newX < -limit) newX = -limit; if(newX > window.innerWidth - limit) newX = window.innerWidth - limit;
-                    if(newY < 40 - limit) newY = 40 - limit; if(newY > window.innerHeight - 40 - limit) newY = window.innerHeight - 40 - limit;
-                    item.x = newX; item.y = newY; div.style.transform = `translate3d(${newX}px, ${newY}px, 0)`;
-                }); }
+                function move(me) { 
+                    item.x = me.clientX - offset.x; item.y = me.clientY - offset.y;
+                    div.style.transform = `translate3d(${item.x}px, ${item.y}px, 0)`;
+                }
                 function up() { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); updateUI(); }
                 window.addEventListener('pointermove', move); window.addEventListener('pointerup', up);
             };
@@ -230,42 +252,27 @@
         updateUI();
     }
 
-    function openMap() {
-        if(selectedIdx === null) return;
-        const item = addedItems[selectedIdx];
-        if (item.parts || item.name === "Combined") {
-            showToast("Cannot map combined regions");
-            return;
-        }
-        window.open(`https://www.google.com/maps/search/${encodeURIComponent(item.name)}`, '_blank');
-    }
-
     function updateUI() {
         const hasSel = selectedIdx !== null;
         document.getElementById('delBtn').style.display = hasSel ? 'block' : 'none';
-        document.getElementById('mapBtn').style.display = hasSel ? 'block' : 'none';
+        document.getElementById('mapBtn').style.display = (hasSel && !addedItems[selectedIdx].parts && addedItems[selectedIdx].name !== "Combined") ? 'block' : 'none';
         document.getElementById('actionBtn').textContent = (hasSel && addedItems[selectedIdx].parts) ? "Split" : "Merge";
 
         const compDiv = document.getElementById('comparison-overlay');
         if (addedItems.length === 2) {
-            const val1 = mode === 'population' ? (addedItems[0].population || 0) : addedItems[0].area;
-            const val2 = mode === 'population' ? (addedItems[1].population || 0) : addedItems[1].area;
-            
-            if (val1 === val2) {
-                compDiv.innerHTML = `${addedItems[0].name} and ${addedItems[1].name} are identical in size`;
-            } else {
-                const larger = val1 > val2 ? addedItems[0] : addedItems[1];
-                const smaller = val1 > val2 ? addedItems[1] : addedItems[0];
-                const lVal = Math.max(val1, val2);
-                const sVal = Math.min(val1, val2) || 1;
-                
-                const percent = (((lVal / sVal) - 1) * 100).toLocaleString(undefined, {maximumFractionDigits: 1});
-                compDiv.innerHTML = `${larger.name} is ${percent}% larger than ${smaller.name}`;
-            }
+            const val1 = mode === 'population' ? addedItems[0].population : addedItems[0].area;
+            const val2 = mode === 'population' ? addedItems[1].population : addedItems[1].area;
+            const larger = val1 > val2 ? addedItems[0] : addedItems[1];
+            const smaller = val1 > val2 ? addedItems[1] : addedItems[0];
+            const ratio = (((Math.max(val1, val2) / (Math.min(val1, val2) || 1)) - 1) * 100).toLocaleString(undefined, {maximumFractionDigits: 1});
+            compDiv.innerHTML = `${larger.name} is ${ratio}% larger than ${smaller.name}`;
             compDiv.style.display = 'block';
-        } else {
-            compDiv.style.display = 'none';
-        }
+        } else { compDiv.style.display = 'none'; }
+    }
+
+    function openMap() {
+        if(selectedIdx === null) return;
+        window.open(`https://www.google.com/maps/search/${encodeURIComponent(addedItems[selectedIdx].name)}`, '_blank');
     }
 
     function handleMerge() {
@@ -274,11 +281,11 @@
         if(target.parts) {
             const pts = target.parts; addedItems.splice(selectedIdx, 1); addedItems.push(...pts); selectedIdx = null;
         } else {
-            const sc = getScale(); const s1 = Math.sqrt(mode === 'population' ? (target.population || target.area) : target.area) * sc;
+            const sc = getScale(); const s1 = Math.sqrt(mode === 'population' ? target.population : target.area) * sc;
             const toM = [selectedIdx]; const others = [];
             addedItems.forEach((it, i) => {
                 if(i === selectedIdx) return;
-                const s2 = Math.sqrt(mode === 'population' ? (it.population || it.area) : it.area) * sc;
+                const s2 = Math.sqrt(mode === 'population' ? it.population : it.area) * sc;
                 if(!(target.x + s1 < it.x || target.x > it.x + s2 || target.y + s1 < it.y || target.y > it.y + s2)) toM.push(i); else others.push(it);
             });
             if(toM.length > 1) {
