@@ -49,15 +49,15 @@
         }
         .shape.square { border-radius: 4px; }
         .shape.circle { border-radius: 50%; }
-        .shape.selected { border: 3px solid #000 !important; z-index: 500 !important; }
-        .shape.not-to-scale { border: 2px dashed var(--danger) !important; }
+        /* LAYER FIX: Selected item always on top */
+        .shape.selected { border: 3px solid #000 !important; z-index: 1000 !important; }
+        .shape.not-to-scale { border: 2.5px dashed var(--danger) !important; }
         
-        /* High Contrast Label */
+        /* High Contrast Label: Clean Outline Style */
         .label { 
             font-size: 10px; font-weight: 800; text-align: center; pointer-events: none; 
             color: white; line-height: 1.1;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8), -1px -1px 2px rgba(0,0,0,0.8);
-            background: rgba(0,0,0,0.2); padding: 2px 4px; border-radius: 4px;
+            text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 0 2px 4px rgba(0,0,0,0.5);
         }
         
         .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 5000; align-items: center; justify-content: center; padding: 20px; }
@@ -65,7 +65,7 @@
         .modal { background: white; padding: 20px; border-radius: 12px; max-width: 350px; position: relative; }
         .modal-close { position: absolute; top: 5px; right: 10px; border: none; background: none; font-size: 24px; color: #000; padding: 10px; }
         
-        #toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.8); color: white; padding: 10px 20px; border-radius: 20px; font-size: 14px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 6000; text-align: center; }
+        #toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.8); color: white; padding: 10px 20px; border-radius: 20px; font-size: 14px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 6000; }
         #toast.show { opacity: 1; }
         #loading { position: fixed; inset: 0; background: white; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .spinner { width: 30px; height: 30px; border: 3px solid #eee; border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
@@ -85,7 +85,7 @@
 <div id="stage"></div>
 
 <div id="top-panel">
-    <input type="text" id="entitySearch" placeholder="Enter a location to compare..." autocomplete="off">
+    <input type="text" id="entitySearch" placeholder="Enter a location..." autocomplete="off">
     <div id="results-box"></div>
     <div id="button-bar">
         <button id="actionBtn" style="background:var(--success)" onclick="handleMerge()">Merge</button>
@@ -115,10 +115,10 @@
         <button class="modal-close" onclick="toggleHelp()">×</button>
         <h3>Quick Start</h3>
         <p style="font-size: 13px; color: #555; line-height: 1.6;">
-            • <b>Search</b> a place to drop it on the stage.<br>
-            • <b>Drag</b> shapes to compare their real size.<br>
-            • <b>Overlap</b> two shapes and hit <b>Merge</b> to combine.<br>
-            • <b>Select</b> a shape and hit <b>📍 Map</b> to see it live.
+            • <b>Search</b> a place to add it.<br>
+            • <b>Drag</b> shapes to compare size.<br>
+            • <b>Overlap</b> shapes and hit <b>Merge</b>.<br>
+            • <b>Select</b> a shape for more options.
         </p>
     </div>
 </div>
@@ -140,44 +140,15 @@
                 name: item.name.includes(' > ') ? item.name.split(' > ').pop() : item.name
             }));
         } catch(e) { console.error(e); }
-        
-        // Add Ghost Reference Object
-        addGhost();
-        
         document.getElementById('loading').style.display = 'none';
         
         input.addEventListener('input', e => {
             const val = e.target.value.toLowerCase();
             if(val.length < 1) { resultsBox.style.display = 'none'; return; }
-            const matches = masterData.filter(d => {
-                const nameMatch = d.name.toLowerCase().includes(val);
-                const aliasMatch = d.aliases && d.aliases.some(a => a.toLowerCase().includes(val));
-                return nameMatch || aliasMatch;
-            }).slice(0, 15);
-
-            resultsBox.innerHTML = matches.map(m => `
-                <div class="result-item" onpointerdown="selectByIndex(${masterData.indexOf(m)})">
-                    <div style="font-weight:bold; font-size:14px">${m.name}</div>
-                    <div style="font-size:11px; color:#888">${m.type.replace('_',' ')}</div>
-                </div>
-            `).join('');
+            const matches = masterData.filter(d => (d.name.toLowerCase().includes(val) || (d.aliases && d.aliases.some(a => a.toLowerCase().includes(val))))).slice(0, 15);
+            resultsBox.innerHTML = matches.map(m => `<div class="result-item" onpointerdown="selectByIndex(${masterData.indexOf(m)})"><div style="font-weight:bold; font-size:14px">${m.name}</div><div style="font-size:11px; color:#888">${m.type.replace('_',' ')}</div></div>`).join('');
             resultsBox.style.display = 'block';
         });
-    }
-
-    function addGhost() {
-        const isMetric = unit === 'km';
-        const ghost = {
-            name: isMetric ? "Soccer Pitch" : "Baseball Diamond",
-            area: isMetric ? 0.00714 : 0.00809, // Approx km2
-            population: 0,
-            type: "reference",
-            color: "rgba(46, 204, 113, 0.5)",
-            x: window.innerWidth / 2 - 20,
-            y: window.innerHeight / 2 + 100
-        };
-        addedItems.push(ghost);
-        render();
     }
 
     function selectByIndex(index) {
@@ -201,44 +172,34 @@
     }
 
     function render() {
-        stage.innerHTML = ''; 
-        const scale = getScale();
-
-        // SORTING: Smallest area items last (so they appear on top)
-        const sortedItems = [...addedItems].map((item, originalIndex) => ({...item, originalIndex}))
-            .sort((a, b) => b.area - a.area);
-
-        sortedItems.forEach((itemObj) => {
-            const item = addedItems[itemObj.originalIndex];
+        stage.innerHTML = ''; const scale = getScale();
+        addedItems.forEach((item, i) => {
             const val = mode === 'population' ? (item.population || 0) : item.area;
             let size = Math.sqrt(val) * scale; 
             let isNTS = size < MIN_SIZE; if (isNTS) size = MIN_SIZE;
             
             const div = document.createElement('div');
-            div.className = `shape ${mode === 'population' ? 'circle' : 'square'} ${selectedIdx === itemObj.originalIndex ? 'selected' : ''} ${isNTS ? 'not-to-scale' : ''}`;
+            div.className = `shape ${mode === 'population' ? 'circle' : 'square'} ${selectedIdx === i ? 'selected' : ''} ${isNTS ? 'not-to-scale' : ''}`;
             div.style.width = size + 'px'; div.style.height = size + 'px'; div.style.backgroundColor = item.color;
             div.style.transform = `translate3d(${item.x}px, ${item.y}px, 0)`;
             
-            // DYNAMIC UNIT SWAPPING
             let labelVal = "";
             if (mode === 'population') {
                 labelVal = item.population >= 1000000 ? (item.population/1000000).toFixed(1)+'M' : item.population.toLocaleString();
             } else {
-                const areaKm = item.area;
                 if (unit === 'km') {
-                    labelVal = areaKm < 0.1 ? (areaKm * 1000000).toLocaleString() + " m²" : areaKm.toLocaleString() + " km²";
+                    labelVal = item.area < 0.1 ? (item.area * 1000000).toLocaleString() + " m²" : item.area.toLocaleString() + " km²";
                 } else {
-                    const areaMi = areaKm * 0.386102;
-                    labelVal = areaMi < 0.01 ? (areaMi * 27878400).toLocaleString() + " ft²" : areaMi.toLocaleString() + " mi²";
+                    const mi = item.area * 0.386102;
+                    labelVal = mi < 0.01 ? (mi * 27878400).toLocaleString() + " ft²" : mi.toLocaleString() + " mi²";
                 }
             }
-            
             div.innerHTML = `<div class="label">${item.name}<br>${labelVal}</div>`;
             
             div.onpointerdown = e => {
-                div.setPointerCapture(e.pointerId); e.preventDefault(); 
-                selectedIdx = itemObj.originalIndex;
-                render(); // Re-render to show selection border
+                div.setPointerCapture(e.pointerId); e.preventDefault(); selectedIdx = i;
+                document.querySelectorAll('.shape').forEach(s => s.classList.remove('selected'));
+                div.classList.add('selected');
                 const offset = { x: e.clientX - item.x, y: e.clientY - item.y };
                 function move(me) { 
                     item.x = me.clientX - offset.x; item.y = me.clientY - offset.y;
@@ -257,23 +218,19 @@
         document.getElementById('delBtn').style.display = hasSel ? 'block' : 'none';
         document.getElementById('mapBtn').style.display = (hasSel && !addedItems[selectedIdx].parts && addedItems[selectedIdx].name !== "Combined") ? 'block' : 'none';
         document.getElementById('actionBtn').textContent = (hasSel && addedItems[selectedIdx].parts) ? "Split" : "Merge";
-
         const compDiv = document.getElementById('comparison-overlay');
         if (addedItems.length === 2) {
-            const val1 = mode === 'population' ? addedItems[0].population : addedItems[0].area;
-            const val2 = mode === 'population' ? addedItems[1].population : addedItems[1].area;
-            const larger = val1 > val2 ? addedItems[0] : addedItems[1];
-            const smaller = val1 > val2 ? addedItems[1] : addedItems[0];
-            const ratio = (((Math.max(val1, val2) / (Math.min(val1, val2) || 1)) - 1) * 100).toLocaleString(undefined, {maximumFractionDigits: 1});
+            const v1 = mode === 'population' ? addedItems[0].population : addedItems[0].area;
+            const v2 = mode === 'population' ? addedItems[1].population : addedItems[1].area;
+            const larger = v1 > v2 ? addedItems[0] : addedItems[1];
+            const smaller = v1 > v2 ? addedItems[1] : addedItems[0];
+            const ratio = (((Math.max(v1, v2) / (Math.min(v1, v2) || 1)) - 1) * 100).toLocaleString(undefined, {maximumFractionDigits: 1});
             compDiv.innerHTML = `${larger.name} is ${ratio}% larger than ${smaller.name}`;
             compDiv.style.display = 'block';
         } else { compDiv.style.display = 'none'; }
     }
 
-    function openMap() {
-        if(selectedIdx === null) return;
-        window.open(`https://www.google.com/maps/search/${encodeURIComponent(addedItems[selectedIdx].name)}`, '_blank');
-    }
+    function openMap() { if(selectedIdx !== null) window.open(`https://www.google.com/maps/search/${encodeURIComponent(addedItems[selectedIdx].name)}`, '_blank'); }
 
     function handleMerge() {
         if(selectedIdx === null) return;
