@@ -51,9 +51,9 @@
         }
         .shape.square { border-radius: 4px; }
         .shape.circle { border-radius: 50%; }
-        .shape.selected { border: 3px solid #000; z-index: 100; }
+        .shape.selected { border: 3px solid #000; }
         .shape.not-to-scale { border: 3px solid var(--danger) !important; }
-        .nts-icon { color: var(--danger); font-weight: 900; font-size: 14px; }
+        .nts-icon { color: var(--danger); font-weight: 900; font-size: 12px; margin-bottom: 2px; }
         .label { font-size: 10px; font-weight: bold; text-align: center; pointer-events: none; color: #222; line-height: 1.1; }
         
         .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 5000; align-items: center; justify-content: center; padding: 20px; }
@@ -194,9 +194,15 @@
 
     function render() {
         stage.innerHTML = ''; const scale = getScale();
+        
+        // Find the maximum value to use for our inverse z-index calculation
+        const values = addedItems.map(item => parseFloat(mode === 'population' ? (item.population || item.area) : item.area) || 1);
+        const maxRawValue = Math.max(...values, 1);
+
         addedItems.forEach((item, i) => {
             const val = mode === 'population' ? (item.population || item.area) : item.area;
-            let size = Math.sqrt(parseFloat(val) || 1) * scale; 
+            const parsedVal = parseFloat(val) || 1;
+            let size = Math.sqrt(parsedVal) * scale; 
             let isNTS = size < MIN_SIZE; if (isNTS) size = MIN_SIZE;
             
             const div = document.createElement('div');
@@ -204,16 +210,36 @@
             div.style.width = size + 'px'; div.style.height = size + 'px'; div.style.backgroundColor = item.color;
             div.style.transform = `translate3d(${item.x}px, ${item.y}px, 0)`;
             
+            // --- OPTION 3: CALCULATE HIERARCHICAL Z-INDEX ---
+            // Smaller raw values yield a higher base layer number. 
+            // We use standard Math.round to keep the layer values clean.
+            let baseZIndex = Math.round((1 - (parsedVal / maxRawValue)) * 1000) + 10;
+            
+            // Give an active lift if this item is currently selected by the user
+            let activeLift = (selectedIdx === i) ? 500 : 0;
+            div.style.zIndex = baseZIndex + activeLift;
+            
             let labelVal = mode === 'population' ? 
                 (item.population ? (item.population/1000000).toFixed(1)+'M' : 'N/A') : 
                 Math.round(unit === 'mi' ? item.area * 0.386102 : item.area).toLocaleString() + (unit === 'mi' ? ' mi²' : ' km²');
             
-            div.innerHTML = `${isNTS ? '<div class="nts-icon">!</div>' : ''}<div class="label">${item.name}<br>${labelVal}</div>`;
+            // --- ADDED "TOO SMALL!" TEXT WARNING HERE ---
+            div.innerHTML = `${isNTS ? '<div class="nts-icon">! too small!</div>' : ''}<div class="label">${item.name}<br>${labelVal}</div>`;
             
             div.onpointerdown = e => {
                 div.setPointerCapture(e.pointerId); e.preventDefault(); selectedIdx = i;
-                document.querySelectorAll('.shape').forEach(s => s.classList.remove('selected'));
+                
+                // Instantly update layout order classes and z-indices on pointer down
+                document.querySelectorAll('.shape').forEach((s, idx) => {
+                    s.classList.remove('selected');
+                    // Recalculate z-index for all other shapes to give current shape the top interactive lift
+                    const sVal = parseFloat(mode === 'population' ? (addedItems[idx].population || addedItems[idx].area) : addedItems[idx].area) || 1;
+                    let sBaseZ = Math.round((1 - (sVal / maxRawValue)) * 1000) + 10;
+                    let sLift = (idx === i) ? 500 : 0;
+                    s.style.zIndex = sBaseZ + sLift;
+                });
                 div.classList.add('selected');
+                
                 const offset = { x: e.clientX - item.x, y: e.clientY - item.y };
                 function move(me) { requestAnimationFrame(() => {
                     let newX = me.clientX - offset.x; let newY = me.clientY - offset.y;
