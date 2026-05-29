@@ -14,8 +14,7 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0; height: 100vh; background: var(--bg); overflow: hidden;
             position: relative; user-select: none; -webkit-user-select: none;
-            /* Prevents double-tap zoom completely while keeping smooth drag and scroll intact */
-            touch-action: manipulation; 
+            touch-action: none; /* Locked down tight to let JS handle custom gestures entirely */
         }
         #app-header {
             position: fixed; top: 0; left: 0; right: 0; height: var(--header-h);
@@ -55,7 +54,15 @@
         .shape.circle { border-radius: 50%; }
         .shape.selected { border: 3px solid #000; }
         .shape.not-to-scale { border: 3px solid var(--danger) !important; }
-        .nts-icon { color: var(--danger); font-weight: 900; font-size: 11px; margin-bottom: 2px; letter-spacing: 0.5px; }
+        
+        /* Positioned absolute to sit beautifully just above the top border line */
+        .nts-icon { 
+            position: absolute; top: -18px; left: 50%; transform: translateX(-50%);
+            color: var(--danger); font-weight: 900; font-size: 10px; 
+            letter-spacing: 0.5px; background: white; padding: 1px 5px; 
+            border-radius: 10px; border: 1px solid var(--danger); box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+            white-space: nowrap;
+        }
         .label { font-size: 10px; font-weight: bold; text-align: center; pointer-events: none; color: #222; line-height: 1.1; }
         
         .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 5000; align-items: center; justify-content: center; padding: 20px; }
@@ -126,6 +133,18 @@
 <script>
     let masterData = []; let addedItems = []; let selectedIdx = null; let mode = 'area'; let unit = 'km'; const MIN_SIZE = 40;
     const stage = document.getElementById('stage'); const input = document.getElementById('entitySearch'); const resultsBox = document.getElementById('results-box');
+
+    // --- BULLETPROOF DOUBLE-TAP ZOOM BLOCKER ---
+    // Tracks time gaps between screen taps. If a second tap happens too quickly, it gets explicitly intercepted and shut down.
+    let lastTapTime = 0;
+    document.addEventListener('touchend', function (e) {
+        const currentTime = new Date().getTime();
+        const tapGap = currentTime - lastTapTime;
+        if (tapGap < 300 && tapGap > 0) {
+            e.preventDefault(); // Kills the zoom event right here
+        }
+        lastTapTime = currentTime;
+    }, { passive: false });
 
     async function init() {
         try { 
@@ -219,7 +238,6 @@
                 (item.population ? (item.population/1000000).toFixed(1)+'M' : 'N/A') : 
                 Math.round(unit === 'mi' ? item.area * 0.386102 : item.area).toLocaleString() + (unit === 'mi' ? ' mi²' : ' km²');
             
-            // Cleaned badge to output just a neat "TINY!" string when scaled up
             div.innerHTML = `${isNTS ? '<div class="nts-icon">TINY!</div>' : ''}<div class="label">${item.name}<br>${labelVal}</div>`;
             
             div.onpointerdown = e => {
@@ -247,6 +265,7 @@
             };
             stage.appendChild(div);
         });
+        document.getElementById('actionBtn').textContent = (selectedIdx !== null && addedItems[selectedIdx].parts) ? "Split" : "Merge";
         updateUI();
     }
 
